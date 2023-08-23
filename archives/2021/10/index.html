@@ -373,9 +373,14 @@
 
 
 <script>
-    // $('.bg-cover').css('background-image', 'url(/medias/banner/0.jpg)');
-    // $('.bg-cover').css('background-image', 'url(http://pic.huangruimin.tech/banner_3.jpg)');
-    var bannerUrl = "http://pic.huangruimin.tech/banner_" + '1.jpg';
+    // 每天切换 banner 图.  Switch banner image every day.
+
+    // 这个是原来的代码
+    //var bannerUrl = "/medias/banner/" + new Date().getDay() + '.jpg';
+    // 这个是我修改的代码
+    //var bannerUrl = "http://pic.huangruimin.tech/banner_" + new Date().getDay() + '.jpg';
+    // 这个是我修改以及优化的代码
+    var bannerUrl = "http://pic.huangruimin.tech/banner_" + new Date().getDay() + '.jpg';
     $('.bg-cover').css('background-image', 'url(' + bannerUrl + ')');
 </script>
 
