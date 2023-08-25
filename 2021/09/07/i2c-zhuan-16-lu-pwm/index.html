@@ -440,42 +440,42 @@
 <li>I2C接口，支持高达16路PWM输出，每路12位分辨率(4096级)</li>
 <li>内置25MHz晶振，可不连接外部晶振，也可以连接外部晶振，最大50MHz</li>
 <li>支持2.3V-5.5V电压，最大耐压值5.5V,逻辑电平3.3V</li>
-<li>具有上电复位，以及软件复位等功能<br><img src="http://huangruimin.club//20190518024522.png"><br><strong>注</strong>：本教程侧重PCA9685的PWM输出，但PCA9685亦可用于WS2812等LED颜色控制等。</li>
+<li>具有上电复位，以及软件复位等功能<br><img src="http://huangruimin.tech//20190518024522.png"><br><strong>注</strong>：本教程侧重PCA9685的PWM输出，但PCA9685亦可用于WS2812等LED颜色控制等。</li>
 </ul>
 <h3 id="1-2-控制精度"><a href="#1-2-控制精度" class="headerlink" title="1.2 控制精度"></a>1.2 控制精度</h3><p>假设舵机为50HZ的控制频率，脉宽为0.5ms~2.5ms，12位分辨率(4096级)，相关精度计算如下：</p>
 <ul>
-<li><p>PWM周期：<br><img src="http://huangruimin.club//20190518130821.png"></p>
+<li><p>PWM周期：<br><img src="http://huangruimin.tech//20190518130821.png"></p>
 </li>
-<li><p>时间分辨率：<br><img src="http://huangruimin.club//20190518130904.png"></p>
+<li><p>时间分辨率：<br><img src="http://huangruimin.tech//20190518130904.png"></p>
 </li>
-<li><p>最大脉宽时间：<br><img src="http://huangruimin.club//20190518130937.png"></p>
+<li><p>最大脉宽时间：<br><img src="http://huangruimin.tech//20190518130937.png"></p>
 </li>
-<li><p>最大脉宽时间可分成的份数：<br><img src="http://huangruimin.club//20190518131003.png"></p>
+<li><p>最大脉宽时间可分成的份数：<br><img src="http://huangruimin.tech//20190518131003.png"></p>
 </li>
-<li><p>0-180度的舵机，角度分辨率：<br><img src="http://huangruimin.club//20190518131028.png"></p>
+<li><p>0-180度的舵机，角度分辨率：<br><img src="http://huangruimin.tech//20190518131028.png"></p>
 </li>
 </ul>
-<h2 id="2-硬件参数"><a href="#2-硬件参数" class="headerlink" title="2 硬件参数"></a>2 硬件参数</h2><h3 id="2-1-封装及引脚排列"><a href="#2-1-封装及引脚排列" class="headerlink" title="2.1 封装及引脚排列"></a>2.1 封装及引脚排列</h3><p>PCA9685有两种封装：TSSOP28, HVQFN28，其相应的引脚排列如下图所示：<br><img src="http://huangruimin.club//20190518024735.png"><br>引脚功能描述如下图所示：<br><img src="http://huangruimin.club//20190518024833.png"><br><img src="http://huangruimin.club//20190518024855.png"></p>
-<h3 id="2-2-器件地址"><a href="#2-2-器件地址" class="headerlink" title="2.2 器件地址"></a>2.2 器件地址</h3><p>PCA9685的器件地址是由引脚A0，A1，A2，A3，A4，A5共同决定，并且该引脚不可悬空，由于有6个引脚共同决定器件地址，因此，可以有64个器件地址，由于该IC上电便保留LED All Call address (E0h，1110 000)以及Software Reset address(06h，0000 0110)，实际仅有62个可用器件地址，因此，理论上，1个I2C接口可控制16*62=992路PWM，其引脚控制器件地址的示意图如下图所示：<br><img src="http://huangruimin.club//20190518025127.png"><br>默认情况下，若将A0-A5全部接地，则其器件地址为:0x40。</p>
-<h3 id="2-3-寄存器及其地址"><a href="#2-3-寄存器及其地址" class="headerlink" title="2.3 寄存器及其地址"></a>2.3 寄存器及其地址</h3><p>默认情况下，上电复位后，寄存器地址的默认值均为0，寄存器地址及其用途见下图所示:<br><img src="http://huangruimin.club//20190518025235.png"><br><img src="http://huangruimin.club//20190518025305.png"><br>图中节选的部分寄存器地址中，主要关心以下寄存器：</p>
+<h2 id="2-硬件参数"><a href="#2-硬件参数" class="headerlink" title="2 硬件参数"></a>2 硬件参数</h2><h3 id="2-1-封装及引脚排列"><a href="#2-1-封装及引脚排列" class="headerlink" title="2.1 封装及引脚排列"></a>2.1 封装及引脚排列</h3><p>PCA9685有两种封装：TSSOP28, HVQFN28，其相应的引脚排列如下图所示：<br><img src="http://huangruimin.tech//20190518024735.png"><br>引脚功能描述如下图所示：<br><img src="http://huangruimin.tech//20190518024833.png"><br><img src="http://huangruimin.tech//20190518024855.png"></p>
+<h3 id="2-2-器件地址"><a href="#2-2-器件地址" class="headerlink" title="2.2 器件地址"></a>2.2 器件地址</h3><p>PCA9685的器件地址是由引脚A0，A1，A2，A3，A4，A5共同决定，并且该引脚不可悬空，由于有6个引脚共同决定器件地址，因此，可以有64个器件地址，由于该IC上电便保留LED All Call address (E0h，1110 000)以及Software Reset address(06h，0000 0110)，实际仅有62个可用器件地址，因此，理论上，1个I2C接口可控制16*62=992路PWM，其引脚控制器件地址的示意图如下图所示：<br><img src="http://huangruimin.tech//20190518025127.png"><br>默认情况下，若将A0-A5全部接地，则其器件地址为:0x40。</p>
+<h3 id="2-3-寄存器及其地址"><a href="#2-3-寄存器及其地址" class="headerlink" title="2.3 寄存器及其地址"></a>2.3 寄存器及其地址</h3><p>默认情况下，上电复位后，寄存器地址的默认值均为0，寄存器地址及其用途见下图所示:<br><img src="http://huangruimin.tech//20190518025235.png"><br><img src="http://huangruimin.tech//20190518025305.png"><br>图中节选的部分寄存器地址中，主要关心以下寄存器：</p>
 <ul>
 <li>模式设置寄存器：MODE1，MODE2。</li>
 <li>脉宽(占空比)设置寄存器：LED0_ON_L,LED0_ON_H,LED0_OFF_L,LED0_OFF_H……LED15……每一路PWM通道占用4个寄存器。</li>
 <li>周期(频率)设置寄存器：PRE_SCALE。<br>接下来介绍以上寄存器的使用及其注意事项。</li>
 </ul>
-<h3 id="2-4-模式设置寄存器"><a href="#2-4-模式设置寄存器" class="headerlink" title="2.4 模式设置寄存器"></a>2.4 模式设置寄存器</h3><h4 id="2-4-1-MODE1寄存器"><a href="#2-4-1-MODE1寄存器" class="headerlink" title="2.4.1 MODE1寄存器"></a>2.4.1 MODE1寄存器</h4><p>首先介绍MODE1寄存器,如下图:<br><img src="http://huangruimin.club//20190518025438.png"><br>在使用该寄存器的时候要注意：</p>
+<h3 id="2-4-模式设置寄存器"><a href="#2-4-模式设置寄存器" class="headerlink" title="2.4 模式设置寄存器"></a>2.4 模式设置寄存器</h3><h4 id="2-4-1-MODE1寄存器"><a href="#2-4-1-MODE1寄存器" class="headerlink" title="2.4.1 MODE1寄存器"></a>2.4.1 MODE1寄存器</h4><p>首先介绍MODE1寄存器,如下图:<br><img src="http://huangruimin.tech//20190518025438.png"><br>在使用该寄存器的时候要注意：</p>
 <ul>
 <li><p>如果未停止所有PWM输出就将其进入到睡眠模式，那么，所有输出通道在下一轮都将输出高电平。</p>
 </li>
-<li><p>睡眠后重新启动PWM的操作为:<br><img src="http://huangruimin.club//20190518025531.png"></p>
+<li><p>睡眠后重新启动PWM的操作为:<br><img src="http://huangruimin.tech//20190518025531.png"></p>
 </li>
 <li><p>注意，在设置PWM频率(写PRESCALE寄存器)的时候，要先设置为Sleep模式，请参考后面源码部分。</p>
 </li>
 </ul>
-<h4 id="2-4-2-MODE2寄存器"><a href="#2-4-2-MODE2寄存器" class="headerlink" title="2.4.2 MODE2寄存器"></a>2.4.2 MODE2寄存器</h4><p>该寄存器的各位功能如下图所示:<br><img src="http://huangruimin.club//20190518025715.png"></p>
-<h3 id="2-5-PWM通道寄存器及其占空比设置"><a href="#2-5-PWM通道寄存器及其占空比设置" class="headerlink" title="2.5 PWM通道寄存器及其占空比设置"></a>2.5 PWM通道寄存器及其占空比设置</h3><p>PWM通道寄存器如下图：<br><img src="http://huangruimin.club//20190518025806.png"><br>由图可知，对于每一个通道，有4个寄存器，每个寄存器图解如下图所示:<br><img src="http://huangruimin.club//20190518025850.png"><br>在设置PWM占空比的时候，首先，配置舵机的示例如下图所示(ON &lt; OFF的情况):<br><img src="http://huangruimin.club//20190518030017.png"><br>当特殊情况下，PWM周期大于定时器一次计数时,如下图所示(ON&gt;OFF的情况):<br><img src="http://huangruimin.club//20190518031556.png"></p>
-<h3 id="2-6-PWM周期-频率-寄存器及其周期-频率-设置"><a href="#2-6-PWM周期-频率-寄存器及其周期-频率-设置" class="headerlink" title="2.6 PWM周期(频率)寄存器及其周期(频率)设置"></a>2.6 PWM周期(频率)寄存器及其周期(频率)设置</h3><p>接下来介绍配置PWM频率的寄存器:<br>一般情况下，在用内置晶振，为25MHZ，通过配置PRE_SCALE寄存器进行配置，配置的PRE_SCALE寄存器的值与PWM频率的关系如下图所示:<br><img src="http://huangruimin.club//20190518030157.png"><br>如果在舵机控制中，采用内置晶振，取osc_clock=25000000，update_rate=50(舵机控制频率50Hz)</p>
-<h3 id="2-7-推荐硬件设计"><a href="#2-7-推荐硬件设计" class="headerlink" title="2.7 推荐硬件设计"></a>2.7 推荐硬件设计</h3><p>首先，OE引脚须接低电平以确保IC使能，如果连接LED灯，则推荐以下几种连接方式，如下图所示:<br><img src="http://huangruimin.club//20190518030252.png"></p>
+<h4 id="2-4-2-MODE2寄存器"><a href="#2-4-2-MODE2寄存器" class="headerlink" title="2.4.2 MODE2寄存器"></a>2.4.2 MODE2寄存器</h4><p>该寄存器的各位功能如下图所示:<br><img src="http://huangruimin.tech//20190518025715.png"></p>
+<h3 id="2-5-PWM通道寄存器及其占空比设置"><a href="#2-5-PWM通道寄存器及其占空比设置" class="headerlink" title="2.5 PWM通道寄存器及其占空比设置"></a>2.5 PWM通道寄存器及其占空比设置</h3><p>PWM通道寄存器如下图：<br><img src="http://huangruimin.tech//20190518025806.png"><br>由图可知，对于每一个通道，有4个寄存器，每个寄存器图解如下图所示:<br><img src="http://huangruimin.tech//20190518025850.png"><br>在设置PWM占空比的时候，首先，配置舵机的示例如下图所示(ON &lt; OFF的情况):<br><img src="http://huangruimin.tech//20190518030017.png"><br>当特殊情况下，PWM周期大于定时器一次计数时,如下图所示(ON&gt;OFF的情况):<br><img src="http://huangruimin.tech//20190518031556.png"></p>
+<h3 id="2-6-PWM周期-频率-寄存器及其周期-频率-设置"><a href="#2-6-PWM周期-频率-寄存器及其周期-频率-设置" class="headerlink" title="2.6 PWM周期(频率)寄存器及其周期(频率)设置"></a>2.6 PWM周期(频率)寄存器及其周期(频率)设置</h3><p>接下来介绍配置PWM频率的寄存器:<br>一般情况下，在用内置晶振，为25MHZ，通过配置PRE_SCALE寄存器进行配置，配置的PRE_SCALE寄存器的值与PWM频率的关系如下图所示:<br><img src="http://huangruimin.tech//20190518030157.png"><br>如果在舵机控制中，采用内置晶振，取osc_clock=25000000，update_rate=50(舵机控制频率50Hz)</p>
+<h3 id="2-7-推荐硬件设计"><a href="#2-7-推荐硬件设计" class="headerlink" title="2.7 推荐硬件设计"></a>2.7 推荐硬件设计</h3><p>首先，OE引脚须接低电平以确保IC使能，如果连接LED灯，则推荐以下几种连接方式，如下图所示:<br><img src="http://huangruimin.tech//20190518030252.png"></p>
 <h2 id="3-软件设计"><a href="#3-软件设计" class="headerlink" title="3 软件设计"></a>3 软件设计</h2><h3 id="3-1-Micro-bit平台TypeScript版"><a href="#3-1-Micro-bit平台TypeScript版" class="headerlink" title="3.1 Micro:bit平台TypeScript版"></a>3.1 Micro:bit平台TypeScript版</h3><p>接下来进行软件设计部分讲解，由于本次开发采用Micro:bit底层开发，采用的是TypeScript(JavaScript的超类),所以暂提供该语言，提供基本操作方法及其思路，日后再更新C,C++及其它平台(STM32,Linux树莓派，Arduino等)操作方法，源码如下，可结合DataSheet及以上教程理解：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">/**
  * 使用此文件来定义自定义函数和图形块。
