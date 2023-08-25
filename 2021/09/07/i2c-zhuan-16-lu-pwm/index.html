@@ -461,8 +461,9 @@
 <ul>
 <li>模式设置寄存器：MODE1，MODE2。</li>
 <li>脉宽(占空比)设置寄存器：LED0_ON_L,LED0_ON_H,LED0_OFF_L,LED0_OFF_H……LED15……每一路PWM通道占用4个寄存器。</li>
-<li>周期(频率)设置寄存器：PRE_SCALE。<br>接下来介绍以上寄存器的使用及其注意事项。</li>
+<li>周期(频率)设置寄存器：PRE_SCALE。</li>
 </ul>
+<p>接下来介绍以上寄存器的使用及其注意事项。</p>
 <h3 id="2-4-模式设置寄存器"><a href="#2-4-模式设置寄存器" class="headerlink" title="2.4 模式设置寄存器"></a>2.4 模式设置寄存器</h3><h4 id="2-4-1-MODE1寄存器"><a href="#2-4-1-MODE1寄存器" class="headerlink" title="2.4.1 MODE1寄存器"></a>2.4.1 MODE1寄存器</h4><p>首先介绍MODE1寄存器,如下图:<br><img src="http://pic.huangruimin.tech/20190518025438.png"><br>在使用该寄存器的时候要注意：</p>
 <ul>
 <li><p>如果未停止所有PWM输出就将其进入到睡眠模式，那么，所有输出通道在下一轮都将输出高电平。</p>
