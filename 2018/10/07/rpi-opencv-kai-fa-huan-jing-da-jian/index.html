@@ -436,7 +436,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>本章将介绍OpenCV开发环境的搭建，搭建的版本为OpenCV4.1.0，同时支持Python3和C++，在搭建好后，将通过一个C++和Python的Demo打开CSI摄像头来测试开发环境是否搭建完成。</p>
+                <p>本章将介绍OpenCV开发环境的搭建，搭建的版本为OpenCV4.1.0，同时支持Python3和cpp，在搭建好后，将通过一个cpp和Python的Demo打开CSI摄像头来测试开发环境是否搭建完成。</p>
 <h2 id="1-烧录系统"><a href="#1-烧录系统" class="headerlink" title="1 烧录系统"></a>1 烧录系统</h2><p>本教程采用的镜像是树莓派官方2019年7月10日发布的发行版镜像，代号Buster，如下图所示：<br><img src="http://pic.huangruimin.tech/20190821152022.png"></p>
 <h2 id="2-基本设置"><a href="#2-基本设置" class="headerlink" title="2 基本设置"></a>2 基本设置</h2><h3 id="2-1-把目录扩展到整个TF卡"><a href="#2-1-把目录扩展到整个TF卡" class="headerlink" title="2.1 把目录扩展到整个TF卡"></a>2.1 把目录扩展到整个TF卡</h3><p>本次搭建OpenCV开发环境，至少选择16G的TF卡，为了充分利用TF的存储空间，需要将TF卡空间扩展到整个TF卡。<br>在命令行输入命令，进入树莓派配置界面，用上下左右切换光标位置。</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> raspi-config<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -544,7 +544,7 @@ pip config <span class="token builtin class-name">set</span> global.index-url ht
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">make</span> insall<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>注意：install安装时间一般在1分钟左右。</p>
-<h2 id="8-测试是否安装完成"><a href="#8-测试是否安装完成" class="headerlink" title="8 测试是否安装完成"></a>8 测试是否安装完成</h2><p>测试包括Python及C++的测试，用到了摄像头及简单的OpenCV处理函数。</p>
+<h2 id="8-测试是否安装完成"><a href="#8-测试是否安装完成" class="headerlink" title="8 测试是否安装完成"></a>8 测试是否安装完成</h2><p>测试包括Python及cpp的测试，用到了摄像头及简单的OpenCV处理函数。</p>
 <h3 id="8-1-Python3："><a href="#8-1-Python3：" class="headerlink" title="8.1 Python3："></a>8.1 Python3：</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">#!/usr/bin/env python</span>
 
 <span class="token triple-quoted-string string">'''
@@ -590,56 +590,56 @@ A demo to show whether The OpenCV and CSI camera is well installed
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>执行该Python脚本的情况如下：<br><img src="http://pic.huangruimin.tech/20190830201403.png"></p>
-<h3 id="8-2-C-："><a href="#8-2-C-：" class="headerlink" title="8.2 C++："></a>8.2 C++：</h3><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include&lt;iostream&gt;
-#include&lt;opencv2/opencv.hpp&gt;
-#include&lt;opencv2/highgui/highgui.hpp&gt;
-#include&lt;opencv2/imgproc/imgproc.hpp&gt;
+<h3 id="8-2-cpp："><a href="#8-2-cpp：" class="headerlink" title="8.2 cpp："></a>8.2 cpp：</h3><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;iostream&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;opencv2/opencv.hpp&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;opencv2/highgui/highgui.hpp&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;opencv2/imgproc/imgproc.hpp&gt;</span></span>
 
-using namespace std;
-using namespace cv;
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> cv<span class="token punctuation">;</span>
 
-int main()
-{
-	cout &lt;&lt; "Waveshare OpenCV Tutorial"&lt;&lt; endl;
-	cout &lt;&lt; "00_Test_OpenCV"&lt;&lt;endl;
-	cout &lt;&lt; "A demo to show whether The OpenCV and CSI camera is well installed" &lt;&lt;endl;
-	cout &lt;&lt; endl;
-	cout &lt;&lt; "OpenCV Version:" &lt;&lt; CV_VERSION &lt;&lt; endl;
-	// 0: use CSI camera,1：use USB camera
-	VideoCapture cap(0);
-	if(!cap.isOpened())
-	{
-		cout&lt;&lt;"can't open this camera"&lt;&lt;endl;
-		return -1;
-	}	
-	Mat FrameImage,GrayImage,BlurImage,CannyImage;
-	while(1)
-	{
-		cap&gt;&gt;FrameImage;
-		//Change to gray image
-		cvtColor(FrameImage,GrayImage,COLOR_BGR2GRAY);
-		//blur the image
-		blur(GrayImage,BlurImage,Size(7,7));
-		//use canny to detect contour
-		Canny(BlurImage,CannyImage,3,9);
-		//show the image
-		imshow("Camera Capture",CannyImage);
-		//Press Q to quit
-		if(char(waitKey(1)) == 'q')
-		{
-			break;
-		}
-	}
-	return 0;
-}
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+	cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Waveshare OpenCV Tutorial"</span><span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+	cout <span class="token operator">&lt;&lt;</span> <span class="token string">"00_Test_OpenCV"</span><span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
+	cout <span class="token operator">&lt;&lt;</span> <span class="token string">"A demo to show whether The OpenCV and CSI camera is well installed"</span> <span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
+	cout <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+	cout <span class="token operator">&lt;&lt;</span> <span class="token string">"OpenCV Version:"</span> <span class="token operator">&lt;&lt;</span> CV_VERSION <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+	<span class="token comment">// 0: use CSI camera,1：use USB camera</span>
+	VideoCapture <span class="token function">cap</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>cap<span class="token punctuation">.</span><span class="token function">isOpened</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+	<span class="token punctuation">{</span>
+		cout<span class="token operator">&lt;&lt;</span><span class="token string">"can't open this camera"</span><span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
+		<span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>	
+	Mat FrameImage<span class="token punctuation">,</span>GrayImage<span class="token punctuation">,</span>BlurImage<span class="token punctuation">,</span>CannyImage<span class="token punctuation">;</span>
+	<span class="token keyword">while</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+	<span class="token punctuation">{</span>
+		cap<span class="token operator">&gt;&gt;</span>FrameImage<span class="token punctuation">;</span>
+		<span class="token comment">//Change to gray image</span>
+		<span class="token function">cvtColor</span><span class="token punctuation">(</span>FrameImage<span class="token punctuation">,</span>GrayImage<span class="token punctuation">,</span>COLOR_BGR2GRAY<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token comment">//blur the image</span>
+		<span class="token function">blur</span><span class="token punctuation">(</span>GrayImage<span class="token punctuation">,</span>BlurImage<span class="token punctuation">,</span><span class="token function">Size</span><span class="token punctuation">(</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token comment">//use canny to detect contour</span>
+		<span class="token function">Canny</span><span class="token punctuation">(</span>BlurImage<span class="token punctuation">,</span>CannyImage<span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token comment">//show the image</span>
+		<span class="token function">imshow</span><span class="token punctuation">(</span><span class="token string">"Camera Capture"</span><span class="token punctuation">,</span>CannyImage<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token comment">//Press Q to quit</span>
+		<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">char</span><span class="token punctuation">(</span><span class="token function">waitKey</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token char">'q'</span><span class="token punctuation">)</span>
+		<span class="token punctuation">{</span>
+			<span class="token keyword">break</span><span class="token punctuation">;</span>
+		<span class="token punctuation">}</span>
+	<span class="token punctuation">}</span>
+	<span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>CMakeLists.txt：</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">cmake_minimum_required(VERSION 3.0)
-project(00_Test_OpenCV)
-find_package(OpenCV REQUIRED)
-add_executable(00_Test_OpenCV 00_Test_OpenCV.cpp)
-target_link_libraries(00_Test_OpenCV ${OpenCV_LIBS})<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token function">cmake_minimum_required</span><span class="token punctuation">(</span>VERSION <span class="token number">3.0</span><span class="token punctuation">)</span>
+<span class="token function">project</span><span class="token punctuation">(</span><span class="token number">00</span>_Test_OpenCV<span class="token punctuation">)</span>
+<span class="token function">find_package</span><span class="token punctuation">(</span>OpenCV REQUIRED<span class="token punctuation">)</span>
+<span class="token function">add_executable</span><span class="token punctuation">(</span><span class="token number">00</span>_Test_OpenCV <span class="token number">00</span>_Test_OpenCV<span class="token punctuation">.</span>cpp<span class="token punctuation">)</span>
+<span class="token function">target_link_libraries</span><span class="token punctuation">(</span><span class="token number">00</span>_Test_OpenCV $<span class="token punctuation">{</span>OpenCV_LIBS<span class="token punctuation">}</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>编译并运行：<br><img src="http://pic.huangruimin.tech/20190830201919.png"></p>
 <h2 id="9-结语"><a href="#9-结语" class="headerlink" title="9 结语"></a>9 结语</h2><p>若中途有安装失败，或多次尝试安装失败，或者想在搭建环境的时候节省时间，可直接使用我们提供的镜像，在我们提供的镜像中，除了已安装OpenCV4.1.0之外，还安装了TensorFlow和Keras，如下图所示：</p>

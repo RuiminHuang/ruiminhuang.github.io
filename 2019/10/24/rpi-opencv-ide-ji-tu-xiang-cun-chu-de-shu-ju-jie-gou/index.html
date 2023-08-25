@@ -437,22 +437,22 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p>本章将首先讲解开发OpenCV的基本的IDE，以方便代码提示，同时方便阅读底层源码，接着，讲解图像存储的基本数据结构。</p>
-<h2 id="1-IDE"><a href="#1-IDE" class="headerlink" title="1 IDE"></a>1 IDE</h2><p>之前两章开发OpenCV均未使用到IDE，比如开发Python的代码，用记事本即可写，需要时执行该脚本即可，当开发C++的代码则需要先Cmake生成Makefile，再make编译，最后执行，为提高效率，首先介绍常用的IDE的相关配置，以及如何将OpenCV集成到该工程中。</p>
+<h2 id="1-IDE"><a href="#1-IDE" class="headerlink" title="1 IDE"></a>1 IDE</h2><p>之前两章开发OpenCV均未使用到IDE，比如开发Python的代码，用记事本即可写，需要时执行该脚本即可，当开发cpp的代码则需要先Cmake生成Makefile，再make编译，最后执行，为提高效率，首先介绍常用的IDE的相关配置，以及如何将OpenCV集成到该工程中。</p>
 <p>说明：</p>
 <ul>
 <li>关于Python中，目前采用的是OpenCV4，为什么却是import cv2呢？</li>
 </ul>
 <blockquote>
-<p>OpenCV1采用C语言编写，OpenCV2，OpenCV3，OpenCV4均采用C++编写，在Python中，cv1指代底 层算法为C语言的OpenCV版本，cv2指代底层算法为C ++语言的版本，所以，在Python中，import cv2可能是OpenCV2,OpenCV3,OpenCV4等版本。</p>
+<p>OpenCV1采用C语言编写，OpenCV2，OpenCV3，OpenCV4均采用cpp编写，在Python中，cv1指代底 层算法为C语言的OpenCV版本，cv2指代底层算法为C ++语言的版本，所以，在Python中，import cv2可能是OpenCV2,OpenCV3,OpenCV4等版本。</p>
 </blockquote>
 <ul>
 <li>Python版本的OpenCV能不能看到底层的Python实现？</li>
 </ul>
 <blockquote>
-<p>不能，因为底层实现为C++，OpenCV仅仅提供了Python接口，同时OpenCV还提供了C#，java，Andriod等的接口。</p>
+<p>不能，因为底层实现为cpp，OpenCV仅仅提供了Python接口，同时OpenCV还提供了C#，java，Andriod等的接口。</p>
 </blockquote>
 <ul>
-<li>C++版本的OpenCV，推荐用什么IDE呢？</li>
+<li>cpp版本的OpenCV，推荐用什么IDE呢？</li>
 </ul>
 <blockquote>
 <p>因为工程是通过Cmake构建的，首先应该选择支持构建Cmake工程的IDE，在Linux(Raspbian)平台下，推荐Qt Creator，除了采用Cmake构建OpenCV工程外，Qt Creator还支持采用qmake构建OpenCV工程；此外，Qt creator还支持底层接口函数跳转，方便跳转到对应的函数中，方便OpenCV的算法研究，算法移植等工作。</p>
@@ -461,14 +461,14 @@
 <p><img src="http://pic.huangruimin.tech/20190901022724.png"></p>
 <p>点击Load，打开00_Test_OpenCV.py，点击Run，即可运行相应的Python脚本，此外，该IDE支持断点调试，如下图所示：</p>
 <p><img src="http://pic.huangruimin.tech/20190901023321.png"></p>
-<h3 id="1-2-C"><a href="#1-2-C" class="headerlink" title="1.2 C++"></a>1.2 C++</h3><p>在C++开发环境中，首选Qt Creator，方便添加依赖，同时支持跳转底层代码，开发与研究两不误；同时，结合Qt自带的UI界面，方便做成桌面应用；并且，支持添加树莓派自带bcm2835，wiringPi等库，方便进行底层开发；结合C ++的特点，向上支持应用开发，向下支持底层开发。</p>
+<h3 id="1-2-cpp"><a href="#1-2-cpp" class="headerlink" title="1.2 cpp"></a>1.2 cpp</h3><p>在cpp开发环境中，首选Qt Creator，方便添加依赖，同时支持跳转底层代码，开发与研究两不误；同时，结合Qt自带的UI界面，方便做成桌面应用；并且，支持添加树莓派自带bcm2835，wiringPi等库，方便进行底层开发；结合C ++的特点，向上支持应用开发，向下支持底层开发。</p>
 <h4 id="1-2-1-安装Qt-Creator"><a href="#1-2-1-安装Qt-Creator" class="headerlink" title="1.2.1 安装Qt Creator"></a>1.2.1 安装Qt Creator</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> update
 <span class="token function">sudo</span> <span class="token function">apt-get</span> upgrade
 <span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> qt5-default
 <span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> qtcreator<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>安装好之后，即可在菜单-&gt;编程界面中找到Qt Creator，如下图所示：</p>
 <p><img src="http://pic.huangruimin.tech/20190901012530.png"></p>
-<h4 id="1-2-2-创建并运行Cmake项目"><a href="#1-2-2-创建并运行Cmake项目" class="headerlink" title="1.2.2 创建并运行Cmake项目"></a>1.2.2 创建并运行Cmake项目</h4><p>打开Qt Creator，新建工程，选择纯C++项目：</p>
+<h4 id="1-2-2-创建并运行Cmake项目"><a href="#1-2-2-创建并运行Cmake项目" class="headerlink" title="1.2.2 创建并运行Cmake项目"></a>1.2.2 创建并运行Cmake项目</h4><p>打开Qt Creator，新建工程，选择纯cpp项目：</p>
 <p><img src="http://pic.huangruimin.tech/20190901014412.png"></p>
 <p>选择合适的路径：</p>
 <p><img src="http://pic.huangruimin.tech/20190901014532.png"></p>
@@ -486,7 +486,7 @@
 <p><img src="http://pic.huangruimin.tech/20190901021813.png"></p>
 <p>并且，Qt Creator支持编程提示，错误提示等功能，能大幅提高效率，如下图所示：</p>
 <p><img src="http://pic.huangruimin.tech/20190901022115.png"></p>
-<h2 id="2-图像存储的数据结构"><a href="#2-图像存储的数据结构" class="headerlink" title="2 图像存储的数据结构"></a>2 图像存储的数据结构</h2><p>任何图像处理算法，都是从操作每个像素点开始的。即使我们不会使用OpenCV提供的图像处理算法，只要了解图像处理算法的基本原理，也可以写出具有相同功能的程序。接下来，我们首先讲解图像存储的基本数据结构，接着，讲解如何访问图像中的具体某个像素点，将分为Python3和C++进行讲解。</p>
+<h2 id="2-图像存储的数据结构"><a href="#2-图像存储的数据结构" class="headerlink" title="2 图像存储的数据结构"></a>2 图像存储的数据结构</h2><p>任何图像处理算法，都是从操作每个像素点开始的。即使我们不会使用OpenCV提供的图像处理算法，只要了解图像处理算法的基本原理，也可以写出具有相同功能的程序。接下来，我们首先讲解图像存储的基本数据结构，接着，讲解如何访问图像中的具体某个像素点，将分为Python3和cpp进行讲解。</p>
 <h3 id="2-1-Python3"><a href="#2-1-Python3" class="headerlink" title="2.1 Python3"></a>2.1 Python3</h3><h4 id="2-1-1-numpy基础"><a href="#2-1-1-numpy基础" class="headerlink" title="2.1.1 numpy基础"></a>2.1.1 numpy基础</h4><p>在Python中OpenCV图像读取(imread) 读入的数据格式是numpy的ndarray数据格式，此外，Python在数据计算领域火爆，numpy功不可没，所以，在讲解Python图像存储数据结构之前，有必要先讲解涉及到的numpy的相关操作：</p>
 <h5 id="ndarray初始化数组"><a href="#ndarray初始化数组" class="headerlink" title="ndarray初始化数组"></a>ndarray初始化数组</h5><p>Python3：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
@@ -578,193 +578,193 @@ cv2<span class="token punctuation">.</span>destroyAllWindows<span class="token p
 <p>输出结果如下图所示：</p>
 <p><img src="http://pic.huangruimin.tech/20190902000858.png"></p>
 <p>通过对图像数据结构ndarray的切片操作，打印出了4个像素点的值，需要注意的是，每个点的像素值是以(B,G,R)的形式存储。</p>
-<h3 id="2-2-C"><a href="#2-2-C" class="headerlink" title="2.2 C++"></a>2.2 C++</h3><p>与Python不同，在OpenCV4版本中(OpenCV1例外)，提供了Mat类作为图像容器，该对象利用了内存管理(非严格意义上的)，可以避免在退出程序前忘记释放内存造成的内存泄露。</p>
+<h3 id="2-2-cpp"><a href="#2-2-cpp" class="headerlink" title="2.2 cpp"></a>2.2 cpp</h3><p>与Python不同，在OpenCV4版本中(OpenCV1例外)，提供了Mat类作为图像容器，该对象利用了内存管理(非严格意义上的)，可以避免在退出程序前忘记释放内存造成的内存泄露。</p>
 <p>总而言之，Mat就是一个类，由两个数据部分组成：矩阵头(包含矩阵尺寸、存储方法、存储地址等信息)和一个存储所有像素值的矩阵(根据所选存储方法的不同，矩阵可以是不同的维数)的指针。</p>
 <h4 id="2-2-1-创建矩阵及输出矩阵的常用方法"><a href="#2-2-1-创建矩阵及输出矩阵的常用方法" class="headerlink" title="2.2.1 创建矩阵及输出矩阵的常用方法"></a>2.2.1 创建矩阵及输出矩阵的常用方法</h4><p>当使用拷贝构造函数，或对矩阵进行复制时，只复制信息头和矩阵指针，而不复制矩阵。</p>
 <p>来看下面这段代码：</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">Mat A,C
-A = imread("1.jpg"，CV_LOAD_IMAGE_COLOR);
-Mat B(A);
-C = A;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">Mat A<span class="token punctuation">,</span>C
+A <span class="token operator">=</span> <span class="token function">imread</span><span class="token punctuation">(</span><span class="token string">"1.jpg"</span>，CV_LOAD_IMAGE_COLOR<span class="token punctuation">)</span><span class="token punctuation">;</span>
+Mat <span class="token function">B</span><span class="token punctuation">(</span>A<span class="token punctuation">)</span><span class="token punctuation">;</span>
+C <span class="token operator">=</span> A<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>在以上代码中，构造函数Mat B(A),赋值操作C=A,均只是复制矩阵A的信息头和矩阵指针，而不复制矩阵。</p>
 <p>如果需要复制矩阵进行操作(实际不建议大量复制矩阵，因为图像一般比较占内存)，可使用以下操作：</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">Mat A,B,C;
-A = imread("1.jpg"，CV_LOAD_IMAGE_COLOR);
-B = A.clone();
-A.copyTo(C);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">Mat A<span class="token punctuation">,</span>B<span class="token punctuation">,</span>C<span class="token punctuation">;</span>
+A <span class="token operator">=</span> <span class="token function">imread</span><span class="token punctuation">(</span><span class="token string">"1.jpg"</span>，CV_LOAD_IMAGE_COLOR<span class="token punctuation">)</span><span class="token punctuation">;</span>
+B <span class="token operator">=</span> A<span class="token punctuation">.</span><span class="token function">clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+A<span class="token punctuation">.</span><span class="token function">copyTo</span><span class="token punctuation">(</span>C<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>这样一来，B和C均复制了A的图像矩阵。</p>
 <p>此外，可直观地使用以下方法创建矩阵：</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">Mat M(2,2,CV_8UC3,Scalar(0,0,255));
-cout &lt;&lt; "M = " &lt;&lt; endl &lt;&lt; " " &lt;&lt; M &lt;&lt; endl &lt;&lt; endl;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">Mat <span class="token function">M</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span>CV_8UC3<span class="token punctuation">,</span><span class="token function">Scalar</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">255</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+cout <span class="token operator">&lt;&lt;</span> <span class="token string">"M = "</span> <span class="token operator">&lt;&lt;</span> endl <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span> <span class="token operator">&lt;&lt;</span> M <span class="token operator">&lt;&lt;</span> endl <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>输出结果如下：</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">M=
-[0,0,255,0,0,255;
-0,0,255,0,0,255]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">M<span class="token operator">=</span>
+<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">255</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">255</span><span class="token punctuation">;</span>
+<span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">255</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">255</span><span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>下面将通过一个综合示例来演示创建矩阵及矩阵的输出方法：</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include "opencv2/core/core.hpp"
-#include "opencv2/highgui/highgui.hpp"
-#include &lt;iostream&gt;
-using namespace std;
-using namespace cv;
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">"opencv2/core/core.hpp"</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">"opencv2/highgui/highgui.hpp"</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> cv<span class="token punctuation">;</span>
 
-int main(int,char**)
-{
-    //Create
-    Mat I = Mat::eye(4, 4, CV_64F);
-    I.at&lt;double&gt;(1,1) = CV_PI;
-    //Display
-    cout &lt;&lt; "I=\n" &lt;&lt; I &lt;&lt; ";\n" &lt;&lt; endl;
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">,</span><span class="token keyword">char</span><span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">//Create</span>
+    Mat I <span class="token operator">=</span> <span class="token class-name">Mat</span><span class="token double-colon punctuation">::</span><span class="token function">eye</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> CV_64F<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    I<span class="token punctuation">.</span><span class="token generic-function"><span class="token function">at</span><span class="token generic class-name"><span class="token operator">&lt;</span><span class="token keyword">double</span><span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">=</span> CV_PI<span class="token punctuation">;</span>
+    <span class="token comment">//Display</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"I=\n"</span> <span class="token operator">&lt;&lt;</span> I <span class="token operator">&lt;&lt;</span> <span class="token string">";\n"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
 
-    //Create
-    Mat r = Mat(3, 4, CV_8UC3);
-    randu(r, Scalar::all(0), Scalar::all(255));
-    //Display
-    cout &lt;&lt; "(OpenCV default Style)=\n" &lt;&lt; r &lt;&lt; ";" &lt;&lt; endl &lt;&lt; endl;
-    cout &lt;&lt; "(Python Style)=\n" &lt;&lt; format(r, Formatter::FMT_PYTHON) &lt;&lt; ";" &lt;&lt; endl &lt;&lt; endl;
-    cout &lt;&lt; "(Numpy Style)=\n" &lt;&lt;  format(r, Formatter::FMT_NUMPY)&lt;&lt; ";" &lt;&lt; endl &lt;&lt; endl;
-    cout &lt;&lt; "(Comma Style)=\n" &lt;&lt; format(r, Formatter::FMT_CSV)&lt;&lt; ";" &lt;&lt; endl&lt;&lt; endl;
-    cout &lt;&lt; "(C Style)=\n" &lt;&lt;  format(r, Formatter::FMT_C) &lt;&lt; ";" &lt;&lt; endl &lt;&lt; endl;
+    <span class="token comment">//Create</span>
+    Mat r <span class="token operator">=</span> <span class="token function">Mat</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> CV_8UC3<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">randu</span><span class="token punctuation">(</span>r<span class="token punctuation">,</span> <span class="token class-name">Scalar</span><span class="token double-colon punctuation">::</span><span class="token function">all</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token class-name">Scalar</span><span class="token double-colon punctuation">::</span><span class="token function">all</span><span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">//Display</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"(OpenCV default Style)=\n"</span> <span class="token operator">&lt;&lt;</span> r <span class="token operator">&lt;&lt;</span> <span class="token string">";"</span> <span class="token operator">&lt;&lt;</span> endl <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"(Python Style)=\n"</span> <span class="token operator">&lt;&lt;</span> <span class="token function">format</span><span class="token punctuation">(</span>r<span class="token punctuation">,</span> Formatter<span class="token double-colon punctuation">::</span>FMT_PYTHON<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">";"</span> <span class="token operator">&lt;&lt;</span> endl <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"(Numpy Style)=\n"</span> <span class="token operator">&lt;&lt;</span>  <span class="token function">format</span><span class="token punctuation">(</span>r<span class="token punctuation">,</span> Formatter<span class="token double-colon punctuation">::</span>FMT_NUMPY<span class="token punctuation">)</span><span class="token operator">&lt;&lt;</span> <span class="token string">";"</span> <span class="token operator">&lt;&lt;</span> endl <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"(Comma Style)=\n"</span> <span class="token operator">&lt;&lt;</span> <span class="token function">format</span><span class="token punctuation">(</span>r<span class="token punctuation">,</span> Formatter<span class="token double-colon punctuation">::</span>FMT_CSV<span class="token punctuation">)</span><span class="token operator">&lt;&lt;</span> <span class="token string">";"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"(C Style)=\n"</span> <span class="token operator">&lt;&lt;</span>  <span class="token function">format</span><span class="token punctuation">(</span>r<span class="token punctuation">,</span> Formatter<span class="token double-colon punctuation">::</span>FMT_C<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">";"</span> <span class="token operator">&lt;&lt;</span> endl <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
 
-    //Create
-    Point2f p(6, 2);
-    //Display
-    cout &lt;&lt; "Two Dimension Point p =\n" &lt;&lt; p &lt;&lt; ";\n" &lt;&lt; endl;
+    <span class="token comment">//Create</span>
+    Point2f <span class="token function">p</span><span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">//Display</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Two Dimension Point p =\n"</span> <span class="token operator">&lt;&lt;</span> p <span class="token operator">&lt;&lt;</span> <span class="token string">";\n"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
 
-    //Create
-    Point3f p3f(8, 2, 0);
-    //Display
-    cout &lt;&lt; "Three Dimension Point p3f =\n" &lt;&lt; p3f &lt;&lt; ";\n" &lt;&lt; endl;
+    <span class="token comment">//Create</span>
+    Point3f <span class="token function">p3f</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">//Display</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Three Dimension Point p3f =\n"</span> <span class="token operator">&lt;&lt;</span> p3f <span class="token operator">&lt;&lt;</span> <span class="token string">";\n"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
 
-    //Create
-    vector&lt;float&gt; v;
-    v.push_back(3);
-    v.push_back(5);
-    v.push_back(7);
-    //Display
-    cout &lt;&lt; "Point based on vector shortvec =\n" &lt;&lt; Mat(v) &lt;&lt; ";\n"&lt;&lt;endl;
+    <span class="token comment">//Create</span>
+    vector<span class="token operator">&lt;</span><span class="token keyword">float</span><span class="token operator">&gt;</span> v<span class="token punctuation">;</span>
+    v<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    v<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    v<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token number">7</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">//Display</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Point based on vector shortvec =\n"</span> <span class="token operator">&lt;&lt;</span> <span class="token function">Mat</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">";\n"</span><span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
 
-    //Create
-    vector&lt;Point2f&gt; points(10);
-    for (size_t i = 0; i &lt; points.size(); ++i)
-    {
-        points[i] = Point2f((float)(i * 5), (float)(i % 7));
-    }
-    //Display
-    cout &lt;&lt; "Two Dimension points =\n" &lt;&lt; points&lt;&lt;";";
+    <span class="token comment">//Create</span>
+    vector<span class="token operator">&lt;</span>Point2f<span class="token operator">&gt;</span> <span class="token function">points</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>size_t i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> points<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        points<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">Point2f</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">float</span><span class="token punctuation">)</span><span class="token punctuation">(</span>i <span class="token operator">*</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">float</span><span class="token punctuation">)</span><span class="token punctuation">(</span>i <span class="token operator">%</span> <span class="token number">7</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">//Display</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Two Dimension points =\n"</span> <span class="token operator">&lt;&lt;</span> points<span class="token operator">&lt;&lt;</span><span class="token string">";"</span><span class="token punctuation">;</span>
 
-    return 0;
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>相应的输出结果如下所示：</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">I=
-[1, 0, 0, 0;
- 0, 3.141592653589793, 0, 0;
- 0, 0, 1, 0;
- 0, 0, 0, 1];
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">I<span class="token operator">=</span>
+<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">;</span>
+ <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">3.141592653589793</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">;</span>
+ <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">;</span>
+ <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 
-(OpenCV default Style)=
-[ 91,   2,  79, 179,  52, 205, 236,   8, 181, 239,  26, 248;
- 207, 218,  45, 183, 158, 101, 102,  18, 118,  68, 210, 139;
- 198, 207, 211, 181, 162, 197, 191, 196,  40,   7, 243, 230];
+<span class="token punctuation">(</span>OpenCV <span class="token keyword">default</span> Style<span class="token punctuation">)</span><span class="token operator">=</span>
+<span class="token punctuation">[</span> <span class="token number">91</span><span class="token punctuation">,</span>   <span class="token number">2</span><span class="token punctuation">,</span>  <span class="token number">79</span><span class="token punctuation">,</span> <span class="token number">179</span><span class="token punctuation">,</span>  <span class="token number">52</span><span class="token punctuation">,</span> <span class="token number">205</span><span class="token punctuation">,</span> <span class="token number">236</span><span class="token punctuation">,</span>   <span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">181</span><span class="token punctuation">,</span> <span class="token number">239</span><span class="token punctuation">,</span>  <span class="token number">26</span><span class="token punctuation">,</span> <span class="token number">248</span><span class="token punctuation">;</span>
+ <span class="token number">207</span><span class="token punctuation">,</span> <span class="token number">218</span><span class="token punctuation">,</span>  <span class="token number">45</span><span class="token punctuation">,</span> <span class="token number">183</span><span class="token punctuation">,</span> <span class="token number">158</span><span class="token punctuation">,</span> <span class="token number">101</span><span class="token punctuation">,</span> <span class="token number">102</span><span class="token punctuation">,</span>  <span class="token number">18</span><span class="token punctuation">,</span> <span class="token number">118</span><span class="token punctuation">,</span>  <span class="token number">68</span><span class="token punctuation">,</span> <span class="token number">210</span><span class="token punctuation">,</span> <span class="token number">139</span><span class="token punctuation">;</span>
+ <span class="token number">198</span><span class="token punctuation">,</span> <span class="token number">207</span><span class="token punctuation">,</span> <span class="token number">211</span><span class="token punctuation">,</span> <span class="token number">181</span><span class="token punctuation">,</span> <span class="token number">162</span><span class="token punctuation">,</span> <span class="token number">197</span><span class="token punctuation">,</span> <span class="token number">191</span><span class="token punctuation">,</span> <span class="token number">196</span><span class="token punctuation">,</span>  <span class="token number">40</span><span class="token punctuation">,</span>   <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">243</span><span class="token punctuation">,</span> <span class="token number">230</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 
-(Python Style)=
-[[[ 91,   2,  79], [179,  52, 205], [236,   8, 181], [239,  26, 248]],
- [[207, 218,  45], [183, 158, 101], [102,  18, 118], [ 68, 210, 139]],
- [[198, 207, 211], [181, 162, 197], [191, 196,  40], [  7, 243, 230]]];
+<span class="token punctuation">(</span>Python Style<span class="token punctuation">)</span><span class="token operator">=</span>
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token number">91</span><span class="token punctuation">,</span>   <span class="token number">2</span><span class="token punctuation">,</span>  <span class="token number">79</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">179</span><span class="token punctuation">,</span>  <span class="token number">52</span><span class="token punctuation">,</span> <span class="token number">205</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">236</span><span class="token punctuation">,</span>   <span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">181</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">239</span><span class="token punctuation">,</span>  <span class="token number">26</span><span class="token punctuation">,</span> <span class="token number">248</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+ <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">207</span><span class="token punctuation">,</span> <span class="token number">218</span><span class="token punctuation">,</span>  <span class="token number">45</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">183</span><span class="token punctuation">,</span> <span class="token number">158</span><span class="token punctuation">,</span> <span class="token number">101</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">102</span><span class="token punctuation">,</span>  <span class="token number">18</span><span class="token punctuation">,</span> <span class="token number">118</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span> <span class="token number">68</span><span class="token punctuation">,</span> <span class="token number">210</span><span class="token punctuation">,</span> <span class="token number">139</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+ <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">198</span><span class="token punctuation">,</span> <span class="token number">207</span><span class="token punctuation">,</span> <span class="token number">211</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">181</span><span class="token punctuation">,</span> <span class="token number">162</span><span class="token punctuation">,</span> <span class="token number">197</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">191</span><span class="token punctuation">,</span> <span class="token number">196</span><span class="token punctuation">,</span>  <span class="token number">40</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>  <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">243</span><span class="token punctuation">,</span> <span class="token number">230</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 
-(Numpy Style)=
-array([[[ 91,   2,  79], [179,  52, 205], [236,   8, 181], [239,  26, 248]],
-       [[207, 218,  45], [183, 158, 101], [102,  18, 118], [ 68, 210, 139]],
-       [[198, 207, 211], [181, 162, 197], [191, 196,  40], [  7, 243, 230]]], dtype='uint8');
+<span class="token punctuation">(</span>Numpy Style<span class="token punctuation">)</span><span class="token operator">=</span>
+<span class="token function">array</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token number">91</span><span class="token punctuation">,</span>   <span class="token number">2</span><span class="token punctuation">,</span>  <span class="token number">79</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">179</span><span class="token punctuation">,</span>  <span class="token number">52</span><span class="token punctuation">,</span> <span class="token number">205</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">236</span><span class="token punctuation">,</span>   <span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">181</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">239</span><span class="token punctuation">,</span>  <span class="token number">26</span><span class="token punctuation">,</span> <span class="token number">248</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+       <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">207</span><span class="token punctuation">,</span> <span class="token number">218</span><span class="token punctuation">,</span>  <span class="token number">45</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">183</span><span class="token punctuation">,</span> <span class="token number">158</span><span class="token punctuation">,</span> <span class="token number">101</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">102</span><span class="token punctuation">,</span>  <span class="token number">18</span><span class="token punctuation">,</span> <span class="token number">118</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span> <span class="token number">68</span><span class="token punctuation">,</span> <span class="token number">210</span><span class="token punctuation">,</span> <span class="token number">139</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+       <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">198</span><span class="token punctuation">,</span> <span class="token number">207</span><span class="token punctuation">,</span> <span class="token number">211</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">181</span><span class="token punctuation">,</span> <span class="token number">162</span><span class="token punctuation">,</span> <span class="token number">197</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">191</span><span class="token punctuation">,</span> <span class="token number">196</span><span class="token punctuation">,</span>  <span class="token number">40</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>  <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">243</span><span class="token punctuation">,</span> <span class="token number">230</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span> dtype<span class="token operator">=</span><span class="token char">'uint8'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-(Comma Style)=
- 91,   2,  79, 179,  52, 205, 236,   8, 181, 239,  26, 248
-207, 218,  45, 183, 158, 101, 102,  18, 118,  68, 210, 139
-198, 207, 211, 181, 162, 197, 191, 196,  40,   7, 243, 230
-;
+<span class="token punctuation">(</span>Comma Style<span class="token punctuation">)</span><span class="token operator">=</span>
+ <span class="token number">91</span><span class="token punctuation">,</span>   <span class="token number">2</span><span class="token punctuation">,</span>  <span class="token number">79</span><span class="token punctuation">,</span> <span class="token number">179</span><span class="token punctuation">,</span>  <span class="token number">52</span><span class="token punctuation">,</span> <span class="token number">205</span><span class="token punctuation">,</span> <span class="token number">236</span><span class="token punctuation">,</span>   <span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">181</span><span class="token punctuation">,</span> <span class="token number">239</span><span class="token punctuation">,</span>  <span class="token number">26</span><span class="token punctuation">,</span> <span class="token number">248</span>
+<span class="token number">207</span><span class="token punctuation">,</span> <span class="token number">218</span><span class="token punctuation">,</span>  <span class="token number">45</span><span class="token punctuation">,</span> <span class="token number">183</span><span class="token punctuation">,</span> <span class="token number">158</span><span class="token punctuation">,</span> <span class="token number">101</span><span class="token punctuation">,</span> <span class="token number">102</span><span class="token punctuation">,</span>  <span class="token number">18</span><span class="token punctuation">,</span> <span class="token number">118</span><span class="token punctuation">,</span>  <span class="token number">68</span><span class="token punctuation">,</span> <span class="token number">210</span><span class="token punctuation">,</span> <span class="token number">139</span>
+<span class="token number">198</span><span class="token punctuation">,</span> <span class="token number">207</span><span class="token punctuation">,</span> <span class="token number">211</span><span class="token punctuation">,</span> <span class="token number">181</span><span class="token punctuation">,</span> <span class="token number">162</span><span class="token punctuation">,</span> <span class="token number">197</span><span class="token punctuation">,</span> <span class="token number">191</span><span class="token punctuation">,</span> <span class="token number">196</span><span class="token punctuation">,</span>  <span class="token number">40</span><span class="token punctuation">,</span>   <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">243</span><span class="token punctuation">,</span> <span class="token number">230</span>
+<span class="token punctuation">;</span>
 
-(C Style)=
-{ 91,   2,  79, 179,  52, 205, 236,   8, 181, 239,  26, 248,
- 207, 218,  45, 183, 158, 101, 102,  18, 118,  68, 210, 139,
- 198, 207, 211, 181, 162, 197, 191, 196,  40,   7, 243, 230};
+<span class="token punctuation">(</span>C Style<span class="token punctuation">)</span><span class="token operator">=</span>
+<span class="token punctuation">{</span> <span class="token number">91</span><span class="token punctuation">,</span>   <span class="token number">2</span><span class="token punctuation">,</span>  <span class="token number">79</span><span class="token punctuation">,</span> <span class="token number">179</span><span class="token punctuation">,</span>  <span class="token number">52</span><span class="token punctuation">,</span> <span class="token number">205</span><span class="token punctuation">,</span> <span class="token number">236</span><span class="token punctuation">,</span>   <span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">181</span><span class="token punctuation">,</span> <span class="token number">239</span><span class="token punctuation">,</span>  <span class="token number">26</span><span class="token punctuation">,</span> <span class="token number">248</span><span class="token punctuation">,</span>
+ <span class="token number">207</span><span class="token punctuation">,</span> <span class="token number">218</span><span class="token punctuation">,</span>  <span class="token number">45</span><span class="token punctuation">,</span> <span class="token number">183</span><span class="token punctuation">,</span> <span class="token number">158</span><span class="token punctuation">,</span> <span class="token number">101</span><span class="token punctuation">,</span> <span class="token number">102</span><span class="token punctuation">,</span>  <span class="token number">18</span><span class="token punctuation">,</span> <span class="token number">118</span><span class="token punctuation">,</span>  <span class="token number">68</span><span class="token punctuation">,</span> <span class="token number">210</span><span class="token punctuation">,</span> <span class="token number">139</span><span class="token punctuation">,</span>
+ <span class="token number">198</span><span class="token punctuation">,</span> <span class="token number">207</span><span class="token punctuation">,</span> <span class="token number">211</span><span class="token punctuation">,</span> <span class="token number">181</span><span class="token punctuation">,</span> <span class="token number">162</span><span class="token punctuation">,</span> <span class="token number">197</span><span class="token punctuation">,</span> <span class="token number">191</span><span class="token punctuation">,</span> <span class="token number">196</span><span class="token punctuation">,</span>  <span class="token number">40</span><span class="token punctuation">,</span>   <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">243</span><span class="token punctuation">,</span> <span class="token number">230</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-Two Dimension Point p =
-[6, 2];
+Two Dimension Point p <span class="token operator">=</span>
+<span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 
-Three Dimension Point p3f =
-[8, 2, 0];
+Three Dimension Point p3f <span class="token operator">=</span>
+<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 
-Point based on vector shortvec =
-[3;
- 5;
- 7];
+Point based on vector shortvec <span class="token operator">=</span>
+<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">;</span>
+ <span class="token number">5</span><span class="token punctuation">;</span>
+ <span class="token number">7</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 
-Two Dimension points =
-[0, 0;
- 5, 1;
- 10, 2;
- 15, 3;
- 20, 4;
- 25, 5;
- 30, 6;
- 35, 0;
- 40, 1;
- 45, 2];<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+Two Dimension points <span class="token operator">=</span>
+<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">;</span>
+ <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">;</span>
+ <span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">;</span>
+ <span class="token number">15</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">;</span>
+ <span class="token number">20</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">;</span>
+ <span class="token number">25</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">;</span>
+ <span class="token number">30</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">;</span>
+ <span class="token number">35</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">;</span>
+ <span class="token number">40</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">;</span>
+ <span class="token number">45</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
 
-<h4 id="2-2-2-从Mat中取出像素点"><a href="#2-2-2-从Mat中取出像素点" class="headerlink" title="2.2.2 从Mat中取出像素点"></a>2.2.2 从Mat中取出像素点</h4><p>本节，将介绍C++中常用的从Mat类的实例化对象中取出像素点的3种方法，并且，每种方法均对颜色空间进行缩减，即：</p>
+<h4 id="2-2-2-从Mat中取出像素点"><a href="#2-2-2-从Mat中取出像素点" class="headerlink" title="2.2.2 从Mat中取出像素点"></a>2.2.2 从Mat中取出像素点</h4><p>本节，将介绍cpp中常用的从Mat类的实例化对象中取出像素点的3种方法，并且，每种方法均对颜色空间进行缩减，即：</p>
 <p>0~100范围的像素值为0；</p>
 <p>100~200范围的像素值为100；</p>
 <p>200~255范围的像素值为200。</p>
 <p>并且，每种方法均统计了运行时间。</p>
-<h5 id="用指针访问像素"><a href="#用指针访问像素" class="headerlink" title="用指针访问像素"></a>用指针访问像素</h5><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;opencv2/core/core.hpp&gt;
-#include &lt;opencv2/highgui/highgui.hpp&gt;
-#include &lt;iostream&gt;
-using namespace std;
-using namespace cv;
+<h5 id="用指针访问像素"><a href="#用指针访问像素" class="headerlink" title="用指针访问像素"></a>用指针访问像素</h5><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;opencv2/core/core.hpp&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;opencv2/highgui/highgui.hpp&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> cv<span class="token punctuation">;</span>
 
-void colorReduce(Mat&amp; inputImage, Mat&amp; outputImage, int div);
+<span class="token keyword">void</span> <span class="token function">colorReduce</span><span class="token punctuation">(</span>Mat<span class="token operator">&amp;</span> inputImage<span class="token punctuation">,</span> Mat<span class="token operator">&amp;</span> outputImage<span class="token punctuation">,</span> <span class="token keyword">int</span> div<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-int main( )
-{
-    Mat srcImage = imread("color.jpg");
-    imshow("srcImage",srcImage);
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span> <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    Mat srcImage <span class="token operator">=</span> <span class="token function">imread</span><span class="token punctuation">(</span><span class="token string">"color.jpg"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">imshow</span><span class="token punctuation">(</span><span class="token string">"srcImage"</span><span class="token punctuation">,</span>srcImage<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    Mat dstImage;
-    dstImage.create(srcImage.rows,srcImage.cols,srcImage.type());
+    Mat dstImage<span class="token punctuation">;</span>
+    dstImage<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span>srcImage<span class="token punctuation">.</span>rows<span class="token punctuation">,</span>srcImage<span class="token punctuation">.</span>cols<span class="token punctuation">,</span>srcImage<span class="token punctuation">.</span><span class="token function">type</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    double time0 = static_cast&lt;double&gt;(getTickCount());
+    <span class="token keyword">double</span> time0 <span class="token operator">=</span> <span class="token generic-function"><span class="token function">static_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span><span class="token keyword">double</span><span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span><span class="token function">getTickCount</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    colorReduce(srcImage,dstImage,100);
+    <span class="token function">colorReduce</span><span class="token punctuation">(</span>srcImage<span class="token punctuation">,</span>dstImage<span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    time0 = ((double)getTickCount() - time0)/getTickFrequency();
-    cout&lt;&lt;"This function  waste time:"&lt;&lt;time0&lt;&lt;" second"&lt;&lt;endl;
+    time0 <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">double</span><span class="token punctuation">)</span><span class="token function">getTickCount</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> time0<span class="token punctuation">)</span><span class="token operator">/</span><span class="token function">getTickFrequency</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    cout<span class="token operator">&lt;&lt;</span><span class="token string">"This function  waste time:"</span><span class="token operator">&lt;&lt;</span>time0<span class="token operator">&lt;&lt;</span><span class="token string">" second"</span><span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
 
-    imshow("dstImage",dstImage);
-    waitKey(0);
-}
+    <span class="token function">imshow</span><span class="token punctuation">(</span><span class="token string">"dstImage"</span><span class="token punctuation">,</span>dstImage<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">waitKey</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
 
-void colorReduce(Mat&amp; inputImage, Mat&amp; outputImage, int div)
-{
-    outputImage = inputImage.clone();
-    int rowNumber = outputImage.rows;
+<span class="token keyword">void</span> <span class="token function">colorReduce</span><span class="token punctuation">(</span>Mat<span class="token operator">&amp;</span> inputImage<span class="token punctuation">,</span> Mat<span class="token operator">&amp;</span> outputImage<span class="token punctuation">,</span> <span class="token keyword">int</span> div<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    outputImage <span class="token operator">=</span> inputImage<span class="token punctuation">.</span><span class="token function">clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> rowNumber <span class="token operator">=</span> outputImage<span class="token punctuation">.</span>rows<span class="token punctuation">;</span>
     
-    //Number of columns * Number of channels = number of elements per line
-    int colNumber = outputImage.cols*outputImage.channels();
+    <span class="token comment">//Number of columns * Number of channels = number of elements per line</span>
+    <span class="token keyword">int</span> colNumber <span class="token operator">=</span> outputImage<span class="token punctuation">.</span>cols<span class="token operator">*</span>outputImage<span class="token punctuation">.</span><span class="token function">channels</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    for(int i = 0;i &lt; rowNumber;i++)
-    {
-        //Get the first address of the i-th line
-        uchar* data = outputImage.ptr&lt;uchar&gt;(i);
-        for(int j = 0;j &lt; colNumber;j++)
-        {
-            data[j] = data[j]/div*div;
-        }
-    }
-}
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>i <span class="token operator">&lt;</span> rowNumber<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">//Get the first address of the i-th line</span>
+        uchar<span class="token operator">*</span> data <span class="token operator">=</span> outputImage<span class="token punctuation">.</span><span class="token generic-function"><span class="token function">ptr</span><span class="token generic class-name"><span class="token operator">&lt;</span>uchar<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>j <span class="token operator">&lt;</span> colNumber<span class="token punctuation">;</span>j<span class="token operator">++</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            data<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> data<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token operator">/</span>div<span class="token operator">*</span>div<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>在该程序中，先获取每一行的元素的个数，在双重遍历中，先获取第i行的首地址，然后通过指针获取第i的第j个元素，再对该元素进行处理。</p>
@@ -772,48 +772,48 @@ void colorReduce(Mat&amp; inputImage, Mat&amp; outputImage, int div)
 <p><img src="http://pic.huangruimin.tech/20190902023319.png"></p>
 <p>可见，遍历所有像素点并进行处理的时间为0.02秒左右</p>
 <h5 id="用迭代器访问像素"><a href="#用迭代器访问像素" class="headerlink" title="用迭代器访问像素"></a>用迭代器访问像素</h5><p>用迭代器访问像素点的操作如下程序所示：</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;opencv2/core/core.hpp&gt;
-#include &lt;opencv2/highgui/highgui.hpp&gt;
-#include &lt;iostream&gt;
-using namespace std;
-using namespace cv;
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;opencv2/core/core.hpp&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;opencv2/highgui/highgui.hpp&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> cv<span class="token punctuation">;</span>
 
-void colorReduce(Mat&amp; inputImage, Mat&amp; outputImage, int div);
+<span class="token keyword">void</span> <span class="token function">colorReduce</span><span class="token punctuation">(</span>Mat<span class="token operator">&amp;</span> inputImage<span class="token punctuation">,</span> Mat<span class="token operator">&amp;</span> outputImage<span class="token punctuation">,</span> <span class="token keyword">int</span> div<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-int main( )
-{
-    Mat srcImage = imread("color.jpg");
-    imshow("srcImage",srcImage);
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span> <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    Mat srcImage <span class="token operator">=</span> <span class="token function">imread</span><span class="token punctuation">(</span><span class="token string">"color.jpg"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">imshow</span><span class="token punctuation">(</span><span class="token string">"srcImage"</span><span class="token punctuation">,</span>srcImage<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    Mat dstImage;
-    dstImage.create(srcImage.rows,srcImage.cols,srcImage.type());
+    Mat dstImage<span class="token punctuation">;</span>
+    dstImage<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span>srcImage<span class="token punctuation">.</span>rows<span class="token punctuation">,</span>srcImage<span class="token punctuation">.</span>cols<span class="token punctuation">,</span>srcImage<span class="token punctuation">.</span><span class="token function">type</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    double time0 = static_cast&lt;double&gt;(getTickCount());
+    <span class="token keyword">double</span> time0 <span class="token operator">=</span> <span class="token generic-function"><span class="token function">static_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span><span class="token keyword">double</span><span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span><span class="token function">getTickCount</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    colorReduce(srcImage,dstImage,100);
+    <span class="token function">colorReduce</span><span class="token punctuation">(</span>srcImage<span class="token punctuation">,</span>dstImage<span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    time0 = ((double)getTickCount() - time0)/getTickFrequency();
-    cout&lt;&lt;"This function  waste time:"&lt;&lt;time0&lt;&lt;" second"&lt;&lt;endl;
+    time0 <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">double</span><span class="token punctuation">)</span><span class="token function">getTickCount</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> time0<span class="token punctuation">)</span><span class="token operator">/</span><span class="token function">getTickFrequency</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    cout<span class="token operator">&lt;&lt;</span><span class="token string">"This function  waste time:"</span><span class="token operator">&lt;&lt;</span>time0<span class="token operator">&lt;&lt;</span><span class="token string">" second"</span><span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
 
-    imshow("dstImage",dstImage);
-    waitKey(0);
-}
+    <span class="token function">imshow</span><span class="token punctuation">(</span><span class="token string">"dstImage"</span><span class="token punctuation">,</span>dstImage<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">waitKey</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-void colorReduce(Mat&amp; inputImage, Mat&amp; outputImage, int div)  
-{  
-	outputImage = inputImage.clone();
-	//Start position iterator
-	Mat_&lt;Vec3b&gt;::iterator it = outputImage.begin&lt;Vec3b&gt;(); 
-	//End position iterator
-	Mat_&lt;Vec3b&gt;::iterator itend = outputImage.end&lt;Vec3b&gt;();
+<span class="token keyword">void</span> <span class="token function">colorReduce</span><span class="token punctuation">(</span>Mat<span class="token operator">&amp;</span> inputImage<span class="token punctuation">,</span> Mat<span class="token operator">&amp;</span> outputImage<span class="token punctuation">,</span> <span class="token keyword">int</span> div<span class="token punctuation">)</span>  
+<span class="token punctuation">{</span>  
+	outputImage <span class="token operator">=</span> inputImage<span class="token punctuation">.</span><span class="token function">clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token comment">//Start position iterator</span>
+	Mat_<span class="token operator">&lt;</span>Vec3b<span class="token operator">&gt;</span><span class="token double-colon punctuation">::</span>iterator it <span class="token operator">=</span> outputImage<span class="token punctuation">.</span><span class="token generic-function"><span class="token function">begin</span><span class="token generic class-name"><span class="token operator">&lt;</span>Vec3b<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+	<span class="token comment">//End position iterator</span>
+	Mat_<span class="token operator">&lt;</span>Vec3b<span class="token operator">&gt;</span><span class="token double-colon punctuation">::</span>iterator itend <span class="token operator">=</span> outputImage<span class="token punctuation">.</span><span class="token generic-function"><span class="token function">end</span><span class="token generic class-name"><span class="token operator">&lt;</span>Vec3b<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 	
-	for(;it != itend;++it)  
-	{
-		(*it)[0] = (*it)[0]/div*div;  
-		(*it)[1] = (*it)[1]/div*div;  
-		(*it)[2] = (*it)[2]/div*div;
-	}  
-}  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+	<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token punctuation">;</span>it <span class="token operator">!=</span> itend<span class="token punctuation">;</span><span class="token operator">++</span>it<span class="token punctuation">)</span>  
+	<span class="token punctuation">{</span>
+		<span class="token punctuation">(</span><span class="token operator">*</span>it<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token operator">*</span>it<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">/</span>div<span class="token operator">*</span>div<span class="token punctuation">;</span>  
+		<span class="token punctuation">(</span><span class="token operator">*</span>it<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token operator">*</span>it<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">/</span>div<span class="token operator">*</span>div<span class="token punctuation">;</span>  
+		<span class="token punctuation">(</span><span class="token operator">*</span>it<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token operator">*</span>it<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token operator">/</span>div<span class="token operator">*</span>div<span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>  
+<span class="token punctuation">}</span>  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>该函数运行效果如下图所示：</p>
 <p><img src="http://pic.huangruimin.tech/20190902025830.png"></p>
 <p>在该方法中，直接使用迭代器进行处理，采用迭代器访问相对于数组越界的可能性，还是非常安全的，经实测，该方法遍历所有像素点并进行处理的时间为0.04秒左右。</p>

@@ -503,15 +503,15 @@ time<span class="token punctuation">.</span>sleep<span class="token punctuation"
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ls</span> <span class="token parameter variable">-ltrh</span> /dev/video*<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>便可查看到video设备，其中video0便是CSI摄像头：</p>
 <p><img src="http://pic.huangruimin.tech/20190831152421.png"></p>
-<p>该video设备可同时供Python与C++调用，具体使用请参考《树莓派OpenCV系列教程1：开发环境搭建》的例程。</p>
+<p>该video设备可同时供Python与cpp调用，具体使用请参考《树莓派OpenCV系列教程1：开发环境搭建》的例程。</p>
 <h2 id="2-USB摄像头"><a href="#2-USB摄像头" class="headerlink" title="2 USB摄像头"></a>2 USB摄像头</h2><p>树莓派除了支持CSI摄像头外，同样也支持USB摄像头：</p>
 <p><img src="http://pic.huangruimin.tech/20190831153829.png"></p>
 <p>若采用USB摄像头，若摄像头本身免驱，接入树莓派后，将直接识别的video设备，在/dev下可找到对应的video设备，在中断，输入命令：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ls</span> <span class="token parameter variable">-ltrh</span> /dev/video*<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>即可查询到新接入的video设备。</p>
-<p>但使用Python，C++使用摄像头，区分不同的摄像头时：</p>
-<p>c++：	</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">VideoCapture cap(0);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>但使用Python，cpp使用摄像头，区分不同的摄像头时：</p>
+<p>cpp：	</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">VideoCapture <span class="token function">cap</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>python：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">cap <span class="token operator">=</span> cv2<span class="token punctuation">.</span>VideoCapture<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>传入参数0代表使用CSI摄像头，传入其它参数代表使用其它video序号对应的USB摄像头。<br>具体使用请参考《1.OpenCV开发环境搭建》的例程。</p>
@@ -561,42 +561,42 @@ A demo to show whether The OpenCV and IP camera is well installed
     cv2<span class="token punctuation">.</span>destroyAllWindows<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>运行效果如下图所示：<br><img src="http://pic.huangruimin.tech/20190831172850.png"></p>
-<h3 id="3-2-C"><a href="#3-2-C" class="headerlink" title="3.2 C++"></a>3.2 C++</h3><p>相应地，C++程序读取网络摄像头的程序如下：</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include&lt;iostream&gt;
-#include&lt;opencv2/opencv.hpp&gt;
-#include&lt;opencv2/highgui/highgui.hpp&gt;
-#include&lt;opencv2/imgproc/imgproc.hpp&gt;
+<h3 id="3-2-cpp"><a href="#3-2-cpp" class="headerlink" title="3.2 cpp"></a>3.2 cpp</h3><p>相应地，cpp程序读取网络摄像头的程序如下：</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;iostream&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;opencv2/opencv.hpp&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;opencv2/highgui/highgui.hpp&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;opencv2/imgproc/imgproc.hpp&gt;</span></span>
 
-using namespace std;
-using namespace cv;
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> cv<span class="token punctuation">;</span>
 
-int main()
-{
-	cout &lt;&lt; "Waveshare OpenCV Tutorial"&lt;&lt; endl;
-	cout &lt;&lt; "00_Test_OpenCV"&lt;&lt;endl;
-	cout &lt;&lt; "A demo to show whether The OpenCV and IP camera is well installed" &lt;&lt;endl;
-	cout &lt;&lt; endl;
-	cout &lt;&lt; "OpenCV Version:" &lt;&lt; CV_VERSION &lt;&lt; endl;
-	const string ip_camera_url = "http://admin:admin@192.168.10.215:8081";
-	VideoCapture cap(ip_camera_url);
-	if(!cap.isOpened())
-	{
-		cout&lt;&lt;"can't open this camera"&lt;&lt;endl;
-		return -1;
-	}	
-	Mat FrameImage;
-	while(1)
-	{
-		cap&gt;&gt;FrameImage;
-		imshow("Camera Capture",FrameImage);
-		//Press Q to quit
-		if(char(waitKey(1)) == 'q')
-		{
-			break;
-		}
-	}
-	return 0;
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+	cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Waveshare OpenCV Tutorial"</span><span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+	cout <span class="token operator">&lt;&lt;</span> <span class="token string">"00_Test_OpenCV"</span><span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
+	cout <span class="token operator">&lt;&lt;</span> <span class="token string">"A demo to show whether The OpenCV and IP camera is well installed"</span> <span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
+	cout <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+	cout <span class="token operator">&lt;&lt;</span> <span class="token string">"OpenCV Version:"</span> <span class="token operator">&lt;&lt;</span> CV_VERSION <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+	<span class="token keyword">const</span> string ip_camera_url <span class="token operator">=</span> <span class="token string">"http://admin:admin@192.168.10.215:8081"</span><span class="token punctuation">;</span>
+	VideoCapture <span class="token function">cap</span><span class="token punctuation">(</span>ip_camera_url<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>cap<span class="token punctuation">.</span><span class="token function">isOpened</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+	<span class="token punctuation">{</span>
+		cout<span class="token operator">&lt;&lt;</span><span class="token string">"can't open this camera"</span><span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
+		<span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>	
+	Mat FrameImage<span class="token punctuation">;</span>
+	<span class="token keyword">while</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+	<span class="token punctuation">{</span>
+		cap<span class="token operator">&gt;&gt;</span>FrameImage<span class="token punctuation">;</span>
+		<span class="token function">imshow</span><span class="token punctuation">(</span><span class="token string">"Camera Capture"</span><span class="token punctuation">,</span>FrameImage<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token comment">//Press Q to quit</span>
+		<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">char</span><span class="token punctuation">(</span><span class="token function">waitKey</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token char">'q'</span><span class="token punctuation">)</span>
+		<span class="token punctuation">{</span>
+			<span class="token keyword">break</span><span class="token punctuation">;</span>
+		<span class="token punctuation">}</span>
+	<span class="token punctuation">}</span>
+	<span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>运行效果如下图所示：<br><img src="http://pic.huangruimin.tech/20190831181427.png"></p>
 
