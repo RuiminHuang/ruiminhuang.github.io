@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="RPi中OpenCV开发环境搭建, AI, TensorRT, Infrared">
+    <meta name="keywords" content="RPi-OpenCV_摄像头的基本使用, AI, TensorRT, Infrared">
     <meta name="description" content="Personal essay record">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>RPi中OpenCV开发环境搭建 | Ruimin Huang&#39;s Space</title>
+    <title>RPi-OpenCV_摄像头的基本使用 | Ruimin Huang&#39;s Space</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -259,12 +259,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('http://pic.huangruimin.tech/banner_16.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('http://pic.huangruimin.tech/banner_14.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">RPi中OpenCV开发环境搭建</h1>
+                    <h1 class="description center-align post-title">RPi-OpenCV_摄像头的基本使用</h1>
                 </div>
             </div>
         </div>
@@ -392,7 +392,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2018-10-07
+                    2018-10-10
                 </div>
                 
 
@@ -406,14 +406,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.7k
+                    1.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    7 分
+                    5 分
                 </div>
                 
 
@@ -436,121 +436,100 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>本章将介绍OpenCV开发环境的搭建，搭建的版本为OpenCV4.1.0，同时支持Python3和C++，在搭建好后，将通过一个C++和Python的Demo打开CSI摄像头来测试开发环境是否搭建完成。</p>
-<h2 id="1-烧录系统"><a href="#1-烧录系统" class="headerlink" title="1 烧录系统"></a>1 烧录系统</h2><p>本教程采用的镜像是树莓派官方2019年7月10日发布的发行版镜像，代号Buster，如下图所示：<br><img src="http://pic.huangruimin.tech/20190821152022.png"></p>
-<h2 id="2-基本设置"><a href="#2-基本设置" class="headerlink" title="2 基本设置"></a>2 基本设置</h2><h3 id="2-1-把目录扩展到整个TF卡"><a href="#2-1-把目录扩展到整个TF卡" class="headerlink" title="2.1 把目录扩展到整个TF卡"></a>2.1 把目录扩展到整个TF卡</h3><p>本次搭建OpenCV开发环境，至少选择16G的TF卡，为了充分利用TF的存储空间，需要将TF卡空间扩展到整个TF卡。<br>在命令行输入命令，进入树莓派配置界面，用上下左右切换光标位置。</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> raspi-config<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p><img src="http://pic.huangruimin.tech/20190830130336.png"><br><img src="http://pic.huangruimin.tech/20190830130406.png"></p>
-<h3 id="2-2-开启摄像头"><a href="#2-2-开启摄像头" class="headerlink" title="2.2 开启摄像头"></a>2.2 开启摄像头</h3><p>作为开源计算机视觉库，主要进行图像处理，对摄像头图像数据进行处理是主要需求，因此，开启摄像头是很有必要的。</p>
-<h4 id="2-2-1-启用摄像头"><a href="#2-2-1-启用摄像头" class="headerlink" title="2.2.1 启用摄像头"></a>2.2.1 启用摄像头</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> raspi-config<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>进入Interfacing Options-&gt;Camera-&gt;Yes，即可启用摄像头。<br>检测摄像头是否正常，可以使用以下命令进行检测：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">raspivid <span class="token parameter variable">-t</span> <span class="token number">0</span> <span class="token parameter variable">-cs</span> <span class="token number">0</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+                <p>本章将介绍计算机视觉中最核心传感器-摄像头的基本使用，主要讲解了CSI摄像头，USB摄像头，网络摄像头的基本使用。</p>
+<h2 id="1-CSI摄像头"><a href="#1-CSI摄像头" class="headerlink" title="1 CSI摄像头"></a>1 CSI摄像头</h2><p>首先将讲解CSI摄像头的使用：</p>
+<p><img src="http://pic.huangruimin.tech/20190831153253.png"></p>
+<h3 id="1-1-picamera"><a href="#1-1-picamera" class="headerlink" title="1.1 picamera"></a>1.1 picamera</h3><p>树莓派自带的摄像头为CSI摄像头，在树莓派平台中，发行版的Raspbian默认安装了树莓派平台的picamera:</p>
+<p><a target="_blank" rel="noopener" href="https://picamera.readthedocs.io/en/release-1.13/index.html">相关官方文档链接</a></p>
+<p>执行该脚本将录制一段10秒的视频到本地：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> picamera
 
-<h4 id="2-2-2-准备视频流设备"><a href="#2-2-2-准备视频流设备" class="headerlink" title="2.2.2 准备视频流设备"></a>2.2.2 准备视频流设备</h4><p>在OpenCV中，若要读取摄像头数据，需要开启v4l2(video for linux 2)，开启后，摄像头设备文件为/dev/video0，OpenCV将从该文件中读取视频流文件。</p>
+camera <span class="token operator">=</span> picamera<span class="token punctuation">.</span>PiCamera<span class="token punctuation">(</span><span class="token punctuation">)</span>
+camera<span class="token punctuation">.</span>resolution <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">640</span><span class="token punctuation">,</span> <span class="token number">480</span><span class="token punctuation">)</span>
+camera<span class="token punctuation">.</span>start_recording<span class="token punctuation">(</span><span class="token string">'my_video.h264'</span><span class="token punctuation">)</span>
+camera<span class="token punctuation">.</span>wait_recording<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span>
+camera<span class="token punctuation">.</span>stop_recording<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>但由于picamera输出的数据是RGB格式的，需要通过Numpy转换为BGR格式，代码如下：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> time
+<span class="token keyword">import</span> picamera
+<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token keyword">import</span> cv2
+
+<span class="token keyword">with</span> picamera<span class="token punctuation">.</span>PiCamera<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">as</span> camera<span class="token punctuation">:</span>
+    camera<span class="token punctuation">.</span>resolution <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">320</span><span class="token punctuation">,</span> <span class="token number">240</span><span class="token punctuation">)</span>
+    camera<span class="token punctuation">.</span>framerate <span class="token operator">=</span> <span class="token number">24</span>
+    time<span class="token punctuation">.</span>sleep<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
+    image <span class="token operator">=</span> np<span class="token punctuation">.</span>empty<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">240</span> <span class="token operator">*</span> <span class="token number">320</span> <span class="token operator">*</span> <span class="token number">3</span><span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">,</span> dtype<span class="token operator">=</span>np<span class="token punctuation">.</span>uint8<span class="token punctuation">)</span>
+    <span class="token comment"># save as bgr format for OpenCV</span>
+    camera<span class="token punctuation">.</span>capture<span class="token punctuation">(</span>image<span class="token punctuation">,</span> <span class="token string">'bgr'</span><span class="token punctuation">)</span>
+    image <span class="token operator">=</span> image<span class="token punctuation">.</span>reshape<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">240</span><span class="token punctuation">,</span> <span class="token number">320</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    cv2<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span><span class="token string">"img"</span><span class="token punctuation">,</span> image<span class="token punctuation">)</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>cv2<span class="token punctuation">.</span>waitKey<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token builtin">ord</span><span class="token punctuation">(</span><span class="token string">'q'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        exit<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>当然，picamera 也提供了PIRGBArray对象，用来保存RGB 图像数据,下面将在capture_continuous函数中，不断地把RGB转换成BGR图像，供OpenCV显示，以形成视频流。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> picamera<span class="token punctuation">.</span>array <span class="token keyword">import</span> PiRGBArray
+<span class="token keyword">from</span> picamera <span class="token keyword">import</span> PiCamera
+<span class="token keyword">import</span> time
+<span class="token keyword">import</span> cv2
+
+<span class="token comment"># initialize the camera and grab a reference to the raw camera capture</span>
+camera <span class="token operator">=</span> PiCamera<span class="token punctuation">(</span><span class="token punctuation">)</span>
+camera<span class="token punctuation">.</span>resolution <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">640</span><span class="token punctuation">,</span> <span class="token number">480</span><span class="token punctuation">)</span>
+camera<span class="token punctuation">.</span>framerate <span class="token operator">=</span> <span class="token number">32</span>
+rawCapture <span class="token operator">=</span> PiRGBArray<span class="token punctuation">(</span>camera<span class="token punctuation">)</span>
+<span class="token comment"># allow the camera to warmup</span>
+time<span class="token punctuation">.</span>sleep<span class="token punctuation">(</span><span class="token number">0.1</span><span class="token punctuation">)</span>
+<span class="token comment"># capture frames from the camera</span>
+<span class="token keyword">for</span> frame <span class="token keyword">in</span> camera<span class="token punctuation">.</span>capture_continuous<span class="token punctuation">(</span>rawCapture<span class="token punctuation">,</span> <span class="token builtin">format</span><span class="token operator">=</span><span class="token string">"bgr"</span><span class="token punctuation">,</span> use_video_port<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    image <span class="token operator">=</span> frame<span class="token punctuation">.</span>array
+    <span class="token comment"># show the frame</span>
+    cv2<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span><span class="token string">"Frame"</span><span class="token punctuation">,</span> image<span class="token punctuation">)</span>
+    <span class="token comment"># prepare for net stream</span>
+    rawCapture<span class="token punctuation">.</span>truncate<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+    
+    <span class="token keyword">if</span><span class="token punctuation">(</span>cv2<span class="token punctuation">.</span>waitKey<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token builtin">ord</span><span class="token punctuation">(</span><span class="token string">'q'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        cv2<span class="token punctuation">.</span>destroyAllWindows<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">break</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>但由于picamera为树莓派或兼容树莓派平台专用的库，且仅能供树莓派使用，下面将介绍更为通用的使用方法。</p>
+<h3 id="1-2-V4L2"><a href="#1-2-V4L2" class="headerlink" title="1.2 V4L2"></a>1.2 V4L2</h3><p>目前,CSI摄像头可通过picamera等库进行调用，但在Raspbian系统中，并不属于一个video设备而存在，若想将CSI摄像头作为一个视频设备文件使用，则要开启V4L2(Video for Linux 2)模块以开启：</p>
 <p>开启方法如下:</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">vim</span> /etc/modules<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <p>在末尾添加一行：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">bcm2835-v4l2<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h3 id="2-3-更换软件源"><a href="#2-3-更换软件源" class="headerlink" title="2.3 更换软件源"></a>2.3 更换软件源</h3><p>鉴于国内网络环境下载各大镜像，软件包速度慢的问题，需要更换软件源，以防下载慢，且在本教程中，统一更换为清华源。</p>
-<h4 id="2-3-1-更换树莓派软件源"><a href="#2-3-1-更换树莓派软件源" class="headerlink" title="2.3.1 更换树莓派软件源"></a>2.3.1 更换树莓派软件源</h4><p>包括系统源与系统更新源，操作方法：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 编辑 `/etc/apt/sources.list` 文件，删除原文件所有内容，用以下内容取代：</span>
-deb http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ buster main non-free contrib
-deb-src http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ buster main non-free contrib
-
-<span class="token comment"># 编辑 `/etc/apt/sources.list.d/raspi.list` 文件，删除原文件所有内容，用以下内容取代：</span>
-deb http://mirrors.tuna.tsinghua.edu.cn/raspberrypi/ buster main ui<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>如下图所示：<br><img src="http://pic.huangruimin.tech/20190830132453.png"><br><img src="http://pic.huangruimin.tech/20190830132542.png"></p>
-<p><a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/help/raspbian/">清华软件源Raspbian官方说明</a></p>
-<h4 id="2-3-2-更换pip软件源"><a href="#2-3-2-更换pip软件源" class="headerlink" title="2.3.2 更换pip软件源"></a>2.3.2 更换pip软件源</h4><p>为加速Python pip安装速度，特更改Python软件源，操作方法：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pip <span class="token function">install</span> pip <span class="token parameter variable">-U</span>
-pip config <span class="token builtin class-name">set</span> global.index-url https://pypi.tuna.tsinghua.edu.cn/simple<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p><a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/help/pypi/">清华软件源Pypi官方说明</a></p>
-<h3 id="2-4-重启"><a href="#2-4-重启" class="headerlink" title="2.4 重启"></a>2.4 重启</h3><p>以上步骤均完成之后，需要进行重启才生效，重启命令如下：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">reboot</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h2 id="3-安装OpenCV所需要的库"><a href="#3-安装OpenCV所需要的库" class="headerlink" title="3 安装OpenCV所需要的库"></a>3 安装OpenCV所需要的库</h2><h3 id="3-1-安装numpy"><a href="#3-1-安装numpy" class="headerlink" title="3.1 安装numpy"></a>3.1 安装numpy</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> pip3 <span class="token function">install</span> numpy<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h3 id="3-2-安装OpenCV所需的依赖"><a href="#3-2-安装OpenCV所需的依赖" class="headerlink" title="3.2 安装OpenCV所需的依赖"></a>3.2 安装OpenCV所需的依赖</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> build-essential <span class="token function">git</span> cmake pkg-config <span class="token parameter variable">-y</span>
-<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> libjpeg8-dev <span class="token parameter variable">-y</span>
-<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> libtiff5-dev <span class="token parameter variable">-y</span>
-<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> libjasper-dev <span class="token parameter variable">-y</span>
-<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> libpng12-dev <span class="token parameter variable">-y</span>
-
-<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> libavcodec-dev libavformat-dev libswscale-dev libv4l-dev <span class="token parameter variable">-y</span>
-
-<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> libgtk2.0-dev <span class="token parameter variable">-y</span>
-<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> libatlas-base-dev gfortran <span class="token parameter variable">-y</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="4-下载OpenCV"><a href="#4-下载OpenCV" class="headerlink" title="4 下载OpenCV"></a>4 下载OpenCV</h2><p>本次安装的OpenCV版本为OpenCV 4.1.0，<a target="_blank" rel="noopener" href="https://opencv.org/releases/">官方链接地址</a></p>
-<p>需要下载包括OpenCV与OpenCV_Contrib两个仓库</p>
-<p>OpenCV_4.1.0仓库：<a target="_blank" rel="noopener" href="https://github.com/opencv/opencv/tree/4.1.0">Github地址</a></p>
-<p>OpenCV_Contrib_4.1.0仓库：<a target="_blank" rel="noopener" href="https://github.com/opencv/opencv_contrib/tree/4.1.0">Github地址</a></p>
-<p>鉴于下载速度慢，建议采用Git Bash下载：</p>
-<p>下载命令如下，注意添加–recursive及-b 4.1.0</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> clone <span class="token parameter variable">-b</span> <span class="token number">4.1</span>.0 <span class="token parameter variable">--recursive</span> https://github.com/opencv/opencv.git
-<span class="token function">git</span> clone <span class="token parameter variable">-b</span> <span class="token number">4.1</span>.0 <span class="token parameter variable">--recursive</span> https://github.com/opencv/opencv_contrib.git<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>下载后，建议采用Fillzilla或者U盘等方法把文件传输到树莓派中。</p>
-<p><img src="http://pic.huangruimin.tech/20190830153146.png"></p>
-<p>当然，也可以直接在树莓派命令行窗口执行以上命令进行下载，但请确保网络稳定。</p>
-<h2 id="5-配置Cmake"><a href="#5-配置Cmake" class="headerlink" title="5 配置Cmake"></a>5 配置Cmake</h2><p>Cmake是一款跨平台的编译工具，经过配置，可输出适配于树莓派平台的Makefile</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /home/pi/Downloads/opencv-4.1.0
-<span class="token function">mkdir</span> build
-<span class="token builtin class-name">cd</span> build<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p>配置Cmake，执行以下命令：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">cmake <span class="token parameter variable">-D</span> <span class="token assign-left variable">CMAKE_BUILD_TYPE</span><span class="token operator">=</span>RELEASE <span class="token punctuation">\</span>
-<span class="token parameter variable">-D</span> <span class="token assign-left variable">CMAKE_INSTALL_PREFIX</span><span class="token operator">=</span>/usr/local <span class="token punctuation">\</span>
-<span class="token parameter variable">-D</span> <span class="token assign-left variable">INSTALL_C_EXAMPLES</span><span class="token operator">=</span>ON <span class="token punctuation">\</span>
-<span class="token parameter variable">-D</span> <span class="token assign-left variable">INSTALL_PYTHON_EXAMPLES</span><span class="token operator">=</span>ON <span class="token punctuation">\</span>
-<span class="token parameter variable">-D</span> <span class="token assign-left variable">OPENCV_EXTRA_MODULES_PATH</span><span class="token operator">=</span>/home/pi/Downloads/opencv-4.1.0/opencv_contrib-3.4.0/modules <span class="token punctuation">\</span>
-<span class="token parameter variable">-D</span> <span class="token assign-left variable">BUILD_EXAMPLES</span><span class="token operator">=</span>ON <span class="token punctuation">\</span>
-<span class="token parameter variable">-D</span> <span class="token assign-left variable">WITH_LIBV4L</span><span class="token operator">=</span>ON <span class="token punctuation">\</span>
-<span class="token parameter variable">-D</span> <span class="token assign-left variable">PYTHON3_EXECUTABLE</span><span class="token operator">=</span>/usr/bin/python3.7 <span class="token punctuation">\</span>
-<span class="token parameter variable">-D</span> <span class="token assign-left variable">PYTHON_INCLUDE_DIR</span><span class="token operator">=</span>/usr/include/python3.7 <span class="token punctuation">\</span>
-<span class="token parameter variable">-D</span> <span class="token assign-left variable">PYTHON_LIBRARY</span><span class="token operator">=</span>/usr/lib/arm-linux-gnueabihf/libpython3.7m.so <span class="token punctuation">\</span>
-<span class="token parameter variable">-D</span> <span class="token assign-left variable">PYTHON3_NUMPY_INCLUDE_DIRS</span><span class="token operator">=</span>/usr/lib/python3/dist-packages/numpy/core/include <span class="token punctuation">\</span>
-<span class="token punctuation">..</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>注意，以上命令需要根据您具体的软件环境进行修改，否则很可能报错。<br>其中：</p>
-<ul>
-<li>CMAKE_BUILD_TYPE=RELEASE \ 代表编译类型为发行版本</li>
-<li>CMAKE_INSTALL_PREFIX=/usr/local \ 安装路径</li>
-<li>INSTALL_C_EXAMPLES=ON \ C demo</li>
-<li>INSTALL_PYTHON_EXAMPLES=ON \ Python demo</li>
-<li>OPENCV_EXTRA_MODULES_PATH=/home/pi/Downloads/opencv-4.1.0/opencv_contrib-3.4.0/modules \ OpenCV Contrib路径</li>
-<li>BUILD_EXAMPLES=ON \ 编译demo</li>
-<li>WITH_LIBV4L=ON \ 开启Video for Linux</li>
-<li>PYTHON3_EXECUTABLE=/usr/bin/python3.7 \ Python3路径</li>
-<li>PYTHON_INCLUDE_DIR=/usr/include/python3.7 \ Python3 include文件夹</li>
-<li>PYTHON_LIBRARY=/usr/lib/arm-linux-gnueabihf/libpython3.7m.so \ Python3库</li>
-<li>PYTHON3_NUMPY_INCLUDE_DIRS=/usr/lib/python3/dist-packages/numpy/core/include \ Python3 Numpy安装路径</li>
-<li>..</li>
-</ul>
-<p>如下图所示：</p>
-<p><img src="http://pic.huangruimin.tech/20190829173935.png"></p>
-<p>cmake 配置完成后的界面如下图所示：</p>
-<p><img src="http://pic.huangruimin.tech/20190829172645.png"></p>
-<p>注意：cmake执行时间一般在15分钟左右。</p>
-<h2 id="6-编译"><a href="#6-编译" class="headerlink" title="6 编译"></a>6 编译</h2><p>在Cmake生成Makefile之后，便可进行编译：<br>输入并执行：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">make</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>即开始进行编译，编译过程如下图所示：<br><img src="http://pic.huangruimin.tech/20190829203241.png"></p>
-<p>注意：make编译时间比较长，一般编译时间在5小时左右。</p>
-<h2 id="7-安装"><a href="#7-安装" class="headerlink" title="7 安装"></a>7 安装</h2><p>输入以下命令即可进行安装：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">make</span> insall<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>注意：install安装时间一般在1分钟左右。</p>
-<h2 id="8-测试是否安装完成"><a href="#8-测试是否安装完成" class="headerlink" title="8 测试是否安装完成"></a>8 测试是否安装完成</h2><p>测试包括Python及C++的测试，用到了摄像头及简单的OpenCV处理函数。</p>
-<h3 id="8-1-Python3："><a href="#8-1-Python3：" class="headerlink" title="8.1 Python3："></a>8.1 Python3：</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">#!/usr/bin/env python</span>
+<p>此时，CSI摄像头便成为了一个video设备，此时在中断执行：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ls</span> <span class="token parameter variable">-ltrh</span> /dev/video*<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>便可查看到video设备，其中video0便是CSI摄像头：</p>
+<p><img src="http://pic.huangruimin.tech/20190831152421.png"></p>
+<p>该video设备可同时供Python与C++调用，具体使用请参考《树莓派OpenCV系列教程1：开发环境搭建》的例程。</p>
+<h2 id="2-USB摄像头"><a href="#2-USB摄像头" class="headerlink" title="2 USB摄像头"></a>2 USB摄像头</h2><p>树莓派除了支持CSI摄像头外，同样也支持USB摄像头：</p>
+<p><img src="http://pic.huangruimin.tech/20190831153829.png"></p>
+<p>若采用USB摄像头，若摄像头本身免驱，接入树莓派后，将直接识别的video设备，在/dev下可找到对应的video设备，在中断，输入命令：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ls</span> <span class="token parameter variable">-ltrh</span> /dev/video*<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>即可查询到新接入的video设备。</p>
+<p>但使用Python，C++使用摄像头，区分不同的摄像头时：</p>
+<p>c++：	</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">VideoCapture cap(0);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>python：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">cap <span class="token operator">=</span> cv2<span class="token punctuation">.</span>VideoCapture<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>传入参数0代表使用CSI摄像头，传入其它参数代表使用其它video序号对应的USB摄像头。<br>具体使用请参考《1.OpenCV开发环境搭建》的例程。</p>
+<h2 id="3-网络摄像头"><a href="#3-网络摄像头" class="headerlink" title="3 网络摄像头"></a>3 网络摄像头</h2><p>除了使用CSI摄像头，USB摄像头外，还可以将手机变成一个IP摄像头，具体方法如下：</p>
+<p>在手机应用市场中，搜索这款名为IP摄像头的APP，图表如下：</p>
+<p><img src="http://pic.huangruimin.tech/20190831160527.png"></p>
+<p>安装好后，连接wifi，确保树莓派和手机处在同一局域网内，手机打开IP摄像头软件，同时点击打开IP摄像头服务器，即可将手机变成一个IP摄像头。如下图所示：</p>
+<p><img src="http://pic.huangruimin.tech/20190831161321.png"></p>
+<p>此时,在浏览器中打开该IP地址，输入用户名:admin，密码:admin，即可浏览摄像头画面：</p>
+<p><img src="http://pic.huangruimin.tech/20190831161042.png"></p>
+<p>此时说明手机成为了一个IP摄像头，此摄像头可供OpenCV调用。</p>
+<p>OpenCV调用IP摄像头的源程序如下：</p>
+<h3 id="3-1-Python3"><a href="#3-1-Python3" class="headerlink" title="3.1 Python3"></a>3.1 Python3</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">#!/usr/bin/env python</span>
 
 <span class="token triple-quoted-string string">'''
 Waveshare OpenCV Tutorial
-00_Test_OpenCV.py
-A demo to show whether The OpenCV and CSI camera is well installed
+01_IP_Camera.py
+A demo to show whether The OpenCV and IP camera is well installed
 '''</span>
 
 <span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
@@ -559,21 +538,15 @@ A demo to show whether The OpenCV and CSI camera is well installed
 <span class="token keyword">def</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"OpenCV Version:{}"</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>cv2<span class="token punctuation">.</span>__version__<span class="token punctuation">)</span><span class="token punctuation">)</span>
     <span class="token comment"># 0: use CSI camera,1：use USB camera</span>
-    cap <span class="token operator">=</span> cv2<span class="token punctuation">.</span>VideoCapture<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+    ip_camera_url <span class="token operator">=</span> <span class="token string">'http://admin:admin@192.168.10.215:8081'</span>
+    cap <span class="token operator">=</span> cv2<span class="token punctuation">.</span>VideoCapture<span class="token punctuation">(</span>ip_camera_url<span class="token punctuation">)</span>
     <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">not</span> cap<span class="token punctuation">.</span>isOpened<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"can't open this camera"</span><span class="token punctuation">)</span>
 
     <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token boolean">True</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
         ret<span class="token punctuation">,</span> FrameImage <span class="token operator">=</span> cap<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span>
         <span class="token keyword">if</span> ret <span class="token operator">==</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
-            <span class="token comment"># change to gray image</span>
-            GrayImage <span class="token operator">=</span> cv2<span class="token punctuation">.</span>cvtColor<span class="token punctuation">(</span>FrameImage<span class="token punctuation">,</span> cv2<span class="token punctuation">.</span>COLOR_BGR2GRAY<span class="token punctuation">)</span>
-            <span class="token comment"># blur the image </span>
-            BlurImage <span class="token operator">=</span> cv2<span class="token punctuation">.</span>blur<span class="token punctuation">(</span>GrayImage<span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-            <span class="token comment"># use canny to detect contour</span>
-            CannyImage <span class="token operator">=</span> cv2<span class="token punctuation">.</span>Canny<span class="token punctuation">(</span>BlurImage<span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">)</span>
-            <span class="token comment"># show the image</span>
-            cv2<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span><span class="token string">'Camera Capture'</span><span class="token punctuation">,</span>CannyImage<span class="token punctuation">)</span>
+            cv2<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span><span class="token string">'Camera Capture'</span><span class="token punctuation">,</span>FrameImage<span class="token punctuation">)</span>
             <span class="token comment">#Press Q to quit</span>
             <span class="token keyword">if</span> <span class="token punctuation">(</span>cv2<span class="token punctuation">.</span>waitKey<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token builtin">ord</span><span class="token punctuation">(</span><span class="token string">'q'</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
                 cap<span class="token punctuation">.</span>release<span class="token punctuation">(</span><span class="token punctuation">)</span>
@@ -585,12 +558,11 @@ A demo to show whether The OpenCV and CSI camera is well installed
     <span class="token keyword">print</span><span class="token punctuation">(</span>__doc__<span class="token punctuation">)</span>
     main<span class="token punctuation">(</span><span class="token punctuation">)</span>
     <span class="token comment"># Release resource</span>
-    cv2<span class="token punctuation">.</span>destroyAllWindows<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    cv2<span class="token punctuation">.</span>destroyAllWindows<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>执行该Python脚本的情况如下：<br><img src="http://pic.huangruimin.tech/20190830201403.png"></p>
-<h3 id="8-2-C-："><a href="#8-2-C-：" class="headerlink" title="8.2 C++："></a>8.2 C++：</h3><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include&lt;iostream&gt;
+<p>运行效果如下图所示：<br><img src="http://pic.huangruimin.tech/20190831172850.png"></p>
+<h3 id="3-2-C"><a href="#3-2-C" class="headerlink" title="3.2 C++"></a>3.2 C++</h3><p>相应地，C++程序读取网络摄像头的程序如下：</p>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include&lt;iostream&gt;
 #include&lt;opencv2/opencv.hpp&gt;
 #include&lt;opencv2/highgui/highgui.hpp&gt;
 #include&lt;opencv2/imgproc/imgproc.hpp&gt;
@@ -602,28 +574,21 @@ int main()
 {
 	cout &lt;&lt; "Waveshare OpenCV Tutorial"&lt;&lt; endl;
 	cout &lt;&lt; "00_Test_OpenCV"&lt;&lt;endl;
-	cout &lt;&lt; "A demo to show whether The OpenCV and CSI camera is well installed" &lt;&lt;endl;
+	cout &lt;&lt; "A demo to show whether The OpenCV and IP camera is well installed" &lt;&lt;endl;
 	cout &lt;&lt; endl;
 	cout &lt;&lt; "OpenCV Version:" &lt;&lt; CV_VERSION &lt;&lt; endl;
-	// 0: use CSI camera,1：use USB camera
-	VideoCapture cap(0);
+	const string ip_camera_url = "http://admin:admin@192.168.10.215:8081";
+	VideoCapture cap(ip_camera_url);
 	if(!cap.isOpened())
 	{
 		cout&lt;&lt;"can't open this camera"&lt;&lt;endl;
 		return -1;
 	}	
-	Mat FrameImage,GrayImage,BlurImage,CannyImage;
+	Mat FrameImage;
 	while(1)
 	{
 		cap&gt;&gt;FrameImage;
-		//Change to gray image
-		cvtColor(FrameImage,GrayImage,COLOR_BGR2GRAY);
-		//blur the image
-		blur(GrayImage,BlurImage,Size(7,7));
-		//use canny to detect contour
-		Canny(BlurImage,CannyImage,3,9);
-		//show the image
-		imshow("Camera Capture",CannyImage);
+		imshow("Camera Capture",FrameImage);
 		//Press Q to quit
 		if(char(waitKey(1)) == 'q')
 		{
@@ -631,19 +596,9 @@ int main()
 		}
 	}
 	return 0;
-}
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>CMakeLists.txt：</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">cmake_minimum_required(VERSION 3.0)
-project(00_Test_OpenCV)
-find_package(OpenCV REQUIRED)
-add_executable(00_Test_OpenCV 00_Test_OpenCV.cpp)
-target_link_libraries(00_Test_OpenCV ${OpenCV_LIBS})<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>编译并运行：<br><img src="http://pic.huangruimin.tech/20190830201919.png"></p>
-<h2 id="9-结语"><a href="#9-结语" class="headerlink" title="9 结语"></a>9 结语</h2><p>若中途有安装失败，或多次尝试安装失败，或者想在搭建环境的时候节省时间，可直接使用我们提供的镜像，在我们提供的镜像中，除了已安装OpenCV4.1.0之外，还安装了TensorFlow和Keras，如下图所示：</p>
-<p><img src="http://pic.huangruimin.tech/20190830204006.png"></p>
+<p>运行效果如下图所示：<br><img src="http://pic.huangruimin.tech/20190831181427.png"></p>
 
                 
             </div>
@@ -670,7 +625,7 @@ target_link_libraries(00_Test_OpenCV ${OpenCV_LIBS})<span aria-hidden="true" cla
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://www.huangruimin.tech/2018/10/07/rpi-zhong-opencv-kai-fa-huan-jing-da-jian/">http://www.huangruimin.tech/2018/10/07/rpi-zhong-opencv-kai-fa-huan-jing-da-jian/</a>
+                    <a href="http://www.huangruimin.tech/2018/10/10/rpi-opencv-she-xiang-tou-de-ji-ben-shi-yong/">http://www.huangruimin.tech/2018/10/10/rpi-opencv-she-xiang-tou-de-ji-ben-shi-yong/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -915,12 +870,12 @@ target_link_libraries(00_Test_OpenCV ${OpenCV_LIBS})<span aria-hidden="true" cla
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2018/09/07/hello-world/">
+                <a href="/2018/10/07/rpi-opencv-kai-fa-huan-jing-da-jian/">
                     <div class="card-image">
                         
-                        <img src="http://pic.huangruimin.tech/banner_10.jpg" class="responsive-img" alt="调试专用页面">
+                        <img src="http://pic.huangruimin.tech/banner_16.jpg" class="responsive-img" alt="RPi-OpenCV_开发环境搭建">
                         
-                        <span class="card-title">调试专用页面</span>
+                        <span class="card-title">RPi-OpenCV_开发环境搭建</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -931,7 +886,7 @@ target_link_libraries(00_Test_OpenCV ${OpenCV_LIBS})<span aria-hidden="true" cla
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2018-09-07
+                                <i class="far fa-clock fa-fw icon-date"></i>2018-10-07
                             </span>
                         <span class="publish-author">
                             
@@ -1140,7 +1095,7 @@ target_link_libraries(00_Test_OpenCV ${OpenCV_LIBS})<span aria-hidden="true" cla
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">8.1k</span>&nbsp;字
+                class="white-color">9.3k</span>&nbsp;字
             
             
             
