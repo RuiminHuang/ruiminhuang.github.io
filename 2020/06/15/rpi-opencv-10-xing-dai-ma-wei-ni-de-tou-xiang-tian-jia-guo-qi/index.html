@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="如何为RPi交叉编译特定版本的支持v4l2的.ko以及.dtb, AI, TensorRT, Infrared">
+    <meta name="keywords" content="RPi-OpenCV_10行代码为你的头像添加国旗, AI, TensorRT, Infrared">
     <meta name="description" content="Personal essay record">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>如何为RPi交叉编译特定版本的支持v4l2的.ko以及.dtb | Ruimin Huang&#39;s Space</title>
+    <title>RPi-OpenCV_10行代码为你的头像添加国旗 | Ruimin Huang&#39;s Space</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -259,12 +259,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('http://pic.huangruimin.tech/banner_8.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('http://pic.huangruimin.tech/banner_21.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">如何为RPi交叉编译特定版本的支持v4l2的.ko以及.dtb</h1>
+                    <h1 class="description center-align post-title">RPi-OpenCV_10行代码为你的头像添加国旗</h1>
                 </div>
             </div>
         </div>
@@ -392,7 +392,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-10-07
+                    2020-06-15
                 </div>
                 
 
@@ -406,14 +406,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.1k
+                    783
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    4 分
+                    3 分
                 </div>
                 
 
@@ -436,237 +436,95 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="0-背景"><a href="#0-背景" class="headerlink" title="0 背景"></a>0 背景</h2><p>我在以前一个版本的64bit树莓派系统上，搭建了很多环境，现在，这个64bit的树莓派系统需要接入IMX385，目前只有v4l2这种方案(64bit的树莓派系统删除了一些库，树莓派原生相机也就不支持)。</p>
-<p>但悲催的是，目前veye在Github提供的源码，只支持内核版本为5.10.92-v8+的树莓派，也就是只支持比较新版本的树莓派进行，然而我的树莓派系统内核版本为5.10.63-v8+，veye官方的源码也就不支持。</p>
-<blockquote>
-<p>解决方法一：更换内核版本为5.10.92-v8+的树莓派系统，但有点不太现实，我搭建了很多环境，特别是很多深度学习的推理环境，这样再折腾明显不现实。</p>
+                <p>在学完前面较为枯燥的概念后，接下来，是时候展现真正的技术了。由于OpenCV既是机器视觉库，也是图像处理库，给头像添加国旗，那自然是小菜一碟，如果用Python写的话，只要10行左右。</p>
+<h2 id="1-思路分析"><a href="#1-思路分析" class="headerlink" title="1 思路分析"></a>1 思路分析</h2><p>好比把大象装进冰箱要几步一样，为头像添加上国旗也是如此，先不讲通过什么语言实现，毕竟语言只是工具，OK，如果那，那为头像添加上国旗则需要以下几个步骤：</p>
+<ul>
+<li>Step1：读取头像和国旗图案。</li>
+<li>Step2：把国旗叠加到头像上。</li>
+<li>Step3：把叠加后的图片保存。</li>
+</ul>
+<p>把大象放进冰箱只要这么几步，但是具体把国旗叠加到头像上，需要考虑的一体细节:</p>
+<ul>
+<li>国旗必须缩放到合适大小，才能放到头像上。</li>
+<li>国旗缩放后不能变形。<br>因此：<blockquote>
+<p>就把国旗的宽度缩放至头像宽度的1/4，然后高度也按照同样的比例进行缩放。</p>
 </blockquote>
-<blockquote>
-<p>解决方法二：交叉编译一个支持5.10.63-v8+的.ko以及.dtb，这个工作量会少很多，接下来就开始。</p>
-</blockquote>
-<h2 id="1-准备工作"><a href="#1-准备工作" class="headerlink" title="1 准备工作"></a>1 准备工作</h2><blockquote>
-<p> 开发环境准备，在虚拟机Ubuntu18.04中操作</p>
-</blockquote>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> <span class="token function">git</span> <span class="token function">bc</span> bison flex libssl-dev <span class="token function">make</span> libc6-dev libncurses5-dev<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+</ul>
+<p>核心问题已经解决了，剩下来就是工具自身实现的问题，在OpenCV中，读写图像，缩放图像，图像合成，图像显示，是比较基本的操作，现在，就开始驾驭工具，把大象放入冰箱，先从Python开始讲起：</p>
+<h2 id="2-Python实现"><a href="#2-Python实现" class="headerlink" title="2 Python实现"></a>2 Python实现</h2><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># -*- coding: utf8 -*-</span>
+<span class="token keyword">import</span> cv2
 
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> crossbuild-essential-arm64<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<span class="token comment"># Step1：读取头像和国旗图像。</span>
+img_head <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'head.jpg'</span><span class="token punctuation">)</span>
+img_flag <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'flag.jpg'</span><span class="token punctuation">)</span>
 
-<blockquote>
-<p>确认自己的树莓派上的piOS版本，以下动作在树莓派上面完成</p>
-</blockquote>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">uname</span> <span class="token parameter variable">-r</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<span class="token comment"># Step2：把国旗叠加到头像上。</span>
+<span class="token comment"># Step2.1：获取头像和国旗宽度</span>
+w_head<span class="token punctuation">,</span> h_head <span class="token operator">=</span> img_head<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">2</span><span class="token punctuation">]</span>
+w_flag<span class="token punctuation">,</span> h_flag <span class="token operator">=</span> img_flag<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">2</span><span class="token punctuation">]</span>
+<span class="token comment"># Step2.2：根据宽度计算缩放比例</span>
+scale <span class="token operator">=</span> w_head <span class="token operator">/</span> w_flag <span class="token operator">/</span> <span class="token number">4</span>
+<span class="token comment"># Step2.3：根据缩放比例缩放国旗</span>
+img_flag <span class="token operator">=</span> cv2<span class="token punctuation">.</span>resize<span class="token punctuation">(</span>img_flag<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> fx<span class="token operator">=</span>scale<span class="token punctuation">,</span> fy<span class="token operator">=</span>scale<span class="token punctuation">)</span>
+<span class="token comment"># Step2.4：获取缩放后国旗的新尺寸</span>
+w_flag<span class="token punctuation">,</span> h_flag <span class="token operator">=</span> img_flag<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">2</span><span class="token punctuation">]</span>
+<span class="token comment"># Step2.5：根据缩放后的尺寸叠加国旗到头像右下角</span>
+<span class="token keyword">for</span> c <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    img_head<span class="token punctuation">[</span>w_head <span class="token operator">-</span> w_flag<span class="token punctuation">:</span><span class="token punctuation">,</span> h_head <span class="token operator">-</span> h_flag<span class="token punctuation">:</span><span class="token punctuation">,</span> c<span class="token punctuation">]</span> <span class="token operator">=</span> img_flag<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> <span class="token punctuation">:</span><span class="token punctuation">,</span> c<span class="token punctuation">]</span>
 
-<p><img src="http://pic.huangruimin.tech/20220320223036.png"></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /home/pi/ko_dev
+<span class="token comment"># Step3：保存叠加后的图像</span>
+cv2<span class="token punctuation">.</span>imwrite<span class="token punctuation">(</span><span class="token string">'new_head.jpg'</span><span class="token punctuation">,</span> img_head<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<span class="token function">cp</span> /usr/share/doc/raspberrypi-bootloader/changelog.Debian.gz ./
+<p>程序执行效果如下图所示：<br><img src="http://pic.huangruimin.tech/20191028175608.png"></p>
+<p>注释有说明步骤相关的思路及其实现。</p>
+<h2 id="3-cpp实现"><a href="#3-cpp实现" class="headerlink" title="3 cpp实现"></a>3 cpp实现</h2><p>接下来，来看看cpp执行相关的代码</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;iostream&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;opencv2/opencv.hpp&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;opencv2/highgui/highgui.hpp&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;opencv2/imgproc/imgproc.hpp&gt;</span></span>
 
-<span class="token function">vi</span> changelog.Debian<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><img src="http://pic.huangruimin.tech/20220320223131.png"></p>
-<blockquote>
-<p>从下面的连接下载源码</p>
-</blockquote>
-<p><a target="_blank" rel="noopener" href="http://github.com/raspberrypi/linux/tags">Github源码链接</a></p>
-<p><img src="http://pic.huangruimin.tech/20220320223241.png"></p>
-<blockquote>
-<p>将获取到的源码放虚拟机上</p>
-</blockquote>
-<p><img src="http://pic.huangruimin.tech/20220320222937.png"></p>
-<h2 id="2-给源代码打补丁"><a href="#2-给源代码打补丁" class="headerlink" title="2 给源代码打补丁"></a>2 给源代码打补丁</h2><blockquote>
-<p>以下动作在虚拟机中进行，打补丁</p>
-</blockquote>
-<blockquote>
-<p>进入到第一个需要打补丁的地方</p>
-</blockquote>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /home/book/RPi/linux-oldstable_20211201<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> cv<span class="token punctuation">;</span>
 
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> ./drivers/media/i2c/<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">//Step1：读取头像和国旗图像。</span>
+    Mat img_head <span class="token operator">=</span> <span class="token function">imread</span><span class="token punctuation">(</span><span class="token string">"head.jpg"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    Mat img_flag <span class="token operator">=</span> <span class="token function">imread</span><span class="token punctuation">(</span><span class="token string">"flag.jpg"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    Mat img_flag_resized<span class="token punctuation">;</span>
 
-<blockquote>
-<p>先删掉要被替换的文件</p>
-</blockquote>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">rm</span> <span class="token parameter variable">-rf</span> ./Kconfig
-<span class="token function">rm</span> <span class="token parameter variable">-rf</span> ./Makefile<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+    <span class="token comment">//Step2：把国旗叠加到头像上。</span>
+    <span class="token comment">//Step2.1：获取头像和国旗宽度</span>
+    <span class="token keyword">int</span> w_head <span class="token operator">=</span> img_head<span class="token punctuation">.</span>cols<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> h_head <span class="token operator">=</span> img_head<span class="token punctuation">.</span>rows<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> w_flag <span class="token operator">=</span> img_flag<span class="token punctuation">.</span>cols<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> h_flag <span class="token operator">=</span> img_flag<span class="token punctuation">.</span>rows<span class="token punctuation">;</span>
+    <span class="token comment">//Step2.2：根据宽度计算缩放比例</span>
+    <span class="token keyword">double</span> scale <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">double</span><span class="token punctuation">)</span>w_head<span class="token operator">/</span>w_flag<span class="token operator">/</span><span class="token number">4</span><span class="token punctuation">;</span>
+    <span class="token comment">//Step2.3：根据缩放比例缩放国旗    </span>
+    <span class="token function">resize</span><span class="token punctuation">(</span>img_flag<span class="token punctuation">,</span>img_flag_resized<span class="token punctuation">,</span><span class="token function">Size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>scale<span class="token punctuation">,</span>scale<span class="token punctuation">,</span>INTER_NEAREST<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">//Step2.4：获取缩放后国旗的新尺寸</span>
+    w_flag <span class="token operator">=</span> img_flag_resized<span class="token punctuation">.</span>cols<span class="token punctuation">;</span>
+    h_flag <span class="token operator">=</span> img_flag_resized<span class="token punctuation">.</span>rows<span class="token punctuation">;</span>
+    <span class="token comment">//Step2.5：根据缩放后的尺寸叠加国旗到头像右下角</span>
+    Mat imageROI<span class="token operator">=</span><span class="token function">img_head</span><span class="token punctuation">(</span><span class="token function">Rect</span><span class="token punctuation">(</span>w_head<span class="token operator">-</span>w_flag<span class="token punctuation">,</span>h_head<span class="token operator">-</span>h_flag<span class="token punctuation">,</span>w_flag<span class="token punctuation">,</span>h_flag<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    img_flag_resized<span class="token punctuation">.</span><span class="token function">copyTo</span><span class="token punctuation">(</span>imageROI<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<blockquote>
-<p>将以下文件copy到虚拟机中</p>
-</blockquote>
-<p><img src="http://pic.huangruimin.tech/20220320222018.png"></p>
-<blockquote>
-<p>继续拷贝文件</p>
-</blockquote>
-<p><img src="http://pic.huangruimin.tech/20220320222304.png"></p>
-<blockquote>
-<p>进入到第二个需要打补丁的地方</p>
-</blockquote>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /home/book/RPi/linux-oldstable_20211201<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+    <span class="token comment">//Step3：保存叠加后的图像</span>
+    <span class="token function">imwrite</span><span class="token punctuation">(</span><span class="token string">"new_head.jpg"</span><span class="token punctuation">,</span>img_head<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> ./arch/arm/boot/dts/overlays<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<blockquote>
-<p>删除需要被替换的文件</p>
-</blockquote>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">rm</span> <span class="token parameter variable">-rf</span> ./Makefile<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<blockquote>
-<p>拷贝文件</p>
-</blockquote>
-<p><img src="http://pic.huangruimin.tech/20220320222801.png"></p>
-<blockquote>
-<p>其中要去替换的Makefile中是多了以下内容</p>
-</blockquote>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">csimx307-dual-cm4.dtbo<span class="token punctuation">\</span>
-csimx307.dtbo<span class="token punctuation">\</span>
-cssc132-dual-cm4.dtbo<span class="token punctuation">\</span>
-cssc132.dtbo<span class="token punctuation">\</span>
-veye327-dual-cm4.dtbo<span class="token punctuation">\</span>
-veye327.dtbo<span class="token punctuation">\</span>
-veyecam2m-dual-cm4.dtbo<span class="token punctuation">\</span>
-veyecam2m.dtbo<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="3-开始编译源码"><a href="#3-开始编译源码" class="headerlink" title="3 开始编译源码"></a>3 开始编译源码</h2><blockquote>
-<p>首先是编译准备</p>
-</blockquote>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /home/book/RPi/linux-oldstable_20211201<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token assign-left variable">KERNEL</span><span class="token operator">=</span>kernel8
-<span class="token function">make</span> <span class="token assign-left variable">ARCH</span><span class="token operator">=</span>arm64 <span class="token assign-left variable">CROSS_COMPILE</span><span class="token operator">=</span>aarch64-linux-gnu- bcm2711_defconfi<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<blockquote>
-<p>然后是增加编译选项</p>
-<blockquote>
-<p>5.10版本kernel的路径是Device Drivers –&gt; Multimedia Support –&gt; Media ancillary drivers –&gt; Camera sensor devices</p>
-</blockquote>
-</blockquote>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /home/book/RPi/linux-oldstable_20211201<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">make</span> <span class="token assign-left variable">ARCH</span><span class="token operator">=</span>arm64 <span class="token assign-left variable">CROSS_COMPILE</span><span class="token operator">=</span>aarch64-linux-gnu- menuconfig<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-
-<p><img src="http://pic.huangruimin.tech/20220320223827.png"></p>
-<blockquote>
-<p>接着是开始编译内核，模块，设备树</p>
-</blockquote>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /home/book/RPi/linux-oldstable_20211201<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">make</span> <span class="token assign-left variable">ARCH</span><span class="token operator">=</span>arm64 <span class="token assign-left variable">CROSS_COMPILE</span><span class="token operator">=</span>aarch64-linux-gnu- Image modules dtbs <span class="token parameter variable">-j4</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h2 id="4-将编译结果导出"><a href="#4-将编译结果导出" class="headerlink" title="4 将编译结果导出"></a>4 将编译结果导出</h2><blockquote>
-<p>导出模块文件</p>
-</blockquote>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /home/book/RPi/linux-oldstable_20211201<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> ./drivers/media/i2c/<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<blockquote>
-<p>以下为需要导出的文件</p>
-</blockquote>
-<p><img src="http://pic.huangruimin.tech/20220320224431.png"></p>
-<blockquote>
-<p>导出设备树二进制文件</p>
-</blockquote>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /home/book/RPi/linux-oldstable_20211201<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> ./arch/arm/boot/dts/overlays<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<blockquote>
-<p>以下为需要导出的二进制文件</p>
-</blockquote>
-<p><img src="http://pic.huangruimin.tech/20220320224801.png"></p>
-<blockquote>
-<p>最终导出的驱动模块文件，设备树二进制文件，放在PC的下列文件夹中</p>
-</blockquote>
-<p><img src="http://pic.huangruimin.tech/20220320224908.png"></p>
-<blockquote>
-<p>需要将最终导出的文件放到树莓派的Veye V4L2源码的路径下</p>
-</blockquote>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /home/pi/Veye_Camera_V4L2/raspberrypi_v4l2-main/release/driver_bin/5.10.63-v8+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p><img src="http://pic.huangruimin.tech/20220320225151.png"></p>
-<blockquote>
-<p>然后通过脚本在树莓派上安装驱动模块以及设备树二进制文件</p>
-</blockquote>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /home/pi/Veye_Camera_V4L2/raspberrypi_v4l2-main/release<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> ./install_driver.sh veyecam2m<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">dmesg</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p><img src="http://pic.huangruimin.tech/20220320225525.png"></p>
-<blockquote>
-<p>此时，重新开机还不能用，只有内核，以及驱动模块，还有设备树二进制文件都替换掉了，才有用，也就是下一步</p>
-</blockquote>
-<h2 id="5-将编译结果导出到TF卡"><a href="#5-将编译结果导出到TF卡" class="headerlink" title="5 将编译结果导出到TF卡"></a>5 将编译结果导出到TF卡</h2><blockquote>
-<p>首先查看tf卡是否正常插入</p>
-</blockquote>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">lsblk <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<blockquote>
-<p>然后，建立挂载目录</p>
-</blockquote>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /home/book/RPi
-<span class="token function">mkdir</span> mnt
-<span class="token function">mkdir</span> mnt/fat32
-<span class="token function">mkdir</span> mnt/ext4<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<blockquote>
-<p>挂载文件</p>
-</blockquote>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /home/book/RPi
-<span class="token function">sudo</span> <span class="token function">mount</span> /dev/sdb1 ./mnt/fat32
-<span class="token function">sudo</span> <span class="token function">mount</span> /dev/sdb2 ./mnt/ext4<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<blockquote>
-<p>安装驱动模块到TF卡</p>
-</blockquote>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">
-<span class="token builtin class-name">cd</span> /home/book/RPi/linux-oldstable_20211201
-
-<span class="token function">sudo</span> <span class="token function">env</span> <span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span><span class="token environment constant">$PATH</span> <span class="token function">make</span> <span class="token assign-left variable">ARCH</span><span class="token operator">=</span>arm64 <span class="token assign-left variable">CROSS_COMPILE</span><span class="token operator">=</span>aarch64-linux-gnu- <span class="token assign-left variable">INSTALL_MOD_PATH</span><span class="token operator">=</span><span class="token punctuation">..</span>/mnt/ext4 modules_install<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-<blockquote>
-<p>备份原版kernel</p>
-</blockquote>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">
-<span class="token builtin class-name">cd</span> /home/book/RPi/mnt/fat32
-
-<span class="token function">cp</span> ./kernel8.img ./kernel8_bak.img
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<blockquote>
-<p>安装kernel，以及设备树二进制文件到TF卡</p>
-</blockquote>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">
-<span class="token builtin class-name">cd</span> /home/book/RPi/linux-oldstable_20211201
-
-<span class="token function">sudo</span> <span class="token function">cp</span> arch/arm64/boot/Image <span class="token punctuation">..</span>/mnt/fat32/kernel8.img <span class="token parameter variable">-f</span>
-
-<span class="token function">sudo</span> <span class="token function">cp</span> arch/arm64/boot/dts/broadcom/*.dtb <span class="token punctuation">..</span>/mnt/fat32/ <span class="token parameter variable">-f</span>
-
-<span class="token function">sudo</span> <span class="token function">cp</span> arch/arm64/boot/dts/overlays/*.dtb* <span class="token punctuation">..</span>/mnt/fat32/overlays/ <span class="token parameter variable">-f</span>
-
-<span class="token function">sudo</span> <span class="token function">cp</span> arch/arm64/boot/dts/overlays/README <span class="token punctuation">..</span>/mnt/fat32/overlays/ <span class="token parameter variable">-f</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<blockquote>
-<p>卸载挂载的TF卡</p>
-</blockquote>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">
-<span class="token builtin class-name">cd</span> /home/book/RPi/linux-oldstable_20211201
-
-<span class="token function">sudo</span> <span class="token function">umount</span> <span class="token punctuation">..</span>/mnt/fat32
-
-<span class="token function">sudo</span> <span class="token function">umount</span> <span class="token punctuation">..</span>/mnt/ext4<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="6-虚拟机，主机弹出TF卡，插入到树莓派"><a href="#6-虚拟机，主机弹出TF卡，插入到树莓派" class="headerlink" title="6 虚拟机，主机弹出TF卡，插入到树莓派"></a>6 虚拟机，主机弹出TF卡，插入到树莓派</h2><blockquote>
-<p>到这一步，即完成IMX385的V4L2的移植了</p>
-</blockquote>
-<p><img src="http://pic.huangruimin.tech/20220320230934.png"></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">dmesg</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p><img src="http://pic.huangruimin.tech/20220320231014.png"></p>
-<p><img src="http://pic.huangruimin.tech/20220320231101.png"></p>
-<p><img src="http://pic.huangruimin.tech/20220320231048.png"></p>
+<p>其CmakeList.txt为：</p>
+<pre class="line-numbers language-cmake" data-language="cmake"><code class="language-cmake"><span class="token keyword">cmake_minimum_required</span><span class="token punctuation">(</span><span class="token property">VERSION</span> <span class="token number">3.0</span><span class="token punctuation">)</span>
+<span class="token keyword">project</span><span class="token punctuation">(</span>07_National_Flag<span class="token punctuation">)</span>
+<span class="token keyword">find_package</span><span class="token punctuation">(</span>OpenCV REQUIRED<span class="token punctuation">)</span>
+<span class="token keyword">add_executable</span><span class="token punctuation">(</span>07_National_Flag main.cpp<span class="token punctuation">)</span>
+<span class="token keyword">target_link_libraries</span><span class="token punctuation">(</span>07_National_Flag <span class="token punctuation">${</span>OpenCV_LIBS<span class="token punctuation">}</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>执行结果图下图所示：<br><img src="http://pic.huangruimin.tech/20191028194113.png"></p>
+<p>其执行效果同Python。</p>
 
                 
             </div>
@@ -693,7 +551,7 @@ veyecam2m.dtbo<span aria-hidden="true" class="line-numbers-rows"><span></span><s
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://www.huangruimin.tech/2021/10/07/ru-he-wei-rpi-jiao-cha-bian-yi-te-ding-ban-ben-de-zhi-chi-v4l2-de.ko-yi-ji.dtb/">http://www.huangruimin.tech/2021/10/07/ru-he-wei-rpi-jiao-cha-bian-yi-te-ding-ban-ben-de-zhi-chi-v4l2-de.ko-yi-ji.dtb/</a>
+                    <a href="http://www.huangruimin.tech/2020/06/15/rpi-opencv-10-xing-dai-ma-wei-ni-de-tou-xiang-tian-jia-guo-qi/">http://www.huangruimin.tech/2020/06/15/rpi-opencv-10-xing-dai-ma-wei-ni-de-tou-xiang-tian-jia-guo-qi/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -898,17 +756,16 @@ veyecam2m.dtbo<span aria-hidden="true" class="line-numbers-rows"><span></span><s
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/10/07/ru-he-wei-rpi-jiao-cha-bian-yi-te-ding-ban-ben-de-zhi-chi-v4l2-de.ko-yi-ji.dtb/">
+                <a href="/2020/08/08/qian-ru-shi-xi-tong-zhong-han-zi-zi-ku-bian-ma-ji-he/">
                     <div class="card-image">
                         
-                        <img src="http://pic.huangruimin.tech/banner_8.jpg" class="responsive-img" alt="如何为RPi交叉编译特定版本的支持v4l2的.ko以及.dtb">
+                        <img src="http://pic.huangruimin.tech/banner_9.jpg" class="responsive-img" alt="嵌入式系统中汉字字库编码集合">
                         
-                        <span class="card-title">如何为RPi交叉编译特定版本的支持v4l2的.ko以及.dtb</span>
+                        <span class="card-title">嵌入式系统中汉字字库编码集合</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -918,9 +775,9 @@ veyecam2m.dtbo<span aria-hidden="true" class="line-numbers-rows"><span></span><s
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-07
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-08-08
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -929,7 +786,6 @@ veyecam2m.dtbo<span aria-hidden="true" class="line-numbers-rows"><span></span><s
                         </span>
                     </div>
                 </div>
-
                 
             </div>
         </div>
@@ -940,12 +796,12 @@ veyecam2m.dtbo<span aria-hidden="true" class="line-numbers-rows"><span></span><s
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/09/07/i2c-zhuan-16-lu-pwm/">
+                <a href="/2019/10/28/rpi-opencv-roi-hui-tu-deng-chang-yong-api/">
                     <div class="card-image">
                         
-                        <img src="http://pic.huangruimin.tech/banner_7.jpg" class="responsive-img" alt="I2C转16路PWM">
+                        <img src="http://pic.huangruimin.tech/banner_15.jpg" class="responsive-img" alt="RPi-OpenCV_ROI、绘图等常用API">
                         
-                        <span class="card-title">I2C转16路PWM</span>
+                        <span class="card-title">RPi-OpenCV_ROI、绘图等常用API</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -956,7 +812,7 @@ veyecam2m.dtbo<span aria-hidden="true" class="line-numbers-rows"><span></span><s
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-09-07
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-10-28
                             </span>
                         <span class="publish-author">
                             
