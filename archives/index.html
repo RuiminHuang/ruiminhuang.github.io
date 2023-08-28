@@ -473,30 +473,216 @@
 
             
             <div class="cd-timeline-img day" data-aos="zoom-in-up">
-                <span>21</span>
+                <span>25</span>
             </div>
             <article class="cd-timeline-content" data-aos="fade-up">
                 <div class="article col s12 m6">
                     <div class="card">
-                        <a href="/2021/10/21/hi3516dv300-15-uboot-xiang-jie/">
+                        <a href="/2021/10/25/hi3516dv300-19-hong-mo-ping-ce-shi-ji-qu-dong-xiang-jie-2/">
                             <div class="card-image">
                                 
                                 
-                                <img src="http://pic.huangruimin.tech/The_Wandering_Earth2_50.jpg" class="responsive-img" alt="HI3516DV300_15_Uboot详解">
+                                <img src="http://pic.huangruimin.tech/Transformers3_55.jpg" class="responsive-img" alt="HI3516DV300_19_触摸屏测试及驱动详解2">
                                 
-                                <span class="card-title">HI3516DV300_15_Uboot详解</span>
+                                <span class="card-title">HI3516DV300_19_触摸屏测试及驱动详解2</span>
                             </div>
                         </a>
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    一、分段式uboot的生成过程解析1.0 与以往Uboot不同的
-两段式的Uboot：直接编译的Uboot不能用，还得经过一次编译生成Uboot-z才行，还要进行二次制作；也就是，先编译生成一个Gzip工具，再结合那个excel表格生成一个
+                                    一、移植并测试触摸屏驱动1.1 下载正确的触摸屏驱动文件并替换掉原来不对的1.1.1 电容触摸屏的驱动在下面这个位置：
+
+
+
+这个驱动到底是内核自带的，还是之前的板卡商，在移植的时候放进去的，对我们来说，不用去关心
+
+
+总之，我们拿到的源码
                                 
                             </div>
                             <div class="publish-info">
                                 <span class="publish-date">
-                                    <i class="far fa-clock fa-fw icon-date"></i>2021-10-21
+                                    <i class="far fa-clock fa-fw icon-date"></i>2021-10-25
+                                </span>
+                                <span class="publish-author">
+                                    
+                                    <i class="fas fa-user fa-fw"></i>
+                                    Ruimin Huang
+                                    
+                                </span>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </article>
+        </div>
+        
+        <div class="cd-timeline-block">
+
+            
+            
+
+            
+            
+
+            
+            <div class="cd-timeline-img day" data-aos="zoom-in-up">
+                <span>24</span>
+            </div>
+            <article class="cd-timeline-content" data-aos="fade-up">
+                <div class="article col s12 m6">
+                    <div class="card">
+                        <a href="/2021/10/24/hi3516dv300-18-hong-mo-ping-ce-shi-ji-qu-dong-xiang-jie-1/">
+                            <div class="card-image">
+                                
+                                
+                                <img src="http://pic.huangruimin.tech/The_Wandering_Earth2_57.jpg" class="responsive-img" alt="HI3516DV300_18_触摸屏测试及驱动详解1">
+                                
+                                <span class="card-title">HI3516DV300_18_触摸屏测试及驱动详解1</span>
+                            </div>
+                        </a>
+                        <div class="card-content article-content">
+                            <div class="summary block-with-text">
+                                
+                                    一、Study16DV300的常用外设详解1.1 说明
+刚好拿来做设备树的这样一个平台来讲解了，在设备树的课程里面，已经把大部分的内核驱动的东西都已经分析了
+
+
+大部分驱动，使用的虽然是4.9的内核，比2.6.35的内核比较新，但是驱动部分
+                                
+                            </div>
+                            <div class="publish-info">
+                                <span class="publish-date">
+                                    <i class="far fa-clock fa-fw icon-date"></i>2021-10-24
+                                </span>
+                                <span class="publish-author">
+                                    
+                                    <i class="fas fa-user fa-fw"></i>
+                                    Ruimin Huang
+                                    
+                                </span>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </article>
+        </div>
+        
+        <div class="cd-timeline-block">
+
+            
+            
+
+            
+            
+
+            
+            <div class="cd-timeline-img day" data-aos="zoom-in-up">
+                <span>23</span>
+            </div>
+            <article class="cd-timeline-content" data-aos="fade-up">
+                <div class="article col s12 m6">
+                    <div class="card">
+                        <a href="/2021/10/23/hi3516dv300-17-uboot-di-er-jie-duan-de-qi-dong/">
+                            <div class="card-image">
+                                
+                                
+                                <img src="http://pic.huangruimin.tech/Transformers3_55.jpg" class="responsive-img" alt="HI3516DV300_17_Uboot第二阶段的启动">
+                                
+                                <span class="card-title">HI3516DV300_17_Uboot第二阶段的启动</span>
+                            </div>
+                        </a>
+                        <div class="card-content article-content">
+                            <div class="summary block-with-text">
+                                
+                                    一、从这里开始1.1 分析内存空间
+
+这里就主要集中力量，做了一件事情：去解压缩老版本的U-Boot
+
+
+观察这幅图
+
+
+
+
+上面这张图的黑框部分，就是总共263 KB
+
+
+
+这263 KB由3部分组成：
+
+
+
+
+A是第一部分：64字节，就
+                                
+                            </div>
+                            <div class="publish-info">
+                                <span class="publish-date">
+                                    <i class="far fa-clock fa-fw icon-date"></i>2021-10-23
+                                </span>
+                                <span class="publish-author">
+                                    
+                                    <i class="fas fa-user fa-fw"></i>
+                                    Ruimin Huang
+                                    
+                                </span>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </article>
+        </div>
+        
+        <div class="cd-timeline-block">
+
+            
+            
+
+            
+            
+
+            
+            <div class="cd-timeline-img day" data-aos="zoom-in-up">
+                <span>22</span>
+            </div>
+            <article class="cd-timeline-content" data-aos="fade-up">
+                <div class="article col s12 m6">
+                    <div class="card">
+                        <a href="/2021/10/22/hi3516dv300-16-uboot-di-yi-jie-duan-de-qi-dong/">
+                            <div class="card-image">
+                                
+                                
+                                <img src="http://pic.huangruimin.tech/The_Wandering_Earth2_120.jpg" class="responsive-img" alt="HI3516DV300_16_Uboot第一阶段的启动">
+                                
+                                <span class="card-title">HI3516DV300_16_Uboot第一阶段的启动</span>
+                            </div>
+                        </a>
+                        <div class="card-content article-content">
+                            <div class="summary block-with-text">
+                                
+                                    一、uboot第一阶段的启动1.1 起点在：arch\arm\cpu\armv7\hi3516dv300\start.S
+
+1.2 分析start.S源码
+说明海思也是从其它地方移植过来的：
+
+
+
+复位向量表
+
+
+_ start符号就是en
+                                
+                            </div>
+                            <div class="publish-info">
+                                <span class="publish-date">
+                                    <i class="far fa-clock fa-fw icon-date"></i>2021-10-22
                                 </span>
                                 <span class="publish-author">
                                     
@@ -528,29 +714,20 @@
             <article class="cd-timeline-content" data-aos="fade-up">
                 <div class="article col s12 m6">
                     <div class="card">
-                        <a href="/2021/10/21/hi3516dv300-16-uboot-di-yi-jie-duan-de-qi-dong/">
+                        <a href="/2021/10/21/hi3516dv300-15-uboot-xiang-jie/">
                             <div class="card-image">
                                 
                                 
-                                <img src="http://pic.huangruimin.tech/The_Wandering_Earth2_120.jpg" class="responsive-img" alt="HI3516DV300_16_Uboot第一阶段的启动">
+                                <img src="http://pic.huangruimin.tech/The_Wandering_Earth2_50.jpg" class="responsive-img" alt="HI3516DV300_15_Uboot详解">
                                 
-                                <span class="card-title">HI3516DV300_16_Uboot第一阶段的启动</span>
+                                <span class="card-title">HI3516DV300_15_Uboot详解</span>
                             </div>
                         </a>
                         <div class="card-content article-content">
                             <div class="summary block-with-text">
                                 
-                                    一、uboot第一阶段的启动1.1 起点在：arch\arm\cpu\armv7\hi3516dv300\start.S
-
-1.2 分析start.S源码
-说明海思也是从其它地方移植过来的：
-
-
-
-复位向量表
-
-
-_ start符号就是en
+                                    一、分段式uboot的生成过程解析1.0 与以往Uboot不同的
+两段式的Uboot：直接编译的Uboot不能用，还得经过一次编译生成Uboot-z才行，还要进行二次制作；也就是，先编译生成一个Gzip工具，再结合那个excel表格生成一个
                                 
                             </div>
                             <div class="publish-info">
@@ -897,172 +1074,6 @@ tar.xz的压缩比例则更狠，先得用xz软件解压成gz
             </article>
         </div>
         
-        <div class="cd-timeline-block">
-
-            
-            
-
-            
-            
-
-            
-            <div class="cd-timeline-img day" data-aos="zoom-in-up">
-                <span>14</span>
-            </div>
-            <article class="cd-timeline-content" data-aos="fade-up">
-                <div class="article col s12 m6">
-                    <div class="card">
-                        <a href="/2021/10/14/hi3516dv300-8-uboot-de-dan-du-bian-yi-he-yan-zheng/">
-                            <div class="card-image">
-                                
-                                
-                                <img src="http://pic.huangruimin.tech/Transformers3_60.jpg" class="responsive-img" alt="Hi3516DV300_8_Uboot的单独编译和验证">
-                                
-                                <span class="card-title">Hi3516DV300_8_Uboot的单独编译和验证</span>
-                            </div>
-                        </a>
-                        <div class="card-content article-content">
-                            <div class="summary block-with-text">
-                                
-                                    1.Uboot的单独编译和验证
-参考文献1：SDK内osdrv中的readme
-参考文献2：ReleaseDoc中的《Hi3516CV500╱Hi3516DV300╱Hi3516AV300 U-boot 移植应用开发指南.pdf》
-
-2.编
-                                
-                            </div>
-                            <div class="publish-info">
-                                <span class="publish-date">
-                                    <i class="far fa-clock fa-fw icon-date"></i>2021-10-14
-                                </span>
-                                <span class="publish-author">
-                                    
-                                    <i class="fas fa-user fa-fw"></i>
-                                    Ruimin Huang
-                                    
-                                </span>
-                            </div>
-                        </div>
-
-                        
-                    </div>
-                </div>
-            </article>
-        </div>
-        
-        <div class="cd-timeline-block">
-
-            
-            
-
-            
-            
-
-            
-            <div class="cd-timeline-img day" data-aos="zoom-in-up">
-                <span>13</span>
-            </div>
-            <article class="cd-timeline-content" data-aos="fade-up">
-                <div class="article col s12 m6">
-                    <div class="card">
-                        <a href="/2021/10/13/hi3516dv300-7-kai-fa-ban-pei-tao-sdk-jie-du/">
-                            <div class="card-image">
-                                
-                                
-                                <img src="http://pic.huangruimin.tech/Transformers3_25.jpg" class="responsive-img" alt="Hi3516DV300_7_开发板配套SDK解读">
-                                
-                                <span class="card-title">Hi3516DV300_7_开发板配套SDK解读</span>
-                            </div>
-                        </a>
-                        <div class="card-content article-content">
-                            <div class="summary block-with-text">
-                                
-                                    1、文件夹结构注意：这里有很多符号链接，因为这些文件夹都是链接到别的地方的
-
-这里有干货的文件夹，就只有osdrv与smp
-
-
-make_ext4fs是编译的工具
-
-
-烧录的时候有用到userdata，userdata里面有很多要用到的配置
-                                
-                            </div>
-                            <div class="publish-info">
-                                <span class="publish-date">
-                                    <i class="far fa-clock fa-fw icon-date"></i>2021-10-13
-                                </span>
-                                <span class="publish-author">
-                                    
-                                    <i class="fas fa-user fa-fw"></i>
-                                    Ruimin Huang
-                                    
-                                </span>
-                            </div>
-                        </div>
-
-                        
-                    </div>
-                </div>
-            </article>
-        </div>
-        
-        <div class="cd-timeline-block">
-
-            
-            
-
-            
-            
-
-            
-            <div class="cd-timeline-img day" data-aos="zoom-in-up">
-                <span>12</span>
-            </div>
-            <article class="cd-timeline-content" data-aos="fade-up">
-                <div class="article col s12 m6">
-                    <div class="card">
-                        <a href="/2021/10/12/hi3516dv300-6-guan-fang-sdk-kai-fa-shi-zhan/">
-                            <div class="card-image">
-                                
-                                
-                                <img src="http://pic.huangruimin.tech/The_Wandering_Earth2_22.jpg" class="responsive-img" alt="Hi3516DV300_6_官方SDK开发实战">
-                                
-                                <span class="card-title">Hi3516DV300_6_官方SDK开发实战</span>
-                            </div>
-                        </a>
-                        <div class="card-content article-content">
-                            <div class="summary block-with-text">
-                                
-                                    1. SDK脚本管理解析1.1 sdk.unpack脚本解析
-就是为了解压而已
-
-1.2 scripts/common.sh脚本解析
-定义了很多函数，整个SDK管理的所在
-
-1.3 osdrv/readme_cn.txt
-定义了怎么编译，包
-                                
-                            </div>
-                            <div class="publish-info">
-                                <span class="publish-date">
-                                    <i class="far fa-clock fa-fw icon-date"></i>2021-10-12
-                                </span>
-                                <span class="publish-author">
-                                    
-                                    <i class="fas fa-user fa-fw"></i>
-                                    Ruimin Huang
-                                    
-                                </span>
-                            </div>
-                        </div>
-
-                        
-                    </div>
-                </div>
-            </article>
-        </div>
-        
     </div>
 
 </main>
@@ -1163,7 +1174,7 @@ make_ext4fs是编译的工具
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">150.2k</span>&nbsp;字
+                class="white-color">157.8k</span>&nbsp;字
             
             
             

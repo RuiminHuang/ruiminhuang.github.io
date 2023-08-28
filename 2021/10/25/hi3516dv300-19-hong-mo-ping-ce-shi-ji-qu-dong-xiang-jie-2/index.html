@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="RPi-OpenCV_开发环境搭建, AI, TensorRT, Infrared">
+    <meta name="keywords" content="HI3516DV300_19_触摸屏测试及驱动详解2, AI, TensorRT, Infrared">
     <meta name="description" content="Personal essay record">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>RPi-OpenCV_开发环境搭建 | Ruimin Huang&#39;s Space</title>
+    <title>HI3516DV300_19_触摸屏测试及驱动详解2 | Ruimin Huang&#39;s Space</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -259,12 +259,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('http://pic.huangruimin.tech/banner_16.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('http://pic.huangruimin.tech/Transformers3_55.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">RPi-OpenCV_开发环境搭建</h1>
+                    <h1 class="description center-align post-title">HI3516DV300_19_触摸屏测试及驱动详解2</h1>
                 </div>
             </div>
         </div>
@@ -392,28 +392,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2018-10-07
+                    2021-10-25
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-08-26
+                    2023-08-28
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.7k
+                    2.7k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    7 分
+                    9 分
                 </div>
                 
 
@@ -436,214 +436,550 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>本章将介绍OpenCV开发环境的搭建，搭建的版本为OpenCV4.1.0，同时支持Python3和cpp，在搭建好后，将通过一个cpp和Python的Demo打开CSI摄像头来测试开发环境是否搭建完成。</p>
-<h2 id="1-烧录系统"><a href="#1-烧录系统" class="headerlink" title="1 烧录系统"></a>1 烧录系统</h2><p>本教程采用的镜像是树莓派官方2019年7月10日发布的发行版镜像，代号Buster，如下图所示：<br><img src="http://pic.huangruimin.tech/20190821152022.png"></p>
-<h2 id="2-基本设置"><a href="#2-基本设置" class="headerlink" title="2 基本设置"></a>2 基本设置</h2><h3 id="2-1-把目录扩展到整个TF卡"><a href="#2-1-把目录扩展到整个TF卡" class="headerlink" title="2.1 把目录扩展到整个TF卡"></a>2.1 把目录扩展到整个TF卡</h3><p>本次搭建OpenCV开发环境，至少选择16G的TF卡，为了充分利用TF的存储空间，需要将TF卡空间扩展到整个TF卡。<br>在命令行输入命令，进入树莓派配置界面，用上下左右切换光标位置。</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> raspi-config<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p><img src="http://pic.huangruimin.tech/20190830130336.png"><br><img src="http://pic.huangruimin.tech/20190830130406.png"></p>
-<h3 id="2-2-开启摄像头"><a href="#2-2-开启摄像头" class="headerlink" title="2.2 开启摄像头"></a>2.2 开启摄像头</h3><p>作为开源计算机视觉库，主要进行图像处理，对摄像头图像数据进行处理是主要需求，因此，开启摄像头是很有必要的。</p>
-<h4 id="2-2-1-启用摄像头"><a href="#2-2-1-启用摄像头" class="headerlink" title="2.2.1 启用摄像头"></a>2.2.1 启用摄像头</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> raspi-config<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>进入Interfacing Options-&gt;Camera-&gt;Yes，即可启用摄像头。<br>检测摄像头是否正常，可以使用以下命令进行检测：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">raspivid <span class="token parameter variable">-t</span> <span class="token number">0</span> <span class="token parameter variable">-cs</span> <span class="token number">0</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h4 id="2-2-2-准备视频流设备"><a href="#2-2-2-准备视频流设备" class="headerlink" title="2.2.2 准备视频流设备"></a>2.2.2 准备视频流设备</h4><p>在OpenCV中，若要读取摄像头数据，需要开启v4l2(video for linux 2)，开启后，摄像头设备文件为/dev/video0，OpenCV将从该文件中读取视频流文件。</p>
-<p>开启方法如下:</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">vim</span> /etc/modules<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>在末尾添加一行：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">bcm2835-v4l2<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h3 id="2-3-更换软件源"><a href="#2-3-更换软件源" class="headerlink" title="2.3 更换软件源"></a>2.3 更换软件源</h3><p>鉴于国内网络环境下载各大镜像，软件包速度慢的问题，需要更换软件源，以防下载慢，且在本教程中，统一更换为清华源。</p>
-<h4 id="2-3-1-更换树莓派软件源"><a href="#2-3-1-更换树莓派软件源" class="headerlink" title="2.3.1 更换树莓派软件源"></a>2.3.1 更换树莓派软件源</h4><p>包括系统源与系统更新源，操作方法：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 编辑 `/etc/apt/sources.list` 文件，删除原文件所有内容，用以下内容取代：</span>
-deb http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ buster main non-free contrib
-deb-src http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ buster main non-free contrib
-
-<span class="token comment"># 编辑 `/etc/apt/sources.list.d/raspi.list` 文件，删除原文件所有内容，用以下内容取代：</span>
-deb http://mirrors.tuna.tsinghua.edu.cn/raspberrypi/ buster main ui<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>如下图所示：<br><img src="http://pic.huangruimin.tech/20190830132453.png"><br><img src="http://pic.huangruimin.tech/20190830132542.png"></p>
-<p><a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/help/raspbian/">清华软件源Raspbian官方说明</a></p>
-<h4 id="2-3-2-更换pip软件源"><a href="#2-3-2-更换pip软件源" class="headerlink" title="2.3.2 更换pip软件源"></a>2.3.2 更换pip软件源</h4><p>为加速Python pip安装速度，特更改Python软件源，操作方法：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pip <span class="token function">install</span> pip <span class="token parameter variable">-U</span>
-pip config <span class="token builtin class-name">set</span> global.index-url https://pypi.tuna.tsinghua.edu.cn/simple<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p><a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/help/pypi/">清华软件源Pypi官方说明</a></p>
-<h3 id="2-4-重启"><a href="#2-4-重启" class="headerlink" title="2.4 重启"></a>2.4 重启</h3><p>以上步骤均完成之后，需要进行重启才生效，重启命令如下：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">reboot</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h2 id="3-安装OpenCV所需要的库"><a href="#3-安装OpenCV所需要的库" class="headerlink" title="3 安装OpenCV所需要的库"></a>3 安装OpenCV所需要的库</h2><h3 id="3-1-安装numpy"><a href="#3-1-安装numpy" class="headerlink" title="3.1 安装numpy"></a>3.1 安装numpy</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> pip3 <span class="token function">install</span> numpy<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h3 id="3-2-安装OpenCV所需的依赖"><a href="#3-2-安装OpenCV所需的依赖" class="headerlink" title="3.2 安装OpenCV所需的依赖"></a>3.2 安装OpenCV所需的依赖</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> build-essential <span class="token function">git</span> cmake pkg-config <span class="token parameter variable">-y</span>
-<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> libjpeg8-dev <span class="token parameter variable">-y</span>
-<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> libtiff5-dev <span class="token parameter variable">-y</span>
-<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> libjasper-dev <span class="token parameter variable">-y</span>
-<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> libpng12-dev <span class="token parameter variable">-y</span>
-
-<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> libavcodec-dev libavformat-dev libswscale-dev libv4l-dev <span class="token parameter variable">-y</span>
-
-<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> libgtk2.0-dev <span class="token parameter variable">-y</span>
-<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> libatlas-base-dev gfortran <span class="token parameter variable">-y</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="4-下载OpenCV"><a href="#4-下载OpenCV" class="headerlink" title="4 下载OpenCV"></a>4 下载OpenCV</h2><p>本次安装的OpenCV版本为OpenCV 4.1.0，<a target="_blank" rel="noopener" href="https://opencv.org/releases/">官方链接地址</a></p>
-<p>需要下载包括OpenCV与OpenCV_Contrib两个仓库</p>
-<p>OpenCV_4.1.0仓库：<a target="_blank" rel="noopener" href="https://github.com/opencv/opencv/tree/4.1.0">Github地址</a></p>
-<p>OpenCV_Contrib_4.1.0仓库：<a target="_blank" rel="noopener" href="https://github.com/opencv/opencv_contrib/tree/4.1.0">Github地址</a></p>
-<p>鉴于下载速度慢，建议采用Git Bash下载：</p>
-<p>下载命令如下，注意添加–recursive及-b 4.1.0</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> clone <span class="token parameter variable">-b</span> <span class="token number">4.1</span>.0 <span class="token parameter variable">--recursive</span> https://github.com/opencv/opencv.git
-<span class="token function">git</span> clone <span class="token parameter variable">-b</span> <span class="token number">4.1</span>.0 <span class="token parameter variable">--recursive</span> https://github.com/opencv/opencv_contrib.git<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>下载后，建议采用Fillzilla或者U盘等方法把文件传输到树莓派中。</p>
-<p><img src="http://pic.huangruimin.tech/20190830153146.png"></p>
-<p>当然，也可以直接在树莓派命令行窗口执行以上命令进行下载，但请确保网络稳定。</p>
-<h2 id="5-配置Cmake"><a href="#5-配置Cmake" class="headerlink" title="5 配置Cmake"></a>5 配置Cmake</h2><p>Cmake是一款跨平台的编译工具，经过配置，可输出适配于树莓派平台的Makefile</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /home/pi/Downloads/opencv-4.1.0
-<span class="token function">mkdir</span> build
-<span class="token builtin class-name">cd</span> build<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p>配置Cmake，执行以下命令：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">cmake <span class="token parameter variable">-D</span> <span class="token assign-left variable">CMAKE_BUILD_TYPE</span><span class="token operator">=</span>RELEASE <span class="token punctuation">\</span>
-<span class="token parameter variable">-D</span> <span class="token assign-left variable">CMAKE_INSTALL_PREFIX</span><span class="token operator">=</span>/usr/local <span class="token punctuation">\</span>
-<span class="token parameter variable">-D</span> <span class="token assign-left variable">INSTALL_C_EXAMPLES</span><span class="token operator">=</span>ON <span class="token punctuation">\</span>
-<span class="token parameter variable">-D</span> <span class="token assign-left variable">INSTALL_PYTHON_EXAMPLES</span><span class="token operator">=</span>ON <span class="token punctuation">\</span>
-<span class="token parameter variable">-D</span> <span class="token assign-left variable">OPENCV_EXTRA_MODULES_PATH</span><span class="token operator">=</span>/home/pi/Downloads/opencv-4.1.0/opencv_contrib-3.4.0/modules <span class="token punctuation">\</span>
-<span class="token parameter variable">-D</span> <span class="token assign-left variable">BUILD_EXAMPLES</span><span class="token operator">=</span>ON <span class="token punctuation">\</span>
-<span class="token parameter variable">-D</span> <span class="token assign-left variable">WITH_LIBV4L</span><span class="token operator">=</span>ON <span class="token punctuation">\</span>
-<span class="token parameter variable">-D</span> <span class="token assign-left variable">PYTHON3_EXECUTABLE</span><span class="token operator">=</span>/usr/bin/python3.7 <span class="token punctuation">\</span>
-<span class="token parameter variable">-D</span> <span class="token assign-left variable">PYTHON_INCLUDE_DIR</span><span class="token operator">=</span>/usr/include/python3.7 <span class="token punctuation">\</span>
-<span class="token parameter variable">-D</span> <span class="token assign-left variable">PYTHON_LIBRARY</span><span class="token operator">=</span>/usr/lib/arm-linux-gnueabihf/libpython3.7m.so <span class="token punctuation">\</span>
-<span class="token parameter variable">-D</span> <span class="token assign-left variable">PYTHON3_NUMPY_INCLUDE_DIRS</span><span class="token operator">=</span>/usr/lib/python3/dist-packages/numpy/core/include <span class="token punctuation">\</span>
-<span class="token punctuation">..</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>注意，以上命令需要根据您具体的软件环境进行修改，否则很可能报错。<br>其中：</p>
-<ul>
-<li>CMAKE_BUILD_TYPE=RELEASE \ 代表编译类型为发行版本</li>
-<li>CMAKE_INSTALL_PREFIX=/usr/local \ 安装路径</li>
-<li>INSTALL_C_EXAMPLES=ON \ C demo</li>
-<li>INSTALL_PYTHON_EXAMPLES=ON \ Python demo</li>
-<li>OPENCV_EXTRA_MODULES_PATH=/home/pi/Downloads/opencv-4.1.0/opencv_contrib-3.4.0/modules \ OpenCV Contrib路径</li>
-<li>BUILD_EXAMPLES=ON \ 编译demo</li>
-<li>WITH_LIBV4L=ON \ 开启Video for Linux</li>
-<li>PYTHON3_EXECUTABLE=/usr/bin/python3.7 \ Python3路径</li>
-<li>PYTHON_INCLUDE_DIR=/usr/include/python3.7 \ Python3 include文件夹</li>
-<li>PYTHON_LIBRARY=/usr/lib/arm-linux-gnueabihf/libpython3.7m.so \ Python3库</li>
-<li>PYTHON3_NUMPY_INCLUDE_DIRS=/usr/lib/python3/dist-packages/numpy/core/include \ Python3 Numpy安装路径</li>
-<li>..</li>
+                <h2 id="一、移植并测试触摸屏驱动"><a href="#一、移植并测试触摸屏驱动" class="headerlink" title="一、移植并测试触摸屏驱动"></a>一、移植并测试触摸屏驱动</h2><h3 id="1-1-下载正确的触摸屏驱动文件并替换掉原来不对的"><a href="#1-1-下载正确的触摸屏驱动文件并替换掉原来不对的" class="headerlink" title="1.1 下载正确的触摸屏驱动文件并替换掉原来不对的"></a>1.1 下载正确的触摸屏驱动文件并替换掉原来不对的</h3><h4 id="1-1-1-电容触摸屏的驱动在下面这个位置："><a href="#1-1-1-电容触摸屏的驱动在下面这个位置：" class="headerlink" title="1.1.1 电容触摸屏的驱动在下面这个位置："></a>1.1.1 电容触摸屏的驱动在下面这个位置：</h4><p><img src="https://pic.huangruimin.tech/20220213130247.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220213130313.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220213130349.png"></p>
+<blockquote>
+<p>这个驱动到底是内核自带的，还是之前的板卡商，在移植的时候放进去的，对我们来说，不用去关心</p>
+</blockquote>
+<blockquote>
+<p>总之，我们拿到的源码，是有的，代码就在这里面呢</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220213142343.png"></p>
+<blockquote>
+<p>这个文件，有相应的.o文件，是被编译了</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220213142505.png"></p>
+<blockquote>
+<p>这个文件，没有.o文件，所以，没有被编译</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220213142613.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220213142652.png"></p>
+<blockquote>
+<p>这个，本来是用make menuconfig来进行配置的，但是这里却被直接注释了</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220213142757.png"></p>
+<blockquote>
+<p>并且，这里只能被编译成为一个module了</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220213142912.png"></p>
+<blockquote>
+<p>如果想编译到zImage里面去，那么这里就要修改成：obj-y</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220213143057.png"></p>
+<blockquote>
+<p>其实只有这两个文件是有用到的</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220213143152.png"></p>
+<blockquote>
+<p>这个pad.c是没有用到的</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220213143244.png"></p>
+<blockquote>
+<p>但问题是这个pad.h是有被用到的</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>其实，大部分东西，都是在这个pad.h里面的</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>现在输出的情况不对，就是因为pad.h里面，有些变量的定义是不对的</p>
+</blockquote>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220213143431.png"></p>
+<h4 id="1-1-2-分析不对的源码"><a href="#1-1-2-分析不对的源码" class="headerlink" title="1.1.2 分析不对的源码"></a>1.1.2 分析不对的源码</h4><p><img src="https://pic.huangruimin.tech/20220213143609.png"></p>
+<blockquote>
+<p>首先，是定义了width与height，也就是定义了分辨率，7inch里面，一般最高分辨率就是1280 X 800</p>
+</blockquote>
+<blockquote>
+<p>这个是不对的，因为咱们的屏幕是1024 X 600的</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220213143945.png"></p>
+<blockquote>
+<p>这是一个数组，用const修饰，是一个不可更改的常量，这里面写了很多寄存器的配置值</p>
+</blockquote>
+<blockquote>
+<p>这个寄存器非常大，并且有非常多的数值</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220213144225.png"></p>
+<blockquote>
+<p>这里面还有很多固件(的标志)，并且，这里面也全是key和value的，并且是成对的</p>
+</blockquote>
+<blockquote>
+<p>前面的key应该是寄存器的地址，后面的value，应该是寄存器的值</p>
+</blockquote>
+<blockquote>
+<p>这些是电容触摸屏里面的那些寄存器</p>
+</blockquote>
+<blockquote>
+<p>每一款电容触摸屏，其实它里面是有自己的处理器的，它那个处理器，就负责处理电容触摸屏内部的寄存器</p>
+</blockquote>
+<blockquote>
+<p>每一个电容触摸屏都有多达几百个寄存器，这里面的寄存器，都是用来配置一些特性的，比如配置屏幕的分辨率，配置电容感应的灵敏度这些的。</p>
+</blockquote>
+<blockquote>
+<p>因为按到的点，中心和边缘的力度，还是有区别的，所以做电容触摸屏这一行，也还是有一点技术含量在里面的。</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220213150437.png"></p>
+<blockquote>
+<p>我们现在，就是这些寄存器里面，配的寄存器的值不对</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220213150550.png"></p>
+<blockquote>
+<p>我们现在要修复这个驱动的话，要找到一个正确的.h文件，把这个错误的.h文件给替换了</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220213150728.png"></p>
+<blockquote>
+<p>先把错误的文件，改个名字</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220213150840.png"></p>
+<blockquote>
+<p>找到正确的文件</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220213150902.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220213150931.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220213151011.png"></p>
+<blockquote>
+<blockquote>
+<p>这个是根据我们的屏幕给配出来的</p>
+</blockquote>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220213151114.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220213151046.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220213151156.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220213151209.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220213151233.png"></p>
+<blockquote>
+<p>这个差异，是来自于触摸屏的差异，因为：</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>一个触摸屏芯片，是不止配置于，一款触摸屏的；这个芯片能够适配于很多屏幕，有些屏幕大，有些屏幕小，有些分辨率大，有些分辨率小。</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>触摸屏芯片本身的配置，要和我们的屏幕适配，就要去修改寄存器；这个适配的过程，要懂触摸屏芯片的寄存器怎么写；而且，有时候，还要去调一些效果。</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>并且，这个过程，有用到专门的人，用专门的软件去调，这个一般是触摸屏芯片厂商去调的</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>这个要找FAE，以及代理商，帮忙调的，自己没必要去学怎么调试，这种技能只能用于调试这个厂商的</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>如果公司很小，人家的FAE不理你的话，没有实力调这个，那就不要调这个，直接买过来就行了，如果非要自己调试，那么就是自讨苦吃。</p>
+</blockquote>
+</blockquote>
+<h4 id="1-1-3-把正确的源码复制到Ubuntu"><a href="#1-1-3-把正确的源码复制到Ubuntu" class="headerlink" title="1.1.3 把正确的源码复制到Ubuntu"></a>1.1.3 把正确的源码复制到Ubuntu</h4><ul>
+<li>先把正确的给复制过来</li>
 </ul>
-<p>如下图所示：</p>
-<p><img src="http://pic.huangruimin.tech/20190829173935.png"></p>
-<p>cmake 配置完成后的界面如下图所示：</p>
-<p><img src="http://pic.huangruimin.tech/20190829172645.png"></p>
-<p>注意：cmake执行时间一般在15分钟左右。</p>
-<h2 id="6-编译"><a href="#6-编译" class="headerlink" title="6 编译"></a>6 编译</h2><p>在Cmake生成Makefile之后，便可进行编译：<br>输入并执行：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">make</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://pic.huangruimin.tech/20220213153256.png"></p>
+<blockquote>
+<blockquote>
+<p>这个就是我们的正确的</p>
+</blockquote>
+</blockquote>
+<ul>
+<li>然后，编译生成模块</li>
+</ul>
+<p><img src="https://pic.huangruimin.tech/20220213153659.png"></p>
+<blockquote>
+<blockquote>
+<p>在这里编译生成驱动模块</p>
+</blockquote>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220213153812.png"></p>
+<blockquote>
+<blockquote>
+<p>可以看到，已经被编译了</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>这里会把所有的配置为-m的那些模块，全部重新编译一遍</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>Linux里面，如果我们把它集成到内核里面，还不知道能不能编译单个模块，这个是不行的</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>但是在Android里面，如果想编译单个模块，可以只编译这个模块</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>如果我们把驱动放在了外面，那我们可以直接在驱动那里去make module</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>但是，现在我们把驱动是集成到内核里面了，所以，就要编译所有的</p>
+</blockquote>
+</blockquote>
+<ul>
+<li>编译生成了.ko文件</li>
+</ul>
+<p><img src="https://pic.huangruimin.tech/20220213154511.png"></p>
+<blockquote>
+<p>这个文件，也就是我们所需要的</p>
+</blockquote>
+<ul>
+<li>然后，把这个ko文件拷贝到板子上面去</li>
+</ul>
+<p><img src="https://pic.huangruimin.tech/20220213154702.png"></p>
+<blockquote>
+<p>其中，这个rootfs文件夹，已经被nfs共享出去了</p>
+</blockquote>
+<ul>
+<li>在板子上面找到这个.ko文件</li>
+</ul>
+<p><img src="https://pic.huangruimin.tech/20220213154815.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220213154949.png"></p>
+<blockquote>
+<p>如上图所示</p>
+</blockquote>
+<ul>
+<li>先进到.ko文件夹</li>
+</ul>
+<p><img src="https://pic.huangruimin.tech/20220213155034.png"></p>
+<blockquote>
+<p>如上图所示</p>
+</blockquote>
+<ul>
+<li>先把老版本的.ko文件mv掉</li>
+</ul>
+<p><img src="https://pic.huangruimin.tech/20220213155326.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220213155403.png"></p>
+<blockquote>
+<p>如上图所示</p>
+</blockquote>
+<ul>
+<li>把板子上的.ko文件复制到当前的文件夹</li>
+</ul>
+<p><img src="https://pic.huangruimin.tech/20220213155427.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220213155445.png"></p>
+<blockquote>
+<p>这个ko文件就是我们刚才编译成功的，正确的ko文件了</p>
+</blockquote>
+<blockquote>
+<p>到这一步，部署就完成了</p>
+</blockquote>
+<ul>
+<li>卸载老驱动</li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">remod gslx680.ko<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ul>
+<li>装载新的驱动</li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">insmod gslx680.ko<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>即开始进行编译，编译过程如下图所示：<br><img src="http://pic.huangruimin.tech/20190829203241.png"></p>
-<p>注意：make编译时间比较长，一般编译时间在5小时左右。</p>
-<h2 id="7-安装"><a href="#7-安装" class="headerlink" title="7 安装"></a>7 安装</h2><p>输入以下命令即可进行安装：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">make</span> insall<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>注意：install安装时间一般在1分钟左右。</p>
-<h2 id="8-测试是否安装完成"><a href="#8-测试是否安装完成" class="headerlink" title="8 测试是否安装完成"></a>8 测试是否安装完成</h2><p>测试包括Python及cpp的测试，用到了摄像头及简单的OpenCV处理函数。</p>
-<h3 id="8-1-Python3："><a href="#8-1-Python3：" class="headerlink" title="8.1 Python3："></a>8.1 Python3：</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">#!/usr/bin/env python</span>
-
-<span class="token triple-quoted-string string">'''
-Waveshare OpenCV Tutorial
-00_Test_OpenCV.py
-A demo to show whether The OpenCV and CSI camera is well installed
-'''</span>
-
-<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
-<span class="token keyword">import</span> cv2
-
-<span class="token keyword">def</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"OpenCV Version:{}"</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>cv2<span class="token punctuation">.</span>__version__<span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token comment"># 0: use CSI camera,1：use USB camera</span>
-    cap <span class="token operator">=</span> cv2<span class="token punctuation">.</span>VideoCapture<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">not</span> cap<span class="token punctuation">.</span>isOpened<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"can't open this camera"</span><span class="token punctuation">)</span>
-
-    <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token boolean">True</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        ret<span class="token punctuation">,</span> FrameImage <span class="token operator">=</span> cap<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span>
-        <span class="token keyword">if</span> ret <span class="token operator">==</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
-            <span class="token comment"># change to gray image</span>
-            GrayImage <span class="token operator">=</span> cv2<span class="token punctuation">.</span>cvtColor<span class="token punctuation">(</span>FrameImage<span class="token punctuation">,</span> cv2<span class="token punctuation">.</span>COLOR_BGR2GRAY<span class="token punctuation">)</span>
-            <span class="token comment"># blur the image </span>
-            BlurImage <span class="token operator">=</span> cv2<span class="token punctuation">.</span>blur<span class="token punctuation">(</span>GrayImage<span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-            <span class="token comment"># use canny to detect contour</span>
-            CannyImage <span class="token operator">=</span> cv2<span class="token punctuation">.</span>Canny<span class="token punctuation">(</span>BlurImage<span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">)</span>
-            <span class="token comment"># show the image</span>
-            cv2<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span><span class="token string">'Camera Capture'</span><span class="token punctuation">,</span>CannyImage<span class="token punctuation">)</span>
-            <span class="token comment">#Press Q to quit</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>cv2<span class="token punctuation">.</span>waitKey<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token builtin">ord</span><span class="token punctuation">(</span><span class="token string">'q'</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-                cap<span class="token punctuation">.</span>release<span class="token punctuation">(</span><span class="token punctuation">)</span>
-                <span class="token keyword">break</span>
-        <span class="token keyword">else</span><span class="token punctuation">:</span>
-            <span class="token keyword">break</span>
-
-<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span>__doc__<span class="token punctuation">)</span>
-    main<span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token comment"># Release resource</span>
-    cv2<span class="token punctuation">.</span>destroyAllWindows<span class="token punctuation">(</span><span class="token punctuation">)</span>
-
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>执行该Python脚本的情况如下：<br><img src="http://pic.huangruimin.tech/20190830201403.png"></p>
-<h3 id="8-2-cpp："><a href="#8-2-cpp：" class="headerlink" title="8.2 cpp："></a>8.2 cpp：</h3><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;iostream&gt;</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;opencv2/opencv.hpp&gt;</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;opencv2/highgui/highgui.hpp&gt;</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;opencv2/imgproc/imgproc.hpp&gt;</span></span>
-
-<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
-<span class="token keyword">using</span> <span class="token keyword">namespace</span> cv<span class="token punctuation">;</span>
-
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-	cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Waveshare OpenCV Tutorial"</span><span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
-	cout <span class="token operator">&lt;&lt;</span> <span class="token string">"00_Test_OpenCV"</span><span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
-	cout <span class="token operator">&lt;&lt;</span> <span class="token string">"A demo to show whether The OpenCV and CSI camera is well installed"</span> <span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
-	cout <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
-	cout <span class="token operator">&lt;&lt;</span> <span class="token string">"OpenCV Version:"</span> <span class="token operator">&lt;&lt;</span> CV_VERSION <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
-	<span class="token comment">// 0: use CSI camera,1：use USB camera</span>
-	VideoCapture <span class="token function">cap</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>cap<span class="token punctuation">.</span><span class="token function">isOpened</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-	<span class="token punctuation">{</span>
-		cout<span class="token operator">&lt;&lt;</span><span class="token string">"can't open this camera"</span><span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
-		<span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
-	<span class="token punctuation">}</span>	
-	Mat FrameImage<span class="token punctuation">,</span>GrayImage<span class="token punctuation">,</span>BlurImage<span class="token punctuation">,</span>CannyImage<span class="token punctuation">;</span>
-	<span class="token keyword">while</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
-	<span class="token punctuation">{</span>
-		cap<span class="token operator">&gt;&gt;</span>FrameImage<span class="token punctuation">;</span>
-		<span class="token comment">//Change to gray image</span>
-		<span class="token function">cvtColor</span><span class="token punctuation">(</span>FrameImage<span class="token punctuation">,</span>GrayImage<span class="token punctuation">,</span>COLOR_BGR2GRAY<span class="token punctuation">)</span><span class="token punctuation">;</span>
-		<span class="token comment">//blur the image</span>
-		<span class="token function">blur</span><span class="token punctuation">(</span>GrayImage<span class="token punctuation">,</span>BlurImage<span class="token punctuation">,</span><span class="token function">Size</span><span class="token punctuation">(</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-		<span class="token comment">//use canny to detect contour</span>
-		<span class="token function">Canny</span><span class="token punctuation">(</span>BlurImage<span class="token punctuation">,</span>CannyImage<span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-		<span class="token comment">//show the image</span>
-		<span class="token function">imshow</span><span class="token punctuation">(</span><span class="token string">"Camera Capture"</span><span class="token punctuation">,</span>CannyImage<span class="token punctuation">)</span><span class="token punctuation">;</span>
-		<span class="token comment">//Press Q to quit</span>
-		<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">char</span><span class="token punctuation">(</span><span class="token function">waitKey</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token char">'q'</span><span class="token punctuation">)</span>
-		<span class="token punctuation">{</span>
-			<span class="token keyword">break</span><span class="token punctuation">;</span>
-		<span class="token punctuation">}</span>
-	<span class="token punctuation">}</span>
-	<span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>CMakeLists.txt：</p>
-<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token function">cmake_minimum_required</span><span class="token punctuation">(</span>VERSION <span class="token number">3.0</span><span class="token punctuation">)</span>
-<span class="token function">project</span><span class="token punctuation">(</span><span class="token number">00</span>_Test_OpenCV<span class="token punctuation">)</span>
-<span class="token function">find_package</span><span class="token punctuation">(</span>OpenCV REQUIRED<span class="token punctuation">)</span>
-<span class="token function">add_executable</span><span class="token punctuation">(</span><span class="token number">00</span>_Test_OpenCV <span class="token number">00</span>_Test_OpenCV<span class="token punctuation">.</span>cpp<span class="token punctuation">)</span>
-<span class="token function">target_link_libraries</span><span class="token punctuation">(</span><span class="token number">00</span>_Test_OpenCV $<span class="token punctuation">{</span>OpenCV_LIBS<span class="token punctuation">}</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>编译并运行：<br><img src="http://pic.huangruimin.tech/20190830201919.png"></p>
-<h2 id="9-结语"><a href="#9-结语" class="headerlink" title="9 结语"></a>9 结语</h2><p>若中途有安装失败，或多次尝试安装失败，或者想在搭建环境的时候节省时间，可直接使用我们提供的镜像，在我们提供的镜像中，除了已安装OpenCV4.1.0之外，还安装了TensorFlow和Keras，如下图所示：</p>
-<p><img src="http://pic.huangruimin.tech/20190830204006.png"></p>
+<blockquote>
+<p>如上命令所示</p>
+</blockquote>
+<ul>
+<li>或者简单粗暴地直接重启，重启的话，也会insmod这个驱动的</li>
+</ul>
+<p><img src="https://pic.huangruimin.tech/20220213155750.png"></p>
+<blockquote>
+<p>重启，也就会重新加载驱动了</p>
+</blockquote>
+<ul>
+<li>先看看/dev/input/里面有没有设备</li>
+</ul>
+<p><img src="https://pic.huangruimin.tech/20220213160007.png"></p>
+<ul>
+<li>重新挂载nfs文件系统</li>
+</ul>
+<p><img src="https://pic.huangruimin.tech/20220213160047.png"></p>
+<ul>
+<li>进入到应用程序文件夹下，并执行应用程序</li>
+</ul>
+<p><img src="https://pic.huangruimin.tech/20220213160119.png"></p>
+<ul>
+<li>查看效果</li>
+</ul>
+<p><img src="https://pic.huangruimin.tech/20220213160232.png"></p>
+<blockquote>
+<p>可以看到，效果是对的了</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>但是，调试触摸屏芯片寄存器的过程，应当是触摸屏芯片厂商自己专门做的，而不是我们自己去做</p>
+</blockquote>
+</blockquote>
+<h2 id="二、触摸屏驱动源码简单分析"><a href="#二、触摸屏驱动源码简单分析" class="headerlink" title="二、触摸屏驱动源码简单分析"></a>二、触摸屏驱动源码简单分析</h2><h3 id="2-1-找到并确认实际工作的源码"><a href="#2-1-找到并确认实际工作的源码" class="headerlink" title="2.1 找到并确认实际工作的源码"></a>2.1 找到并确认实际工作的源码</h3><ul>
+<li>先找到源码在哪</li>
+</ul>
+<p><img src="https://pic.huangruimin.tech/20220213193755.png"></p>
+<blockquote>
+<p>pad_touch_back.c</p>
+</blockquote>
+<blockquote>
+<p>pad.c：这个没有被调用</p>
+</blockquote>
+<blockquote>
+<p>touch_id：只包含少量内容</p>
+</blockquote>
+<ul>
+<li>分析源码</li>
+</ul>
+<p><img src="https://pic.huangruimin.tech/20220213194121.png"></p>
+<blockquote>
+<p>源码中，最核心的两个源码，就是在这里的</p>
+</blockquote>
+<ul>
+<li>来分析：gsl_ts_init</li>
+</ul>
+<p><img src="https://pic.huangruimin.tech/20220213194601.png"></p>
+<ul>
+<li>有两个分支</li>
+</ul>
+<p><img src="https://pic.huangruimin.tech/20220213194939.png"></p>
+<blockquote>
+<p>一个是Linux里面的驱动</p>
+</blockquote>
+<blockquote>
+<p>一个是Android里面的驱动</p>
+</blockquote>
+<blockquote>
+<p>这两个驱动是不太一样的</p>
+</blockquote>
+<blockquote>
+<p>区别就是：Linux里面只支持单点，Android里面呢支持多点，但是这个芯片本身是支持多点的</p>
+</blockquote>
+<blockquote>
+<p>Android里面，大部分时候，都是支持多点触控的</p>
+</blockquote>
+<blockquote>
+<p>Linux里面，大部分时候，都会 使用Qtcreator这样一些GUI，这个时候就不需要多点触控</p>
+</blockquote>
+<blockquote>
+<p>大部分驱动，也都是一样的</p>
+</blockquote>
+<ul>
+<li>gsl_ts_init函数分析</li>
+</ul>
+<p><img src="https://pic.huangruimin.tech/20220213195342.png"></p>
+<blockquote>
+<p>在这个函数里面，做的事情主要是这个</p>
+</blockquote>
+<ul>
+<li>分析</li>
+</ul>
+<blockquote>
+<p>I2C Device呢，一个触摸屏驱动对我们主机来说，其实就是I2C的从设备</p>
+</blockquote>
+<blockquote>
+<p>所以：这里就是一个I2C Device，一个I2C Driver</p>
+</blockquote>
+<blockquote>
+<p>那么I2C Device在什么地方添加了呢？就是在设备树解析的那个地方添加了，给你做了I2C add device了</p>
+</blockquote>
+<blockquote>
+<p>然后，在这个地方执行了i2c_add_driver了</p>
+</blockquote>
+<blockquote>
+<p>再然后，driver和device在I2C总线上一match</p>
+</blockquote>
+<blockquote>
+<p>match之后呢，就probe了</p>
+</blockquote>
+<blockquote>
+<p>probe之后，就执行我们的驱动了</p>
+</blockquote>
+<blockquote>
+<p>所以，下一步，其实就到了驱动这里了</p>
+</blockquote>
+<ul>
+<li>找到驱动</li>
+</ul>
+<p><img src="https://pic.huangruimin.tech/20220213200237.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220213200339.png"></p>
+<blockquote>
+<p>进入到驱动这里</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220213205032.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220213205105.png"></p>
+<blockquote>
+<p>这里主要是一个probe函数</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>I2C总线driver和device那边一match，就会调用这个probe</p>
+</blockquote>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220213205244.png"></p>
+<blockquote>
+<p>所以，所有的驱动入口函数，就在probe函数这里</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>这都是非常经典的驱动函数框架</p>
+</blockquote>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220213205426.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220213205505.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220213205538.png"></p>
+<blockquote>
+<p>进入到probe函数里面</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220213205640.png"></p>
+<blockquote>
+<p>可以看到，probe函数，其实是先在定义变量</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220213205721.png"></p>
+<blockquote>
+<p>然后，这里先做相关的check</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220213205810.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220213205911.png"></p>
+<blockquote>
+<p>然后将ts进行相关的实例化，分配内存</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220213210105.png"></p>
+<blockquote>
+<p>然后进行填充</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>然后，在这里面，把各种数据，把Device和Driver里面的那个硬件数据进行挂接</p>
+</blockquote>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220213210332.png"></p>
+<blockquote>
+<p>irq_pin：就是我们中断对应的引脚</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>也就是说，我们的I2C设备，有一个引脚是专门来处理中断的，这是一个硬件信息，是硬件要告诉软件的</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>也就是Device要告诉Driver的，Driver这边操作irq的时候，只会直接基于irq的pin来直接进行处理，这个是纯软件的，这个只负责直接具体的操作，而不知道是哪个Pin，这个是要device告诉它的，怎么告诉它呢？三种方法：</p>
+</blockquote>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220213210856.png"></p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>第一种方法：简单粗暴，这就是直接硬编程，直接编译进去了；缺点就是，如果你要移植，那就必须要修改源码，如果不修改源码，如果不修改源码，这个是完不成的；所以一般正式的代码都不可能这样写的。</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>第二种方法：老式的做法是：通过I2C Device那里来，进行配置，也就是直接使用数据结构，在代码里面定义数据结构，但是，在数据结构那个地方就需要改；也就是说，还需要改源码。</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>第三种方法：新式的做法：改设备树，设备树的代码，就在下面：</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220213211505.png"></p>
+<blockquote>
+<p>这里，就是通过设备树来获取具体的Pin</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>获取touch-gpio的节点，那个节点里面有这样一个属性，属性就是：touch-gpio<br>获取reset-gpio的节点，那个节点里面有这样一个属性，属性就是：reset-gpio</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<p>那么，这个函数在哪里呢？</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220213212344.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220213212438.png"></p>
+<blockquote>
+<p>这就是goodix这家的触摸屏的</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220213212534.png"></p>
+<blockquote>
+<p>这就是gsl680这家的触摸屏的对应的</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220213212701.png"></p>
+<blockquote>
+<p>这里是对应的i2c从地址，对应的0x40</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220213212808.png"></p>
+<blockquote>
+<p>compatible，这个属性是为了让它能够匹配上的</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>所以可以看到，其实人家在这里，都配好了</p>
+</blockquote>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220213212937.png"></p>
+<blockquote>
+<p>但是，在源码里面，是没有用设备树传参的</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>但是，SDK在做这个的时候，已经基本把这个做好了</p>
+</blockquote>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220213213115.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220213213158.png"></p>
+<blockquote>
+<p>看设备树里面的相关属性</p>
+<blockquote>
+<p>这里应该不是800 x 1280，应该是600 x 1024<br>这里没有修改，没有修改是很正常的，因为都是写死的，因为没有用到设备树，在这里改了，其实也不影响</p>
+</blockquote>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220213213420.png"></p>
+<blockquote>
+<p>这两个节点的数值，本来就被配置为4和3</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220213213502.png"></p>
+<blockquote>
+<p>如果在代码里面用这两行，读出来也是4和3</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220213213641.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220213213755.png"></p>
+<blockquote>
+<p>再往下走，这个驱动，其实是和原来的驱动，没啥区别了</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220213213902.png"></p>
+<blockquote>
+<p>但是，这个驱动和以前的相比，差别就在这里</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220213214049.png"></p>
+<blockquote>
+<p>在核心课程一期里面，是没有看到这些寄存器配置值的，因为当时用的是.bin文件，当年，触摸屏厂商为了保持竞争力，是不愿意把这个寄存器的设置值开源的，核心课程一期是15年讲的。</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>寄存器配置值是不是以文本的方式给客户，这个对我们是没有影响的</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>用没用到设备树，也是一个比较大的不同</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>别的驱动，也与这个触摸屏的驱动类似</p>
+</blockquote>
+</blockquote>
 
                 
             </div>
@@ -670,7 +1006,7 @@ A demo to show whether The OpenCV and CSI camera is well installed
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://www.huangruimin.tech/2018/10/07/rpi-opencv-kai-fa-huan-jing-da-jian/">http://www.huangruimin.tech/2018/10/07/rpi-opencv-kai-fa-huan-jing-da-jian/</a>
+                    <a href="http://www.huangruimin.tech/2021/10/25/hi3516dv300-19-hong-mo-ping-ce-shi-ji-qu-dong-xiang-jie-2/">http://www.huangruimin.tech/2021/10/25/hi3516dv300-19-hong-mo-ping-ce-shi-ji-qu-dong-xiang-jie-2/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -879,12 +1215,12 @@ A demo to show whether The OpenCV and CSI camera is well installed
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2018/10/10/rpi-opencv-she-xiang-tou-de-ji-ben-shi-yong/">
+                <a href="/2022/09/15/rpi-opencv-opencv-zhong-highgui-ji-xiang-guan-shang-wei-ji-kai-fa/">
                     <div class="card-image">
                         
-                        <img src="http://pic.huangruimin.tech/banner_14.jpg" class="responsive-img" alt="RPi-OpenCV_摄像头的基本使用">
+                        <img src="http://pic.huangruimin.tech/banner_18.jpg" class="responsive-img" alt="RPi-OpenCV_OpenCV中HighGUI及相关上位机开发">
                         
-                        <span class="card-title">RPi-OpenCV_摄像头的基本使用</span>
+                        <span class="card-title">RPi-OpenCV_OpenCV中HighGUI及相关上位机开发</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -895,7 +1231,7 @@ A demo to show whether The OpenCV and CSI camera is well installed
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2018-10-10
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-09-15
                         </span>
                         <span class="publish-author">
                             
@@ -915,12 +1251,13 @@ A demo to show whether The OpenCV and CSI camera is well installed
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2018/09/07/diao-shi-zhuan-yong-ye-mian/">
+                <a href="/2021/10/24/hi3516dv300-18-hong-mo-ping-ce-shi-ji-qu-dong-xiang-jie-1/">
                     <div class="card-image">
                         
-                        <img src="http://pic.huangruimin.tech/banner_10.jpg" class="responsive-img" alt="调试专用页面">
                         
-                        <span class="card-title">调试专用页面</span>
+                        <img src="http://pic.huangruimin.tech/The_Wandering_Earth2_57.jpg" class="responsive-img" alt="HI3516DV300_18_触摸屏测试及驱动详解1">
+                        
+                        <span class="card-title">HI3516DV300_18_触摸屏测试及驱动详解1</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -931,7 +1268,7 @@ A demo to show whether The OpenCV and CSI camera is well installed
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2018-09-07
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-24
                             </span>
                         <span class="publish-author">
                             
