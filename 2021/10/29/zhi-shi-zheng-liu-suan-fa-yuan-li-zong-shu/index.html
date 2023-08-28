@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="RPi-OpenCV_10行代码为你的头像添加国旗, AI, TensorRT, Infrared">
+    <meta name="keywords" content="知识蒸馏算法_原理&amp;综述, AI, TensorRT, Infrared">
     <meta name="description" content="Personal essay record">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>RPi-OpenCV_10行代码为你的头像添加国旗 | Ruimin Huang&#39;s Space</title>
+    <title>知识蒸馏算法_原理&amp;综述 | Ruimin Huang&#39;s Space</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -259,12 +259,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('http://pic.huangruimin.tech/banner_21.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('http://pic.huangruimin.tech/Transformers3_43.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">RPi-OpenCV_10行代码为你的头像添加国旗</h1>
+                    <h1 class="description center-align post-title">知识蒸馏算法_原理&amp;综述</h1>
                 </div>
             </div>
         </div>
@@ -392,28 +392,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-06-15
+                    2021-10-29
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-08-26
+                    2023-08-28
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    783
+                    1.8k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
+                    6 分
                 </div>
                 
 
@@ -436,95 +436,183 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>在学完前面较为枯燥的概念后，接下来，是时候展现真正的技术了。由于OpenCV既是机器视觉库，也是图像处理库，给头像添加国旗，那自然是小菜一碟，如果用Python写的话，只要10行左右。</p>
-<h2 id="1-思路分析"><a href="#1-思路分析" class="headerlink" title="1 思路分析"></a>1 思路分析</h2><p>好比把大象装进冰箱要几步一样，为头像添加上国旗也是如此，先不讲通过什么语言实现，毕竟语言只是工具，OK，如果那，那为头像添加上国旗则需要以下几个步骤：</p>
+                <p><img src="https://pic.huangruimin.tech/20220812141627.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220812142248.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220812142403.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220812142459.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220812142649.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220812142841.png"></p>
 <ul>
-<li>Step1：读取头像和国旗图案。</li>
-<li>Step2：把国旗叠加到头像上。</li>
-<li>Step3：把叠加后的图片保存。</li>
+<li>权重剪枝：结构化剪枝，整层整层地剪，整通道整通道地剪</li>
+<li>通道剪枝：非结构化剪枝，一根树杈子，一根树杈子剪</li>
+<li>加速卷积运算：将卷积运算转换成张量运算，这里面有很多卡脖子的技术，这也是MATLAB软件非常牛的关键，底层有很多数值运算的功能，都是MATLAB的核心技术，这点是无法被Python这种开源的编程语言所取代的；也是无法被开源计算库所取代的，特别是发射一个火箭，谁也没法保证到小数点后几位，但是MATLAB却可以；这里面有很多卡脖子的技术。</li>
+<li>如果使用OpenVino的话，可以使用Intel神经网络计算棒</li>
+<li>FPGA和集成电路，也可以部署人工智能算法</li>
+<li>比如说MnasNet和MobileNetV3就是把NAS和轻量化网络进行了结合，就是让人工智能自己去设计一个轻量化的网络，而不用人去设计了</li>
+<li>预训练大模型的知识蒸馏</li>
 </ul>
-<p>把大象放进冰箱只要这么几步，但是具体把国旗叠加到头像上，需要考虑的一体细节:</p>
+<p><img src="https://pic.huangruimin.tech/20220812151750.png"></p>
 <ul>
-<li>国旗必须缩放到合适大小，才能放到头像上。</li>
-<li>国旗缩放后不能变形。<br>因此：<blockquote>
-<p>就把国旗的宽度缩放至头像宽度的1/4，然后高度也按照同样的比例进行缩放。</p>
-</blockquote>
+<li>论文来自于NIPS会议，是计算机视觉领域的顶级论文</li>
+</ul>
+<p><img src="https://pic.huangruimin.tech/20220812161505.png"></p>
+<ul>
+<li><p>所以在训练教师网络的时候，可以使用hard target去训练，但是，当训练出了教师网络后，教师网络对这张图片的预测结果，也就是这个soft targets能够传递更多的信息</p>
+</li>
+<li><p>那么也就可以使用这个soft target去训练学生网络</p>
 </li>
 </ul>
-<p>核心问题已经解决了，剩下来就是工具自身实现的问题，在OpenCV中，读写图像，缩放图像，图像合成，图像显示，是比较基本的操作，现在，就开始驾驭工具，把大象放入冰箱，先从Python开始讲起：</p>
-<h2 id="2-Python实现"><a href="#2-Python实现" class="headerlink" title="2 Python实现"></a>2 Python实现</h2><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># -*- coding: utf8 -*-</span>
-<span class="token keyword">import</span> cv2
-
-<span class="token comment"># Step1：读取头像和国旗图像。</span>
-img_head <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'head.jpg'</span><span class="token punctuation">)</span>
-img_flag <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'flag.jpg'</span><span class="token punctuation">)</span>
-
-<span class="token comment"># Step2：把国旗叠加到头像上。</span>
-<span class="token comment"># Step2.1：获取头像和国旗宽度</span>
-w_head<span class="token punctuation">,</span> h_head <span class="token operator">=</span> img_head<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">2</span><span class="token punctuation">]</span>
-w_flag<span class="token punctuation">,</span> h_flag <span class="token operator">=</span> img_flag<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">2</span><span class="token punctuation">]</span>
-<span class="token comment"># Step2.2：根据宽度计算缩放比例</span>
-scale <span class="token operator">=</span> w_head <span class="token operator">/</span> w_flag <span class="token operator">/</span> <span class="token number">4</span>
-<span class="token comment"># Step2.3：根据缩放比例缩放国旗</span>
-img_flag <span class="token operator">=</span> cv2<span class="token punctuation">.</span>resize<span class="token punctuation">(</span>img_flag<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> fx<span class="token operator">=</span>scale<span class="token punctuation">,</span> fy<span class="token operator">=</span>scale<span class="token punctuation">)</span>
-<span class="token comment"># Step2.4：获取缩放后国旗的新尺寸</span>
-w_flag<span class="token punctuation">,</span> h_flag <span class="token operator">=</span> img_flag<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">2</span><span class="token punctuation">]</span>
-<span class="token comment"># Step2.5：根据缩放后的尺寸叠加国旗到头像右下角</span>
-<span class="token keyword">for</span> c <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    img_head<span class="token punctuation">[</span>w_head <span class="token operator">-</span> w_flag<span class="token punctuation">:</span><span class="token punctuation">,</span> h_head <span class="token operator">-</span> h_flag<span class="token punctuation">:</span><span class="token punctuation">,</span> c<span class="token punctuation">]</span> <span class="token operator">=</span> img_flag<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> <span class="token punctuation">:</span><span class="token punctuation">,</span> c<span class="token punctuation">]</span>
-
-<span class="token comment"># Step3：保存叠加后的图像</span>
-cv2<span class="token punctuation">.</span>imwrite<span class="token punctuation">(</span><span class="token string">'new_head.jpg'</span><span class="token punctuation">,</span> img_head<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>程序执行效果如下图所示：<br><img src="http://pic.huangruimin.tech/20191028175608.png"></p>
-<p>注释有说明步骤相关的思路及其实现。</p>
-<h2 id="3-cpp实现"><a href="#3-cpp实现" class="headerlink" title="3 cpp实现"></a>3 cpp实现</h2><p>接下来，来看看cpp执行相关的代码</p>
-<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;iostream&gt;</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;opencv2/opencv.hpp&gt;</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;opencv2/highgui/highgui.hpp&gt;</span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;opencv2/imgproc/imgproc.hpp&gt;</span></span>
-
-<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
-<span class="token keyword">using</span> <span class="token keyword">namespace</span> cv<span class="token punctuation">;</span>
-
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-    <span class="token comment">//Step1：读取头像和国旗图像。</span>
-    Mat img_head <span class="token operator">=</span> <span class="token function">imread</span><span class="token punctuation">(</span><span class="token string">"head.jpg"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    Mat img_flag <span class="token operator">=</span> <span class="token function">imread</span><span class="token punctuation">(</span><span class="token string">"flag.jpg"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    Mat img_flag_resized<span class="token punctuation">;</span>
-
-    <span class="token comment">//Step2：把国旗叠加到头像上。</span>
-    <span class="token comment">//Step2.1：获取头像和国旗宽度</span>
-    <span class="token keyword">int</span> w_head <span class="token operator">=</span> img_head<span class="token punctuation">.</span>cols<span class="token punctuation">;</span>
-    <span class="token keyword">int</span> h_head <span class="token operator">=</span> img_head<span class="token punctuation">.</span>rows<span class="token punctuation">;</span>
-    <span class="token keyword">int</span> w_flag <span class="token operator">=</span> img_flag<span class="token punctuation">.</span>cols<span class="token punctuation">;</span>
-    <span class="token keyword">int</span> h_flag <span class="token operator">=</span> img_flag<span class="token punctuation">.</span>rows<span class="token punctuation">;</span>
-    <span class="token comment">//Step2.2：根据宽度计算缩放比例</span>
-    <span class="token keyword">double</span> scale <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">double</span><span class="token punctuation">)</span>w_head<span class="token operator">/</span>w_flag<span class="token operator">/</span><span class="token number">4</span><span class="token punctuation">;</span>
-    <span class="token comment">//Step2.3：根据缩放比例缩放国旗    </span>
-    <span class="token function">resize</span><span class="token punctuation">(</span>img_flag<span class="token punctuation">,</span>img_flag_resized<span class="token punctuation">,</span><span class="token function">Size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>scale<span class="token punctuation">,</span>scale<span class="token punctuation">,</span>INTER_NEAREST<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token comment">//Step2.4：获取缩放后国旗的新尺寸</span>
-    w_flag <span class="token operator">=</span> img_flag_resized<span class="token punctuation">.</span>cols<span class="token punctuation">;</span>
-    h_flag <span class="token operator">=</span> img_flag_resized<span class="token punctuation">.</span>rows<span class="token punctuation">;</span>
-    <span class="token comment">//Step2.5：根据缩放后的尺寸叠加国旗到头像右下角</span>
-    Mat imageROI<span class="token operator">=</span><span class="token function">img_head</span><span class="token punctuation">(</span><span class="token function">Rect</span><span class="token punctuation">(</span>w_head<span class="token operator">-</span>w_flag<span class="token punctuation">,</span>h_head<span class="token operator">-</span>h_flag<span class="token punctuation">,</span>w_flag<span class="token punctuation">,</span>h_flag<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    img_flag_resized<span class="token punctuation">.</span><span class="token function">copyTo</span><span class="token punctuation">(</span>imageROI<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-    <span class="token comment">//Step3：保存叠加后的图像</span>
-    <span class="token function">imwrite</span><span class="token punctuation">(</span><span class="token string">"new_head.jpg"</span><span class="token punctuation">,</span>img_head<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>其CmakeList.txt为：</p>
-<pre class="line-numbers language-cmake" data-language="cmake"><code class="language-cmake"><span class="token keyword">cmake_minimum_required</span><span class="token punctuation">(</span><span class="token property">VERSION</span> <span class="token number">3.0</span><span class="token punctuation">)</span>
-<span class="token keyword">project</span><span class="token punctuation">(</span>07_National_Flag<span class="token punctuation">)</span>
-<span class="token keyword">find_package</span><span class="token punctuation">(</span>OpenCV REQUIRED<span class="token punctuation">)</span>
-<span class="token keyword">add_executable</span><span class="token punctuation">(</span>07_National_Flag main.cpp<span class="token punctuation">)</span>
-<span class="token keyword">target_link_libraries</span><span class="token punctuation">(</span>07_National_Flag <span class="token punctuation">${</span>OpenCV_LIBS<span class="token punctuation">}</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>执行结果图下图所示：<br><img src="http://pic.huangruimin.tech/20191028194113.png"></p>
-<p>其执行效果同Python。</p>
+<p><img src="https://pic.huangruimin.tech/20220812161731.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220812162236.png"></p>
+<ul>
+<li><p>那么现在目标就明确了，用包含了很多信息的标签去训练学生网络，这样效率就会更高</p>
+</li>
+<li><p>现在还要进行一个操作，这个softtarget，还是不够soft，需要让它更加soft，也就是要知道这些非正确类别的概率，并把它解耦出来，给他暴露出来，所以这个时候就需要引入一个蒸馏温度T，这个温度T越高，这个soft label就越soft</p>
+</li>
+</ul>
+<p><img src="https://pic.huangruimin.tech/20220812163103.png"></p>
+<ul>
+<li><p>可以看出，当T越大，就越soft；当T=100的时候，这4类，就已经基本一样了，等于是基本没有贫富差距了</p>
+</li>
+<li><p>T越小的话，两极分化就越来越严重</p>
+</li>
+<li><p>softmax，本来就是将概率转换为0~1之间，并且使得其求和为1</p>
+</li>
+<li><p>更软的soft-target去训练学生网络，那些非正确类别的概率就暴露得更彻底，更容易让学生网络去学习</p>
+</li>
+<li><p>所以这里就可以举一个具体的例子：</p>
+</li>
+</ul>
+<p><img src="https://pic.huangruimin.tech/20220812164314.png"></p>
+<ul>
+<li>那学生网络与教师网络之间，是如何通过蒸馏来进行学习的呢？</li>
+</ul>
+<p><img src="https://pic.huangruimin.tech/20220812182035.png"></p>
+<ul>
+<li>知识蒸馏的图解如下图所示：</li>
+</ul>
+<p><img src="https://pic.huangruimin.tech/20220812183338.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220812183422.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220812183622.png"></p>
+<ul>
+<li>distillation是有一个师傅在手把手教你，告诉你，这是一个马，更像驴，而不像车，驴和车有多像，有多不像；而下面的这个hardloss就是在告诉你，这个课本有一张马的插图，插图告诉你，这就是马，不是别的东西；所以，这两项，有一个师傅带，还有一个课本看；就是和我们普通人学习的过程是很像的。</li>
+</ul>
+<p><img src="https://pic.huangruimin.tech/20220812220225.png"></p>
+<ul>
+<li><p>我们的目标就是，微调学生网络中的权重，使得最终的损失函数最小化；具体通过什么方法呢，就是通过梯度下降，反向传播的方法。</p>
+</li>
+<li><p>你可以把学生网络中的若干个权重当做水龙头，我们要微调每一个水龙头，使得最终的total loss最小。</p>
+</li>
+<li><p>它里面的所有权重，最终就可以使得，最终的损失函数最小化，或者说收敛到一个低值。</p>
+</li>
+</ul>
+<p><img src="https://pic.huangruimin.tech/20220812221209.png"></p>
+<ul>
+<li>前面这两个图是训练过程，后面这个图是预测过程，也叫做部署过程。</li>
+</ul>
+<p><img src="https://pic.huangruimin.tech/20220812221703.png"></p>
+<ul>
+<li>少样本，甚至0样本，的学习，可以通过知识蒸馏来实现</li>
+</ul>
+<p><img src="https://pic.huangruimin.tech/20220812223901.png"></p>
+<blockquote>
+<p>就好比，我们从来没有见过大熊猫，但是天天有一个人来给我们讲解大熊猫是什么样，给我们讲大熊猫跟老虎有什么区别；当我们再见到大熊猫的时候，其实也知道这是一只大熊猫了。</p>
+</blockquote>
+<blockquote>
+<p>右边，就是李宏毅老师的课程上面的图片</p>
+</blockquote>
+<ul>
+<li><p>这篇论文还在语音识别领域进行了应用，发现蒸馏之后，效果是非常好的，可以把单个模型集成10倍来训练一个教师网络，也可以用教师网络来训练一个更小的学生网络；可以看到，徒弟和老师，是非常类似的；而且，学生会更加轻量化。</p>
+</li>
+<li><p>用softtarget去训练，而不是用hardlabel去训练的话，还有一个好处，就是可以防止过拟合。</p>
+</li>
+<li><p>如果出现了过拟合，那么就要进行早停，dropout，正则化，那么一系列防止过拟合的操作，得密切监视测试集中准确率的变化。</p>
+</li>
+<li><p>如果在测试集中，loss出现先增后降的现象，那么就要进行早停的操作。</p>
+</li>
+<li><p>但是使用soft target去训练就没有这个问题，准确率一直都是在增加的，直到收敛，不会出现先增后降的情况</p>
+</li>
+</ul>
+<p><img src="https://pic.huangruimin.tech/20220812230339.png"></p>
+<ul>
+<li><p>迁移学习：把一个领域学习的东西，泛化到另一个领域，比如把猫狗域迁移到了医疗X光领域</p>
+</li>
+<li><p>知识蒸馏：把一个模型的知识，迁移到另一个模型上，通常是大模型迁移到小模型</p>
+</li>
+<li><p>迁移学习指的是领域之间的迁移，知识蒸馏指的是模型之间的蒸馏</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li>知识蒸馏背后的机理</li>
+</ul>
+<blockquote>
+<blockquote>
+<p>这也是研究的热点，也是适合水论文的一个点</p>
+</blockquote>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220813201455.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220813201526.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220813201607.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220813201749.png"></p>
+<blockquote>
+<p>教师网络就会引导这个黄圈进行收敛，最终收敛到橙圈里面去</p>
+</blockquote>
+<blockquote>
+<p>越靠近教师网路就越好，因为教师网络的性能更好</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220813205659.png"></p>
+<blockquote>
+<p>对bert进行知识蒸馏，也达到了很好的效果</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220813205746.png"></p>
+<blockquote>
+<p>为什么知识蒸馏是有效的？</p>
+</blockquote>
+<blockquote>
+<p>知识蒸馏，就是学生网络在浩如烟海的书籍里面去翻书，但是教师网络指导一下，就不会漫无目的的翻书了</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220813210257.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220813210446.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220813210459.png"></p>
+<blockquote>
+<p>Label Smooth是为了防止网络对某一个类别过度自信，也就是会导致网络对某一个类别的输出趋向于无穷大，为了防止这一现象的发生，通常就是给其它类别也赋予一个常数的概率</p>
+</blockquote>
+<h2 id="知识蒸馏现代的前沿研究方向"><a href="#知识蒸馏现代的前沿研究方向" class="headerlink" title="知识蒸馏现代的前沿研究方向"></a>知识蒸馏现代的前沿研究方向</h2><p><img src="https://pic.huangruimin.tech/20220813211030.png"></p>
+<blockquote>
+<p>每一个方向都是适合发很多论文的，适合自己来做毕业论文，或者适合自己做小论文的</p>
+</blockquote>
+<blockquote>
+<p>可以和人工智能的所有领域发生化学反应</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220813211238.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220813211943.png"></p>
+<blockquote>
+<p>这个图展示了有多个老师，也就是多模态的一种范式</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220813212403.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220813212420.png"></p>
+<blockquote>
+<p>上面是3种蒸馏方法</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220813212541.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220813212608.png"></p>
+<blockquote>
+<p>上面这个就是有一些中间层的蒸馏，也就是脑回路的传授</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220813212713.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220813212727.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220813212738.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220813212833.png"></p>
+<blockquote>
+<p>下面这个博客，描述的是知识蒸馏的综述和历史发展</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220813212853.png"></p>
+<h2 id="知识蒸馏的代码库"><a href="#知识蒸馏的代码库" class="headerlink" title="知识蒸馏的代码库"></a>知识蒸馏的代码库</h2><p><img src="https://pic.huangruimin.tech/20220813213120.png"><br><img src="https://pic.huangruimin.tech/20220813213108.png"><br><img src="https://pic.huangruimin.tech/20220813213519.png"><br><img src="https://pic.huangruimin.tech/20220813213554.png"><br><img src="https://pic.huangruimin.tech/20220813213608.png"></p>
+<h2 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h2><p><img src="https://pic.huangruimin.tech/20220813213622.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220813213648.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220813213707.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220813213732.png"></p>
 
                 
             </div>
@@ -551,7 +639,7 @@ cv2<span class="token punctuation">.</span>imwrite<span class="token punctuation
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://www.huangruimin.tech/2020/06/15/rpi-opencv-10-xing-dai-ma-wei-ni-de-tou-xiang-tian-jia-guo-qi/">http://www.huangruimin.tech/2020/06/15/rpi-opencv-10-xing-dai-ma-wei-ni-de-tou-xiang-tian-jia-guo-qi/</a>
+                    <a href="http://www.huangruimin.tech/2021/10/29/zhi-shi-zheng-liu-suan-fa-yuan-li-zong-shu/">http://www.huangruimin.tech/2021/10/29/zhi-shi-zheng-liu-suan-fa-yuan-li-zong-shu/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -760,12 +848,12 @@ cv2<span class="token punctuation">.</span>imwrite<span class="token punctuation
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/08/08/qian-ru-shi-xi-tong-zhong-han-zi-zi-ku-bian-ma-ji-he/">
+                <a href="/2022/09/15/rpi-opencv-opencv-zhong-highgui-ji-xiang-guan-shang-wei-ji-kai-fa/">
                     <div class="card-image">
                         
-                        <img src="http://pic.huangruimin.tech/banner_9.jpg" class="responsive-img" alt="嵌入式系统中汉字字库编码集合">
+                        <img src="http://pic.huangruimin.tech/banner_18.jpg" class="responsive-img" alt="RPi-OpenCV_OpenCV中HighGUI及相关上位机开发">
                         
-                        <span class="card-title">嵌入式系统中汉字字库编码集合</span>
+                        <span class="card-title">RPi-OpenCV_OpenCV中HighGUI及相关上位机开发</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -776,7 +864,7 @@ cv2<span class="token punctuation">.</span>imwrite<span class="token punctuation
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-08-08
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-09-15
                         </span>
                         <span class="publish-author">
                             
@@ -796,12 +884,13 @@ cv2<span class="token punctuation">.</span>imwrite<span class="token punctuation
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/10/28/rpi-opencv-roi-hui-tu-deng-chang-yong-api/">
+                <a href="/2021/10/28/hi3516dv300-22-gen-wen-jian-xi-tong-jie-xi-3/">
                     <div class="card-image">
                         
-                        <img src="http://pic.huangruimin.tech/banner_15.jpg" class="responsive-img" alt="RPi-OpenCV_ROI、绘图等常用API">
                         
-                        <span class="card-title">RPi-OpenCV_ROI、绘图等常用API</span>
+                        <img src="http://pic.huangruimin.tech/Transformers3_14.jpg" class="responsive-img" alt="HI3516DV300_22_根文件系统解析3">
+                        
+                        <span class="card-title">HI3516DV300_22_根文件系统解析3</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -812,7 +901,7 @@ cv2<span class="token punctuation">.</span>imwrite<span class="token punctuation
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-10-28
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-28
                             </span>
                         <span class="publish-author">
                             
