@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="HI3516DV300_14_Uboot的一般分析, AI, TensorRT, Infrared">
+    <meta name="keywords" content="HI3516DV300_15_Uboot详解, AI, TensorRT, Infrared">
     <meta name="description" content="Personal essay record">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>HI3516DV300_14_Uboot的一般分析 | Ruimin Huang&#39;s Space</title>
+    <title>HI3516DV300_15_Uboot详解 | Ruimin Huang&#39;s Space</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -259,12 +259,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('http://pic.huangruimin.tech/Transformers2_10.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('http://pic.huangruimin.tech/The_Wandering_Earth2_50.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">HI3516DV300_14_Uboot的一般分析</h1>
+                    <h1 class="description center-align post-title">HI3516DV300_15_Uboot详解</h1>
                 </div>
             </div>
         </div>
@@ -392,7 +392,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-10-20
+                    2021-10-21
                 </div>
                 
 
@@ -406,14 +406,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.4k
+                    1.9k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    4 分
+                    7 分
                 </div>
                 
 
@@ -436,163 +436,258 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="一、关于Uboot的说明"><a href="#一、关于Uboot的说明" class="headerlink" title="一、关于Uboot的说明"></a>一、关于Uboot的说明</h2><p><img src="https://pic.huangruimin.tech/20220205142127.png"></p>
-<blockquote>
-<p>这个Uboot使用的是2016.11的版本</p>
+                <h2 id="一、分段式uboot的生成过程解析"><a href="#一、分段式uboot的生成过程解析" class="headerlink" title="一、分段式uboot的生成过程解析"></a>一、分段式uboot的生成过程解析</h2><h3 id="1-0-与以往Uboot不同的"><a href="#1-0-与以往Uboot不同的" class="headerlink" title="1.0 与以往Uboot不同的"></a>1.0 与以往Uboot不同的</h3><blockquote>
+<p>两段式的Uboot：直接编译的Uboot不能用，还得经过一次编译生成Uboot-z才行，还要进行二次制作；也就是，先编译生成一个Gzip工具，再结合那个excel表格生成一个.reg文件，最终生成最终文件；现在很多平台，比如全志，也都会采用这种两段式的Uboot的方式。</p>
 </blockquote>
-<blockquote>
-<p>最大的更新为引入了make，menuconfig这一套</p>
-</blockquote>
-<blockquote>
-<p>BL0是芯片内部的BootROM (irom) 代码，BL1就是Uboot源码，BL2就是Kernel代码，根文件系统系统这些属于BL3。</p>
-</blockquote>
-<blockquote>
-<p>BL0会根据我们设置的启动方式，到相应的外部介质里面去读取BL1，然后来启动这个BL1。</p>
-</blockquote>
-<blockquote>
-<p>能够下载Uboot是因为有BL0固化在板子里面了。</p>
-</blockquote>
-<blockquote>
-<p>能够下载Kernel，Rootfs是因为有Uboot的FastBoot功能已经支持Hi Tool了，Uboot必须提供FastBoot功能。</p>
-</blockquote>
-<blockquote>
-<p>Uboot能够启动内核，并且给内核传参</p>
-</blockquote>
-<blockquote>
-<p>Uboot整个启动分为两大阶段：</p>
-</blockquote>
-<blockquote>
-<blockquote>
-<p>第一阶段：Start.s 里面，这个主要是跟芯片有关的，跟系统有关的，这个阶段的差异是最大的。</p>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<p>第二阶段：跳到C语言里面，StartARMBoot，这个函数主要是在board.c里面，板级初始化，是开发板这个级别的初始化，往后都是纯软件初始化。</p>
-</blockquote>
-</blockquote>
-<blockquote>
-<p>配置文件：配置文件都是相同的，指的是配置文件在哪些地方<br>代码结构：Uboot中文件夹的结构，也都是类似的<br>启动流程：启动流程，都是分为两大块：Start.s，Board.c<br>纯软件部分：跟硬件无关的软件功能</p>
-</blockquote>
-<blockquote>
-<p>现在来讲：</p>
-<blockquote>
-<p>如果在产品厂商：Uboot的工作量一般是不大的，因为芯片厂商给的Uboot基本就能用了；需要自己修改的部分并不是很多。<br>对芯片厂商底层开发者来说：需要一个开机动画的logo，需要一个分辨率很高的logo，那么就需要在Uboot里面作修改了。</p>
-</blockquote>
-</blockquote>
-<blockquote>
-<p>本课程详解uboot第一阶段，这一阶段，有比较多的内容是依赖海思这个平台的。</p>
-</blockquote>
-<h2 id="二、Uboot2016-11的一般分析"><a href="#二、Uboot2016-11的一般分析" class="headerlink" title="二、Uboot2016.11的一般分析"></a>二、Uboot2016.11的一般分析</h2><h3 id="2-1-删除Uboot中一些非必要的源码，然后就只留下ARM的源码"><a href="#2-1-删除Uboot中一些非必要的源码，然后就只留下ARM的源码" class="headerlink" title="2.1 删除Uboot中一些非必要的源码，然后就只留下ARM的源码"></a>2.1 删除Uboot中一些非必要的源码，然后就只留下ARM的源码</h3><h4 id="2-1-1-uboot-arch-路径"><a href="#2-1-1-uboot-arch-路径" class="headerlink" title="2.1.1 uboot/arch/路径"></a>2.1.1 uboot/arch/路径</h4><ul>
-<li>首先是arch路径下，只留下ARM的源码</li>
+<h3 id="1-1-顺着顶层Makefile的u-boot-z目标去找"><a href="#1-1-顺着顶层Makefile的u-boot-z目标去找" class="headerlink" title="1.1 顺着顶层Makefile的u-boot-z目标去找"></a>1.1 顺着顶层Makefile的u-boot-z目标去找</h3><ul>
+<li>首先在顶层的Makefile里面找到u-boot-z</li>
 </ul>
-<p><img src="https://pic.huangruimin.tech/20220205143520.png"></p>
+<blockquote>
+<p>依赖于uboot目录下的u-boot.bin文件</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205194039.png"></p>
+<blockquote>
+<p>由u-boot.bin叠加reg文件生成u-boot-z.bin</p>
+</blockquote>
 <ul>
-<li>接着是arch/arm/路径下，只留下mach-hi35xx的源码</li>
+<li>分析如何由u-boot.bin生成u-boot-z.bin</li>
 </ul>
-<p><img src="https://pic.huangruimin.tech/20220205143815.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220205203837.png"></p>
+<blockquote>
+<p>其实就是进入到下面这个目录去执行下面这个目录的Makefile，并且是执行默认目标</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205204001.png"></p>
 <ul>
-<li>然后是arch/cpu/路径下，只留下armv7，armv7m，一般的话，只留下armv7</li>
+<li>分析以上Makefile</li>
 </ul>
-<p><img src="https://pic.huangruimin.tech/20220205144510.png"></p>
+<blockquote>
+<p>找到要执行生成的目标文件.bin</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205204723.png"></p>
+<blockquote>
+<p>找到目标文件.bin的依赖：.tmp，.regfile</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>.regfile：看名字就知道是生成的.reg文件，下面就是判断Uboot顶层文件夹有没有reg文件，或reg文件有没有错误</p>
+</blockquote>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205205052.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220205205214.png"></p>
+<blockquote>
+<blockquote>
+<p>.tmp：依赖于tmp文件<br>tmp这个依赖文件又依赖于u-boot.elf<br>u-boot.elf有依赖于image_data.gzip<br>image_data.gzip又依赖于BINIMAGE，这个BINIMAGE就是上级传过来的u-boot.bin</p>
+</blockquote>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205205803.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220205211224.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220205211001.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220205213625.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220205213722.png"></p>
+<blockquote>
+<p>SRC, START, COBJS</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205214839.png"></p>
+<blockquote>
+<p>SRC，来自于SSRC</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205214909.png"></p>
+<blockquote>
+<p>SSRC</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205214955.png"></p>
+<blockquote>
+<blockquote>
+<p>一定是先解压到老版本的U-Boot到DDR里面去，再执行老版本的U-Boot，所以以下部分的源码是不能压缩的</p>
+</blockquote>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205220807.png"></p>
+<blockquote>
+<p>所以分析到这里就知道：elf的依赖里面：</p>
+<blockquote>
+<p>第一个依赖就是：压缩之后的老版本的Uboot<br>后面二个就是：没有压缩的那一部分</p>
+</blockquote>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205221016.png"></p>
+<blockquote>
+<p>后面2个：START，COBJS</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>这里面也都是一些与解压相关的，只是语法的问题，并不是重复了 </p>
+</blockquote>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205221431.png"></p>
+<blockquote>
+<p>.tmp：由上述uboot.elf生成了.tmp文件</p>
+</blockquote>
+<blockquote>
+<p>uboot.bin：由 .tmp文件 + regfile一起生成uboot.bin文件</p>
+</blockquote>
+<h3 id="1-2-中间的生成过程，其实是可以去分析的"><a href="#1-2-中间的生成过程，其实是可以去分析的" class="headerlink" title="1.2 中间的生成过程，其实是可以去分析的"></a>1.2 中间的生成过程，其实是可以去分析的</h3><h4 id="1-2-1-elf文件时怎么来的"><a href="#1-2-1-elf文件时怎么来的" class="headerlink" title="1.2.1 elf文件时怎么来的"></a>1.2.1 elf文件时怎么来的</h4><blockquote>
+<p>调用链接器的代码</p>
+<blockquote>
+<p>-Bstatic：表示静态链接<br>-T u-boot.lds：表示指定链接脚本<br>链接的规则就是： u-boot.lds<br>链接脚本的路径如下图所示：</p>
+</blockquote>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205223048.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220205223211.png"></p>
+<blockquote>
+<blockquote>
+<p>从链接脚本中可以看出：ENTRY(_ start)<br>链接的时候：start.o也是在最前面的，所以会把Start.S放在最前面</p>
+</blockquote>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205223300.png"></p>
+<blockquote>
+<blockquote>
+<p>-Ttext：指定我们的目标地址，这就是程序的链接地址，这个链接地址是：$(TEXTBASE)，即为：</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>TEXTBASE这个地址，就是我们整个系统的DDR的地址</p>
+</blockquote>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205230355.png"></p>
+<blockquote>
+<blockquote>
+<p>$(START)，$(COBJS)：就是一些依赖文件</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>$(BOOT).map：生成一个map文件，就是用于查符号表之类的</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>$(OBJDUMP),：生成了一个反汇编文件，如果符号表要查阅反汇编文件，查阅这里就行了</p>
+</blockquote>
+</blockquote>
+<h4 id="1-2-2-image-data-gzip是压缩包，既然是压缩包的话，那是怎样链接的"><a href="#1-2-2-image-data-gzip是压缩包，既然是压缩包的话，那是怎样链接的" class="headerlink" title="1.2.2 image_data.gzip是压缩包，既然是压缩包的话，那是怎样链接的"></a>1.2.2 image_data.gzip是压缩包，既然是压缩包的话，那是怎样链接的</h4><blockquote>
+<p>其实很简单，就是往压缩包里面塞文件</p>
+</blockquote>
+<blockquote>
+<p>具体看链接的规则： u-boot.lds</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205233234.png"></p>
+<blockquote>
+<p>这些都是来源于Source里面的那些东西，并且全部是.o</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205233427.png"></p>
+<blockquote>
+<blockquote>
+<p>整个没有被压缩的这段代码，长度必须小于0x6000，也就是必须小于24K Byte</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>也就是Uboot启动的第一阶段的代码，不能大于24K Byte</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>系统在启动的时候，会自动从eMMC读取一段固定大小的内容到内部sRAM中，然后跳转去执行它，这部分的内容就是U-Boot的第一阶段，也就是上面列出来的内容，这里面的函数，在第一阶段，会被加载进去；在海思里面，这段sRAM的大小就是24K Byte</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<p>就在下面这一部分，往压缩包里面添加东西的了</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>压缩完成之后，它的属性就设置为.image了，这个是看段属性的</p>
+</blockquote>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205234814.png"></p>
+<blockquote>
+<p>整个步骤完成了之后，就会生成.elf</p>
+</blockquote>
+<h4 id="1-2-3-tmp文件是如何生成的呢"><a href="#1-2-3-tmp文件是如何生成的呢" class="headerlink" title="1.2.3 .tmp文件是如何生成的呢"></a>1.2.3 .tmp文件是如何生成的呢</h4><p><img src="https://pic.huangruimin.tech/20220206104833.png"></p>
+<blockquote>
+<p>这个从.elf到.tmp的过程就和以前从.elf到bin的过程差不多</p>
+</blockquote>
+<blockquote>
+<p>这个从.elf到.tmp的的过程：执行的是OBJCOPY</p>
+</blockquote>
+<h4 id="1-2-4-由-tmp以及regfile文件生成bin文件"><a href="#1-2-4-由-tmp以及regfile文件生成bin文件" class="headerlink" title="1.2.4 由.tmp以及regfile文件生成bin文件"></a>1.2.4 由.tmp以及regfile文件生成bin文件</h4><p><img src="https://pic.huangruimin.tech/20220206105340.png"></p>
+<blockquote>
+<p>tmp就已经是二进制文件了，其实就已经是镜像了</p>
+</blockquote>
+<blockquote>
+<p>具体如何添加上regfile呢？</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>首先来分析前三行</p>
+<blockquote>
+<p>第一行：从tmp里面读取前64个字节到tmp1中<br>第二行：从regfile里面读取8192个字节(其实就是8K)到tmp2中（.reg文件本来是没有8K Byte的，但是在这里，被填充到8K Byte了）；这样做是因为：想把reg文件固定一个范围，不想把它设定为一个动态的大小。<br>第三行：从tmp文件拷贝到输出文件，输出文件跳过前8256字节，生成tmp3</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<p>所以：</p>
+<blockquote>
+<p>tmp1就是：tmp的前64个字节；就是一些符号位，相当于一些头部。<br>tmp2就是：.reg文件被吹大到8192字节(8K Byte)；就是寄存器配置的主体。<br>tmp3就是：tmp文件拷贝到输出文件，输出文件跳过前8256字节，生成tmp3；tmp3文件大小就是tmp文件的大小 + 8256字节；就是：未压缩的Uboot的第一阶段 + 原始Uboot的压缩版。</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<p>后面：</p>
+<blockquote>
+<p>把tmp1，tmp2，tmp3合并在一起，就申城额Uboot-z.bin文件<br>最后的bin文件，其实就是tmp1+tmp2+tmp3，分为3段，这个就是最终的uboot.bin了<br>可以发现，为什么要腾出8256字节，是因为：8192+64=8256，为了方便放置前面的2个文件<br>镜像大小：64+8192+temp3大小 = 8256+temp3大小</p>
+</blockquote>
+</blockquote>
+<h3 id="1-3-分析过程的关键记录"><a href="#1-3-分析过程的关键记录" class="headerlink" title="1.3 分析过程的关键记录"></a>1.3 分析过程的关键记录</h3><ul>
+<li>image_data.gzip：其实就是第一次编译出来的老版本u-boot.bin进过gzip压缩后的压缩文件</li>
+</ul>
+<blockquote>
+<p>分析：以前老版本的U-boot是编译完就直接丢进去运行了，这里呢，还进行了压缩，可以解释的一个原因就是U-boot太大了</p>
+</blockquote>
 <ul>
-<li>然后是arch/cpu/armv7路径下，只是留下Hi3516DV300这个</li>
+<li>分析：uboot.bin被压缩肯定带来2个问题：<blockquote>
+<blockquote>
+<p>1.uboot执行时肯定要解压缩再执行</p>
+</blockquote>
+</blockquote>
+</li>
 </ul>
-<p><img src="https://pic.huangruimin.tech/20220205144708.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220205144950.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220205145003.png"></p>
-<h4 id="2-1-2-uboot-board-路径"><a href="#2-1-2-uboot-board-路径" class="headerlink" title="2.1.2 uboot/board/路径"></a>2.1.2 uboot/board/路径</h4><ul>
-<li>首先是board路径下，只留hisilicon文件夹，其余全部删掉</li>
-</ul>
-<p><img src="https://pic.huangruimin.tech/20220205145230.png"></p>
+<blockquote>
+<blockquote>
+<p>2.最终烧录到emmc中去执行的uboot，肯定有一段是未经过压缩的；肯定有一段解压代码在外部，没有进行压缩。</p>
+</blockquote>
+</blockquote>
 <ul>
-<li>接着是board/hisilicon路径下，只留hi3516dv300文件夹，其余全部删掉</li>
-</ul>
-<h4 id="2-1-3-uboot-configs-路径"><a href="#2-1-3-uboot-configs-路径" class="headerlink" title="2.1.3 uboot/configs/路径"></a>2.1.3 uboot/configs/路径</h4><blockquote>
-<p>只留下Hi3516DV300相关的配置文件，其余都删掉</p>
-</blockquote>
+<li><p>最终版本的uboot是链接到0x80700000地址的</p>
 <blockquote>
-<p>其实也只是能用到emmc_defconfig这个文件，其余的文件也用不到</p>
-</blockquote>
-<p><img src="https://pic.huangruimin.tech/20220205145544.png"></p>
 <blockquote>
-<p>实际上，uBoot也没有使用到设备树功能</p>
+<p>所以将来最终版本的U-boot一定要被加载到这个地址去运行，否则就会出现运行地址和链接地址不正确，导致运行不了</p>
 </blockquote>
-<h4 id="2-1-4-uboot-include-路径"><a href="#2-1-4-uboot-include-路径" class="headerlink" title="2.1.4 uboot/include/路径"></a>2.1.4 uboot/include/路径</h4><ul>
-<li>首先是uboot/include/configs/路径，只保留与海思有关的文件</li>
+</blockquote>
+</li>
+<li><p>uboot.elf的内容：前面都是未经压缩的uboot第一阶段，后面是被压缩的原版uboot镜像</p>
+<blockquote>
+<p>前面：eMMC直接Load 24K的文件</p>
+</blockquote>
+</li>
 </ul>
-<p><img src="https://pic.huangruimin.tech/20220205150404.png"></p>
+<blockquote>
+<p>后面：后面是因为第二阶段才会被拉过来用</p>
+</blockquote>
 <ul>
-<li>然后是uboot/include//路径下还有一个也要删除，暂时的话，还没有删除</li>
+<li><p>所以：</p>
+<blockquote>
+<blockquote>
+<p>tmp1就是：tmp的前64个字节；就是一些符号位，相当于一些头部。<br>tmp2就是：.reg文件被吹大到8192字节(8K Byte)；就是寄存器配置的主体。<br>tmp3就是：tmp文件拷贝到输出文件，输出文件跳过前8256字节，生成tmp3；tmp3文件大小就是tmp文件的大小 + 上8256字节；就是：未压缩的Uboot的第一阶段 + 原始Uboot的压缩版。</p>
+</blockquote>
+</blockquote>
+</li>
+<li><p>后面：</p>
+<blockquote>
+<blockquote>
+<p>把tmp1，tmp2，tmp3合并在一起，就申城额Uboot-z.bin文件<br>最后的bin文件，其实就是tmp1+tmp2+tmp3，分为3段，这个就是最终的uboot.bin了<br>可以发现，为什么要腾出8256字节，是因为：8192+64=8256，为了方便放置前面的2个文件<br>镜像大小：64+8192+temp3大小 = 8256+temp3大小</p>
+</blockquote>
+</blockquote>
+</li>
 </ul>
-<h3 id="2-2-建立Uboot源码浏览工程"><a href="#2-2-建立Uboot源码浏览工程" class="headerlink" title="2.2 建立Uboot源码浏览工程"></a>2.2 建立Uboot源码浏览工程</h3><blockquote>
-<p>分析源码的这一份，要纯源码的，要没有编译过的</p>
-</blockquote>
-<blockquote>
-<p>并要注意解析</p>
-</blockquote>
-<blockquote>
-<p>用VSCode也是可以浏览的</p>
-</blockquote>
-<h3 id="2-3-uboot的配置体系，-config和xxxx-h共同作用"><a href="#2-3-uboot的配置体系，-config和xxxx-h共同作用" class="headerlink" title="2.3 uboot的配置体系，.config和xxxx.h共同作用"></a>2.3 uboot的配置体系，.config和xxxx.h共同作用</h3><blockquote>
-<p>以前只有采用.h来配置，现在可以使用.cofig+.h来共同进行配置</p>
-</blockquote>
-<p><img src="https://pic.huangruimin.tech/20220205151353.png"></p>
-<blockquote>
-<p>将来还需要将顶层目录的的configs下的defaultconfig复制为.config文件</p>
-</blockquote>
-<p><img src="https://pic.huangruimin.tech/20220205151442.png"></p>
-<blockquote>
-<p>后面在分析源码的时候，有很多东西都是来自于.config文件中，和kernel中的玩法是一样的</p>
-</blockquote>
-<h3 id="2-4-顶层目录的Makefile"><a href="#2-4-顶层目录的Makefile" class="headerlink" title="2.4 顶层目录的Makefile"></a>2.4 顶层目录的Makefile</h3><blockquote>
-<p>主体依然在此</p>
-</blockquote>
-<p><img src="https://pic.huangruimin.tech/20220205151741.png"></p>
-<h3 id="2-5-链接脚本lds文件"><a href="#2-5-链接脚本lds文件" class="headerlink" title="2.5 链接脚本lds文件"></a>2.5 链接脚本lds文件</h3><blockquote>
-<p>寻找整个uboot入口的关键，链接脚本里面规定了entry是谁等等</p>
-</blockquote>
-<blockquote>
-<p>第一句代码从哪里开始，很大程度上，就是取决于这里</p>
-</blockquote>
-<h3 id="2-6-新增的2个关键点"><a href="#2-6-新增的2个关键点" class="headerlink" title="2.6 新增的2个关键点"></a>2.6 新增的2个关键点</h3><blockquote>
-<p>和以前的Uboot的差异：</p>
-</blockquote>
-<blockquote>
-<blockquote>
-<p>两段式的Uboot：直接编译的Uboot不能用，还得经过一次Uboot-z才行，还要进行二次制作，也就是用那个excel表格生成一个.reg文件，现在很多平台，比如全志，也都会采用这种两段式的Uboot的方式。</p>
-</blockquote>
-</blockquote>
-<blockquote>
-<p>压缩版的uboot</p>
-</blockquote>
-<blockquote>
-<blockquote>
-<p>前几节中有一步就是编译一个hi_gzip的工具进行压缩，就是把原版的Uboot进行了压缩，然后再去做这种两段式的Uboot</p>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<p>这种技术以前也没有涉及，这个就是Linux Kernel中的ZImage技术</p>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<p>Linux Kernel是一个宝藏，基本很多技术都在抄袭Linux Kernel</p>
-</blockquote>
-</blockquote>
-<h2 id="三、本课程会用到的技术和资料"><a href="#三、本课程会用到的技术和资料" class="headerlink" title="三、本课程会用到的技术和资料"></a>三、本课程会用到的技术和资料</h2><blockquote>
-<p>关键是基本功，也就是核心课程1期中uboot移植课程里手把手培养的，这个在核心课程1期中占了很大的比例，因为Uboot能很大程度上提升基本功</p>
-</blockquote>
-<blockquote>
-<p>主体信息在源码中，比如makefile、config文件等等</p>
-</blockquote>
-<blockquote>
-<p>要配合芯片数据手册，海思官方doc中提供了一个简化版本的，详细版的没有，因为国内的芯片厂商习惯上把核心的源码直接给你，告诉你直接这样用就可以了，需要查阅的细节也不是很多，给个冗余的数据手册并不方便查阅</p>
-</blockquote>
-<blockquote>
-<p>本来需要irom application note的，这个会告诉你芯片里面的BL0是做了什么事情，三星是有这个文档，海思是没有， 因为他不希望你关注这些细节。他希望你拿来就用</p>
-</blockquote>
 
                 
             </div>
@@ -619,7 +714,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://www.huangruimin.tech/2021/10/20/hi3516dv300-14-uboot-de-yi-ban-fen-xi/">http://www.huangruimin.tech/2021/10/20/hi3516dv300-14-uboot-de-yi-ban-fen-xi/</a>
+                    <a href="http://www.huangruimin.tech/2021/10/21/hi3516dv300-15-uboot-xiang-jie/">http://www.huangruimin.tech/2021/10/21/hi3516dv300-15-uboot-xiang-jie/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -828,13 +923,12 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/10/21/hi3516dv300-15-uboot-xiang-jie/">
+                <a href="/2022/09/15/rpi-opencv-opencv-zhong-highgui-ji-xiang-guan-shang-wei-ji-kai-fa/">
                     <div class="card-image">
                         
+                        <img src="http://pic.huangruimin.tech/banner_18.jpg" class="responsive-img" alt="RPi-OpenCV_OpenCV中HighGUI及相关上位机开发">
                         
-                        <img src="http://pic.huangruimin.tech/The_Wandering_Earth2_50.jpg" class="responsive-img" alt="HI3516DV300_15_Uboot详解">
-                        
-                        <span class="card-title">HI3516DV300_15_Uboot详解</span>
+                        <span class="card-title">RPi-OpenCV_OpenCV中HighGUI及相关上位机开发</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -845,7 +939,7 @@
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-10-21
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-09-15
                         </span>
                         <span class="publish-author">
                             
@@ -865,13 +959,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/10/19/hi3516dv300-13-pei-tao-sdk-zhong-ti-gong-de-rootfs-fen-xi/">
+                <a href="/2021/10/20/hi3516dv300-14-uboot-de-yi-ban-fen-xi/">
                     <div class="card-image">
                         
                         
-                        <img src="http://pic.huangruimin.tech/Transformers1_17.jpg" class="responsive-img" alt="HI3516DV300_13_配套SDK中提供的Rootfs分析">
+                        <img src="http://pic.huangruimin.tech/Transformers2_10.jpg" class="responsive-img" alt="HI3516DV300_14_Uboot的一般分析">
                         
-                        <span class="card-title">HI3516DV300_13_配套SDK中提供的Rootfs分析</span>
+                        <span class="card-title">HI3516DV300_14_Uboot的一般分析</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -882,7 +976,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-19
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-20
                             </span>
                         <span class="publish-author">
                             
