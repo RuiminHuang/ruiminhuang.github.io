@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Hi3516DV300_8_Uboot的单独编译和验证, AI, TensorRT, Infrared">
+    <meta name="keywords" content="HI3516DV300_13_配套SDK中提供的Rootfs分析, AI, TensorRT, Infrared">
     <meta name="description" content="Personal essay record">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Hi3516DV300_8_Uboot的单独编译和验证 | Ruimin Huang&#39;s Space</title>
+    <title>HI3516DV300_13_配套SDK中提供的Rootfs分析 | Ruimin Huang&#39;s Space</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -259,12 +259,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('http://pic.huangruimin.tech/Transformers3_60.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('http://pic.huangruimin.tech/Transformers1_17.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hi3516DV300_8_Uboot的单独编译和验证</h1>
+                    <h1 class="description center-align post-title">HI3516DV300_13_配套SDK中提供的Rootfs分析</h1>
                 </div>
             </div>
         </div>
@@ -392,7 +392,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-10-14
+                    2021-10-19
                 </div>
                 
 
@@ -406,14 +406,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1k
+                    2.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    4 分
+                    7 分
                 </div>
                 
 
@@ -436,108 +436,409 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="1-Uboot的单独编译和验证"><a href="#1-Uboot的单独编译和验证" class="headerlink" title="1.Uboot的单独编译和验证"></a>1.Uboot的单独编译和验证</h2><ul>
-<li>参考文献1：SDK内osdrv中的readme</li>
-<li>参考文献2：ReleaseDoc中的《Hi3516CV500╱Hi3516DV300╱Hi3516AV300 U-boot 移植应用开发指南.pdf》</li>
-</ul>
-<h2 id="2-编译"><a href="#2-编译" class="headerlink" title="2.编译"></a>2.编译</h2><h3 id="2-1-首先进入到Uboot源码路径下："><a href="#2-1-首先进入到Uboot源码路径下：" class="headerlink" title="2.1 首先进入到Uboot源码路径下："></a>2.1 首先进入到Uboot源码路径下：</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">tar</span> <span class="token parameter variable">-xzvf</span> u-boot-2016.11.tgz
-<span class="token builtin class-name">cd</span> u-boot-2016.11/<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>其中这个Uboot是根据海思官方开发板移植过的，一般如果没有特殊的需求，Uboot就和官方的一样</p>
-<h3 id="2-2-然后生成config文件"><a href="#2-2-然后生成config文件" class="headerlink" title="2.2 然后生成config文件"></a>2.2 然后生成config文件</h3><p>其中生成.config文件就有以下4种方法：</p>
+                <h2 id="一配套SDK中提供的rootfs构建分析1-2"><a href="#一配套SDK中提供的rootfs构建分析1-2" class="headerlink" title="一配套SDK中提供的rootfs构建分析1_2"></a>一配套SDK中提供的rootfs构建分析1_2</h2><h3 id="1-1-默认镜像中根文件系统内容解析"><a href="#1-1-默认镜像中根文件系统内容解析" class="headerlink" title="1.1 默认镜像中根文件系统内容解析"></a>1.1 默认镜像中根文件系统内容解析</h3><h4 id="1-1-1-烧录了默认镜像进入系统后"><a href="#1-1-1-烧录了默认镜像进入系统后" class="headerlink" title="1.1.1 烧录了默认镜像进入系统后"></a>1.1.1 烧录了默认镜像进入系统后</h4><p><img src="https://pic.huangruimin.tech/20220205094548.png"></p>
+<h4 id="1-1-2-进入到bin目录中，宾目录中大部分是busybox的文件"><a href="#1-1-2-进入到bin目录中，宾目录中大部分是busybox的文件" class="headerlink" title="1.1.2 进入到bin目录中，宾目录中大部分是busybox的文件"></a>1.1.2 进入到bin目录中，宾目录中大部分是busybox的文件</h4><p><img src="https://pic.huangruimin.tech/20220205094642.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220205094655.png"></p>
+<blockquote>
+<p>上图中，绿色的，应该是其它某些地方来的，而不是默认的busybox中的东西</p>
+</blockquote>
+<h4 id="1-1-3-komod"><a href="#1-1-3-komod" class="headerlink" title="1.1.3 komod"></a>1.1.3 komod</h4><blockquote>
+<p>ko应该就是去insmod去安装的那个模块</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205095018.png"></p>
+<blockquote>
+<p>里面是空的</p>
+</blockquote>
+<h4 id="1-1-4-mnt"><a href="#1-1-4-mnt" class="headerlink" title="1.1.4 mnt"></a>1.1.4 mnt</h4><blockquote>
+<p>这个也是一个空目录，因为这只是一个挂载点</p>
+</blockquote>
+<h4 id="1-1-5-share"><a href="#1-1-5-share" class="headerlink" title="1.1.5 share"></a>1.1.5 share</h4><blockquote>
+<p>share目录也是一个空的</p>
+</blockquote>
+<h4 id="1-1-6-usr"><a href="#1-1-6-usr" class="headerlink" title="1.1.6 usr"></a>1.1.6 usr</h4><p><img src="https://pic.huangruimin.tech/20220205095309.png"></p>
 <ul>
-<li>这一条也是readme中的，对应EMMC的硬件版本：<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">make</span> <span class="token assign-left variable">ARCH</span><span class="token operator">=</span>arm <span class="token assign-left variable">CROSS_COMPILE</span><span class="token operator">=</span>arm-himix200-linux- hi3516dv300_emmc_defconfig<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-<li>这一条是readme中写的，也是默认编译的SPI_Flash的，对EMMC硬件来说是不能用的：<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">make</span> <span class="token assign-left variable">ARCH</span><span class="token operator">=</span>arm <span class="token assign-left variable">CROSS_COMPILE</span><span class="token operator">=</span>arm-himix200-linux- hi3516dv300_defconfig<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-<li>其中这一条是手册中写的，但用的是SPI_Flash版本的，对EMMC硬件来说是不能用的：<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">make</span> <span class="token assign-left variable">ARCH</span><span class="token operator">=</span>arm <span class="token assign-left variable">CROSS_COMPILE</span><span class="token operator">=</span>arm-himix200-linux- hi3516dv300_config<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-<li>注意：使用下面这条命令时：make ARCH=arm CROSS_COMPILE=arm-himix200-linux- -j 8还会重新提示你进行选择配置<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">cp</span> ./configs/hi3516dv300_emmc_defconfig ./.config<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><p>usr目录下不是空的，是有东西的，并且还有不少的东西</p>
+</li>
+<li><p>bin：肯定也是busybox生成的一些符号链接</p>
+</li>
 </ul>
-<h3 id="2-3-执行menuconfig配置，当然默认不用配置"><a href="#2-3-执行menuconfig配置，当然默认不用配置" class="headerlink" title="2.3 执行menuconfig配置，当然默认不用配置"></a>2.3 执行menuconfig配置，当然默认不用配置</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">make</span> <span class="token assign-left variable">ARCH</span><span class="token operator">=</span>arm <span class="token assign-left variable">CROSS_COMPILE</span><span class="token operator">=</span>arm-himix200-linux- menuconfig<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>连续按2下ESC即可直接推出配置的界面</p>
+<p><img src="https://pic.huangruimin.tech/20220205101503.png"></p>
 <blockquote>
-<p>注意这一步也是要先load那个.config文件</p>
+<p>除了btools和RpHicom不是默认就有的之外，其它都是</p>
+</blockquote>
+<ul>
+<li><p>lib：里面应该是一些库文件</p>
+</li>
+<li><p>ko：里面有好多东西</p>
+</li>
+</ul>
+<p><img src="https://pic.huangruimin.tech/20220205095556.png"></p>
+<blockquote>
+<p>这些其实就是芯片里面所用到的那些库，都是mpp相关的库<br>hi3516dv300_ive.ko：就是图像视频AI处理相关的<br>这些ko呢是本来就有的，这些是从SDK里面复制过来的<br>这些ko文件位于SDK的以下位置，实际上就是从这个位置原封不动地拷贝过来的：</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205100336.png"></p>
+<blockquote>
+<p>注意看有3个脚本，脚本里面就是去insmod这些模块，重启开机就可以观察出来</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205100622.png"></p>
+<blockquote>
+<p>这里面有些是属于触摸的驱动的，在这个平台，默认移植了两个电容触摸屏的驱动，如下图：</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205100834.png"></p>
+<blockquote>
+<p>这里也有一些是和网络有关的驱动</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205101417.png"></p>
+<ul>
+<li>libexec</li>
+</ul>
+<p><img src="https://pic.huangruimin.tech/20220205101738.png"></p>
+<blockquote>
+<p>这里存放的是运行时库，一个是ftp的server，一个是ssh的server，ssh的server是用来生成key的</p>
+</blockquote>
+<ul>
+<li>qt5.12</li>
+</ul>
+<blockquote>
+<p>这里已经默认移植了qt5.12，将来如果要基于Qt5.12来开发程序，那么根文件系统里面就已经提供了，这里的这些文件，也都比较大</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205102209.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220205102522.png"></p>
+<ul>
+<li>sbin</li>
+</ul>
+<p><img src="https://pic.huangruimin.tech/20220205102945.png"></p>
+<blockquote>
+<p>这里存放的也是和busybox有关的符号链接<br>bin和sbin的区别：sbin一般是给网络系统管理员使用的；bin一般是给用户使用的</p>
+</blockquote>
+<ul>
+<li>share</li>
+</ul>
+<blockquote>
+<p>share也一定是一个空目录</p>
+</blockquote>
+<ul>
+<li>include</li>
+</ul>
+<p><img src="https://pic.huangruimin.tech/20220205103131.png"></p>
+<blockquote>
+<p>里面是安装一些什么东西的头文件，比如OpenSSL与Zlib，这些东西呢，其实可有可无</p>
 </blockquote>
 <blockquote>
-<p>注意这一步也是在写.config文件的</p>
+<p>在开发板上面，只是用来做执行，而不用来做开发，做开发编译就要用到这些头文件</p>
+</blockquote>
+<ul>
+<li>lib</li>
+</ul>
+<p><img src="https://pic.huangruimin.tech/20220205103613.png"></p>
+<blockquote>
+<p>lib是拷贝的SDK中的动态链接库</p>
 </blockquote>
 <blockquote>
-<p>这一步在默认情况下不用去配置</p>
+<p>其中编译工具的动态链接库是在外面的</p>
 </blockquote>
-<h3 id="2-4-编译生成中间文件u-boot-bin"><a href="#2-4-编译生成中间文件u-boot-bin" class="headerlink" title="2.4 编译生成中间文件u-boot.bin"></a>2.4 编译生成中间文件u-boot.bin</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">make</span> <span class="token assign-left variable">ARCH</span><span class="token operator">=</span>arm <span class="token assign-left variable">CROSS_COMPILE</span><span class="token operator">=</span>arm-himix200-linux- <span class="token parameter variable">-j</span> <span class="token number">8</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<blockquote>
+<p>lib动态链接库是位于SDK中的以下路径</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205104109.png"></p>
+<blockquote>
+<p>ko是内核模块，这些和驱动是相互联系的，ko是将来要insmod到内核内部的</p>
+</blockquote>
+<blockquote>
+<p>so跟用户程序一样，是工作在用户态的</p>
+</blockquote>
+<ul>
+<li>local</li>
+</ul>
+<p><img src="https://pic.huangruimin.tech/20220205104411.png"></p>
+<blockquote>
+<p>local里面有bin和etc</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>bin：bin里面也是一些简单程序，如下图所示：<br>基本都是ssh，ftp，scp，openssl相关的程序，基本是移植的第三方的功能的</p>
+</blockquote>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205104522.png"></p>
+<blockquote>
+<blockquote>
+<p>etc：etc里面基本都是与ssh相关的public key</p>
+</blockquote>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205105102.png"></p>
+<ul>
+<li>sample</li>
+</ul>
+<blockquote>
+<p>sample里面放的就是我们的应用程序</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205105228.png"></p>
+<blockquote>
+<p>其实这个sample应用程序也是来自于SDK的以下路径</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205105317.png"></p>
+<blockquote>
+<p>svp就是图像的智能识别相关的东西<br>region就是图像的region相关的功能<br>hifb：就是直接把彩色图像直接输出出去的功能<br>如果基于海思芯片来开发一些应用程序，一般是先看懂sample，然后基于sample来开发新功能</p>
+</blockquote>
+<ul>
+<li>script</li>
+</ul>
+<p><img src="https://pic.huangruimin.tech/20220205110021.png"></p>
+<blockquote>
+<p>script里面存放的就是一些测试脚本</p>
+</blockquote>
+<ul>
+<li>tools</li>
+</ul>
+<p><img src="https://pic.huangruimin.tech/20220205110138.png"></p>
+<blockquote>
+<p>里面存放的是一些工具，这些工具，确实是海思SDK里面本来就有的</p>
+</blockquote>
+<blockquote>
+<p>这些工具位于海思SDK的以下位置：</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205110249.png"></p>
+<h4 id="1-1-7-boot"><a href="#1-1-7-boot" class="headerlink" title="1.1.7 boot"></a>1.1.7 boot</h4><blockquote>
+<p>boot里面是空的</p>
+</blockquote>
+<h4 id="1-1-8-lib"><a href="#1-1-8-lib" class="headerlink" title="1.1.8 lib"></a>1.1.8 lib</h4><blockquote>
+<p>lib就是复制的动态链接库里面的那个lib</p>
+</blockquote>
+<h4 id="1-1-9-nfsroot"><a href="#1-1-9-nfsroot" class="headerlink" title="1.1.9 nfsroot"></a>1.1.9 nfsroot</h4><blockquote>
+<p>一个空白的挂载点</p>
+</blockquote>
+<h4 id="1-1-10-sharefs"><a href="#1-1-10-sharefs" class="headerlink" title="1.1.10 sharefs"></a>1.1.10 sharefs</h4><blockquote>
+<p>这个也是空的</p>
+</blockquote>
+<h4 id="1-1-11-var"><a href="#1-1-11-var" class="headerlink" title="1.1.11 var"></a>1.1.11 var</h4><blockquote>
+<p>这是一个虚拟文件系统，在该文件夹里面有以下东西，在Ubuntu里面也是有的</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205110747.png"></p>
+<h4 id="1-1-12-dev"><a href="#1-1-12-dev" class="headerlink" title="1.1.12 dev"></a>1.1.12 dev</h4><blockquote>
+<p>虚拟的设备文件，里面有以下东西</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205110919.png"></p>
+<blockquote>
+<p>上面有些，是在安装那些ko文件的时候生成的</p>
+</blockquote>
+<blockquote>
+<p>本身就是驱动，经过安装后，就会有那些设备文件</p>
+</blockquote>
+<h4 id="1-1-13-linuxrc"><a href="#1-1-13-linuxrc" class="headerlink" title="1.1.13 linuxrc"></a>1.1.13 linuxrc</h4><blockquote>
+<p>linuxrc就是busybox的符号链接</p>
+</blockquote>
+<h4 id="1-1-14-opt"><a href="#1-1-14-opt" class="headerlink" title="1.1.14 opt"></a>1.1.14 opt</h4><blockquote>
+<p>opt也是一个挂载点，也是空的</p>
+</blockquote>
+<h4 id="1-1-15-sys"><a href="#1-1-15-sys" class="headerlink" title="1.1.15 sys"></a>1.1.15 sys</h4><blockquote>
+<p>是一个高版本的虚拟文件系统，是用来做调试用的</p>
+</blockquote>
+<h4 id="1-1-16-etc"><a href="#1-1-16-etc" class="headerlink" title="1.1.16 etc"></a>1.1.16 etc</h4><blockquote>
+<p>里面有很多动态运行时的脚本</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205111246.png"></p>
+<blockquote>
+<p>除了本身文件系统就有的东西，还多了</p>
+<blockquote>
+<p>ssl：也就是openssl里面的一些配置文件<br>ppp：应该是支持了ppp拨号，属于4G的功能<br>wireless：无线网卡<br>dhcpcd.conf：移植了dhcp功能<br>包括network在内，都是和网络通信相关的</p>
+</blockquote>
+</blockquote>
+<h4 id="1-1-17-proc"><a href="#1-1-17-proc" class="headerlink" title="1.1.17 proc"></a>1.1.17 proc</h4><blockquote>
+<p>标准的linux调试文件</p>
+</blockquote>
+<h4 id="1-1-18-tmp"><a href="#1-1-18-tmp" class="headerlink" title="1.1.18 tmp"></a>1.1.18 tmp</h4><blockquote>
+<p>也是一个标准的虚拟文件系统</p>
+</blockquote>
+<h4 id="1-1-19-home"><a href="#1-1-19-home" class="headerlink" title="1.1.19 home"></a>1.1.19 home</h4><blockquote>
+<p>这是用来放用户相关的</p>
+</blockquote>
+<h4 id="1-1-20-mkimg-rootfs，mknod-consol"><a href="#1-1-20-mkimg-rootfs，mknod-consol" class="headerlink" title="1.1.20 mkimg.rootfs，mknod_consol"></a>1.1.20 mkimg.rootfs，mknod_consol</h4><blockquote>
+<p>创建根文件夹形式的根文件系统</p>
+</blockquote>
+<blockquote>
+<p>mknod：这个是用来mknod用的</p>
+</blockquote>
+<h4 id="1-1-21-root"><a href="#1-1-21-root" class="headerlink" title="1.1.21 root"></a>1.1.21 root</h4><blockquote>
+<p>这个是root用户的宿主目录</p>
+</blockquote>
+<h4 id="1-1-22-usr"><a href="#1-1-22-usr" class="headerlink" title="1.1.22 usr"></a>1.1.22 usr</h4><blockquote>
+<p>这里面也是没有实现的，这里面只有一个回收用的文件夹</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205112326.png"></p>
+<h4 id="1-1-23-init"><a href="#1-1-23-init" class="headerlink" title="1.1.23 init"></a>1.1.23 init</h4><blockquote>
+<p>这个也属于符号链接，也是指向busybox的</p>
+</blockquote>
+<h4 id="1-1-24-sbin"><a href="#1-1-24-sbin" class="headerlink" title="1.1.24 sbin"></a>1.1.24 sbin</h4><blockquote>
+<p>这个是属于系统管理员用到的一些</p>
+</blockquote>
+<blockquote>
+<p>大部分都还是系统管理员用到的符号链接</p>
+</blockquote>
+<blockquote>
+<p>少部分是用来连接网卡用到的，用户自己生成的bin</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205112629.png"></p>
+<h4 id="1-1-25-userdata"><a href="#1-1-25-userdata" class="headerlink" title="1.1.25 userdata"></a>1.1.25 userdata</h4><blockquote>
+<p>这个user.conf肯定是在系统启动的时候，去加载了</p>
+</blockquote>
+<blockquote>
+<p>这个就是运行时配置体系，把这个文件丢到etc下也是可以的</p>
+</blockquote>
+<blockquote>
+<p>这个强调的是用户的配置，而/etc强调的是系统的配置</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205112845.png"></p>
+<h3 id="1-2配套SDK解压开后rootfs构建上文件解析"><a href="#1-2配套SDK解压开后rootfs构建上文件解析" class="headerlink" title="1.2配套SDK解压开后rootfs构建上文件解析"></a>1.2配套SDK解压开后rootfs构建上文件解析</h3><h4 id="1-2-1-make-sh文件分析"><a href="#1-2-1-make-sh文件分析" class="headerlink" title="1.2.1 make.sh文件分析"></a>1.2.1 make.sh文件分析</h4><ul>
+<li>首先查看make.sh文件</li>
+</ul>
+<p><img src="https://pic.huangruimin.tech/20220205113315.png"></p>
+<blockquote>
+<p>打开make.sh</p>
+<blockquote>
+<p>里面制作根文件系统最重要的就是用到了这个：</p>
+</blockquote>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205113430.png"></p>
+<blockquote>
+<p>前面这些东西就不说了，和有的没的没啥区别，主要看下面这一段</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205113632.png"></p>
+<blockquote>
+<p>最核心的，也就是多了以下命令文件：</p>
+<blockquote>
+<p>关键是执行了：source cp2rootfs.sh</p>
+</blockquote>
+</blockquote>
+<ul>
+<li>文件夹查看</li>
+</ul>
+<blockquote>
+<p>这个文件在哪里呢？</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205114140.png"></p>
+<blockquote>
+<p>生成rootfs的文件夹已经有一些东西了，ko文件夹下面也有些东西了，所以这个是整个做完了再打了一个包的</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205114459.png"></p>
+<blockquote>
+<p>其实默认的SDK也只有以下3个文件夹，其它的都是移植过来的</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205115127.png"></p>
+<blockquote>
+<p>在Package文件夹下面有以下文件，这个也是事先经过交叉编译了</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205115306.png"></p>
+<ul>
+<li>接下来重点分析cp2rootfs.sh文件</li>
+</ul>
+<blockquote>
+<p>新建文件夹</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205115715.png"></p>
+<blockquote>
+<p>拷贝编译好的OpenSSH</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205115833.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220205120115.png"></p>
+<blockquote>
+<p>拷贝rootfs-custom</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205120811.png"></p>
+<blockquote>
+<p>拷贝dhcpcd</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205121044.png"></p>
+<blockquote>
+<p>拷贝Qt</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205121106.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220205121300.png"></p>
+<blockquote>
+<p>拷贝ko文件</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205121830.png"></p>
+<blockquote>
+<p>拷贝lib文件</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205121850.png"></p>
+<blockquote>
+<p>拷贝reg_tool文件</p>
+<blockquote>
+<p>这个是用来读取寄存器的一个工具，这下面的工具都是可以直接用的，直接和内核进行交互的<br>himm：Hision Memory Modify<br>ARM里面的寄存器，其实就是一个内存地址<br>应用层想读写某个寄存器，直接使用这个工具就够了<br>这都是海思提供的，能够直接进行硬件操作的工具</p>
+</blockquote>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205122144.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220205122429.png"></p>
+<blockquote>
+<p>拷贝RpHicom文件</p>
+<blockquote>
+<p>这个是用串口来控制RS485用的<br>单独的一个RS485通信的一个程序</p>
+</blockquote>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205122217.png"></p>
+<blockquote>
+<p>拷贝dump工具文件</p>
+<blockquote>
+<p>Dump其实就是反汇编，这里其实是为了获取某个图像使用的</p>
+</blockquote>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205122953.png"></p>
+<blockquote>
+<p>拷贝Sample</p>
+<blockquote>
+<p>这个是拷贝mpp里面的sample，并且是先创建文件夹，然后再进行Copy</p>
+</blockquote>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205123117.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220205123233.png"></p>
+<blockquote>
+<p>拷贝测试脚本</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205123306.png"></p>
+<blockquote>
+<p>创建userdata与user文件夹</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220205123356.png"></p>
+<ul>
+<li>接下来，创建了一个/dev/shm文件夹</li>
+</ul>
+<p><img src="https://pic.huangruimin.tech/20220205123604.png"></p>
+<ul>
+<li>然后，再额外拷贝一些文件</li>
+</ul>
+<p><img src="https://pic.huangruimin.tech/20220205123638.png"></p>
+<ul>
+<li>最后，制作根文件系统</li>
+</ul>
+<p><img src="https://pic.huangruimin.tech/20220205123721.png"></p>
+<h4 id="1-2-2-如何自己来单独构建这个根文件系统呢？"><a href="#1-2-2-如何自己来单独构建这个根文件系统呢？" class="headerlink" title="1.2.2 如何自己来单独构建这个根文件系统呢？"></a>1.2.2 如何自己来单独构建这个根文件系统呢？</h4><ul>
+<li>要传哪个参数</li>
+</ul>
+<p><img src="https://pic.huangruimin.tech/20220205124000.png"></p>
+<ul>
+<li>具体怎么执行呢？</li>
+</ul>
+<p><img src="https://pic.huangruimin.tech/20220205124205.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220205124233.png"></p>
+<ul>
+<li>最后生成的根文件系统在什么地方呢？</li>
+</ul>
+<p><img src="https://pic.huangruimin.tech/20220205124407.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220205124426.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220205124631.png"></p>
+<ul>
+<li>后续如何修改呢？</li>
+</ul>
+<blockquote>
+<p>就是修改make.sh脚本文件</p>
+</blockquote>
+<blockquote>
+<p>海思的这种玩法确实有它的套路</p>
+</blockquote>
+<ul>
+<li>后续：驱动，mpp，svp，ive</li>
+</ul>
 
-<p>但这里生成的只是中间件，很多厂商都选择把一些跟硬件相关的把它独立出来，这个原理跟设备树有点类似，也就是和硬件相关的配置还在下面的步骤中</p>
-<h3 id="2-5-编译生成gzip文件"><a href="#2-5-编译生成gzip文件" class="headerlink" title="2.5 编译生成gzip文件"></a>2.5 编译生成gzip文件</h3><p>首先进入到路径：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/tools/pc/hi_gzip
-<span class="token function">make</span>
-<span class="token builtin class-name">cd</span> bin
-<span class="token function">cp</span> ./gzip /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/opensource/uboot/u-boot-2016.11/arch/arm/cpu/armv7/hi3516dv300/hw_compressed <span class="token parameter variable">-f</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="2-6-配置表格文件"><a href="#2-6-配置表格文件" class="headerlink" title="2.6 配置表格文件"></a>2.6 配置表格文件</h3><ul>
-<li>表格路径</li>
-</ul>
-<p><img src="https://pic.huangruimin.tech/20220217214541.png"></p>
-<ul>
-<li>设计思想：把Uboot配套的整个硬件的很多的这个值写到了Excel中</li>
-</ul>
-<blockquote>
-<p>第一项，配置Uboot里面的PLL</p>
-</blockquote>
-<ul>
-<li>配置好表格文件后，点击Generate reg bin file，生成reg_info.bin文件</li>
-</ul>
-<h3 id="2-7-拷贝相关文件"><a href="#2-7-拷贝相关文件" class="headerlink" title="2.7 拷贝相关文件"></a>2.7 拷贝相关文件</h3><ul>
-<li>拷贝reg_info.bin到U-bot源码目录，重命名为.reg</li>
-</ul>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/opensource/uboot/u-boot-2016.11<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<blockquote>
-<p>这里通过SSH工具拷贝reg_info.bin文件</p>
-</blockquote>
-<blockquote>
-<p>然后进行重命名</p>
-</blockquote>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">mv</span> ./reg_info.bin ./.reg<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<ul>
-<li>将生成的u-boot.bin复制到osdrv/tools/pc/uboot_tools/目录<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/opensource/uboot/u-boot-2016.11
-<span class="token function">cp</span> ./u-boot.bin <span class="token punctuation">..</span>/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/tools/pc/uboot_tools/ <span class="token parameter variable">-f</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
-</ul>
-<h3 id="2-8-编译生成u-boot-hi3516dv300-bin"><a href="#2-8-编译生成u-boot-hi3516dv300-bin" class="headerlink" title="2.8 编译生成u-boot-hi3516dv300.bin"></a>2.8 编译生成u-boot-hi3516dv300.bin</h3><ul>
-<li><p>注意make的时候用的是u-boot-z.bin，但实际生成的是u-boot-hi3516dv300.bin</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/opensource/uboot/u-boot-2016.11
-<span class="token function">make</span> <span class="token assign-left variable">ARCH</span><span class="token operator">=</span>arm <span class="token assign-left variable">CROSS_COMPILE</span><span class="token operator">=</span>arm-himix200-linux- u-boot-z.bin<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-</li>
-<li><p>在当前Uboot源码路径下生成的u-boot-hi3516dv300.bin就是能够在单板上运行的uboot镜像</p>
-</li>
-</ul>
-<h2 id="3-烧录并设置环境变量"><a href="#3-烧录并设置环境变量" class="headerlink" title="3 烧录并设置环境变量"></a>3 烧录并设置环境变量</h2><h3 id="3-1-烧写"><a href="#3-1-烧写" class="headerlink" title="3.1 烧写"></a>3.1 烧写</h3><ul>
-<li><p>参考以前烧写实战</p>
-</li>
-<li><p>以前三星的，他的整个环境变量是放在跟Uboot独立的一个空间里面，当我们重新去烧写Uboot的时候，并不会覆盖之前的bootcmd和bootargs，所以以前对的是可以保存的</p>
-</li>
-<li><p>但海思的不是这么设计，它的环境变量整个是和Uboot在一起的，所以重新烧写Uboot时，我们这份Uboot里面的环境变量，会覆盖之前的，但是默认的环境变量又不对。所以要重新配置才行。</p>
-</li>
-<li><p>烧录之后是不能启动的，原因在于要设置bootcmd和bootargs</p>
-</li>
-<li><p>其中烧写的相关配置如下图所示：<br><img src="https://pic.huangruimin.tech/20211205202224.png"></p>
-</li>
-</ul>
-<h3 id="3-2-设置换将变量"><a href="#3-2-设置换将变量" class="headerlink" title="3.2 设置换将变量"></a>3.2 设置换将变量</h3><ul>
-<li><p>设置环境变量时，发现只认识setenv，并不认识set这个环境变量</p>
-</li>
-<li><p>也并不是每次都要重新设置环境变量</p>
-</li>
-<li><p>具体的环境变量如下：</p>
-<blockquote>
-<p>bootcmd ：Uboot 首先执行这句</p>
-</blockquote>
-</li>
-</ul>
-<blockquote>
-<p>bootargs：Uboot 给Kernel传参</p>
-</blockquote>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">printenv</span>
-setenv bootcmd <span class="token string">"mmc read 0 0x81000000 0x2800 0x5000; bootm 0x81000000"</span>
-setenv bootargs <span class="token string">"mem=512M console=ttyAMA0,115200 root=/dev/mmcblk0p3 rootfstype=ext4 rw rootwait blkdevparts=mmcblk0:5M(boot),10M(kernel),500M(rootfs),200M(userdata),-(user)"</span>
-saveenv
-<span class="token function">printenv</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>
@@ -563,7 +864,7 @@ saveenv
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://www.huangruimin.tech/2021/10/14/hi3516dv300-8-uboot-de-dan-du-bian-yi-he-yan-zheng/">http://www.huangruimin.tech/2021/10/14/hi3516dv300-8-uboot-de-dan-du-bian-yi-he-yan-zheng/</a>
+                    <a href="http://www.huangruimin.tech/2021/10/19/hi3516dv300-13-pei-tao-sdk-zhong-ti-gong-de-rootfs-fen-xi/">http://www.huangruimin.tech/2021/10/19/hi3516dv300-13-pei-tao-sdk-zhong-ti-gong-de-rootfs-fen-xi/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -772,13 +1073,13 @@ saveenv
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/10/15/hi3516dv300-9-kernel-de-dan-du-bian-yi-he-yan-zheng/">
+                <a href="/2021/10/20/hi3516dv300-14-uboot-de-yi-ban-fen-xi/">
                     <div class="card-image">
                         
                         
-                        <img src="http://pic.huangruimin.tech/Transformers2_53.jpg" class="responsive-img" alt="Hi3516DV300_9_Kernel的单独编译和验证">
+                        <img src="http://pic.huangruimin.tech/Transformers2_10.jpg" class="responsive-img" alt="HI3516DV300_14_Uboot的一般分析">
                         
-                        <span class="card-title">Hi3516DV300_9_Kernel的单独编译和验证</span>
+                        <span class="card-title">HI3516DV300_14_Uboot的一般分析</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -789,7 +1090,7 @@ saveenv
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-10-15
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-10-20
                         </span>
                         <span class="publish-author">
                             
@@ -809,13 +1110,13 @@ saveenv
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/10/13/hi3516dv300-7-kai-fa-ban-pei-tao-sdk-jie-du/">
+                <a href="/2021/10/18/hi3516dv300-12-zi-zhi-rootfs-shi-zhan-ji-lu/">
                     <div class="card-image">
                         
                         
-                        <img src="http://pic.huangruimin.tech/Transformers3_25.jpg" class="responsive-img" alt="Hi3516DV300_7_开发板配套SDK解读">
+                        <img src="http://pic.huangruimin.tech/The_Wandering_Earth2_51.jpg" class="responsive-img" alt="HI3516DV300_12_自制Rootfs实战记录">
                         
-                        <span class="card-title">Hi3516DV300_7_开发板配套SDK解读</span>
+                        <span class="card-title">HI3516DV300_12_自制Rootfs实战记录</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -826,7 +1127,7 @@ saveenv
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-13
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-18
                             </span>
                         <span class="publish-author">
                             
