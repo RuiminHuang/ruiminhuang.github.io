@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Linux采用4G模块上网_PPP拨号, AI, TensorRT, Infrared">
+    <meta name="keywords" content="Hi3516DV300_8_Uboot的单独编译和验证, AI, TensorRT, Infrared">
     <meta name="description" content="Personal essay record">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Linux采用4G模块上网_PPP拨号 | Ruimin Huang&#39;s Space</title>
+    <title>Hi3516DV300_8_Uboot的单独编译和验证 | Ruimin Huang&#39;s Space</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -259,12 +259,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('http://pic.huangruimin.tech/Transformers1_10.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('http://pic.huangruimin.tech/Transformers3_60.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Linux采用4G模块上网_PPP拨号</h1>
+                    <h1 class="description center-align post-title">Hi3516DV300_8_Uboot的单独编译和验证</h1>
                 </div>
             </div>
         </div>
@@ -392,28 +392,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-11-05
+                    2021-10-14
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-08-27
+                    2023-08-28
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    948
+                    1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
+                    4 分
                 </div>
                 
 
@@ -436,111 +436,108 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="1-说明"><a href="#1-说明" class="headerlink" title="1.说明"></a>1.说明</h2><p>本章将继续讲解Jetson Nano采用SIM7600 4G模块进行无线上网，紧接上一章NDIS拨号上网，本章将讲解PPP拨号上网，本教程同样适用于树莓派。</p>
-<h2 id="2-准备工作"><a href="#2-准备工作" class="headerlink" title="2. 准备工作"></a>2. 准备工作</h2><p>接下来，将介绍Jetson Nano或Raspberry Pi采用NDIS驱动通过SIM7600 4G模块上网的过程。</p>
-<h3 id="3-1-硬件准备"><a href="#3-1-硬件准备" class="headerlink" title="3.1 硬件准备"></a>3.1 硬件准备</h3><ul>
-<li><a target="_blank" rel="noopener" href="http://www.waveshare.net/shop/SIM7600CE-4G-HAT.htm">SIM7600CE 4G HAT</a>及其配件</li>
-<li><a target="_blank" rel="noopener" href="http://www.waveshare.net/shop/Jetson-Nano-Developer-Kit.htm">Jetson Nano</a>及其配件，或Raspberry Pi 及其配件</li>
-<li>可上网的4G SIM卡</li>
+                <h2 id="1-Uboot的单独编译和验证"><a href="#1-Uboot的单独编译和验证" class="headerlink" title="1.Uboot的单独编译和验证"></a>1.Uboot的单独编译和验证</h2><ul>
+<li>参考文献1：SDK内osdrv中的readme</li>
+<li>参考文献2：ReleaseDoc中的《Hi3516CV500╱Hi3516DV300╱Hi3516AV300 U-boot 移植应用开发指南.pdf》</li>
 </ul>
-<h3 id="3-2-硬件连接"><a href="#3-2-硬件连接" class="headerlink" title="3.2 硬件连接"></a>3.2 硬件连接</h3><p>硬件连接如下图所示：<br><img src="http://pic.huangruimin.tech/20191115140317.png"></p>
-<p>注意：</p>
+<h2 id="2-编译"><a href="#2-编译" class="headerlink" title="2.编译"></a>2.编译</h2><h3 id="2-1-首先进入到Uboot源码路径下："><a href="#2-1-首先进入到Uboot源码路径下：" class="headerlink" title="2.1 首先进入到Uboot源码路径下："></a>2.1 首先进入到Uboot源码路径下：</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">tar</span> <span class="token parameter variable">-xzvf</span> u-boot-2016.11.tgz
+<span class="token builtin class-name">cd</span> u-boot-2016.11/<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>其中这个Uboot是根据海思官方开发板移植过的，一般如果没有特殊的需求，Uboot就和官方的一样</p>
+<h3 id="2-2-然后生成config文件"><a href="#2-2-然后生成config文件" class="headerlink" title="2.2 然后生成config文件"></a>2.2 然后生成config文件</h3><p>其中生成.config文件就有以下4种方法：</p>
 <ul>
-<li>若接到40Pin引脚上使用，则注意将SIM7600的Flight Mode，PWR引脚拉低，即需要设计初始化脚本，详情见相关产品页面，否则将进入飞行模式。</li>
-<li>若树莓派通过USB线单独给SIM7600供电，则可能出现供电不稳定，导致SIM7600开机后关机的现象。</li>
-<li>若仅仅使用拨号上网功能，则可以不接到Jetson Nano或Raspberry Pi的40Pin上。</li>
+<li>这一条也是readme中的，对应EMMC的硬件版本：<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">make</span> <span class="token assign-left variable">ARCH</span><span class="token operator">=</span>arm <span class="token assign-left variable">CROSS_COMPILE</span><span class="token operator">=</span>arm-himix200-linux- hi3516dv300_emmc_defconfig<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>这一条是readme中写的，也是默认编译的SPI_Flash的，对EMMC硬件来说是不能用的：<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">make</span> <span class="token assign-left variable">ARCH</span><span class="token operator">=</span>arm <span class="token assign-left variable">CROSS_COMPILE</span><span class="token operator">=</span>arm-himix200-linux- hi3516dv300_defconfig<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>其中这一条是手册中写的，但用的是SPI_Flash版本的，对EMMC硬件来说是不能用的：<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">make</span> <span class="token assign-left variable">ARCH</span><span class="token operator">=</span>arm <span class="token assign-left variable">CROSS_COMPILE</span><span class="token operator">=</span>arm-himix200-linux- hi3516dv300_config<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>注意：使用下面这条命令时：make ARCH=arm CROSS_COMPILE=arm-himix200-linux- -j 8还会重新提示你进行选择配置<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">cp</span> ./configs/hi3516dv300_emmc_defconfig ./.config<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
 </ul>
-<h2 id="4-正式开始"><a href="#4-正式开始" class="headerlink" title="4. 正式开始"></a>4. 正式开始</h2><h3 id="4-1-检查硬件连接，网络连接-该步骤必须检查并确认"><a href="#4-1-检查硬件连接，网络连接-该步骤必须检查并确认" class="headerlink" title="4.1 检查硬件连接，网络连接(该步骤必须检查并确认)"></a>4.1 检查硬件连接，网络连接(该步骤必须检查并确认)</h3><ul>
-<li><p>长按SIM7600CE 4G HAT上的PWKKEY键，使得SIM7600CE 4G HAT开机，正常开机后，NET灯应当闪烁(若未闪烁，请检查SIM卡是否可用，或是否进入了飞行模式)。</p>
-</li>
-<li><p>检查Jetson Nano的Ubuntu系统或树莓派的Raspbian系统是否内置了高通USB串口驱动，非新版本镜像系统可能未内置该驱动，查看方式如下图所示：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 查看Ubuntu版本</span>
-<span class="token function">uname</span> <span class="token parameter variable">-a</span>
-lsb_release <span class="token parameter variable">-a</span>
-<span class="token function">cat</span> /proc/version
-<span class="token comment"># 查看是否有高通USB虚拟串口驱动</span>
-lsusb<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><img src="http://pic.huangruimin.tech/20191115144137.png"><br>如果能看到Qualcomm/Option字样，则说明内置了高通USB虚拟串口驱动</p>
-</li>
-<li><p>输入AT指令，设置为4G上网，查看网络连接状态</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">su</span>
-<span class="token comment"># 关闭ModemManager进程，以防止minicom调试AT串口时，显示没用的数据，若没有该进程，则不用关闭。</span>
-<span class="token function">killall</span> ModemManager
-<span class="token comment"># 安装minicom串口工具</span>
-<span class="token function">apt-get</span> <span class="token function">install</span> minicom
-<span class="token comment"># 查看串口设备，AT指令串口，为/dev/ttyUSB2</span>
-<span class="token function">ls</span> /dev/ttyUSB*
-<span class="token comment"># 用minicom打开串口</span>
-<span class="token function">sudo</span> minicom <span class="token parameter variable">-D</span> /dev/ttyUSB2
-<span class="token comment"># 强制设置为4G上网</span>
-AT+CNMP<span class="token operator">=</span><span class="token number">38</span>
-<span class="token comment"># 查询网络质量</span>
-AT+CSQ
-<span class="token comment"># 查询网络注册状</span>
-AT+CREG?
-<span class="token comment"># 查询网络运营商</span>
-AT+COPS?
-<span class="token comment"># 查询网络波段</span>
-AT+CPSI?<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><img src="http://pic.huangruimin.tech/20191115170503.png"></p>
-</li>
+<h3 id="2-3-执行menuconfig配置，当然默认不用配置"><a href="#2-3-执行menuconfig配置，当然默认不用配置" class="headerlink" title="2.3 执行menuconfig配置，当然默认不用配置"></a>2.3 执行menuconfig配置，当然默认不用配置</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">make</span> <span class="token assign-left variable">ARCH</span><span class="token operator">=</span>arm <span class="token assign-left variable">CROSS_COMPILE</span><span class="token operator">=</span>arm-himix200-linux- menuconfig<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>连续按2下ESC即可直接推出配置的界面</p>
+<blockquote>
+<p>注意这一步也是要先load那个.config文件</p>
+</blockquote>
+<blockquote>
+<p>注意这一步也是在写.config文件的</p>
+</blockquote>
+<blockquote>
+<p>这一步在默认情况下不用去配置</p>
+</blockquote>
+<h3 id="2-4-编译生成中间文件u-boot-bin"><a href="#2-4-编译生成中间文件u-boot-bin" class="headerlink" title="2.4 编译生成中间文件u-boot.bin"></a>2.4 编译生成中间文件u-boot.bin</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">make</span> <span class="token assign-left variable">ARCH</span><span class="token operator">=</span>arm <span class="token assign-left variable">CROSS_COMPILE</span><span class="token operator">=</span>arm-himix200-linux- <span class="token parameter variable">-j</span> <span class="token number">8</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>但这里生成的只是中间件，很多厂商都选择把一些跟硬件相关的把它独立出来，这个原理跟设备树有点类似，也就是和硬件相关的配置还在下面的步骤中</p>
+<h3 id="2-5-编译生成gzip文件"><a href="#2-5-编译生成gzip文件" class="headerlink" title="2.5 编译生成gzip文件"></a>2.5 编译生成gzip文件</h3><p>首先进入到路径：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/tools/pc/hi_gzip
+<span class="token function">make</span>
+<span class="token builtin class-name">cd</span> bin
+<span class="token function">cp</span> ./gzip /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/opensource/uboot/u-boot-2016.11/arch/arm/cpu/armv7/hi3516dv300/hw_compressed <span class="token parameter variable">-f</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="2-6-配置表格文件"><a href="#2-6-配置表格文件" class="headerlink" title="2.6 配置表格文件"></a>2.6 配置表格文件</h3><ul>
+<li>表格路径</li>
 </ul>
-<p>至此，SIM7600CE和Jetson Nano连接正常，网络连接正常。</p>
-<h3 id="4-2-配置PPP拨号脚本并连接"><a href="#4-2-配置PPP拨号脚本并连接" class="headerlink" title="4.2 配置PPP拨号脚本并连接"></a>4.2 配置PPP拨号脚本并连接</h3><ul>
-<li><p>首先：安装ppp拨号程序：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> pppd<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-</li>
-<li><p>接着：切换到root用户</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">su</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-</li>
-<li><p>然后：修改拨号脚本文件，为了简便，直接将以下两个文件拷贝到Jetson Nano或树莓派：</p>
-</li>
-</ul>
-<p><img src="http://pic.huangruimin.tech/20191119094531.png"></p>
-<p>以上两个文件将在文章末尾给出。</p>
+<p><img src="https://pic.huangruimin.tech/20220217214541.png"></p>
 <ul>
-<li>紧接着：再将以上两个文件复制(替换)到相关路径下：</li>
+<li>设计思想：把Uboot配套的整个硬件的很多的这个值写到了Excel中</li>
 </ul>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 注意使用root账户操作</span>
-
-<span class="token comment"># 将chat放到/etc/ppp</span>
-<span class="token function">cp</span> ./chat /etc/ppp
-<span class="token comment"># 将dial放到/etc/ppp/peers</span>
-<span class="token function">cp</span> ./dial /etc/ppp/peers<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><img src="http://pic.huangruimin.tech/20191119181003.jpg"></p>
+<blockquote>
+<p>第一项，配置Uboot里面的PLL</p>
+</blockquote>
 <ul>
-<li>最后：执行拨号命令</li>
+<li>配置好表格文件后，点击Generate reg bin file，生成reg_info.bin文件</li>
 </ul>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 注意使用root账户操作</span>
+<h3 id="2-7-拷贝相关文件"><a href="#2-7-拷贝相关文件" class="headerlink" title="2.7 拷贝相关文件"></a>2.7 拷贝相关文件</h3><ul>
+<li>拷贝reg_info.bin到U-bot源码目录，重命名为.reg</li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/opensource/uboot/u-boot-2016.11<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<blockquote>
+<p>这里通过SSH工具拷贝reg_info.bin文件</p>
+</blockquote>
+<blockquote>
+<p>然后进行重命名</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">mv</span> ./reg_info.bin ./.reg<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<span class="token comment"># 开始拨号</span>
-pppd call dial<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p><img src="http://pic.huangruimin.tech/20191119104536.png"><br>如下图所示，则为拨号成功的效果：<br><img src="http://pic.huangruimin.tech/20191119105516.png"></p>
 <ul>
-<li>测试：</li>
+<li>将生成的u-boot.bin复制到osdrv/tools/pc/uboot_tools/目录<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/opensource/uboot/u-boot-2016.11
+<span class="token function">cp</span> ./u-boot.bin <span class="token punctuation">..</span>/<span class="token punctuation">..</span>/<span class="token punctuation">..</span>/tools/pc/uboot_tools/ <span class="token parameter variable">-f</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
 </ul>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 注意使用root账户操作，不要关闭拨号成功的终端，新开一个终端操作</span>
-
-<span class="token comment"># 查看网口及其ip</span>
-<span class="token function">ifconfig</span> <span class="token parameter variable">-a</span>
-<span class="token comment"># 为避免DNS解析不了，添加以下默认路由</span>
-route <span class="token function">add</span> <span class="token parameter variable">-net</span> <span class="token number">0.0</span>.0.0 ppp0
-<span class="token comment"># 通过ppp0上网测试</span>
-<span class="token function">ping</span> <span class="token parameter variable">-I</span> ppp0 www.baidu.com<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><img src="http://pic.huangruimin.tech/20191119110004.png"><br><img src="http://pic.huangruimin.tech/20191119110054.png"><br>如上图所示，如果采用ppp0网口ping通了百度，则采用ppp拨号上网成功。</p>
-<ul>
-<li>断开连接</li>
+<h3 id="2-8-编译生成u-boot-hi3516dv300-bin"><a href="#2-8-编译生成u-boot-hi3516dv300-bin" class="headerlink" title="2.8 编译生成u-boot-hi3516dv300.bin"></a>2.8 编译生成u-boot-hi3516dv300.bin</h3><ul>
+<li><p>注意make的时候用的是u-boot-z.bin，但实际生成的是u-boot-hi3516dv300.bin</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/opensource/uboot/u-boot-2016.11
+<span class="token function">make</span> <span class="token assign-left variable">ARCH</span><span class="token operator">=</span>arm <span class="token assign-left variable">CROSS_COMPILE</span><span class="token operator">=</span>arm-himix200-linux- u-boot-z.bin<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li><p>在当前Uboot源码路径下生成的u-boot-hi3516dv300.bin就是能够在单板上运行的uboot镜像</p>
+</li>
 </ul>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 注意使用root账户操作</span>
-<span class="token comment"># 断开ppp连接</span>
-<span class="token function">killall</span> pppd<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="5-测速"><a href="#5-测速" class="headerlink" title="5 测速"></a>5 测速</h2><p>最后，对采用ppp拨号上网进行测速：</p>
-<p><img src="http://pic.huangruimin.tech/20191119102754.png"></p>
-<p>注意，以上数值仅供参考，不同地域，不同运营商，测速所得出的数据略有差距，在理想的情况下，在SIMCOM实验室测试，理想上行与下行速度为20Mbps。</p>
-<h2 id="6-拨号相关文件"><a href="#6-拨号相关文件" class="headerlink" title="6 拨号相关文件"></a>6 拨号相关文件</h2><p><a target="_blank" rel="noopener" href="http://pic.huangruimin.tech/chat%26dial.rar">chat&amp;dial.rar</a></p>
-
+<h2 id="3-烧录并设置环境变量"><a href="#3-烧录并设置环境变量" class="headerlink" title="3 烧录并设置环境变量"></a>3 烧录并设置环境变量</h2><h3 id="3-1-烧写"><a href="#3-1-烧写" class="headerlink" title="3.1 烧写"></a>3.1 烧写</h3><ul>
+<li><p>参考以前烧写实战</p>
+</li>
+<li><p>以前三星的，他的整个环境变量是放在跟Uboot独立的一个空间里面，当我们重新去烧写Uboot的时候，并不会覆盖之前的bootcmd和bootargs，所以以前对的是可以保存的</p>
+</li>
+<li><p>但海思的不是这么设计，它的环境变量整个是和Uboot在一起的，所以重新烧写Uboot时，我们这份Uboot里面的环境变量，会覆盖之前的，但是默认的环境变量又不对。所以要重新配置才行。</p>
+</li>
+<li><p>烧录之后是不能启动的，原因在于要设置bootcmd和bootargs</p>
+</li>
+<li><p>其中烧写的相关配置如下图所示：<br><img src="https://pic.huangruimin.tech/20211205202224.png"></p>
+</li>
+</ul>
+<h3 id="3-2-设置换将变量"><a href="#3-2-设置换将变量" class="headerlink" title="3.2 设置换将变量"></a>3.2 设置换将变量</h3><ul>
+<li><p>设置环境变量时，发现只认识setenv，并不认识set这个环境变量</p>
+</li>
+<li><p>也并不是每次都要重新设置环境变量</p>
+</li>
+<li><p>具体的环境变量如下：</p>
+<blockquote>
+<p>bootcmd ：Uboot 首先执行这句</p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p>bootargs：Uboot 给Kernel传参</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">printenv</span>
+setenv bootcmd <span class="token string">"mmc read 0 0x81000000 0x2800 0x5000; bootm 0x81000000"</span>
+setenv bootargs <span class="token string">"mem=512M console=ttyAMA0,115200 root=/dev/mmcblk0p3 rootfstype=ext4 rw rootwait blkdevparts=mmcblk0:5M(boot),10M(kernel),500M(rootfs),200M(userdata),-(user)"</span>
+saveenv
+<span class="token function">printenv</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>
@@ -566,7 +563,7 @@ route <span class="token function">add</span> <span class="token parameter varia
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://www.huangruimin.tech/2020/11/05/linux-cai-yong-4g-mo-kuai-shang-wang-ppp-bo-hao/">http://www.huangruimin.tech/2020/11/05/linux-cai-yong-4g-mo-kuai-shang-wang-ppp-bo-hao/</a>
+                    <a href="http://www.huangruimin.tech/2021/10/14/hi3516dv300-8-uboot-de-dan-du-bian-yi-he-yan-zheng/">http://www.huangruimin.tech/2021/10/14/hi3516dv300-8-uboot-de-dan-du-bian-yi-he-yan-zheng/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -775,13 +772,12 @@ route <span class="token function">add</span> <span class="token parameter varia
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/09/07/i2c-zhuan-16-lu-pwm/">
+                <a href="/2022/09/15/rpi-opencv-opencv-zhong-highgui-ji-xiang-guan-shang-wei-ji-kai-fa/">
                     <div class="card-image">
                         
+                        <img src="http://pic.huangruimin.tech/banner_18.jpg" class="responsive-img" alt="RPi-OpenCV_OpenCV中HighGUI及相关上位机开发">
                         
-                        <img src="http://pic.huangruimin.tech/The_Wandering_Earth2_79.jpg" class="responsive-img" alt="I2C转16路PWM">
-                        
-                        <span class="card-title">I2C转16路PWM</span>
+                        <span class="card-title">RPi-OpenCV_OpenCV中HighGUI及相关上位机开发</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -792,7 +788,7 @@ route <span class="token function">add</span> <span class="token parameter varia
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-09-07
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-09-15
                         </span>
                         <span class="publish-author">
                             
@@ -812,13 +808,13 @@ route <span class="token function">add</span> <span class="token parameter varia
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/11/05/linux-cai-yong-4g-mo-kuai-shang-wang-ndis-bo-hao/">
+                <a href="/2021/10/13/hi3516dv300-7-kai-fa-ban-pei-tao-sdk-jie-du/">
                     <div class="card-image">
                         
                         
-                        <img src="http://pic.huangruimin.tech/The_Wandering_Earth2_24.jpg" class="responsive-img" alt="Linux采用4G模块上网_NDIS拨号">
+                        <img src="http://pic.huangruimin.tech/Transformers3_25.jpg" class="responsive-img" alt="Hi3516DV300_7_开发板配套SDK解读">
                         
-                        <span class="card-title">Linux采用4G模块上网_NDIS拨号</span>
+                        <span class="card-title">Hi3516DV300_7_开发板配套SDK解读</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -829,7 +825,7 @@ route <span class="token function">add</span> <span class="token parameter varia
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-11-05
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-13
                             </span>
                         <span class="publish-author">
                             

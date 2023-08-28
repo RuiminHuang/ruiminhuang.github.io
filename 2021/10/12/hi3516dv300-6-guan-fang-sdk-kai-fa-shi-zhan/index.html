@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Linux采用4G模块上网_PPP拨号, AI, TensorRT, Infrared">
+    <meta name="keywords" content="Hi3516DV300_6_官方SDK开发实战, AI, TensorRT, Infrared">
     <meta name="description" content="Personal essay record">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Linux采用4G模块上网_PPP拨号 | Ruimin Huang&#39;s Space</title>
+    <title>Hi3516DV300_6_官方SDK开发实战 | Ruimin Huang&#39;s Space</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -259,12 +259,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('http://pic.huangruimin.tech/Transformers1_10.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('http://pic.huangruimin.tech/The_Wandering_Earth2_22.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Linux采用4G模块上网_PPP拨号</h1>
+                    <h1 class="description center-align post-title">Hi3516DV300_6_官方SDK开发实战</h1>
                 </div>
             </div>
         </div>
@@ -392,28 +392,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-11-05
+                    2021-10-12
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-08-27
+                    2023-08-28
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    948
+                    566
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
+                    2 分
                 </div>
                 
 
@@ -436,110 +436,78 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="1-说明"><a href="#1-说明" class="headerlink" title="1.说明"></a>1.说明</h2><p>本章将继续讲解Jetson Nano采用SIM7600 4G模块进行无线上网，紧接上一章NDIS拨号上网，本章将讲解PPP拨号上网，本教程同样适用于树莓派。</p>
-<h2 id="2-准备工作"><a href="#2-准备工作" class="headerlink" title="2. 准备工作"></a>2. 准备工作</h2><p>接下来，将介绍Jetson Nano或Raspberry Pi采用NDIS驱动通过SIM7600 4G模块上网的过程。</p>
-<h3 id="3-1-硬件准备"><a href="#3-1-硬件准备" class="headerlink" title="3.1 硬件准备"></a>3.1 硬件准备</h3><ul>
-<li><a target="_blank" rel="noopener" href="http://www.waveshare.net/shop/SIM7600CE-4G-HAT.htm">SIM7600CE 4G HAT</a>及其配件</li>
-<li><a target="_blank" rel="noopener" href="http://www.waveshare.net/shop/Jetson-Nano-Developer-Kit.htm">Jetson Nano</a>及其配件，或Raspberry Pi 及其配件</li>
-<li>可上网的4G SIM卡</li>
+                <h2 id="1-SDK脚本管理解析"><a href="#1-SDK脚本管理解析" class="headerlink" title="1. SDK脚本管理解析"></a>1. SDK脚本管理解析</h2><h3 id="1-1-sdk-unpack脚本解析"><a href="#1-1-sdk-unpack脚本解析" class="headerlink" title="1.1 sdk.unpack脚本解析"></a>1.1 sdk.unpack脚本解析</h3><ul>
+<li>就是为了解压而已</li>
 </ul>
-<h3 id="3-2-硬件连接"><a href="#3-2-硬件连接" class="headerlink" title="3.2 硬件连接"></a>3.2 硬件连接</h3><p>硬件连接如下图所示：<br><img src="http://pic.huangruimin.tech/20191115140317.png"></p>
-<p>注意：</p>
+<h3 id="1-2-scripts-common-sh脚本解析"><a href="#1-2-scripts-common-sh脚本解析" class="headerlink" title="1.2 scripts/common.sh脚本解析"></a>1.2 scripts/common.sh脚本解析</h3><ul>
+<li>定义了很多函数，整个SDK管理的所在</li>
+</ul>
+<h3 id="1-3-osdrv-readme-cn-txt"><a href="#1-3-osdrv-readme-cn-txt" class="headerlink" title="1.3 osdrv/readme_cn.txt"></a>1.3 osdrv/readme_cn.txt</h3><ul>
+<li>定义了怎么编译，包括一键编译，全部编译</li>
+</ul>
+<h2 id="2-如何安装交叉编译工具链"><a href="#2-如何安装交叉编译工具链" class="headerlink" title="2.如何安装交叉编译工具链"></a>2.如何安装交叉编译工具链</h2><p><img src="https://pic.huangruimin.tech/20211223141315.png"></p>
+<blockquote>
+<p>位于：/home/book/Hi3516DV300/arm-himix200-linux中</p>
+</blockquote>
 <ul>
-<li>若接到40Pin引脚上使用，则注意将SIM7600的Flight Mode，PWR引脚拉低，即需要设计初始化脚本，详情见相关产品页面，否则将进入飞行模式。</li>
-<li>若树莓派通过USB线单独给SIM7600供电，则可能出现供电不稳定，导致SIM7600开机后关机的现象。</li>
-<li>若仅仅使用拨号上网功能，则可以不接到Jetson Nano或Raspberry Pi的40Pin上。</li>
-</ul>
-<h2 id="4-正式开始"><a href="#4-正式开始" class="headerlink" title="4. 正式开始"></a>4. 正式开始</h2><h3 id="4-1-检查硬件连接，网络连接-该步骤必须检查并确认"><a href="#4-1-检查硬件连接，网络连接-该步骤必须检查并确认" class="headerlink" title="4.1 检查硬件连接，网络连接(该步骤必须检查并确认)"></a>4.1 检查硬件连接，网络连接(该步骤必须检查并确认)</h3><ul>
-<li><p>长按SIM7600CE 4G HAT上的PWKKEY键，使得SIM7600CE 4G HAT开机，正常开机后，NET灯应当闪烁(若未闪烁，请检查SIM卡是否可用，或是否进入了飞行模式)。</p>
+<li><p>正确的安装命令：</p>
+<blockquote>
+<p>sudo source ./arm-himix200-linux.install</p>
+</blockquote>
 </li>
-<li><p>检查Jetson Nano的Ubuntu系统或树莓派的Raspbian系统是否内置了高通USB串口驱动，非新版本镜像系统可能未内置该驱动，查看方式如下图所示：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 查看Ubuntu版本</span>
-<span class="token function">uname</span> <span class="token parameter variable">-a</span>
-lsb_release <span class="token parameter variable">-a</span>
-<span class="token function">cat</span> /proc/version
-<span class="token comment"># 查看是否有高通USB虚拟串口驱动</span>
-lsusb<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><img src="http://pic.huangruimin.tech/20191115144137.png"><br>如果能看到Qualcomm/Option字样，则说明内置了高通USB虚拟串口驱动</p>
+<li><p>如果遇到sudo: source: command not found，那么先执行：</p>
+<blockquote>
+<p>sudo su</p>
+</blockquote>
 </li>
-<li><p>输入AT指令，设置为4G上网，查看网络连接状态</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">su</span>
-<span class="token comment"># 关闭ModemManager进程，以防止minicom调试AT串口时，显示没用的数据，若没有该进程，则不用关闭。</span>
-<span class="token function">killall</span> ModemManager
-<span class="token comment"># 安装minicom串口工具</span>
-<span class="token function">apt-get</span> <span class="token function">install</span> minicom
-<span class="token comment"># 查看串口设备，AT指令串口，为/dev/ttyUSB2</span>
-<span class="token function">ls</span> /dev/ttyUSB*
-<span class="token comment"># 用minicom打开串口</span>
-<span class="token function">sudo</span> minicom <span class="token parameter variable">-D</span> /dev/ttyUSB2
-<span class="token comment"># 强制设置为4G上网</span>
-AT+CNMP<span class="token operator">=</span><span class="token number">38</span>
-<span class="token comment"># 查询网络质量</span>
-AT+CSQ
-<span class="token comment"># 查询网络注册状</span>
-AT+CREG?
-<span class="token comment"># 查询网络运营商</span>
-AT+COPS?
-<span class="token comment"># 查询网络波段</span>
-AT+CPSI?<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><img src="http://pic.huangruimin.tech/20191115170503.png"></p>
+<li><p>如下图所示：<br><img src="https://pic.huangruimin.tech/20211223144953.png"><br><img src="https://pic.huangruimin.tech/20211223145209.png"></p>
 </li>
-</ul>
-<p>至此，SIM7600CE和Jetson Nano连接正常，网络连接正常。</p>
-<h3 id="4-2-配置PPP拨号脚本并连接"><a href="#4-2-配置PPP拨号脚本并连接" class="headerlink" title="4.2 配置PPP拨号脚本并连接"></a>4.2 配置PPP拨号脚本并连接</h3><ul>
-<li><p>首先：安装ppp拨号程序：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> pppd<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<li><p>要明白x86-arm的含义：</p>
+<blockquote>
+<p>x86表示的是宿主运行环境，arm表示目标运行环境</p>
+</blockquote>
 </li>
-<li><p>接着：切换到root用户</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">su</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<li><p>最后安装的工具如下图所示：<br><img src="https://pic.huangruimin.tech/20211223150519.png"></p>
 </li>
-<li><p>然后：修改拨号脚本文件，为了简便，直接将以下两个文件拷贝到Jetson Nano或树莓派：</p>
+<li><p>/etc/profile：系统启动之初，就能启动它</p>
+</li>
+<li><p>.bach.src：其实是低一个等级的</p>
+</li>
+<li><p>最后检查下/etc/profile里面，其实是有export PATH=”/opt/hisi-linux/x86-arm/arm-himix200-linux/bin:$PATH”的，说明是添加到环境变量里面去了。</p>
+</li>
+<li><p>最后安装好后的情况如下输出所示：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">book@100ask:~$ <span class="token function">ls</span>
+Configuring_ubuntu.sh  Documents  examples.desktop  Music       Pictures  snap       tftpboot
+Desktop                Downloads  Hi3516DV300       nfs_rootfs  Public    Templates  Videos
+book@100ask:~$ arm-himix200-linux-gcc <span class="token parameter variable">-v</span>
+Using built-in specs.
+<span class="token assign-left variable">COLLECT_GCC</span><span class="token operator">=</span>arm-himix200-linux-gcc
+<span class="token assign-left variable">COLLECT_LTO_WRAPPER</span><span class="token operator">=</span>/opt/hisi-linux/x86-arm/arm-himix200-linux/host_bin/<span class="token punctuation">..</span>/libexec/gcc/arm-linux-gnueabi/6.3.0/lto-wrapper
+Target: arm-linux-gnueabi
+Configured with: /home/sying/SDK_CPU_UNIFIED/build/script/arm-himix200-linux/arm_himix200_build_dir/src/gcc-6.3.0/configure <span class="token parameter variable">--host</span><span class="token operator">=</span>i386-redhat-linux <span class="token parameter variable">--build</span><span class="token operator">=</span>i386-redhat-linux <span class="token parameter variable">--target</span><span class="token operator">=</span>arm-linux-gnueabi <span class="token parameter variable">--prefix</span><span class="token operator">=</span>/home/sying/SDK_CPU_UNIFIED/build/script/arm-himix200-linux/arm_himix200_build_dir/install --enable-threads --disable-libmudflap --disable-libssp --disable-libstdcxx-pch --with-gnu-as --with-gnu-ld --enable-languages<span class="token operator">=</span>c,c++ --enable-shared --enable-lto --enable-symvers<span class="token operator">=</span>gnu --enable-__cxa_atexit --disable-nls --enable-clocale<span class="token operator">=</span>gnu --enable-extra-hisi-multilibs --with-sysroot<span class="token operator">=</span>/home/sying/SDK_CPU_UNIFIED/build/script/arm-himix200-linux/arm_himix200_build_dir/install/target --with-build-sysroot<span class="token operator">=</span>/home/sying/SDK_CPU_UNIFIED/build/script/arm-himix200-linux/arm_himix200_build_dir/install/target --with-gmp<span class="token operator">=</span>/home/sying/SDK_CPU_UNIFIED/build/script/arm-himix200-linux/arm_himix200_build_dir/obj/host-libs/usr --with-mpfr<span class="token operator">=</span>/home/sying/SDK_CPU_UNIFIED/build/script/arm-himix200-linux/arm_himix200_build_dir/obj/host-libs/usr --with-mpc<span class="token operator">=</span>/home/sying/SDK_CPU_UNIFIED/build/script/arm-himix200-linux/arm_himix200_build_dir/obj/host-libs/usr --enable-libgomp --disable-libitm --enable-poison-system-directories --with-pkgversion<span class="token operator">=</span><span class="token string">'HC&amp;C V1R3C00SPC200B005_20190606'</span> --disable-bootstrap
+Thread model: posix
+gcc version <span class="token number">6.3</span>.0 <span class="token punctuation">(</span>HC<span class="token operator">&amp;</span>C V1R3C00SPC200B005_20190606<span class="token punctuation">)</span>
+book@100ask:~$<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>解压过程中会有这种报错，所以，要重新配置一下：</p>
 </li>
 </ul>
-<p><img src="http://pic.huangruimin.tech/20191119094531.png"></p>
-<p>以上两个文件将在文章末尾给出。</p>
+<p><img src="https://pic.huangruimin.tech/20211223153942.png"></p>
+<p><img src="https://pic.huangruimin.tech/20211223154131.png"></p>
 <ul>
-<li>紧接着：再将以上两个文件复制(替换)到相关路径下：</li>
+<li>注意，在解压之前，需要把芯片的型号给确定好，就是要在</li>
 </ul>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 注意使用root账户操作</span>
-
-<span class="token comment"># 将chat放到/etc/ppp</span>
-<span class="token function">cp</span> ./chat /etc/ppp
-<span class="token comment"># 将dial放到/etc/ppp/peers</span>
-<span class="token function">cp</span> ./dial /etc/ppp/peers<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><img src="http://pic.huangruimin.tech/20191119181003.jpg"></p>
+<p><img src="https://pic.huangruimin.tech/20211223165806.png"><br><img src="https://pic.huangruimin.tech/20211223165831.png"></p>
 <ul>
-<li>最后：执行拨号命令</li>
+<li>接下来就是进行解压</li>
 </ul>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 注意使用root账户操作</span>
-
-<span class="token comment"># 开始拨号</span>
-pppd call dial<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p><img src="http://pic.huangruimin.tech/20191119104536.png"><br>如下图所示，则为拨号成功的效果：<br><img src="http://pic.huangruimin.tech/20191119105516.png"></p>
+<p><img src="https://pic.huangruimin.tech/20211223170123.png"></p>
 <ul>
-<li>测试：</li>
+<li><p>注意查阅OSDRV文件夹下的readme</p>
+</li>
+<li><p>荣品给的那一份，其实是编译好的，并没有重新压缩回去</p>
+</li>
 </ul>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 注意使用root账户操作，不要关闭拨号成功的终端，新开一个终端操作</span>
-
-<span class="token comment"># 查看网口及其ip</span>
-<span class="token function">ifconfig</span> <span class="token parameter variable">-a</span>
-<span class="token comment"># 为避免DNS解析不了，添加以下默认路由</span>
-route <span class="token function">add</span> <span class="token parameter variable">-net</span> <span class="token number">0.0</span>.0.0 ppp0
-<span class="token comment"># 通过ppp0上网测试</span>
-<span class="token function">ping</span> <span class="token parameter variable">-I</span> ppp0 www.baidu.com<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><img src="http://pic.huangruimin.tech/20191119110004.png"><br><img src="http://pic.huangruimin.tech/20191119110054.png"><br>如上图所示，如果采用ppp0网口ping通了百度，则采用ppp拨号上网成功。</p>
-<ul>
-<li>断开连接</li>
-</ul>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 注意使用root账户操作</span>
-<span class="token comment"># 断开ppp连接</span>
-<span class="token function">killall</span> pppd<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="5-测速"><a href="#5-测速" class="headerlink" title="5 测速"></a>5 测速</h2><p>最后，对采用ppp拨号上网进行测速：</p>
-<p><img src="http://pic.huangruimin.tech/20191119102754.png"></p>
-<p>注意，以上数值仅供参考，不同地域，不同运营商，测速所得出的数据略有差距，在理想的情况下，在SIMCOM实验室测试，理想上行与下行速度为20Mbps。</p>
-<h2 id="6-拨号相关文件"><a href="#6-拨号相关文件" class="headerlink" title="6 拨号相关文件"></a>6 拨号相关文件</h2><p><a target="_blank" rel="noopener" href="http://pic.huangruimin.tech/chat%26dial.rar">chat&amp;dial.rar</a></p>
 
                 
             </div>
@@ -566,7 +534,7 @@ route <span class="token function">add</span> <span class="token parameter varia
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://www.huangruimin.tech/2020/11/05/linux-cai-yong-4g-mo-kuai-shang-wang-ppp-bo-hao/">http://www.huangruimin.tech/2020/11/05/linux-cai-yong-4g-mo-kuai-shang-wang-ppp-bo-hao/</a>
+                    <a href="http://www.huangruimin.tech/2021/10/12/hi3516dv300-6-guan-fang-sdk-kai-fa-shi-zhan/">http://www.huangruimin.tech/2021/10/12/hi3516dv300-6-guan-fang-sdk-kai-fa-shi-zhan/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -775,13 +743,13 @@ route <span class="token function">add</span> <span class="token parameter varia
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/09/07/i2c-zhuan-16-lu-pwm/">
+                <a href="/2021/10/13/hi3516dv300-7-kai-fa-ban-pei-tao-sdk-jie-du/">
                     <div class="card-image">
                         
                         
-                        <img src="http://pic.huangruimin.tech/The_Wandering_Earth2_79.jpg" class="responsive-img" alt="I2C转16路PWM">
+                        <img src="http://pic.huangruimin.tech/Transformers3_25.jpg" class="responsive-img" alt="Hi3516DV300_7_开发板配套SDK解读">
                         
-                        <span class="card-title">I2C转16路PWM</span>
+                        <span class="card-title">Hi3516DV300_7_开发板配套SDK解读</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -792,7 +760,7 @@ route <span class="token function">add</span> <span class="token parameter varia
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-09-07
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-10-13
                         </span>
                         <span class="publish-author">
                             
@@ -812,13 +780,13 @@ route <span class="token function">add</span> <span class="token parameter varia
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/11/05/linux-cai-yong-4g-mo-kuai-shang-wang-ndis-bo-hao/">
+                <a href="/2021/10/11/hi3516dv300-5-guan-fang-sdk-guan-li-jiao-ben-jie-xi/">
                     <div class="card-image">
                         
                         
-                        <img src="http://pic.huangruimin.tech/The_Wandering_Earth2_24.jpg" class="responsive-img" alt="Linux采用4G模块上网_NDIS拨号">
+                        <img src="http://pic.huangruimin.tech/Transformers3_46.jpg" class="responsive-img" alt="Hi3516DV300_5_官方SDK管理脚本解析">
                         
-                        <span class="card-title">Linux采用4G模块上网_NDIS拨号</span>
+                        <span class="card-title">Hi3516DV300_5_官方SDK管理脚本解析</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -829,7 +797,7 @@ route <span class="token function">add</span> <span class="token parameter varia
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-11-05
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-11
                             </span>
                         <span class="publish-author">
                             
