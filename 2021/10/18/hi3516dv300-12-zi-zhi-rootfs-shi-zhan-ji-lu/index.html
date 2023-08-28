@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Hi3516DV300_7_开发板配套SDK解读, AI, TensorRT, Infrared">
+    <meta name="keywords" content="自制Rootfs实战记录, AI, TensorRT, Infrared">
     <meta name="description" content="Personal essay record">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Hi3516DV300_7_开发板配套SDK解读 | Ruimin Huang&#39;s Space</title>
+    <title>自制Rootfs实战记录 | Ruimin Huang&#39;s Space</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -259,12 +259,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('http://pic.huangruimin.tech/Transformers3_25.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('http://pic.huangruimin.tech/The_Wandering_Earth2_71.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hi3516DV300_7_开发板配套SDK解读</h1>
+                    <h1 class="description center-align post-title">自制Rootfs实战记录</h1>
                 </div>
             </div>
         </div>
@@ -392,7 +392,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-10-13
+                    2021-10-18
                 </div>
                 
 
@@ -406,14 +406,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    106
+                    2.4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    11 分
                 </div>
                 
 
@@ -436,19 +436,329 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="1、文件夹结构"><a href="#1、文件夹结构" class="headerlink" title="1、文件夹结构"></a>1、文件夹结构</h2><p><img src="https://pic.huangruimin.tech/20211224152259.png"><br>注意：这里有很多符号链接，因为这些文件夹都是链接到别的地方的</p>
+                <blockquote>
+<p>主要查阅第三部分前面，以及第四部分</p>
+</blockquote>
+<h2 id="一、-教程中的实战"><a href="#一、-教程中的实战" class="headerlink" title="一、 教程中的实战"></a>一、 教程中的实战</h2><h3 id="1-1-解压rootfs"><a href="#1-1-解压rootfs" class="headerlink" title="1.1 解压rootfs"></a>1.1 解压rootfs</h3><ul>
+<li>先解压rootfs<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/pub
+<span class="token function">cp</span> <span class="token punctuation">..</span>/rootfs_scripts/rootfs.tgz ./
+<span class="token function">tar</span> <span class="token parameter variable">-xzvf</span> rootfs.tgz
+<span class="token function">mv</span> ./rootfs ./rootfs_glibc<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
 <blockquote>
-<p>这里有干货的文件夹，就只有osdrv与smp</p>
+<p>这个时候，在/etc的目录下，已经有相关的配置文件了</p>
+</blockquote>
+<h3 id="1-2-编译busybox"><a href="#1-2-编译busybox" class="headerlink" title="1.2 编译busybox"></a>1.2 编译busybox</h3><ul>
+<li><p>然后解压busybox</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/opensource/busybox
+<span class="token function">tar</span> <span class="token parameter variable">-xzvf</span> busybox-1.26.2.tgz<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li><p>进busybox里面去配置.config文件</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/opensource/busybox/busybox-1.26.2
+<span class="token function">cp</span> ./config_v200_a7_softfp_neon ./.config<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li><p>执行menuconfig</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">make</span> <span class="token assign-left variable">CROSS_COMPILE</span><span class="token operator">=</span>arm-himix200-linux- <span class="token assign-left variable">CHIP</span><span class="token operator">=</span>hi3516dv300 menuconfig<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<blockquote>
+<p>这一步，其实也是在生成.config<br>一定要注意先load文件.config<br>然后什么都不做，然后退出<br>默认是不用做这一个步骤的</p>
+</blockquote>
+</li>
+<li><p>编译的命令</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">make</span> <span class="token assign-left variable">CROSS_COMPILE</span><span class="token operator">=</span>arm-himix200-linux- <span class="token assign-left variable">CHIP</span><span class="token operator">=</span>hi3516dv300 <span class="token assign-left variable">MP_TYPE</span><span class="token operator">=</span>smp <span class="token assign-left variable">BOOT_MEDIA</span><span class="token operator">=</span>emmc <span class="token assign-left variable">OSDRV_CROSS_CFLAGS</span><span class="token operator">=</span><span class="token string">"-mcpu=cortex-a7 -mfloat-abi=softfp -mfpu=neon-vfpv4 -w"</span>  <span class="token assign-left variable">LIB_TYPE</span><span class="token operator">=</span>glibc <span class="token assign-left variable">RUNTIME_LIB</span><span class="token operator">=</span>runtime_glibc <span class="token assign-left variable">CROSS_SPECIFIED</span><span class="token operator">=</span>y <span class="token parameter variable">-j8</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+</ul>
+<h3 id="1-3-安装busybox"><a href="#1-3-安装busybox" class="headerlink" title="1.3 安装busybox"></a>1.3 安装busybox</h3><h4 id="1-3-1-默认的安装方式"><a href="#1-3-1-默认的安装方式" class="headerlink" title="1.3.1 默认的安装方式"></a>1.3.1 默认的安装方式</h4><ul>
+<li>默认安装的命令<blockquote>
+<p>默认的脚本采用这种方式，但是实际上，一般不采用这种方式<br>这种默认安装方式放到的路径是./_install</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">make</span> <span class="token assign-left variable">CROSS_COMPILE</span><span class="token operator">=</span>arm-himix200-linux- <span class="token assign-left variable">CHIP</span><span class="token operator">=</span>hi3516dv300 <span class="token assign-left variable">MP_TYPE</span><span class="token operator">=</span>smp <span class="token assign-left variable">BOOT_MEDIA</span><span class="token operator">=</span>emmc <span class="token assign-left variable">OSDRV_CROSS_CFLAGS</span><span class="token operator">=</span><span class="token string">"-mcpu=cortex-a7 -mfloat-abi=softfp -mfpu=neon-vfpv4 -w"</span>  <span class="token assign-left variable">LIB_TYPE</span><span class="token operator">=</span>glibc <span class="token assign-left variable">RUNTIME_LIB</span><span class="token operator">=</span>runtime_glibc <span class="token assign-left variable">CROSS_SPECIFIED</span><span class="token operator">=</span>y <span class="token function">install</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+</ul>
+<h4 id="1-3-2-这次流程采用的安装方式"><a href="#1-3-2-这次流程采用的安装方式" class="headerlink" title="1.3.2 这次流程采用的安装方式"></a>1.3.2 这次流程采用的安装方式</h4><blockquote>
+<p>朱有鹏视频教程中主要采用这种安装方式：</p>
+</blockquote>
+<ul>
+<li><p>首先配置menuconfig</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">make</span> <span class="token assign-left variable">CROSS_COMPILE</span><span class="token operator">=</span>arm-himix200-linux- <span class="token assign-left variable">CHIP</span><span class="token operator">=</span>hi3516dv300 menuconfig<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><p>然后一定要记得先load这个文件.config</p>
+</li>
+<li><p>选中Busybox Setting后回车</p>
+</li>
+<li><p>选中(./_install) BusyBox installation prefix后回车</p>
+</li>
+<li><p>然后填写路径：解压rootfs的路径</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">/home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/pub/rootfs_glibc<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<blockquote>
+<p>注意在删除已经填写的路径过程中，要按下Ctrl+Backspace才能正常删除<br>粘贴也是要按下Ctrl+鼠标右键Paste</p>
+</blockquote>
+</li>
+<li><p>最后执行安装</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">make</span> <span class="token assign-left variable">CROSS_COMPILE</span><span class="token operator">=</span>arm-himix200-linux- <span class="token assign-left variable">CHIP</span><span class="token operator">=</span>hi3516dv300 <span class="token assign-left variable">MP_TYPE</span><span class="token operator">=</span>smp <span class="token assign-left variable">BOOT_MEDIA</span><span class="token operator">=</span>emmc <span class="token assign-left variable">OSDRV_CROSS_CFLAGS</span><span class="token operator">=</span><span class="token string">"-mcpu=cortex-a7 -mfloat-abi=softfp -mfpu=neon-vfpv4 -w"</span>  <span class="token assign-left variable">LIB_TYPE</span><span class="token operator">=</span>glibc <span class="token assign-left variable">RUNTIME_LIB</span><span class="token operator">=</span>runtime_glibc <span class="token assign-left variable">CROSS_SPECIFIED</span><span class="token operator">=</span>y <span class="token function">install</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><p>检验是否安装成功</p>
+<blockquote>
+<p>就是查看bin目录下是否成功生成了相关二进制可执行文件<br>如果有生成二进制可执行文件，说明busybox成功安装了</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/pub/rootfs_glibc/bin
+<span class="token function">ls</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+</ul>
+<h3 id="1-4-复制动态链接库"><a href="#1-4-复制动态链接库" class="headerlink" title="1.4 复制动态链接库"></a>1.4 复制动态链接库</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/pub/rootfs_glibc
+<span class="token function">cp</span> /opt/hisi-linux/x86-arm/arm-himix200-linux/runtime_glibc/a7_softfp_neon-vfpv4/lib.tgz ./
+<span class="token function">tar</span> <span class="token parameter variable">-xzvf</span> lib.tgz
+<span class="token builtin class-name">cd</span> lib/
+<span class="token function">ls</span> <span class="token parameter variable">-ahl</span>
+<span class="token builtin class-name">cd</span> <span class="token punctuation">..</span>
+<span class="token function">ls</span>
+<span class="token function">rm</span> <span class="token parameter variable">-rf</span> ./lib.tgz<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>注意在解压的过程中，直接就覆盖了目标路径下的文件<br>如果出现动态链接库，那么就说明复制成功了<br>并且可以发现，有一些是符号链接</p>
+</blockquote>
+<h3 id="1-5-用Strip精简体积，节省空间用"><a href="#1-5-用Strip精简体积，节省空间用" class="headerlink" title="1.5 用Strip精简体积，节省空间用"></a>1.5 用Strip精简体积，节省空间用</h3><blockquote>
+<p>但是因为我们使用的是EMMC，不用在乎这点空间，所以就没有做这一步了</p>
+</blockquote>
+<h3 id="1-6-最后，生成文件系统"><a href="#1-6-最后，生成文件系统" class="headerlink" title="1.6 最后，生成文件系统"></a>1.6 最后，生成文件系统</h3><ul>
+<li><p>首先得编译生成make_ext4fs并且复制到目标路径</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/tools/pc/ext4_utils
+<span class="token function">make</span>
+<span class="token builtin class-name">cd</span> bin
+<span class="token function">cp</span> ./make_ext4fs /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/pub<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>然后回到制作目录</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/pub<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>最后就开始制作</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">./make_ext4fs <span class="token parameter variable">-l</span> 200M <span class="token parameter variable">-s</span> build_rootfs_hi3516dv300.ext4 rootfs_glibc<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>检查一下大小</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">file</span> ./build_rootfs_hi3516dv300.ext4
+<span class="token function">du</span> <span class="token parameter variable">-h</span> ./build_rootfs_hi3516dv300.ext4<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<blockquote>
+<p>也就才59M，说明-l这个参数，只是划定最大的大小而已，本来是多大，就是多大，并不会填充空内容<br>到这一步，就制作完成了</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="二、烧写根文件系统"><a href="#二、烧写根文件系统" class="headerlink" title="二、烧写根文件系统"></a>二、烧写根文件系统</h2><h3 id="2-1-烧写成功截图"><a href="#2-1-烧写成功截图" class="headerlink" title="2.1 烧写成功截图"></a>2.1 烧写成功截图</h3><p><img src="https://pic.huangruimin.tech/20211230185113.png"></p>
+<h3 id="2-2-相关说明"><a href="#2-2-相关说明" class="headerlink" title="2.2 相关说明"></a>2.2 相关说明</h3><h4 id="2-2-1-相关文件夹说明"><a href="#2-2-1-相关文件夹说明" class="headerlink" title="2.2.1 相关文件夹说明"></a>2.2.1 相关文件夹说明</h4><blockquote>
+<p>进入到根目录底下来了</p>
 </blockquote>
 <blockquote>
-<p>make_ext4fs是编译的工具</p>
+<p>在bin目录下有相关的应用程序</p>
 </blockquote>
 <blockquote>
-<p>烧录的时候有用到userdata，userdata里面有很多要用到的配置</p>
+<p>在lib目录下有相应的动态库</p>
 </blockquote>
 <blockquote>
-<p>很多芯片的官方，都想做成这样一键编译的形式，问题是，做好后，就不能动</p>
+<p>在etc目录下可以看到相关的配置脚本，/etc/init.d/rcS，也都是共用的，/bin/mount -a，挂载的就是init table</p>
 </blockquote>
+<blockquote>
+<p>的dev目录下可以看到相关的设备文件，说明mdev也工作了</p>
+</blockquote>
+<blockquote>
+<p>ifconfig eth0 192.168.31.14，这样一来，网口也工作了，说明之前kernel里面的网卡设置，也是工作的</p>
+</blockquote>
+<blockquote>
+<p>这仅仅是一个最小的根文件系统</p>
+</blockquote>
+<h4 id="2-2-2-少了的相关驱动"><a href="#2-2-2-少了的相关驱动" class="headerlink" title="2.2.2 少了的相关驱动"></a>2.2.2 少了的相关驱动</h4><blockquote>
+<p>/dev/input：只有一个mice</p>
+</blockquote>
+<blockquote>
+<p>少了相关的测试程序</p>
+</blockquote>
+<blockquote>
+<p>少了mpp相关的编解码应用程序</p>
+</blockquote>
+<blockquote>
+<p>后面相关的内容操作也就在：cp2rootfs.sh中</p>
+</blockquote>
+<h4 id="2-2-3-在rcS里面做了什么"><a href="#2-2-3-在rcS里面做了什么" class="headerlink" title="2.2.3 在rcS里面做了什么"></a>2.2.3 在rcS里面做了什么</h4><p><img src="https://pic.huangruimin.tech/20220204220914.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220204220953.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220204221258.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220204221438.png"></p>
+<blockquote>
+<p>S00devs里面的，这个在手动创建根文件系统的时候，也干过，尤其是console，null这个干过，其实就是创建字符设备的主设备号与次设备号</p>
+</blockquote>
+<blockquote>
+<p>S01udev里面的，主要是创建了udev，创建了虚拟文件系统，然后去挂载</p>
+</blockquote>
+<blockquote>
+<p>S80network里面，是和网络有关的，/proc/cmdline，即为传参文件，即通过bootargs传参的时候，有没有传ipinfo，如果有就读进来，通过ifconfig去设定它，并打印出来，否则就算了。</p>
+</blockquote>
+<h2 id="三、全程编译的流程"><a href="#三、全程编译的流程" class="headerlink" title="三、全程编译的流程"></a>三、全程编译的流程</h2><h3 id="3-1首先要下载的软件"><a href="#3-1首先要下载的软件" class="headerlink" title="3.1首先要下载的软件"></a>3.1首先要下载的软件</h3><blockquote>
+<p>要下载一下软件</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20211231111128.png"></p>
+<blockquote>
+<p>要配置以下工具</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/tools/board/eudev-3.2.7<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://pic.huangruimin.tech/20211231111345.png"></p>
+<blockquote>
+<blockquote>
+<p>阅读该路径下的readme_cn.txt文件：</p>
+</blockquote>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220204223517.png"></p>
+<blockquote>
+<blockquote>
+<p>具体描述如下图，按照描述操作：</p>
+</blockquote>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220204223553.png"></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">注意：
+eudev-3.2.7工具编译时依赖gperf工具，服务器上需要安装gperf工具。
+下载网址：http://ftp.gnu.org/pub/gnu/gperf/gperf-3.1.tar.gz
+安装说明：
+<span class="token function">tar</span> <span class="token parameter variable">-xzf</span> gperf-3.1.tar.gz
+<span class="token builtin class-name">cd</span> gperf-3.1
+<span class="token function">sudo</span> ./configure
+<span class="token function">sudo</span> <span class="token function">make</span>
+<span class="token function">sudo</span> <span class="token function">make</span> <span class="token function">install</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="3-2然后执行编译命令"><a href="#3-2然后执行编译命令" class="headerlink" title="3.2然后执行编译命令"></a>3.2然后执行编译命令</h3><blockquote>
+<p>注意从这里开始，直接看第四部分就行了</p>
+</blockquote>
+<blockquote>
+<p>并且，第三部分只需要做一次就行</p>
+</blockquote>
+<blockquote>
+<p>仅编译的话，就只执行第一条命令，后面两条分别是清理，彻底清理</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">make</span> <span class="token assign-left variable">CROSS_COMPILE</span><span class="token operator">=</span>arm-himix200-linux- <span class="token assign-left variable">CHIP</span><span class="token operator">=</span>hi3516dv300  <span class="token assign-left variable">BOOT_MEDIA</span><span class="token operator">=</span>emmc all
+
+<span class="token function">make</span> <span class="token assign-left variable">CROSS_COMPILE</span><span class="token operator">=</span>arm-himix200-linux- clean
+
+<span class="token function">make</span> <span class="token assign-left variable">CROSS_COMPILE</span><span class="token operator">=</span>arm-himix200-linux- distclean<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="3-3全程的编译流程"><a href="#3-3全程的编译流程" class="headerlink" title="3.3全程的编译流程"></a>3.3全程的编译流程</h3><ul>
+<li>详情见41.1-全程编译笔记</li>
+</ul>
+<h2 id="四、参考全程编译，单独制作Rootfs"><a href="#四、参考全程编译，单独制作Rootfs" class="headerlink" title="四、参考全程编译，单独制作Rootfs"></a>四、参考全程编译，单独制作Rootfs</h2><h3 id="4-1-单独制作过程记录，并且已经成功"><a href="#4-1-单独制作过程记录，并且已经成功" class="headerlink" title="4.1 单独制作过程记录，并且已经成功"></a>4.1 单独制作过程记录，并且已经成功</h3><ul>
+<li><p>先清除记录</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv
+
+<span class="token function">make</span> <span class="token assign-left variable">CROSS_COMPILE</span><span class="token operator">=</span>arm-himix200-linux- clean<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>编译生成板载工具</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">make</span> hiboardtools <span class="token parameter variable">-j8</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>解压rootfs.tgz</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">rm</span> /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/pub/rootfs_glibc* <span class="token parameter variable">-rf</span>
+
+<span class="token function">tar</span> xzf /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/rootfs_scripts/rootfs.tgz <span class="token parameter variable">-C</span> /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/pub
+
+<span class="token function">mv</span> /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/pub/rootfs /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/pub/rootfs_glibc<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>生成lib文件</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">tar</span> xzf /opt/hisi-linux/x86-arm/arm-himix200-linux/runtime_glibc/a7_softfp_neon-vfpv4/lib.tgz <span class="token parameter variable">-C</span> /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/pub/rootfs_glibc<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>用strip工具缩小体积</p>
+</li>
+</ul>
+<blockquote>
+<p>海思官方使用了这一个步骤，但是朱有鹏的教程中，是没有使用这一条命令的，没有使用这一条命令，测试通过</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/pub/rootfs_glibc
+
+arm-himix200-linux-strip <span class="token parameter variable">-d</span> ./lib/*<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li><p>解压busybox，以下几步是为了bin目录</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv
+
+<span class="token function">rm</span> /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/opensource/busybox/busybox-1.26.2 <span class="token parameter variable">-rf</span>
+
+<span class="token function">tar</span> xzf /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/opensource/busybox/busybox-1.26.2.tgz <span class="token parameter variable">-C</span> /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/opensource/busybox
+
+<span class="token function">find</span> /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/opensource/busybox/busybox-1.26.2 <span class="token operator">|</span> <span class="token function">xargs</span> <span class="token function">touch</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>配置busybox的.config文件</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">cp</span> /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/opensource/busybox/busybox-1.26.2/config_v200_a7_softfp_neon /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/opensource/busybox/busybox-1.26.2/.config<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>编译busybox</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/opensource/busybox/busybox-1.26.2/
+
+<span class="token function">make</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>！！！更确切的编译方法是，用的这种方法，测试通过</p>
+</blockquote>
+</li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/opensource/busybox/busybox-1.26.2/
+
+<span class="token function">make</span> <span class="token assign-left variable">CROSS_COMPILE</span><span class="token operator">=</span>arm-himix200-linux- <span class="token assign-left variable">CHIP</span><span class="token operator">=</span>hi3516dv300 <span class="token assign-left variable">MP_TYPE</span><span class="token operator">=</span>smp <span class="token assign-left variable">BOOT_MEDIA</span><span class="token operator">=</span>emmc <span class="token assign-left variable">OSDRV_CROSS_CFLAGS</span><span class="token operator">=</span><span class="token string">"-mcpu=cortex-a7 -mfloat-abi=softfp -mfpu=neon-vfpv4 -w"</span>  <span class="token assign-left variable">LIB_TYPE</span><span class="token operator">=</span>glibc <span class="token assign-left variable">RUNTIME_LIB</span><span class="token operator">=</span>runtime_glibc <span class="token assign-left variable">CROSS_SPECIFIED</span><span class="token operator">=</span>y <span class="token parameter variable">-j8</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>部署busybox<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">make</span> <span class="token function">install</span>
+
+<span class="token function">cp</span> <span class="token parameter variable">-af</span> /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/opensource/busybox/busybox-1.26.2/_install/* /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/pub/rootfs_glibc<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>！！！更确切的部署方法是，用的这种方法，测试通过</p>
+</blockquote>
+</li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">make</span> <span class="token assign-left variable">CROSS_COMPILE</span><span class="token operator">=</span>arm-himix200-linux- <span class="token assign-left variable">CHIP</span><span class="token operator">=</span>hi3516dv300 <span class="token assign-left variable">MP_TYPE</span><span class="token operator">=</span>smp <span class="token assign-left variable">BOOT_MEDIA</span><span class="token operator">=</span>emmc <span class="token assign-left variable">OSDRV_CROSS_CFLAGS</span><span class="token operator">=</span><span class="token string">"-mcpu=cortex-a7 -mfloat-abi=softfp -mfpu=neon-vfpv4 -w"</span>  <span class="token assign-left variable">LIB_TYPE</span><span class="token operator">=</span>glibc <span class="token assign-left variable">RUNTIME_LIB</span><span class="token operator">=</span>runtime_glibc <span class="token assign-left variable">CROSS_SPECIFIED</span><span class="token operator">=</span>y <span class="token function">install</span>
+
+<span class="token function">cp</span> <span class="token parameter variable">-af</span> /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/opensource/busybox/busybox-1.26.2/_install/* /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/pub/rootfs_glibc<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+
+<ul>
+<li><p>复制板载工具到rootfs</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">cp</span> <span class="token parameter variable">-af</span> /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/tools/board/e2fsprogs/bin/* /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/pub/rootfs_glibc/bin
+
+<span class="token function">cp</span> <span class="token parameter variable">-af</span> /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/tools/board/reg-tools-1.0.0/bin/* /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/pub/rootfs_glibc/bin
+
+<span class="token function">cp</span> <span class="token parameter variable">-af</span> /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/tools/board/eudev-3.2.7/rootfs/. /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/pub/rootfs_glibc/<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>删除非必要的工具，海思官方是删掉了这些工具包的</p>
+</li>
+</ul>
+<blockquote>
+<p>！！！其实，这一个步骤是可以不执行的，保留最好了，制作的时候，选择不删除，测试通过</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">rm</span> /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/pub/rootfs_glibc/dev/* <span class="token parameter variable">-rf</span>
+
+<span class="token function">rm</span> /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/pub/rootfs_glibc/bin/himm <span class="token parameter variable">-rf</span>
+
+<span class="token function">rm</span> /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/pub/rootfs_glibc/bin/himc <span class="token parameter variable">-rf</span>
+
+<span class="token function">rm</span> /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/pub/rootfs_glibc/bin/himd <span class="token parameter variable">-rf</span>
+
+<span class="token function">rm</span> /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/pub/rootfs_glibc/bin/himd.l <span class="token parameter variable">-rf</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+<ul>
+<li><p>对文件设置权限</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/pub/rootfs_glibc
+
+<span class="token function">ln</span> <span class="token parameter variable">-s</span> sbin/init init
+
+<span class="token function">chmod</span> <span class="token number">750</span> * <span class="token parameter variable">-R</span>
+
+<span class="token function">chmod</span> <span class="token number">750</span> usr/* <span class="token parameter variable">-R</span>
+
+<span class="token function">chmod</span> <span class="token parameter variable">-w</span> usr/bin <span class="token parameter variable">-R</span>
+
+<span class="token function">chmod</span> <span class="token parameter variable">-w</span> usr/sbin <span class="token parameter variable">-R</span>
+
+<span class="token function">chmod</span> <span class="token parameter variable">-w</span> sbin <span class="token parameter variable">-R</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>编译生成make_ext4fs工具</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/tools/pc/ext4_utils
+
+<span class="token function">make</span>
+
+<span class="token builtin class-name">cd</span> ./bin/<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>制作生成rootfs镜像</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">./make_ext4fs <span class="token parameter variable">-l</span> 96M <span class="token parameter variable">-s</span> /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/pub/rootfs_hi3516dv300_96M.ext4 /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/pub/rootfs_glibc<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+</ul>
+<blockquote>
+<p>96M只是一个最大的大小，如果小于这个大小，并不会去填充到96M</p>
+</blockquote>
+<blockquote>
+<p>生成的rootfs文件位于：/home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/pub</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /home/book/Hi3516DV300_Original/Hi3516CV500_SDK_V2.0.2.0/osdrv/pub<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://pic.huangruimin.tech/20220218172530.png"></p>
+<h3 id="4-2成功，并成功下载的页面截图"><a href="#4-2成功，并成功下载的页面截图" class="headerlink" title="4.2成功，并成功下载的页面截图"></a>4.2成功，并成功下载的页面截图</h3><p><img src="https://pic.huangruimin.tech/20211231225345.png"><br><img src="https://pic.huangruimin.tech/20211231225434.png"></p>
 
                 
             </div>
@@ -475,7 +785,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://www.huangruimin.tech/2021/10/13/hi3516dv300-7-kai-fa-ban-pei-tao-sdk-jie-du/">http://www.huangruimin.tech/2021/10/13/hi3516dv300-7-kai-fa-ban-pei-tao-sdk-jie-du/</a>
+                    <a href="http://www.huangruimin.tech/2021/10/18/hi3516dv300-12-zi-zhi-rootfs-shi-zhan-ji-lu/">http://www.huangruimin.tech/2021/10/18/hi3516dv300-12-zi-zhi-rootfs-shi-zhan-ji-lu/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -684,13 +994,12 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/10/14/hi3516dv300-8-uboot-de-dan-du-bian-yi-he-yan-zheng/">
+                <a href="/2022/09/15/rpi-opencv-opencv-zhong-highgui-ji-xiang-guan-shang-wei-ji-kai-fa/">
                     <div class="card-image">
                         
+                        <img src="http://pic.huangruimin.tech/banner_18.jpg" class="responsive-img" alt="RPi-OpenCV_OpenCV中HighGUI及相关上位机开发">
                         
-                        <img src="http://pic.huangruimin.tech/Transformers3_60.jpg" class="responsive-img" alt="Hi3516DV300_8_Uboot的单独编译和验证">
-                        
-                        <span class="card-title">Hi3516DV300_8_Uboot的单独编译和验证</span>
+                        <span class="card-title">RPi-OpenCV_OpenCV中HighGUI及相关上位机开发</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -701,7 +1010,7 @@
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-10-14
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-09-15
                         </span>
                         <span class="publish-author">
                             
@@ -721,13 +1030,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/10/12/hi3516dv300-6-guan-fang-sdk-kai-fa-shi-zhan/">
+                <a href="/2021/10/17/hi3516dv300-11-bian-yi-ji-lu/">
                     <div class="card-image">
                         
                         
-                        <img src="http://pic.huangruimin.tech/The_Wandering_Earth2_22.jpg" class="responsive-img" alt="Hi3516DV300_6_官方SDK开发实战">
+                        <img src="http://pic.huangruimin.tech/The_Wandering_Earth2_33.jpg" class="responsive-img" alt="编译记录">
                         
-                        <span class="card-title">Hi3516DV300_6_官方SDK开发实战</span>
+                        <span class="card-title">编译记录</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -738,7 +1047,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-12
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-17
                             </span>
                         <span class="publish-author">
                             
