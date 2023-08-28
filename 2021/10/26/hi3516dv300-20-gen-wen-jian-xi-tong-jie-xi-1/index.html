@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="RPi-OpenCV_绘图板综合, AI, TensorRT, Infrared">
+    <meta name="keywords" content="HI3516DV300_20_根文件系统解析1, AI, TensorRT, Infrared">
     <meta name="description" content="Personal essay record">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>RPi-OpenCV_绘图板综合 | Ruimin Huang&#39;s Space</title>
+    <title>HI3516DV300_20_根文件系统解析1 | Ruimin Huang&#39;s Space</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -259,12 +259,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('http://pic.huangruimin.tech/banner_19.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('http://pic.huangruimin.tech/The_Wandering_Earth2_14.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">RPi-OpenCV_绘图板综合</h1>
+                    <h1 class="description center-align post-title">HI3516DV300_20_根文件系统解析1</h1>
                 </div>
             </div>
         </div>
@@ -392,21 +392,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-03-03
+                    2021-10-26
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-08-26
+                    2023-08-28
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.3k
+                    1.7k
                 </div>
                 
 
@@ -436,198 +436,415 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>在上一节中，讲解了大量的概念，比较零散，于是，在这一节，将通过一个绘图板的综合项目将上一节的知识汇总起来，此外，之前的课程主要讲解OpenCV中一些基本操作，并未涉及OpenCV的精髓内容，因此，尽量早些完成相关操作的讲解，尽快进入算法讲解的环节中。</p>
-<h2 id="1-思路分析"><a href="#1-思路分析" class="headerlink" title="1.思路分析"></a>1.思路分析</h2><p>类似于液晶触摸的书写，我们来研究下如何实现绘图功能。</p>
-<blockquote>
-<p>本质上，绘图是绘制线条，曲线可以分解成很多直线，直线可以分解成很多点，因此，就先从绘制点开始。</p>
+                <h2 id="一、根文件系统来自哪里"><a href="#一、根文件系统来自哪里" class="headerlink" title="一、根文件系统来自哪里"></a>一、根文件系统来自哪里</h2><h3 id="1-1-包含哪些部分"><a href="#1-1-包含哪些部分" class="headerlink" title="1.1 包含哪些部分"></a>1.1 包含哪些部分</h3><blockquote>
+<p>rootfs：这是根文件系统里面比较熟悉的</p>
 </blockquote>
 <blockquote>
-<p>绘制点时鼠标在移动，因此，要设置鼠标的回调函数，那当什么时候调用回调函数呢，显然，是鼠标左键按下并且鼠标在移动的时候。</p>
+<p>userdata：用户数据</p>
 </blockquote>
 <blockquote>
-<p>因此，程序整体结构是：定义一个回调函数，这个回调函数用于画图；然后建立一个窗口，窗口绑定回调函数；最后将回调函数画的图显示在这个窗口上。</p>
+<blockquote>
+<p>比如，安卓手机里面，就是有一些目录，专门存放我们的用户数据的</p>
 </blockquote>
-<p>想法有了，可以开始着手了。</p>
-<h2 id="2-写出基本结构"><a href="#2-写出基本结构" class="headerlink" title="2.写出基本结构"></a>2.写出基本结构</h2><p>由于Python的便捷性，先采用Python实现，不用太顾及语法问题。</p>
-<p>下面先调出第一个版本的源码。</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> cv2
-<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
-
-<span class="token comment"># 创建一个窗口</span>
-cv2<span class="token punctuation">.</span>namedWindow<span class="token punctuation">(</span><span class="token string">'image'</span><span class="token punctuation">)</span>
-
-<span class="token comment"># 创建一个黑色图像</span>
-img <span class="token operator">=</span> np<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">800</span><span class="token punctuation">,</span><span class="token number">600</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>uint8<span class="token punctuation">)</span>
-
-<span class="token comment"># 定义一个回调函数，用于绘制图像</span>
-<span class="token keyword">def</span> <span class="token function">draw_point</span><span class="token punctuation">(</span>event<span class="token punctuation">,</span>x<span class="token punctuation">,</span>y<span class="token punctuation">,</span>flags<span class="token punctuation">,</span>param<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">if</span> event <span class="token operator">==</span> cv2<span class="token punctuation">.</span>EVENT_LBUTTONDOWN<span class="token punctuation">:</span>
-        cv2<span class="token punctuation">.</span>circle<span class="token punctuation">(</span>img<span class="token punctuation">,</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">20</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
-        
-<span class="token comment"># 将回调函数绑定到窗口上</span>
-cv2<span class="token punctuation">.</span>setMouseCallback<span class="token punctuation">(</span><span class="token string">'image'</span><span class="token punctuation">,</span> draw_point<span class="token punctuation">)</span>
-
-<span class="token comment"># 主循环显示图像</span>
-<span class="token keyword">while</span><span class="token punctuation">(</span><span class="token boolean">True</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    cv2<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span><span class="token string">'image'</span><span class="token punctuation">,</span>img<span class="token punctuation">)</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>cv2<span class="token punctuation">.</span>waitKey<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token builtin">ord</span><span class="token punctuation">(</span><span class="token string">'q'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token keyword">break</span>
-
-cv2<span class="token punctuation">.</span>destroyAllWindows<span class="token punctuation">(</span><span class="token punctuation">)</span>
-
-<span class="token comment"># 保存图像</span>
-cv2<span class="token punctuation">.</span>imwrite<span class="token punctuation">(</span> <span class="token string">"OpenCV_Paint.png"</span><span class="token punctuation">,</span>img<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>第一个版本运行效果如下图所示：<br><img src="http://pic.huangruimin.tech/20191029181044.png"></p>
-<h2 id="3-总结，改进"><a href="#3-总结，改进" class="headerlink" title="3.总结，改进"></a>3.总结，改进</h2><p>在上一版本中，鼠标按下后，只能画一个点，在此情况下，需要改进为鼠标按下后，就一直画点，于是，改进后，就有了以下代码</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> cv2  
-<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np  
-
-isMouseLBDown <span class="token operator">=</span> <span class="token boolean">False</span>
-
-<span class="token keyword">def</span> <span class="token function">draw_circle</span><span class="token punctuation">(</span>event<span class="token punctuation">,</span>x<span class="token punctuation">,</span>y<span class="token punctuation">,</span>flags<span class="token punctuation">,</span>param<span class="token punctuation">)</span><span class="token punctuation">:</span> 
-
-    <span class="token keyword">print</span><span class="token punctuation">(</span>event<span class="token punctuation">)</span>
-    <span class="token keyword">global</span> isMouseLBDown
-
-    <span class="token keyword">if</span> event <span class="token operator">==</span> cv2<span class="token punctuation">.</span>EVENT_LBUTTONDOWN<span class="token punctuation">:</span>
-        <span class="token comment"># 检测到鼠标左键按下</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"mouse down"</span><span class="token punctuation">)</span>
-        isMouseLBDown <span class="token operator">=</span> <span class="token boolean">True</span>
-        cv2<span class="token punctuation">.</span>circle<span class="token punctuation">(</span>img<span class="token punctuation">,</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> 
-    <span class="token keyword">elif</span> event <span class="token operator">==</span> cv2<span class="token punctuation">.</span>EVENT_LBUTTONUP<span class="token punctuation">:</span>
-        <span class="token comment"># 检测到鼠标左键抬起</span>
-        isMouseLBDown <span class="token operator">=</span> <span class="token boolean">False</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"mouse up"</span><span class="token punctuation">)</span>
-    <span class="token keyword">elif</span> event <span class="token operator">==</span> cv2<span class="token punctuation">.</span>EVENT_MOUSEMOVE<span class="token punctuation">:</span>
-        <span class="token comment"># 如果鼠标按下并且鼠标在移动</span>
-        <span class="token keyword">if</span> isMouseLBDown<span class="token punctuation">:</span>
-            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"drawing"</span><span class="token punctuation">)</span>
-            cv2<span class="token punctuation">.</span>circle<span class="token punctuation">(</span>img<span class="token punctuation">,</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
-
-<span class="token comment"># 创建一个黑色图像，并绑定窗口和鼠标回调函数  </span>
-img <span class="token operator">=</span> np<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">512</span><span class="token punctuation">,</span><span class="token number">512</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>uint8<span class="token punctuation">)</span>  
-cv2<span class="token punctuation">.</span>namedWindow<span class="token punctuation">(</span><span class="token string">'image'</span><span class="token punctuation">)</span>
-<span class="token comment"># 设置鼠标事件回调</span>
-cv2<span class="token punctuation">.</span>setMouseCallback<span class="token punctuation">(</span><span class="token string">'image'</span><span class="token punctuation">,</span>draw_circle<span class="token punctuation">)</span>  
-
-<span class="token keyword">while</span><span class="token punctuation">(</span><span class="token boolean">True</span><span class="token punctuation">)</span><span class="token punctuation">:</span>  
-    cv2<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span><span class="token string">'image'</span><span class="token punctuation">,</span>img<span class="token punctuation">)</span>  
-    <span class="token keyword">if</span> cv2<span class="token punctuation">.</span>waitKey<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token builtin">ord</span><span class="token punctuation">(</span><span class="token string">'q'</span><span class="token punctuation">)</span><span class="token punctuation">:</span>  
-        <span class="token keyword">break</span>  
-cv2<span class="token punctuation">.</span>destroyAllWindows<span class="token punctuation">(</span><span class="token punctuation">)</span>
-
-cv2<span class="token punctuation">.</span>imwrite<span class="token punctuation">(</span><span class="token string">"OpenCV_Paint.png"</span><span class="token punctuation">,</span>  img<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>程序运行效果如下图所示：<br><img src="http://pic.huangruimin.tech/20191029191417.png"></p>
-<p>程序运行后，在黑窗中，按下鼠标左键，并且移动鼠标，即可绘制图案。</p>
-<h2 id="3-再次总结，改进"><a href="#3-再次总结，改进" class="headerlink" title="3.再次总结，改进"></a>3.再次总结，改进</h2><p>经过一番改进，总算是能画图了，但是，画图过程中，如果画笔速度过快，那么，将会导致出现断点，并且使用上，不能调整画笔的颜色，画笔的宽度等一系列参数。为此做了以下改进：</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> cv2  
-<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np  
-
-<span class="token comment"># 判断鼠标是否按下的标志</span>
-isMouseLBDown <span class="token operator">=</span> <span class="token boolean">False</span>
-<span class="token comment"># 画笔的颜色</span>
-circleColor <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
-<span class="token comment"># 画笔的粗壮</span>
-circleRadius <span class="token operator">=</span> <span class="token number">5</span>
-<span class="token comment"># 上一次的点</span>
-lastPoint <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
-
-<span class="token comment"># 定义鼠标函数，用于绘图</span>
-<span class="token keyword">def</span> <span class="token function">draw_circle</span><span class="token punctuation">(</span>event<span class="token punctuation">,</span>x<span class="token punctuation">,</span>y<span class="token punctuation">,</span>flags<span class="token punctuation">,</span>param<span class="token punctuation">)</span><span class="token punctuation">:</span> 
-
-    <span class="token keyword">global</span> img
-    <span class="token keyword">global</span> isMouseLBDown
-    <span class="token keyword">global</span> color
-    <span class="token keyword">global</span> lastPoint
-
-    <span class="token keyword">if</span> event <span class="token operator">==</span> cv2<span class="token punctuation">.</span>EVENT_LBUTTONDOWN<span class="token punctuation">:</span>
-        <span class="token comment"># 检测到鼠标左键按下，按下就画圆，并且记录抬起按键之前的点</span>
-        isMouseLBDown <span class="token operator">=</span> <span class="token boolean">True</span>
-        cv2<span class="token punctuation">.</span>circle<span class="token punctuation">(</span>img<span class="token punctuation">,</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token builtin">int</span><span class="token punctuation">(</span>circleRadius<span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span> circleColor<span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
-        lastPoint <span class="token operator">=</span> <span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span>
-    <span class="token keyword">elif</span> event <span class="token operator">==</span> cv2<span class="token punctuation">.</span>EVENT_LBUTTONUP<span class="token punctuation">:</span>
-        <span class="token comment"># 检测到鼠标左键抬起</span>
-        isMouseLBDown <span class="token operator">=</span> <span class="token boolean">False</span>
-    <span class="token keyword">elif</span> event <span class="token operator">==</span> cv2<span class="token punctuation">.</span>EVENT_MOUSEMOVE<span class="token punctuation">:</span>
-        <span class="token comment"># 如果鼠标左键按下，并且鼠标在移动,就画线</span>
-        <span class="token comment"># 并且记录按键抬起之前的点</span>
-        <span class="token keyword">if</span> isMouseLBDown<span class="token punctuation">:</span>
-            cv2<span class="token punctuation">.</span>line<span class="token punctuation">(</span>img<span class="token punctuation">,</span> pt1<span class="token operator">=</span>lastPoint<span class="token punctuation">,</span> pt2<span class="token operator">=</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">,</span> color<span class="token operator">=</span>circleColor<span class="token punctuation">,</span> thickness<span class="token operator">=</span>circleRadius<span class="token punctuation">)</span>
-            lastPoint <span class="token operator">=</span> <span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span>
-
-<span class="token comment"># 定义滑动条回调函数，用于更改颜色</span>
-<span class="token keyword">def</span> <span class="token function">updateCircleColor</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">global</span> circleColor
-    <span class="token keyword">global</span> colorPreviewImg
-
-    r <span class="token operator">=</span> cv2<span class="token punctuation">.</span>getTrackbarPos<span class="token punctuation">(</span><span class="token string">'Channel_Red'</span><span class="token punctuation">,</span><span class="token string">'image'</span><span class="token punctuation">)</span>
-    g <span class="token operator">=</span> cv2<span class="token punctuation">.</span>getTrackbarPos<span class="token punctuation">(</span><span class="token string">'Channel_Green'</span><span class="token punctuation">,</span><span class="token string">'image'</span><span class="token punctuation">)</span>
-    b <span class="token operator">=</span> cv2<span class="token punctuation">.</span>getTrackbarPos<span class="token punctuation">(</span><span class="token string">'Channel_Blue'</span><span class="token punctuation">,</span><span class="token string">'image'</span><span class="token punctuation">)</span>
-
-    circleColor <span class="token operator">=</span> <span class="token punctuation">(</span>b<span class="token punctuation">,</span> g<span class="token punctuation">,</span> r<span class="token punctuation">)</span>
-    colorPreviewImg<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">]</span> <span class="token operator">=</span> circleColor
-
-<span class="token comment"># 定义滑动条回调函数，用于更改线条的粗壮</span>
-<span class="token keyword">def</span> <span class="token function">updateCircleRadius</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">global</span> circleRadius
-    <span class="token keyword">global</span> radiusPreview
-
-    circleRadius <span class="token operator">=</span> cv2<span class="token punctuation">.</span>getTrackbarPos<span class="token punctuation">(</span><span class="token string">'Circle_Radius'</span><span class="token punctuation">,</span> <span class="token string">'image'</span><span class="token punctuation">)</span>
-    radiusPreview<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">,</span> <span class="token number">255</span><span class="token punctuation">,</span> <span class="token number">255</span><span class="token punctuation">)</span>
-    cv2<span class="token punctuation">.</span>circle<span class="token punctuation">(</span>radiusPreview<span class="token punctuation">,</span> center<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">,</span> radius<span class="token operator">=</span><span class="token builtin">int</span><span class="token punctuation">(</span>circleRadius <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span> color<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> thickness<span class="token operator">=</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
-
-<span class="token comment"># 预览画布用的画布</span>
-img <span class="token operator">=</span> np<span class="token punctuation">.</span>ones<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">512</span><span class="token punctuation">,</span><span class="token number">512</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>uint8<span class="token punctuation">)</span>
-img<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">,</span> <span class="token number">255</span><span class="token punctuation">,</span> <span class="token number">255</span><span class="token punctuation">)</span>
-
-<span class="token comment"># 预览画笔颜色用的画布</span>
-colorPreviewImg <span class="token operator">=</span> np<span class="token punctuation">.</span>ones<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>uint8<span class="token punctuation">)</span>
-colorPreviewImg<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span>  <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
-
-<span class="token comment"># 预览画笔粗壮用的画布</span>
-radiusPreview <span class="token operator">=</span> np<span class="token punctuation">.</span>ones<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>uint8<span class="token punctuation">)</span>
-radiusPreview<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">,</span> <span class="token number">255</span><span class="token punctuation">,</span> <span class="token number">255</span><span class="token punctuation">)</span>
-
-
-<span class="token comment"># 预览画布用的窗口</span>
-cv2<span class="token punctuation">.</span>namedWindow<span class="token punctuation">(</span><span class="token string">'image'</span><span class="token punctuation">)</span>
-
-<span class="token comment"># 预览画笔颜色用的窗口</span>
-cv2<span class="token punctuation">.</span>namedWindow<span class="token punctuation">(</span><span class="token string">'colorPreview'</span><span class="token punctuation">)</span>
-
-<span class="token comment"># 预览画笔粗壮用的窗口</span>
-cv2<span class="token punctuation">.</span>namedWindow<span class="token punctuation">(</span><span class="token string">'radiusPreview'</span><span class="token punctuation">)</span>
-
-
-<span class="token comment"># 画画的鼠标回调，绑定在预览画布窗口上</span>
-cv2<span class="token punctuation">.</span>setMouseCallback<span class="token punctuation">(</span><span class="token string">'image'</span><span class="token punctuation">,</span>draw_circle<span class="token punctuation">)</span>  
-
-
-<span class="token comment"># 更改颜色用的滑条回调，绑定在预览画布用的窗口</span>
-cv2<span class="token punctuation">.</span>createTrackbar<span class="token punctuation">(</span><span class="token string">'Channel_Red'</span><span class="token punctuation">,</span><span class="token string">'image'</span><span class="token punctuation">,</span><span class="token number">60</span><span class="token punctuation">,</span><span class="token number">255</span><span class="token punctuation">,</span>updateCircleColor<span class="token punctuation">)</span>
-cv2<span class="token punctuation">.</span>createTrackbar<span class="token punctuation">(</span><span class="token string">'Channel_Green'</span><span class="token punctuation">,</span><span class="token string">'image'</span><span class="token punctuation">,</span><span class="token number">120</span><span class="token punctuation">,</span><span class="token number">255</span><span class="token punctuation">,</span>updateCircleColor<span class="token punctuation">)</span>
-cv2<span class="token punctuation">.</span>createTrackbar<span class="token punctuation">(</span><span class="token string">'Channel_Blue'</span><span class="token punctuation">,</span><span class="token string">'image'</span><span class="token punctuation">,</span><span class="token number">180</span><span class="token punctuation">,</span><span class="token number">255</span><span class="token punctuation">,</span>updateCircleColor<span class="token punctuation">)</span>
-
-<span class="token comment"># 更改线条粗壮的滑条回调，绑定在预览画布用的窗口</span>
-cv2<span class="token punctuation">.</span>createTrackbar<span class="token punctuation">(</span><span class="token string">'Circle_Radius'</span><span class="token punctuation">,</span><span class="token string">'image'</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">20</span><span class="token punctuation">,</span>updateCircleRadius<span class="token punctuation">)</span>
-
-<span class="token keyword">while</span><span class="token punctuation">(</span><span class="token boolean">True</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-
-    <span class="token comment"># 画布</span>
-    cv2<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span><span class="token string">'image'</span><span class="token punctuation">,</span>img<span class="token punctuation">)</span> 
-    <span class="token comment"># 画笔颜色</span>
-    cv2<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span><span class="token string">'colorPreview'</span><span class="token punctuation">,</span> colorPreviewImg<span class="token punctuation">)</span>
-    <span class="token comment"># 画笔线条粗壮</span>
-    cv2<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span><span class="token string">'radiusPreview'</span><span class="token punctuation">,</span> radiusPreview<span class="token punctuation">)</span>
-
-    <span class="token keyword">if</span> cv2<span class="token punctuation">.</span>waitKey<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token builtin">ord</span><span class="token punctuation">(</span><span class="token string">'q'</span><span class="token punctuation">)</span><span class="token punctuation">:</span>  
-        <span class="token keyword">break</span>
-
-cv2<span class="token punctuation">.</span>destroyAllWindows<span class="token punctuation">(</span><span class="token punctuation">)</span>
-cv2<span class="token punctuation">.</span>imwrite<span class="token punctuation">(</span><span class="token string">"OpenCV_Paint.png"</span><span class="token punctuation">,</span>  img<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>程序运行效如下图所示，通过该程序，即可比较方便地绘图，并且，可调整画笔的颜色以及画笔的粗细：<br><img src="http://pic.huangruimin.tech/20191029195835.png"></p>
+</blockquote>
+<blockquote>
+<p>编译完成之后，是在我们的这个result目录里面</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220213220051.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220213220147.png"></p>
+<blockquote>
+<p>但是，result只是一个符号链接，指向的其实是/osdrv/pub</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220213220251.png"></p>
+<blockquote>
+<p>真正的位置，其实是在/osdrv/pub里面的。这里面；其实就是我们构建完后，生成的。</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220213220456.png"></p>
+<blockquote>
+<p>以上分别是：U-boot，Kernel，Rootfs</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220213220555.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220213220717.png"></p>
+<blockquote>
+<p>在这个userdata里面，是有userdata的<br>在这里面，有很多的文件，是因为有很多的配置</p>
+</blockquote>
+<blockquote>
+<p>userfs里面，最主要的就是那个user.conf文件，那个conf文件呢，可以被配置成各种参数</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>sensor，lcd的不同造成了各种差异</p>
+</blockquote>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220213222059.png"></p>
+<blockquote>
+<p>这里，这里提供一个，我们根据自己的需求，自己去配，也很简单</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220214202128.png"></p>
+<blockquote>
+<p>如何生成的呢，其实，就是通过这个命令：make_ext4fs这个命令来生成</p>
+</blockquote>
+<h3 id="1-2-基本流程"><a href="#1-2-基本流程" class="headerlink" title="1.2 基本流程"></a>1.2 基本流程</h3><blockquote>
+<p>如何构建根文件系统：</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<ul>
+<li>首先，建立这些目录，也就是常见的那些目录</li>
+</ul>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<ul>
+<li>然后，再把busybox移植进去</li>
+</ul>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<ul>
+<li>然后，再把那些必要的英文程序库给拷贝进去</li>
+</ul>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<ul>
+<li>再然后，生成一个文件夹格式的根文件系统</li>
+</ul>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<ul>
+<li>最后，再用make工具去make</li>
+</ul>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>这整个make流程是不变的</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<h3 id="1-3-具体流程"><a href="#1-3-具体流程" class="headerlink" title="1.3 具体流程"></a>1.3 具体流程</h3><p><img src="https://pic.huangruimin.tech/20220214204310.png"></p>
+<blockquote>
+<p>一开始，空的根文件系统是上面这个</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>这上面这个东西，一开始的时候，不是全空的，是有一些东西的，是在海思的SDK里面提供的</p>
+</blockquote>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220214204503.png"></p>
+<blockquote>
+<p>解压之后，就生成了这个文件夹</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220214204551.png"></p>
+<blockquote>
+<p>生成了这个之后，把制作根文件系统过程中，需要拷贝的东西，都拷贝到这个文件夹中来</p>
+</blockquote>
+<h3 id="1-4-文件夹分析"><a href="#1-4-文件夹分析" class="headerlink" title="1.4 文件夹分析"></a>1.4 文件夹分析</h3><p><img src="https://pic.huangruimin.tech/20220214205228.png"></p>
+<blockquote>
+<p>现在，可以直接把这个文件夹拷贝到Windows中进行分析</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>因为分析的过程很简单，所以，现在就不拷贝出来了</p>
+</blockquote>
+</blockquote>
+<h3 id="1-5是怎样填充的呢"><a href="#1-5是怎样填充的呢" class="headerlink" title="1.5是怎样填充的呢"></a>1.5是怎样填充的呢</h3><blockquote>
+<p>实际上，是有一些脚本，或者一些Makefile进行填充的</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220214205537.png"></p>
+<blockquote>
+<p>实际上，是在这个脚本里面可以看到的</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220214205616.png"></p>
+<blockquote>
+<p>现在，可以来分析这个make.sh这个脚本文件</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>其实，这一套，在Makefile里面也是有的</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>但不管用的是那一套，套路是一样的</p>
+</blockquote>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220214212943.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220214213007.png"></p>
+<blockquote>
+<p>这里面，定义了很多目录，定义的这些目录都很重要，因为到时候哪个去哪里找，都是看这里的</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220214213248.png"></p>
+<blockquote>
+<p>这个是build u-boot</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220214213339.png"></p>
+<blockquote>
+<p>这个是build kernel</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220214213424.png"></p>
+<blockquote>
+<p>这个是用来编译：busy box的</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220214213609.png"></p>
+<blockquote>
+<p>如果没有busybox，也没有busybox_dir，那么，就创建一个文件指向这个busybox_dir，也就是用了符号链接</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220214213726.png"></p>
+<blockquote>
+<p>如果还没有创建成功的话，就返回错误</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>如果成功的话， 就创建了这个符号链接了</p>
+</blockquote>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220214213850.png"></p>
+<blockquote>
+<p>如果有.config的话，那就直接用了</p>
+<blockquote>
+<p>如果没有.config的话，copy我们的busybox中的.config到到。config</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>这就是那个什么的Make default_config</p>
+</blockquote>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220214214157.png"></p>
+<blockquote>
+<p>打印出CPU的核心数</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220214214239.png"></p>
+<blockquote>
+<p>然后，这里，就开始执行make了</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220214214327.png"></p>
+<blockquote>
+<p>然后再进行make</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220214214348.png"></p>
+<blockquote>
+<p>然后，进行make install</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220214214425.png"></p>
+<blockquote>
+<p>然后，再把install的内容给copy到这里</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>就是在这一步，把busybox给填充进去了</p>
+</blockquote>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220214214612.png"></p>
+<blockquote>
+<p>否则，编译生成busybox失败</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220214214649.png"></p>
+<blockquote>
+<p>然后，这一步，就是开始实际制作rootfs了</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220214214842.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220214215209.png"></p>
+<blockquote>
+<p>这个osdrv/pub，其实就是我们的这个目录</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220214215234.png"></p>
+<blockquote>
+<p>其实也就是result目录</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220214215444.png"></p>
+<blockquote>
+<p>如果不存在rootfs，那就先解压开</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220214215520.png"></p>
+<blockquote>
+<p>否则就提示没有找到，在解压开之后，就进入到linux的那个sample目录下</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>这个A7_LINUX_DIR，其实就是这个：</p>
+</blockquote>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220214224908.png"></p>
+<blockquote>
+<blockquote>
+<p>这个smp其实就是多核的意思</p>
+</blockquote>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220214215639.png"></p>
+<blockquote>
+<p>现在开始往rootfs里面添加东西了，现在来查看一下cp2rootfs.sh</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220214225142.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220214225232.png"></p>
+<p><img src="https://pic.huangruimin.tech/20220214225338.png"></p>
+<blockquote>
+<blockquote>
+<p>这个FS_CUSTOM就是这个目录：</p>
+</blockquote>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220214225431.png"></p>
+<blockquote>
+<blockquote>
+<p>这个就是我们要制作的根文件夹形式的文件系统的根目录</p>
+</blockquote>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220214225613.png"></p>
+<blockquote>
+<blockquote>
+<p>然后，这个目录里面呢，就有一个usr</p>
+</blockquote>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220214225717.png"></p>
+<blockquote>
+<p>这里呢，是copy到usr/sample里面来</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220214225745.png"></p>
+<blockquote>
+<p>所以呢，就来看一下这里的sample：</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220214225831.png"></p>
+<blockquote>
+<p>这里面呢，就有sample</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220214230036.png"></p>
+<blockquote>
+<p>最终在开发板上面运行的，也是这样的，现在来看一下开发板这边：</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220214230103.png"></p>
+<blockquote>
+<p>最终的执行程序，就是这个vio</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>这个vio就是我们双sensor采集，在屏幕上来显示的那个，这个程序呢，其实对应的就是这个vio</p>
+</blockquote>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220214230239.png"></p>
+<blockquote>
+<p>就是在我们copy到rootfs的时候哦，copy进来的</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>这里面，其实copy了很多个sample</p>
+</blockquote>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220214230433.png"></p>
+<blockquote>
+<p>这里面，也copy了一个usr script</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>这些脚本是干什么的呢？其实是可以在这边看一下的：</p>
+</blockquote>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220214230600.png"></p>
+<blockquote>
+<p>这里面的一些脚本，其实就是测试脚本</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>这些脚本也要部署到开发板上，如果不部署这些脚本，怎么测试呢？</p>
+</blockquote>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220214230823.png"></p>
+<blockquote>
+<p>然后，创建了2个空文件夹，这两个空文件夹创建后，用来干嘛的呢？</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>userdata这个目录创建来是用来在我们后面挂载我们的user_fs的</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>也就是说：最终生成的user_data，烧录的时候，烧录的最后的那个分区，最后，就会被挂载到userdata这个文件夹里面去，所以，在这里创建这个文件夹就是为了制造它的挂载点</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>usr这个目录创建来是为了做什么呢？这个就是用户用来放我们自己的一些东西的，这个也就是用户的目录</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>这样做也就是为了看起来比较正式</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>也是为了将来放数据的时候，比较正规</p>
+</blockquote>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220214234935.png"></p>
+<blockquote>
+<p>这个就是用户的目录里面有一个回收站，这个可以理解为，就是用户的桌面</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220214215709.png"></p>
+<blockquote>
+<p>这是与共享设备有关的</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220214235121.png"></p>
+<blockquote>
+<p>这个就是为了进入到RESULT_DIR，然后执行打包命令，打包制作了一个ext4文件，指定了大小为200M，但是实际没有200M</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220214235418.png"></p>
+<blockquote>
+<p>然后，这个就弄完了，开始制作自己的userdata了</p>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220214235509.png"></p>
+<blockquote>
+<p>userdata其实就是刚刚看到的那个userdata文件直接制作</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>实际上，制作文件系统的流程还是比较简单的，就是这样的一些流程而已</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>知道文件从哪里来的，这样就OK了</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>但是，这里不应当还有好多的东西都要被复制的吗？</p>
+</blockquote>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220214235915.png"></p>
+<blockquote>
+<blockquote>
+<p>比如说usr目录下，还有好多的.ko文件，Qt文件，是没有被复制的，应该也是在其他什么地方被复制的</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>buildroot，makefile，shell脚本，等等都可以进行制作的</p>
+</blockquote>
+</blockquote>
+<p><img src="https://pic.huangruimin.tech/20220215000640.png"></p>
+<blockquote>
+<blockquote>
+<p>Linux里面的执行从：/etc/init.d这个地方的rcS开始的</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>但是，这个是谁决定的呢？这个是busybox决定的；因为busybox是我们的任务1</p>
+</blockquote>
+</blockquote>
+</blockquote>
 
                 
             </div>
@@ -654,7 +871,7 @@ cv2<span class="token punctuation">.</span>imwrite<span class="token punctuation
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://www.huangruimin.tech/2019/03/03/rpi-opencv-hui-tu-ban-zong-he/">http://www.huangruimin.tech/2019/03/03/rpi-opencv-hui-tu-ban-zong-he/</a>
+                    <a href="http://www.huangruimin.tech/2021/10/26/hi3516dv300-20-gen-wen-jian-xi-tong-jie-xi-1/">http://www.huangruimin.tech/2021/10/26/hi3516dv300-20-gen-wen-jian-xi-tong-jie-xi-1/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -863,12 +1080,13 @@ cv2<span class="token punctuation">.</span>imwrite<span class="token punctuation
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2019/09/24/rpi-opencv-tu-xiang-yu-shi-pin-zai-ru-xian-shi-shu-chu/">
+                <a href="/2021/10/27/hi3516dv300-21-gen-wen-jian-xi-tong-jie-xi-2/">
                     <div class="card-image">
                         
-                        <img src="http://pic.huangruimin.tech/banner_23.jpg" class="responsive-img" alt="RPi-OpenCV_图像与视频载入、显示、输出">
                         
-                        <span class="card-title">RPi-OpenCV_图像与视频载入、显示、输出</span>
+                        <img src="http://pic.huangruimin.tech/Transformers2_46.jpg" class="responsive-img" alt="HI3516DV300_21_根文件系统解析2">
+                        
+                        <span class="card-title">HI3516DV300_21_根文件系统解析2</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -879,7 +1097,7 @@ cv2<span class="token punctuation">.</span>imwrite<span class="token punctuation
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2019-09-24
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-10-27
                         </span>
                         <span class="publish-author">
                             
@@ -899,12 +1117,13 @@ cv2<span class="token punctuation">.</span>imwrite<span class="token punctuation
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2018/10/10/rpi-opencv-she-xiang-tou-de-ji-ben-shi-yong/">
+                <a href="/2021/10/25/hi3516dv300-19-hong-mo-ping-ce-shi-ji-qu-dong-xiang-jie-2/">
                     <div class="card-image">
                         
-                        <img src="http://pic.huangruimin.tech/banner_14.jpg" class="responsive-img" alt="RPi-OpenCV_摄像头的基本使用">
                         
-                        <span class="card-title">RPi-OpenCV_摄像头的基本使用</span>
+                        <img src="http://pic.huangruimin.tech/Transformers3_55.jpg" class="responsive-img" alt="HI3516DV300_19_触摸屏测试及驱动详解2">
+                        
+                        <span class="card-title">HI3516DV300_19_触摸屏测试及驱动详解2</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -915,7 +1134,7 @@ cv2<span class="token punctuation">.</span>imwrite<span class="token punctuation
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2018-10-10
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-25
                             </span>
                         <span class="publish-author">
                             
