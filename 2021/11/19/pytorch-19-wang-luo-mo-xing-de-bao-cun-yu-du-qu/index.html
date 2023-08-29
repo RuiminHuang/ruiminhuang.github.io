@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="PyTorch_18_现有模型的使用和修改, AI, TensorRT, Infrared">
+    <meta name="keywords" content="PyTorch_19_网络模型的保存与读取, AI, TensorRT, Infrared">
     <meta name="description" content="Personal essay record">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>PyTorch_18_现有模型的使用和修改 | Ruimin Huang&#39;s Space</title>
+    <title>PyTorch_19_网络模型的保存与读取 | Ruimin Huang&#39;s Space</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -259,12 +259,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('http://pic.huangruimin.tech/The_Wandering_Earth2_58.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('http://pic.huangruimin.tech/Transformers3_11.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">PyTorch_18_现有模型的使用和修改</h1>
+                    <h1 class="description center-align post-title">PyTorch_19_网络模型的保存与读取</h1>
                 </div>
             </div>
         </div>
@@ -392,21 +392,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-11-18
+                    2021-11-19
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-08-28
+                    2023-08-29
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    196
+                    307
                 </div>
                 
 
@@ -436,40 +436,76 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> torchvision
+                <ul>
+<li>model_save.py</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> torch
+<span class="token keyword">import</span> torchvision
 
-<span class="token comment"># train_data = torchvision.datasets.ImageNet("./dataset", split='train', download=True,</span>
-<span class="token comment">#                                            transform=torchvision.transforms.ToTensor)</span>
-
-<span class="token comment"># 这个使用的是随机参数</span>
+<span class="token comment"># 这个是没有经过训练的</span>
 <span class="token keyword">from</span> torch <span class="token keyword">import</span> nn
 
-vgg16_false <span class="token operator">=</span> torchvision<span class="token punctuation">.</span>models<span class="token punctuation">.</span>vgg16<span class="token punctuation">(</span>pretrained<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
-<span class="token comment"># 这个是加载了训练好的参数</span>
-vgg16_true <span class="token operator">=</span> torchvision<span class="token punctuation">.</span>models<span class="token punctuation">.</span>vgg16<span class="token punctuation">(</span>pretrained<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'ok'</span><span class="token punctuation">)</span>
+vgg16 <span class="token operator">=</span> torchvision<span class="token punctuation">.</span>models<span class="token punctuation">.</span>vgg16<span class="token punctuation">(</span>pretrained<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+<span class="token comment"># 保存方式一：保存模型结构+模型参数</span>
+<span class="token comment"># 这里不仅保存了网络模型的一些结构，也保存了网络模型的一些参数</span>
+torch<span class="token punctuation">.</span>save<span class="token punctuation">(</span>vgg16<span class="token punctuation">,</span> <span class="token string">"vgg16_method1.pth"</span><span class="token punctuation">)</span>
 
-<span class="token comment"># 可以看出，这是分成了1000多个类的</span>
-<span class="token comment"># print(vgg16_true)</span>
+<span class="token comment"># 保存方式二：模型参数(官方推荐)</span>
+<span class="token comment"># 获取vgg16的状态，并把它保存为字典的形式</span>
+torch<span class="token punctuation">.</span>save<span class="token punctuation">(</span>vgg16<span class="token punctuation">.</span>state_dict<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"vgg16_method2.pth"</span><span class="token punctuation">)</span>
 
 
-train_data <span class="token operator">=</span> torchvision<span class="token punctuation">.</span>datasets<span class="token punctuation">.</span>CIFAR10<span class="token punctuation">(</span><span class="token string">"./dataset"</span><span class="token punctuation">,</span> train<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> download<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span>
-                                          transform<span class="token operator">=</span>torchvision<span class="token punctuation">.</span>transforms<span class="token punctuation">.</span>ToTensor<span class="token punctuation">)</span>
-<span class="token comment"># 方式一：把1000改成10</span>
-<span class="token comment"># 方式二：再加一层，让输入是1000，输出是10</span>
-<span class="token comment"># 通过现有的网络，改变他的结构，满足我们的要求</span>
-<span class="token comment"># 很多框架都会把vgg16当成一个前置的网络</span>
+<span class="token comment"># 陷阱</span>
+<span class="token keyword">class</span> <span class="token class-name">TuDui</span><span class="token punctuation">(</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token builtin">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>conv1 <span class="token operator">=</span> nn<span class="token punctuation">.</span>Conv2d<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">64</span><span class="token punctuation">,</span> kernel_size<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">)</span>
 
-<span class="token comment"># 添加的方式</span>
-<span class="token comment"># vgg16_true.add_module('add_linear', nn.Linear(1000, 10))</span>
-<span class="token comment"># vgg16_true.features.add_module('add_linear', nn.Linear(1000, 10))</span>
-<span class="token comment"># vgg16_true.avgpool.add_module('add_linear', nn.Linear(1000, 10))</span>
-vgg16_true<span class="token punctuation">.</span>classifier<span class="token punctuation">.</span>add_module<span class="token punctuation">(</span><span class="token string">'add_linear'</span><span class="token punctuation">,</span> nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>vgg16_true<span class="token punctuation">)</span>
+    <span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        x <span class="token operator">=</span> self<span class="token punctuation">.</span>conv1<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> x
 
-<span class="token comment"># 修改的方式</span>
-vgg16_false<span class="token punctuation">.</span>classifier<span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">]</span> <span class="token operator">=</span> nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span><span class="token number">4096</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>vgg16_false<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+tudui <span class="token operator">=</span> TuDui<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+torch<span class="token punctuation">.</span>save<span class="token punctuation">(</span>tudui<span class="token punctuation">,</span> <span class="token string">"tudui_method1.pth"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>model_load.py</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> torch
+<span class="token keyword">import</span> torchvision
+
+<span class="token comment">#方式一，对应保存方式一</span>
+<span class="token keyword">from</span> torch <span class="token keyword">import</span> nn
+<span class="token comment"># from model_save import TuDui</span>
+
+model <span class="token operator">=</span> torch<span class="token punctuation">.</span>load<span class="token punctuation">(</span><span class="token string">"vgg16_method1.pth"</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>model<span class="token punctuation">)</span>
+
+<span class="token comment">#方式二，加载模型</span>
+vgg16 <span class="token operator">=</span> torchvision<span class="token punctuation">.</span>models<span class="token punctuation">.</span>vgg16<span class="token punctuation">(</span>pretrained<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+<span class="token comment"># 这里面获取的就是字典</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>torch<span class="token punctuation">.</span>load<span class="token punctuation">(</span><span class="token string">"vgg16_method2.pth"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+vgg16<span class="token punctuation">.</span>load_state_dict<span class="token punctuation">(</span>torch<span class="token punctuation">.</span>load<span class="token punctuation">(</span><span class="token string">"vgg16_method2.pth"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>vgg16<span class="token punctuation">)</span>
+
+<span class="token comment"># 陷阱1</span>
+<span class="token comment"># 这会的时候，还需要把这个模型的类给搬过来</span>
+<span class="token comment"># 但是现在不用写这个了：tudui = TuDui()</span>
+<span class="token comment"># 就是为了确保加载的这个网络模型就是你想要的网络模型</span>
+<span class="token keyword">class</span> <span class="token class-name">TuDui</span><span class="token punctuation">(</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token builtin">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>conv1 <span class="token operator">=</span> nn<span class="token punctuation">.</span>Conv2d<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">64</span><span class="token punctuation">,</span> kernel_size<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        x <span class="token operator">=</span> self<span class="token punctuation">.</span>conv1<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> x
+
+model <span class="token operator">=</span> torch<span class="token punctuation">.</span>load<span class="token punctuation">(</span><span class="token string">"tudui_method1.pth"</span><span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>model<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
                 
             </div>
             <hr/>
@@ -495,7 +531,7 @@ vgg16_false<span class="token punctuation">.</span>classifier<span class="token 
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://www.huangruimin.tech/2021/11/18/pytorch-18-xian-you-mo-xing-de-shi-yong-he-xiu-gai/">http://www.huangruimin.tech/2021/11/18/pytorch-18-xian-you-mo-xing-de-shi-yong-he-xiu-gai/</a>
+                    <a href="http://www.huangruimin.tech/2021/11/19/pytorch-19-wang-luo-mo-xing-de-bao-cun-yu-du-qu/">http://www.huangruimin.tech/2021/11/19/pytorch-19-wang-luo-mo-xing-de-bao-cun-yu-du-qu/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -704,12 +740,13 @@ vgg16_false<span class="token punctuation">.</span>classifier<span class="token 
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/09/15/rpi-opencv-opencv-zhong-highgui-ji-xiang-guan-shang-wei-ji-kai-fa/">
+                <a href="/2021/11/20/pytorch-20-wan-zheng-de-mo-xing-xun-lian-tao-lu/">
                     <div class="card-image">
                         
-                        <img src="http://pic.huangruimin.tech/banner_18.jpg" class="responsive-img" alt="RPi-OpenCV_OpenCV中HighGUI及相关上位机开发">
                         
-                        <span class="card-title">RPi-OpenCV_OpenCV中HighGUI及相关上位机开发</span>
+                        <img src="http://pic.huangruimin.tech/The_Wandering_Earth2_66.jpg" class="responsive-img" alt="PyTorch_20_完整的模型训练套路">
+                        
+                        <span class="card-title">PyTorch_20_完整的模型训练套路</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -720,7 +757,7 @@ vgg16_false<span class="token punctuation">.</span>classifier<span class="token 
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-09-15
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-11-20
                         </span>
                         <span class="publish-author">
                             
@@ -740,13 +777,13 @@ vgg16_false<span class="token punctuation">.</span>classifier<span class="token 
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/11/17/pytorch-17-you-hua-qi/">
+                <a href="/2021/11/18/pytorch-18-xian-you-wang-luo-mo-xing-de-shi-yong-ji-xiu-gai/">
                     <div class="card-image">
                         
                         
-                        <img src="http://pic.huangruimin.tech/Transformers2_68.jpg" class="responsive-img" alt="PyTorch_17_优化器">
+                        <img src="http://pic.huangruimin.tech/The_Wandering_Earth2_58.jpg" class="responsive-img" alt="PyTorch_18_现有模型的使用和修改">
                         
-                        <span class="card-title">PyTorch_17_优化器</span>
+                        <span class="card-title">PyTorch_18_现有模型的使用和修改</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -757,7 +794,7 @@ vgg16_false<span class="token punctuation">.</span>classifier<span class="token 
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-17
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-18
                             </span>
                         <span class="publish-author">
                             
@@ -966,7 +1003,7 @@ vgg16_false<span class="token punctuation">.</span>classifier<span class="token 
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">167.5k</span>&nbsp;字
+                class="white-color">169.9k</span>&nbsp;字
             
             
             
