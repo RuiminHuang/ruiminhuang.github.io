@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="归档: 2020, AI, TensorRT, Infrared">
+    <meta name="keywords" content="AI, TensorRT, Infrared">
     <meta name="description" content="Personal essay record">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>归档: 2020 | Ruimin Huang&#39;s Space</title>
+    <title>Ruimin Huang&#39;s Space</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -255,6 +255,7 @@
 
 </header>
 
+    
     <div class="bg-cover pd-header about-cover">
     <div class="container">
     <div class="row">
@@ -303,319 +304,525 @@
     </div>
 </div>
 
+
 <main class="content">
 
     
-    <div class="container archive-calendar">
-    <div class="card">
-        <div id="post-calendar" class="card-content"></div>
-    </div>
-</div>
-
-<script type="text/javascript" src="/libs/echarts/echarts.min.js"></script>
-<script type="text/javascript">
-    let myChart = echarts.init(document.getElementById('post-calendar'));
 
     
 
-    let option = {
-        title: {
-            top: 0,
-            text: '文章日历',
-            left: 'center',
-            textStyle: {
-                color: '#3C4858'
-            }
-        },
-        tooltip: {
-            padding: 10,
-            backgroundColor: '#555',
-            borderColor: '#777',
-            borderWidth: 1,
-            formatter: function (obj) {
-                var value = obj.value;
-                return '<div style="font-size: 14px;">' + value[0] + '：' + value[1] + '</div>';
-            }
-        },
-        visualMap: {
-            show: true,
-            showLabel: true,
-            categories: [0, 1, 2, 3, 4],
-            calculable: true,
-            inRange: {
-                symbol: 'rect',
-                color: ['#ebedf0', '#c6e48b', '#7bc96f', '#239a3b', '#196127']
-            },
-            itemWidth: 12,
-            itemHeight: 12,
-            orient: 'horizontal',
-            left: 'center',
-            bottom: 0
-        },
-        calendar: [{
-            left: 'center',
-            range: ["2022-08-31", "2023-08-31"],
-            cellSize: [13, 13],
-            splitLine: {
-                show: false
-            },
-            itemStyle: {
-                color: '#196127',
-                borderColor: '#fff',
-                borderWidth: 2
-            },
-            yearLabel: {
-                show: false
-            },
-            monthLabel: {
-                nameMap: 'cn',
-                fontSize: 11
-            },
-            dayLabel: {
-                formatter: '{start}  1st',
-                nameMap: 'cn',
-                fontSize: 11
-            }
-        }],
-        series: [{
-            type: 'heatmap',
-            coordinateSystem: 'calendar',
-            calendarIndex: 0,
-            data: [["2022-08-31", 0], ["2022-09-01", 0], ["2022-09-02", 0], ["2022-09-03", 0], ["2022-09-04", 0], ["2022-09-05", 0], ["2022-09-06", 0], ["2022-09-07", 0], ["2022-09-08", 0], ["2022-09-09", 0], ["2022-09-10", 0], ["2022-09-11", 0], ["2022-09-12", 0], ["2022-09-13", 0], ["2022-09-14", 0], ["2022-09-15", 1], ["2022-09-16", 0], ["2022-09-17", 0], ["2022-09-18", 0], ["2022-09-19", 0], ["2022-09-20", 0], ["2022-09-21", 0], ["2022-09-22", 0], ["2022-09-23", 0], ["2022-09-24", 0], ["2022-09-25", 0], ["2022-09-26", 0], ["2022-09-27", 0], ["2022-09-28", 0], ["2022-09-29", 0], ["2022-09-30", 0], ["2022-10-01", 0], ["2022-10-02", 0], ["2022-10-03", 0], ["2022-10-04", 0], ["2022-10-05", 0], ["2022-10-06", 0], ["2022-10-07", 0], ["2022-10-08", 0], ["2022-10-09", 0], ["2022-10-10", 0], ["2022-10-11", 0], ["2022-10-12", 0], ["2022-10-13", 0], ["2022-10-14", 0], ["2022-10-15", 0], ["2022-10-16", 0], ["2022-10-17", 0], ["2022-10-18", 0], ["2022-10-19", 0], ["2022-10-20", 0], ["2022-10-21", 0], ["2022-10-22", 0], ["2022-10-23", 0], ["2022-10-24", 0], ["2022-10-25", 0], ["2022-10-26", 0], ["2022-10-27", 0], ["2022-10-28", 0], ["2022-10-29", 0], ["2022-10-30", 0], ["2022-10-31", 0], ["2022-11-01", 0], ["2022-11-02", 0], ["2022-11-03", 0], ["2022-11-04", 0], ["2022-11-05", 0], ["2022-11-06", 0], ["2022-11-07", 0], ["2022-11-08", 0], ["2022-11-09", 0], ["2022-11-10", 0], ["2022-11-11", 0], ["2022-11-12", 0], ["2022-11-13", 0], ["2022-11-14", 0], ["2022-11-15", 0], ["2022-11-16", 0], ["2022-11-17", 0], ["2022-11-18", 0], ["2022-11-19", 0], ["2022-11-20", 0], ["2022-11-21", 0], ["2022-11-22", 0], ["2022-11-23", 0], ["2022-11-24", 0], ["2022-11-25", 0], ["2022-11-26", 0], ["2022-11-27", 0], ["2022-11-28", 0], ["2022-11-29", 0], ["2022-11-30", 0], ["2022-12-01", 0], ["2022-12-02", 0], ["2022-12-03", 0], ["2022-12-04", 0], ["2022-12-05", 0], ["2022-12-06", 0], ["2022-12-07", 0], ["2022-12-08", 0], ["2022-12-09", 0], ["2022-12-10", 0], ["2022-12-11", 0], ["2022-12-12", 0], ["2022-12-13", 0], ["2022-12-14", 0], ["2022-12-15", 0], ["2022-12-16", 0], ["2022-12-17", 0], ["2022-12-18", 0], ["2022-12-19", 0], ["2022-12-20", 0], ["2022-12-21", 0], ["2022-12-22", 0], ["2022-12-23", 0], ["2022-12-24", 0], ["2022-12-25", 0], ["2022-12-26", 0], ["2022-12-27", 0], ["2022-12-28", 0], ["2022-12-29", 0], ["2022-12-30", 0], ["2022-12-31", 0], ["2023-01-01", 0], ["2023-01-02", 0], ["2023-01-03", 0], ["2023-01-04", 0], ["2023-01-05", 0], ["2023-01-06", 0], ["2023-01-07", 0], ["2023-01-08", 0], ["2023-01-09", 0], ["2023-01-10", 0], ["2023-01-11", 0], ["2023-01-12", 0], ["2023-01-13", 0], ["2023-01-14", 0], ["2023-01-15", 0], ["2023-01-16", 0], ["2023-01-17", 0], ["2023-01-18", 0], ["2023-01-19", 0], ["2023-01-20", 0], ["2023-01-21", 0], ["2023-01-22", 0], ["2023-01-23", 0], ["2023-01-24", 0], ["2023-01-25", 0], ["2023-01-26", 0], ["2023-01-27", 0], ["2023-01-28", 0], ["2023-01-29", 0], ["2023-01-30", 0], ["2023-01-31", 0], ["2023-02-01", 0], ["2023-02-02", 0], ["2023-02-03", 0], ["2023-02-04", 0], ["2023-02-05", 0], ["2023-02-06", 0], ["2023-02-07", 0], ["2023-02-08", 0], ["2023-02-09", 0], ["2023-02-10", 0], ["2023-02-11", 0], ["2023-02-12", 0], ["2023-02-13", 0], ["2023-02-14", 0], ["2023-02-15", 0], ["2023-02-16", 0], ["2023-02-17", 0], ["2023-02-18", 0], ["2023-02-19", 0], ["2023-02-20", 0], ["2023-02-21", 0], ["2023-02-22", 0], ["2023-02-23", 0], ["2023-02-24", 0], ["2023-02-25", 0], ["2023-02-26", 0], ["2023-02-27", 0], ["2023-02-28", 0], ["2023-03-01", 0], ["2023-03-02", 0], ["2023-03-03", 0], ["2023-03-04", 0], ["2023-03-05", 0], ["2023-03-06", 0], ["2023-03-07", 0], ["2023-03-08", 0], ["2023-03-09", 0], ["2023-03-10", 0], ["2023-03-11", 0], ["2023-03-12", 0], ["2023-03-13", 0], ["2023-03-14", 0], ["2023-03-15", 0], ["2023-03-16", 0], ["2023-03-17", 0], ["2023-03-18", 0], ["2023-03-19", 0], ["2023-03-20", 0], ["2023-03-21", 0], ["2023-03-22", 0], ["2023-03-23", 0], ["2023-03-24", 0], ["2023-03-25", 0], ["2023-03-26", 0], ["2023-03-27", 0], ["2023-03-28", 0], ["2023-03-29", 0], ["2023-03-30", 0], ["2023-03-31", 0], ["2023-04-01", 0], ["2023-04-02", 0], ["2023-04-03", 0], ["2023-04-04", 0], ["2023-04-05", 0], ["2023-04-06", 0], ["2023-04-07", 0], ["2023-04-08", 0], ["2023-04-09", 0], ["2023-04-10", 0], ["2023-04-11", 0], ["2023-04-12", 0], ["2023-04-13", 0], ["2023-04-14", 0], ["2023-04-15", 0], ["2023-04-16", 0], ["2023-04-17", 0], ["2023-04-18", 0], ["2023-04-19", 0], ["2023-04-20", 0], ["2023-04-21", 0], ["2023-04-22", 0], ["2023-04-23", 0], ["2023-04-24", 0], ["2023-04-25", 0], ["2023-04-26", 0], ["2023-04-27", 0], ["2023-04-28", 0], ["2023-04-29", 0], ["2023-04-30", 0], ["2023-05-01", 0], ["2023-05-02", 0], ["2023-05-03", 0], ["2023-05-04", 0], ["2023-05-05", 0], ["2023-05-06", 0], ["2023-05-07", 0], ["2023-05-08", 0], ["2023-05-09", 0], ["2023-05-10", 0], ["2023-05-11", 0], ["2023-05-12", 0], ["2023-05-13", 0], ["2023-05-14", 0], ["2023-05-15", 0], ["2023-05-16", 0], ["2023-05-17", 0], ["2023-05-18", 0], ["2023-05-19", 0], ["2023-05-20", 0], ["2023-05-21", 0], ["2023-05-22", 0], ["2023-05-23", 0], ["2023-05-24", 0], ["2023-05-25", 0], ["2023-05-26", 0], ["2023-05-27", 0], ["2023-05-28", 0], ["2023-05-29", 0], ["2023-05-30", 0], ["2023-05-31", 0], ["2023-06-01", 0], ["2023-06-02", 0], ["2023-06-03", 0], ["2023-06-04", 0], ["2023-06-05", 0], ["2023-06-06", 0], ["2023-06-07", 0], ["2023-06-08", 0], ["2023-06-09", 0], ["2023-06-10", 0], ["2023-06-11", 0], ["2023-06-12", 0], ["2023-06-13", 0], ["2023-06-14", 0], ["2023-06-15", 0], ["2023-06-16", 0], ["2023-06-17", 0], ["2023-06-18", 0], ["2023-06-19", 0], ["2023-06-20", 0], ["2023-06-21", 0], ["2023-06-22", 0], ["2023-06-23", 0], ["2023-06-24", 0], ["2023-06-25", 0], ["2023-06-26", 0], ["2023-06-27", 0], ["2023-06-28", 0], ["2023-06-29", 0], ["2023-06-30", 0], ["2023-07-01", 0], ["2023-07-02", 0], ["2023-07-03", 0], ["2023-07-04", 0], ["2023-07-05", 0], ["2023-07-06", 0], ["2023-07-07", 0], ["2023-07-08", 0], ["2023-07-09", 0], ["2023-07-10", 0], ["2023-07-11", 0], ["2023-07-12", 0], ["2023-07-13", 0], ["2023-07-14", 0], ["2023-07-15", 0], ["2023-07-16", 0], ["2023-07-17", 0], ["2023-07-18", 0], ["2023-07-19", 0], ["2023-07-20", 0], ["2023-07-21", 0], ["2023-07-22", 0], ["2023-07-23", 0], ["2023-07-24", 0], ["2023-07-25", 0], ["2023-07-26", 0], ["2023-07-27", 0], ["2023-07-28", 0], ["2023-07-29", 0], ["2023-07-30", 0], ["2023-07-31", 0], ["2023-08-01", 0], ["2023-08-02", 0], ["2023-08-03", 0], ["2023-08-04", 0], ["2023-08-05", 0], ["2023-08-06", 0], ["2023-08-07", 0], ["2023-08-08", 0], ["2023-08-09", 0], ["2023-08-10", 0], ["2023-08-11", 0], ["2023-08-12", 0], ["2023-08-13", 0], ["2023-08-14", 0], ["2023-08-15", 0], ["2023-08-16", 0], ["2023-08-17", 0], ["2023-08-18", 0], ["2023-08-19", 0], ["2023-08-20", 0], ["2023-08-21", 0], ["2023-08-22", 0], ["2023-08-23", 0], ["2023-08-24", 0], ["2023-08-25", 0], ["2023-08-26", 0], ["2023-08-27", 0], ["2023-08-28", 0], ["2023-08-29", 0], ["2023-08-30", 0], ["2023-08-31", 0]]
-        }]
-
-    };
-
-    myChart.setOption(option);
-</script>
-
-    
-
-    
-
-    <div id="cd-timeline" class="container">
-        
-        <div class="cd-timeline-block">
-
+    <!-- 所有文章卡片 -->
+    <article id="articles" class="container articles">
+        <div class="row article-row">
             
-            
-            
-            <div class="cd-timeline-img year" data-aos="zoom-in-up">
-                <a href="/archives/2020">2020</a>
-            </div>
-            
-
-            
-            
-            
-            <div class="cd-timeline-img month" data-aos="zoom-in-up">
-                <a href="/archives/2020/11">11</a>
-            </div>
-            
-
-            
-            <div class="cd-timeline-img day" data-aos="zoom-in-up">
-                <span>05</span>
-            </div>
-            <article class="cd-timeline-content" data-aos="fade-up">
-                <div class="article col s12 m6">
-                    <div class="card">
-                        <a href="/2020/11/05/linux-cai-yong-4g-mo-kuai-shang-wang-ndis-bo-hao/">
-                            <div class="card-image">
-                                
-                                
-                                <img src="http://pic.huangruimin.tech/The_Wandering_Earth2_24.jpg" class="responsive-img" alt="Linux采用4G模块上网_NDIS拨号">
-                                
-                                <span class="card-title">Linux采用4G模块上网_NDIS拨号</span>
-                            </div>
-                        </a>
-                        <div class="card-content article-content">
-                            <div class="summary block-with-text">
-                                
-                                    1.说明本章将介绍Jetson Nano如何采用SIM7600 4G模块进行无线上网，并描述其相关细节，本章将先讲解NDIS拨号。
-2.采用4G模块的上网方式有哪些？Jetson Nano 或Raspberry Pi通过SIM7600模组，
-                                
-                            </div>
-                            <div class="publish-info">
-                                <span class="publish-date">
-                                    <i class="far fa-clock fa-fw icon-date"></i>2020-11-05
-                                </span>
-                                <span class="publish-author">
-                                    
-                                    <i class="fas fa-user fa-fw"></i>
-                                    Ruimin Huang
-                                    
-                                </span>
-                            </div>
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2021/10/16/hi3516dv300-10-rootfs-de-dan-du-bian-yi-he-yan-zheng/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="http://pic.huangruimin.tech/The_Wandering_Earth2_13.jpg" class="responsive-img" alt="Hi3516DV300_10_Rootfs的单独编译和验证">
+                            
+                            <span class="card-title">Hi3516DV300_10_Rootfs的单独编译和验证</span>
                         </div>
+                    </a>
 
-                        
-                    </div>
-                </div>
-            </article>
-        </div>
-        
-        <div class="cd-timeline-block">
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                1.内核启动后，就会去挂载根文件系统
+移植了应用程序，就往bin目录里面放
 
-            
-            
+移植了库，就往lib目录里面放
 
-            
-            
+要区分一个边界：哪些东西是一定要你去做的，哪些东西不一定是要你做的
 
-            
-            <div class="cd-timeline-img day" data-aos="zoom-in-up">
-                <span>05</span>
-            </div>
-            <article class="cd-timeline-content" data-aos="fade-up">
-                <div class="article col s12 m6">
-                    <div class="card">
-                        <a href="/2020/11/05/linux-cai-yong-4g-mo-kuai-shang-wang-ppp-bo-hao/">
-                            <div class="card-image">
-                                
-                                
-                                <img src="http://pic.huangruimin.tech/Transformers1_10.jpg" class="responsive-img" alt="Linux采用4G模块上网_PPP拨号">
-                                
-                                <span class="card-title">Linux采用4G模块上网_PPP拨号</span>
-                            </div>
-                        </a>
-                        <div class="card-content article-content">
-                            <div class="summary block-with-text">
-                                
-                                    1.说明本章将继续讲解Jetson Nano采用SIM7600 4G模块进行无线上网，紧接上一章NDIS拨号上网，本章将讲解PPP拨号上网，本教程同样适用于树莓派。
-2. 准备工作接下来，将介绍Jetson Nano或Raspberry P
-                                
-                            </div>
-                            <div class="publish-info">
-                                <span class="publish-date">
-                                    <i class="far fa-clock fa-fw icon-date"></i>2020-11-05
-                                </span>
-                                <span class="publish-author">
-                                    
-                                    <i class="fas fa-user fa-fw"></i>
-                                    Ruimin Huang
-                                    
-                                </span>
-                            </div>
+
+14.1、rootfs知识点回顾
+(1)rootfs的作
+                            
                         </div>
-
-                        
-                    </div>
-                </div>
-            </article>
-        </div>
-        
-        <div class="cd-timeline-block">
-
-            
-            
-
-            
-            
-            
-            <div class="cd-timeline-img month" data-aos="zoom-in-up">
-                <a href="/archives/2020/08">08</a>
-            </div>
-            
-
-            
-            <div class="cd-timeline-img day" data-aos="zoom-in-up">
-                <span>08</span>
-            </div>
-            <article class="cd-timeline-content" data-aos="fade-up">
-                <div class="article col s12 m6">
-                    <div class="card">
-                        <a href="/2020/08/08/qian-ru-shi-xi-tong-zhong-han-zi-zi-ku-bian-ma-ji-he/">
-                            <div class="card-image">
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-16
+                            </span>
+                            <span class="publish-author">
                                 
-                                <img src="http://pic.huangruimin.tech/banner_9.jpg" class="responsive-img" alt="嵌入式系统中汉字字库编码集合">
+                                <i class="fas fa-user fa-fw"></i>
+                                Ruimin Huang
                                 
-                                <span class="card-title">嵌入式系统中汉字字库编码集合</span>
-                            </div>
-                        </a>
-                        <div class="card-content article-content">
-                            <div class="summary block-with-text">
-                                
-                                    0 引言还记得通常在MCU驱动LCD，OLED是怎样显示汉字的吗？采用取字模工具，生成字模数组，然后要显示某个字符，直接索引这个字符的数组，然后对这个数组数据进行显示就行了，就像这样：
-最近有开发一个物联网项目，将网络端的发过来的汉字显示到
-                                
-                            </div>
-                            <div class="publish-info">
-                                <span class="publish-date">
-                                    <i class="far fa-clock fa-fw icon-date"></i>2020-08-08
-                                </span>
-                                <span class="publish-author">
-                                    
-                                    <i class="fas fa-user fa-fw"></i>
-                                    Ruimin Huang
-                                    
-                                </span>
-                            </div>
+                            </span>
                         </div>
-
-                        
                     </div>
+
+                    
                 </div>
-            </article>
-        </div>
-        
-        <div class="cd-timeline-block">
-
-            
-            
-
-            
-            
-            
-            <div class="cd-timeline-img month" data-aos="zoom-in-up">
-                <a href="/archives/2020/06">06</a>
             </div>
             
-
-            
-            <div class="cd-timeline-img day" data-aos="zoom-in-up">
-                <span>15</span>
-            </div>
-            <article class="cd-timeline-content" data-aos="fade-up">
-                <div class="article col s12 m6">
-                    <div class="card">
-                        <a href="/2020/06/15/rpi-opencv-10-xing-dai-ma-wei-ni-de-tou-xiang-tian-jia-guo-qi/">
-                            <div class="card-image">
-                                
-                                <img src="http://pic.huangruimin.tech/banner_21.jpg" class="responsive-img" alt="RPi-OpenCV_10行代码为你的头像添加国旗">
-                                
-                                <span class="card-title">RPi-OpenCV_10行代码为你的头像添加国旗</span>
-                            </div>
-                        </a>
-                        <div class="card-content article-content">
-                            <div class="summary block-with-text">
-                                
-                                    在学完前面较为枯燥的概念后，接下来，是时候展现真正的技术了。由于OpenCV既是机器视觉库，也是图像处理库，给头像添加国旗，那自然是小菜一碟，如果用Python写的话，只要10行左右。
-1 思路分析好比把大象装进冰箱要几步一样，为头像添加上
-                                
-                            </div>
-                            <div class="publish-info">
-                                <span class="publish-date">
-                                    <i class="far fa-clock fa-fw icon-date"></i>2020-06-15
-                                </span>
-                                <span class="publish-author">
-                                    
-                                    <i class="fas fa-user fa-fw"></i>
-                                    Ruimin Huang
-                                    
-                                </span>
-                            </div>
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2021/10/15/hi3516dv300-9-kernel-de-dan-du-bian-yi-he-yan-zheng/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="http://pic.huangruimin.tech/Transformers2_53.jpg" class="responsive-img" alt="Hi3516DV300_9_Kernel的单独编译和验证">
+                            
+                            <span class="card-title">Hi3516DV300_9_Kernel的单独编译和验证</span>
                         </div>
+                    </a>
 
-                        
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                1.Kernel的单独编译和验证1.1 打补丁
+tar.gz的压缩比例没有那么狠
+tar.xz的压缩比例则更狠，先得用xz软件解压成gz
+
+
+14         cd opensource/kernel
+15         tar -x
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-15
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-user fa-fw"></i>
+                                Ruimin Huang
+                                
+                            </span>
+                        </div>
                     </div>
+
+                    
                 </div>
-            </article>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2021/10/14/hi3516dv300-8-uboot-de-dan-du-bian-yi-he-yan-zheng/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="http://pic.huangruimin.tech/Transformers3_60.jpg" class="responsive-img" alt="Hi3516DV300_8_Uboot的单独编译和验证">
+                            
+                            <span class="card-title">Hi3516DV300_8_Uboot的单独编译和验证</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                1.Uboot的单独编译和验证
+参考文献1：SDK内osdrv中的readme
+参考文献2：ReleaseDoc中的《Hi3516CV500╱Hi3516DV300╱Hi3516AV300 U-boot 移植应用开发指南.pdf》
+
+2.编
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-14
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-user fa-fw"></i>
+                                Ruimin Huang
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2021/10/13/hi3516dv300-7-kai-fa-ban-pei-tao-sdk-jie-du/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="http://pic.huangruimin.tech/Transformers3_25.jpg" class="responsive-img" alt="Hi3516DV300_7_开发板配套SDK解读">
+                            
+                            <span class="card-title">Hi3516DV300_7_开发板配套SDK解读</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                1、文件夹结构注意：这里有很多符号链接，因为这些文件夹都是链接到别的地方的
+
+这里有干货的文件夹，就只有osdrv与smp
+
+
+make_ext4fs是编译的工具
+
+
+烧录的时候有用到userdata，userdata里面有很多要用到的配置
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-13
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-user fa-fw"></i>
+                                Ruimin Huang
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2021/10/12/hi3516dv300-6-guan-fang-sdk-kai-fa-shi-zhan/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="http://pic.huangruimin.tech/The_Wandering_Earth2_22.jpg" class="responsive-img" alt="Hi3516DV300_6_官方SDK开发实战">
+                            
+                            <span class="card-title">Hi3516DV300_6_官方SDK开发实战</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                1. SDK脚本管理解析1.1 sdk.unpack脚本解析
+就是为了解压而已
+
+1.2 scripts/common.sh脚本解析
+定义了很多函数，整个SDK管理的所在
+
+1.3 osdrv/readme_cn.txt
+定义了怎么编译，包
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-12
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-user fa-fw"></i>
+                                Ruimin Huang
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2021/10/11/hi3516dv300-5-guan-fang-sdk-guan-li-jiao-ben-jie-xi/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="http://pic.huangruimin.tech/Transformers3_46.jpg" class="responsive-img" alt="Hi3516DV300_5_官方SDK管理脚本解析">
+                            
+                            <span class="card-title">Hi3516DV300_5_官方SDK管理脚本解析</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                1.Hi3516CV500_SDK_V2.0.2.1解析 可以看出
+
+官方最早推出这个芯片的时候，使用的还是SPI Flash的
+smp：表示对称多核心，Hi3516DV300是双核A7，两个都是A7，那么就叫做对称。
+glibc：表示用的
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-11
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-user fa-fw"></i>
+                                Ruimin Huang
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2021/10/10/hi3516dv300-4-sdk-zi-yuan-jian-jie/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="http://pic.huangruimin.tech/Transformers2_33.jpg" class="responsive-img" alt="Hi3516DV300_4_SDK资源简介">
+                            
+                            <span class="card-title">Hi3516DV300_4_SDK资源简介</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                芯片资料的获取途径
+国内：代理商，相对来说比较封闭
+国外：最Open的是TI
+国内的芯片厂商相对来说比较封闭，必须要找到正规的代理商，还要以公司的名义和代理商签保密协议，代理商才会给你，跟市场的推广因素有关，正规的途径：通过你的公司，联系海
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-10
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-user fa-fw"></i>
+                                Ruimin Huang
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2021/10/09/hi3516dv300-3-shao-lu-ji-lu-2/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="http://pic.huangruimin.tech/The_Wandering_Earth2_78.jpg" class="responsive-img" alt="Hi3516DV300_3_烧录记录2">
+                            
+                            <span class="card-title">Hi3516DV300_3_烧录记录2</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                1 Uboot烧录设置
+注意一定要选中烧录EMMC模式
+如果Uboot已经被清除掉了，那么，就不用重新上电了
+如果Uboot没有被清除，那么，就点击下载后，重新上电
+按照目前的情况来看，用串口来烧写kernel，rootfs，userdat
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-09
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-user fa-fw"></i>
+                                Ruimin Huang
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2021/10/08/hi3516dv300-2-shao-lu-ji-lu-1/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="http://pic.huangruimin.tech/The_Wandering_Earth2_76.jpg" class="responsive-img" alt="Hi3516DV300_2_烧录记录1">
+                            
+                            <span class="card-title">Hi3516DV300_2_烧录记录1</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                1.分区及相关参数
+分区大小一般自己留有余量，分区大小，自己定，比实际镜像大小大一些就可以。
+分区大小改了，相应的参数也要发生变化：
+
+
+bootcmd：Uboot启动好了之后，Uboot会自动执行bootcmd这个环境变量，这个环境变量里
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-08
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-user fa-fw"></i>
+                                Ruimin Huang
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2021/10/07/hi3516dv300-1-xia-zai-zhun-bei/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="http://pic.huangruimin.tech/The_Wandering_Earth2_122.jpg" class="responsive-img" alt="HI3516DV300_1_下载准备">
+                            
+                            <span class="card-title">HI3516DV300_1_下载准备</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                烧录说明
+不同厂家的芯片，甚至是不同平台的，烧录都是有差别的
+内部也是有代码，出厂只有一段内部代码，与功能无关
+
+两个下载阶段
+裸机下载uboot.bin，使用HiTool软件，通过串口
+基于uboot运行后的fastboot，使用HiTo
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-07
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-user fa-fw"></i>
+                                Ruimin Huang
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2021/10/07/ru-he-wei-rpi-jiao-cha-bian-yi-te-ding-ban-ben-de-zhi-chi-v4l2-de.ko-yi-ji.dtb/">
+                        <div class="card-image">
+                            
+                            <img src="http://pic.huangruimin.tech/banner_8.jpg" class="responsive-img" alt="如何为RPi交叉编译特定版本的支持v4l2的.ko以及.dtb">
+                            
+                            <span class="card-title">如何为RPi交叉编译特定版本的支持v4l2的.ko以及.dtb</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                0 背景我在以前一个版本的64bit树莓派系统上，搭建了很多环境，现在，这个64bit的树莓派系统需要接入IMX385，目前只有v4l2这种方案(64bit的树莓派系统删除了一些库，树莓派原生相机也就不支持)。
+但悲催的是，目前veye在G
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-07
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-user fa-fw"></i>
+                                Ruimin Huang
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2021/09/07/i2c-zhuan-16-lu-pwm/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="http://pic.huangruimin.tech/The_Wandering_Earth2_79.jpg" class="responsive-img" alt="I2C转16路PWM">
+                            
+                            <span class="card-title">I2C转16路PWM</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                1 基本介绍1.1 该IC主要参数特征如下：
+I2C接口，支持高达16路PWM输出，每路12位分辨率(4096级)
+内置25MHz晶振，可不连接外部晶振，也可以连接外部晶振，最大50MHz
+支持2.3V-5.5V电压，最大耐压值5.5V,逻
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-09-07
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-user fa-fw"></i>
+                                Ruimin Huang
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+            
         </div>
-        
-    </div>
+    </article>
 
 </main>
+
+
+<div class="container paging">
+    <div class="row">
+        <div class="col s6 m4 l4">
+            
+            <a href="/page/3/"
+               class="left btn-floating btn-large waves-effect waves-light bg-color">
+                <i class="fas fa-angle-left"></i>
+            </a>
+            
+        </div>
+        <div class="page-info col m4 l4 hide-on-small-only">
+            <div class="center-align b-text-gray">4 / 5</div>
+        </div>
+        <div class="col s6 m4 l4">
+            
+            <a href="/page/5/"
+               class="right btn-floating btn-large waves-effect waves-light bg-color">
+                <i class="fas fa-angle-right"></i>
+            </a>
+            
+        </div>
+    </div>
+</div>
 
 
 
