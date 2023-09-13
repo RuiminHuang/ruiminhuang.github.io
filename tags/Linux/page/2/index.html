@@ -288,10 +288,15 @@
 
 
     <script>
-        // $('.bg-cover').css('background-image', 'url(/medias/banner/0.jpg)');
-        // $('.bg-cover').css('background-image', 'url(http://pic.huangruimin.tech/banner_3.jpg)');
-        //var bannerUrl = "http://pic.huangruimin.tech/banner_" + '1.jpg';
-        var bannerUrl = "http://pic.huangruimin.tech/banner_cover_" + '0.jpg';
+        // 每天切换 banner 图.  Switch banner image every day.
+
+        // 这个是原来的代码
+        //var bannerUrl = "/medias/banner/" + new Date().getDay() + '.jpg';
+        // 这个是我修改的代码
+        //var bannerUrl = "http://pic.huangruimin.tech/banner_" + new Date().getDay() + '.jpg';
+        // 这个是我修改以及优化的代码
+        //var bannerUrl = "http://pic.huangruimin.tech/banner_" + new Date().getDay() + '.jpg';
+        var bannerUrl = "http://pic.huangruimin.tech/banner_cover_" + new Date().getDay() % 2 + '.jpg';
         $('.bg-cover').css('background-image', 'url(' + bannerUrl + ')');
     </script>
 
@@ -393,19 +398,19 @@
                 </a>
                 
                 
-                <a href="/tags/%E6%A8%A1%E5%9E%8B%E8%BD%BB%E9%87%8F%E5%8C%96/" title="模型轻量化: 1">
+                <a href="/tags/%E7%BD%91%E7%AB%99/" title="网站: 1">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            data-tagname="模型轻量化" style="background-color: #85C1E9;">模型轻量化
+                            data-tagname="网站" style="background-color: #85C1E9;">网站
                         <span class="tag-length">1</span>
                     </span>
                 </a>
                 
                 
-                <a href="/tags/%E7%BD%91%E7%AB%99/" title="网站: 1">
+                <a href="/tags/%E6%A8%A1%E5%9E%8B%E8%BD%BB%E9%87%8F%E5%8C%96/" title="模型轻量化: 1">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            data-tagname="网站" style="background-color: #F8C471;">网站
+                            data-tagname="模型轻量化" style="background-color: #F8C471;">模型轻量化
                         <span class="tag-length">1</span>
                     </span>
                 </a>

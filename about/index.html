@@ -295,10 +295,15 @@
 
 
     <script>
-        // $('.bg-cover').css('background-image', 'url(/medias/banner/0.jpg)');
-        // $('.bg-cover').css('background-image', 'url(http://pic.huangruimin.tech/banner_3.jpg)');
-        //var bannerUrl = "http://pic.huangruimin.tech/banner_" + '1.jpg';
-        var bannerUrl = "http://pic.huangruimin.tech/banner_cover_" + '0.jpg';
+        // 每天切换 banner 图.  Switch banner image every day.
+
+        // 这个是原来的代码
+        //var bannerUrl = "/medias/banner/" + new Date().getDay() + '.jpg';
+        // 这个是我修改的代码
+        //var bannerUrl = "http://pic.huangruimin.tech/banner_" + new Date().getDay() + '.jpg';
+        // 这个是我修改以及优化的代码
+        //var bannerUrl = "http://pic.huangruimin.tech/banner_" + new Date().getDay() + '.jpg';
+        var bannerUrl = "http://pic.huangruimin.tech/banner_cover_" + new Date().getDay() % 2 + '.jpg';
         $('.bg-cover').css('background-image', 'url(' + bannerUrl + ')');
     </script>
 
@@ -573,7 +578,7 @@
         xAxis: [
             {
                 type: 'category',
-                data: ["ARM","Linux","深度学习","Hi3516DV300","PyTorch","树莓派","OpenCV","IC和通用外设开发","网络通信","模型轻量化"]
+                data: ["ARM","Linux","深度学习","Hi3516DV300","PyTorch","树莓派","OpenCV","IC和通用外设开发","网络通信","网站"]
             }
         ],
         yAxis: [
