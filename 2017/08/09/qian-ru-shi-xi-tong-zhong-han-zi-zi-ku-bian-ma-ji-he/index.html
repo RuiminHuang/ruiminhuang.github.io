@@ -1,0 +1,1552 @@
+<!DOCTYPE HTML>
+<html lang="default">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="嵌入式系统中汉字字库编码集合, AI, TensorRT, Infrared">
+    <meta name="description" content="黄瑞敏的个人主页">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>嵌入式系统中汉字字库编码集合 | Ruimin Huang&#39;s Space</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+
+   <style>
+    body{
+       background-image: url(http://pic.huangruimin.tech/The_Wandering_Earth2_82.jpg);
+       background-repeat:no-repeat;
+       background-size:cover;
+       background-attachment:fixed;
+    }
+</style>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Ruimin Huang&#39;s Space</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/curriculum-vitae" class="waves-effect waves-light">
+      
+      <i class="fas fa-print" style="zoom: 0.6;"></i>
+      
+      <span>我的简历</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/videos" class="waves-effect waves-light">
+      
+      <i class="fas fa-video" style="zoom: 0.6;"></i>
+      
+      <span>视频展示</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="Search" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Ruimin Huang&#39;s Space</div>
+        <div class="logo-desc">
+            
+            黄瑞敏的个人主页
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/curriculum-vitae" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-print"></i>
+			
+			我的简历
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/videos" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-video"></i>
+			
+			视频展示
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('http://pic.huangruimin.tech/banner_9.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">嵌入式系统中汉字字库编码集合</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/IC%E5%92%8C%E9%80%9A%E7%94%A8%E5%A4%96%E8%AE%BE%E5%BC%80%E5%8F%91/">
+                                <span class="chip bg-color">IC和通用外设开发</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/" class="post-category">
+                                嵌入式
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    2017-08-09
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
+                    2023-09-13
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
+                    3.2k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
+                    12 Min
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>Read Count:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="0-引言"><a href="#0-引言" class="headerlink" title="0 引言"></a>0 引言</h2><p>还记得通常在MCU驱动LCD，OLED是怎样显示汉字的吗？采用取字模工具，生成字模数组，然后要显示某个字符，直接索引这个字符的数组，然后对这个数组数据进行显示就行了，就像这样：<br><img src="http://pic.huangruimin.tech/20190519153008.png"></p>
+<p>最近有开发一个物联网项目，将网络端的发过来的汉字显示到屏幕上，但问题来了，我还不知道网络端要发送具体哪些汉字，我是无法对具体的汉字取模，因此，得想办法先对所有汉字进行取模，或使用字库，于是就有了下文。</p>
+<h2 id="1-字符编码"><a href="#1-字符编码" class="headerlink" title="1 字符编码"></a>1 字符编码</h2><p>先从字符编码说起:<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html">参考阮一峰博客字符编码</a></p>
+<ul>
+<li>ASCII码：一共规定了128个字符的编码，这128个符号（包括32个不能打印出来的控制符号），只占用了一个字节的后面7位，最前面的一位统一规定为0。</li>
+<li>非ASCII码：英语用128个符号编码就够了，但是用来表示其他语言，128个符号是不够的。</li>
+</ul>
+<blockquote>
+<ul>
+<li>GB2312，GBK，Unicode，UTF-8均为非ASCII编码</li>
+</ul>
+</blockquote>
+<ul>
+<li>Unicode码：如果有一种编码，将世界上所有的符号都纳入其中。每一个符号都给予一个独一无二的编码，那么乱码问题就会消失。这就是 Unicode，就像它的名字都表示的，这是一种所有符号的编码。</li>
+</ul>
+<blockquote>
+<ul>
+<li>注意：Unicode 只是一个符号集，它只规定了符号的二进制代码，却没有规定这个二进制代码应该如何存储</li>
+</ul>
+</blockquote>
+<ul>
+<li>UTF-8码:UTF-8 就是在互联网上使用最广的一种 Unicode 的实现方式，是Unicode 的实现方式之一。</li>
+<li>GB2312,GBK：GB2312是常用汉字的专用编码，GBK是所有汉字的专用编码。</li>
+</ul>
+<blockquote>
+<ul>
+<li>注意：GB类的汉字编码与后文的 Unicode 和 UTF-8 是毫无关系的</li>
+</ul>
+</blockquote>
+<h2 id="2-液晶屏汉字显示原理"><a href="#2-液晶屏汉字显示原理" class="headerlink" title="2 液晶屏汉字显示原理"></a>2 液晶屏汉字显示原理</h2><ul>
+<li>ASCII字符显示，由于ASCII字符仅128个，可以实现对每个字符一一取模，且占用MCU的RAM不会过大，此处不再介绍ASCII字符的显示。</li>
+</ul>
+<blockquote>
+<ul>
+<li>为什么显示英文一般不用字库芯片？<br>英文的单词都是由26个字母构成了，加上大小写的区别和其它一些字符，也不过才95个。假如要显示8 * 16像素大小的字符，每一个字符需要16个字节的字库空间，95个字符即是95 * 16=570个字节。即占用570个字节的RAM。对于小型MCU几K字节的RAM来说，绰绰有余了。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>为什么显示中文需要字库芯片？<br>显示中文的话，需要每一个字的字模，16*16像素大小的中文，每一个中文都要32个字节。GBK收录了中文两万多个，如果要都能显示，需要700多K字节的空间。所以，我们选择了把这些字库放在外部存储器当中，可选择2M的FLASH存储芯片W25Q16做为存储媒介。放个700多K的字库足够了，并且，同时放两种字体的字库都没问题。</li>
+</ul>
+</blockquote>
+<ul>
+<li>常规汉字显示，采用相关的汉字取字模工具(PCtoLCD2002完美版)，取出字模，相关参数设置如下所示：</li>
+</ul>
+<p><img src="http://pic.huangruimin.tech/20190519171854.png"></p>
+<p>由于我采用的液晶屏是逐行显示的，不同的液晶屏采用不同的显示模式，需根据具体情况选择字模。<br>取出“你”字模后，将字模数据复制到notepad++,调整成设置好的16列，21行的样式，在将16进制数据转换成2进制数据,然后将0替换成空格，即可找出汉字“你”的原型。</p>
+<p><img src="http://pic.huangruimin.tech/20190519173234.png"></p>
+<ul>
+<li>对于液晶屏而言，字符，图片的显示都是像素点的点阵显示，因此，只要将上述数组中的数据转换成点阵数据显示到液晶屏中即可，对于二进制位1的位数据，显示出该像素点，对于二进制位0的位数据，不显示该像素点，即可显示出该汉字(暂不考虑颜色显示)。</li>
+</ul>
+<h2 id="3-字符显示的实现"><a href="#3-字符显示的实现" class="headerlink" title="3 字符显示的实现"></a>3 字符显示的实现</h2><p>上面讲到了字符显示的原理，接下来将讲解字符显示的实现，相关代码不依赖于底层，具有很好的移植性,且在文章最后放出了Github链接，要实现该代码的功能，需要以下前提条件：</p>
+<blockquote>
+<ul>
+<li>已经在液晶屏上实现了画点功能，该函数将直接调用该功能</li>
+<li>液晶屏在显示时，逐行扫描，且需要高位在前(参考上一节相关参数设置，其它类型的屏幕可能有所不同)</li>
+</ul>
+</blockquote>
+<p>注：由于代码过长，为不影响阅读，仅放部分关键代码，如有需求，更多请参考文末的Github</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">for</span> <span class="token punctuation">(</span>j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> font<span class="token operator">-&gt;</span>Height<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> font<span class="token operator">-&gt;</span>Width<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">*</span>ptr <span class="token operator">&amp;</span> <span class="token punctuation">(</span><span class="token number">0x80</span> <span class="token operator">&gt;&gt;</span> <span class="token punctuation">(</span>i <span class="token operator">%</span> <span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+			<span class="token function">Paint_SetPixel</span><span class="token punctuation">(</span>x <span class="token operator">+</span> i<span class="token punctuation">,</span> y <span class="token operator">+</span> j<span class="token punctuation">,</span> Color_Foreground<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+			<span class="token function">Paint_SetPixel</span><span class="token punctuation">(</span>x <span class="token operator">+</span> i<span class="token punctuation">,</span> y <span class="token operator">+</span> j<span class="token punctuation">,</span> Color_Background<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token punctuation">}</span>
+		<span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">%</span> <span class="token number">8</span> <span class="token operator">==</span> <span class="token number">7</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+			ptr<span class="token operator">++</span><span class="token punctuation">;</span>
+		<span class="token punctuation">}</span>
+	<span class="token punctuation">}</span>
+	<span class="token keyword">if</span> <span class="token punctuation">(</span>font<span class="token operator">-&gt;</span>Width <span class="token operator">%</span> <span class="token number">8</span> <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		ptr<span class="token operator">++</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>此代码简单地实现了索引字模数组中的一个unsigned char类型的元素中的8位，将该8位绘制成像素点，此为字符显示的基本实现，</p>
+<h2 id="4-任意汉字显示的实现-采用取模法"><a href="#4-任意汉字显示的实现-采用取模法" class="headerlink" title="4 任意汉字显示的实现(采用取模法)"></a>4 任意汉字显示的实现(采用取模法)</h2><p>本节将讲述如何实现任意汉字的显示。<br>需要准备以下工具:</p>
+<ul>
+<li>GBK字库</li>
+<li>取模软件</li>
+<li>二进制文件生成工具<br>如下图所示，且相关工具可从文末Github中直接获取得：<br><img src="http://pic.huangruimin.tech/20190520013605.png"></li>
+</ul>
+<p><strong>具体操作步骤如下:</strong></p>
+<ul>
+<li>将字库取模</li>
+</ul>
+<p>在工具栏处点“打开”按钮，打开gbk_ziku.txt文件，然后根据自己的需要，设置想要的取模方式，然后点工具栏上的“输出”按钮 并等待其完成，完成后会在取模软件所在路径生成了一个temp.txt文件。现在我是按照“宋体、点阵数为16、字重为4、取模为为16*16、对齐设置为左上、方向设置为横向取模，高位在左”的方式来取的字模，也就是我平时TFT液晶屏常用的一种字模。<br><img src="http://pic.huangruimin.tech/20190520012836.png"></p>
+<p>打开temp.txt文件可知， 该文件包含了所有字库的点阵，且采用GBK编码排序：<br><img src="http://pic.huangruimin.tech/20190520013137.png"></p>
+<ul>
+<li>将取模的文件生成二进制文件</li>
+</ul>
+<p>将该temp.txt文件转换为二进制文件，供程序读取。在windows下进入CMD命令控制台，进入到相关文件所在的路径，接着，执行命令ziku.exe temp.txt命令，执行效果如下图所示，执行后将生成一个ziku.bin的文件：<br>  <img src="http://pic.huangruimin.tech/20190520015346.png"></p>
+<ul>
+<li>将二进制文件存入外部Flash，或Linux系统用户文件夹下：<br>得到ziku.bin文件后，可将该字库二进制文件存入外部Flash如W25Q16中(MCU)，或者Linux系统用户文件夹下(Linux)；其中，将该bin文件存放如外部Flash的方法为：</li>
+</ul>
+<blockquote>
+<ul>
+<li>单片机与电脑采用串口连接，单片机与W25Q16采用SPI方式连接。所以，我们只需要给单片机写一个接收串口数据再把数据通过SPI口传输到W25Q16中的程序即可。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>使用FT232H芯片工具，该工具实现了USB转SPI，USB转I2C的功能，可直接通过PC的USB接口下载到带I2C或SPI接口的Flash或E2PROM中。</li>
+</ul>
+</blockquote>
+<ul>
+<li>检验二进制文件的可用性</li>
+</ul>
+<p>本文将只在Linux系统下进行检验，MCU环境下的检验同理：</p>
+<p>该bin文件的检验程序如下所示(相关程序均已上传文章末尾的Github)：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;sys/types.h&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;sys/stat.h&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;fcntl.h&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdint.h&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;unistd.h&gt;</span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h&gt;</span></span>
+
+<span class="token keyword">void</span> <span class="token function">Get_GBK_DZK</span><span class="token punctuation">(</span><span class="token class-name">uint8_t</span> <span class="token operator">*</span>code<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+FILE <span class="token operator">*</span>fd<span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">{</span>  
+	<span class="token comment">//字库所在目录</span>
+	<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token constant">NULL</span> <span class="token operator">==</span> <span class="token punctuation">(</span>fd<span class="token operator">=</span><span class="token function">fopen</span><span class="token punctuation">(</span><span class="token string">"./ziku.bin"</span><span class="token punctuation">,</span><span class="token string">"rb"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+		<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Open dir error\r\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+    <span class="token function">Get_GBK_DZK</span><span class="token punctuation">(</span><span class="token string">"你"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\r\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">Get_GBK_DZK</span><span class="token punctuation">(</span><span class="token string">"好"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\r\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">Get_GBK_DZK</span><span class="token punctuation">(</span><span class="token string">"！"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">fclose</span><span class="token punctuation">(</span>fd<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	
+<span class="token punctuation">}</span>
+
+<span class="token comment">//得到字模 </span>
+<span class="token keyword">void</span> <span class="token function">Get_GBK_DZK</span><span class="token punctuation">(</span><span class="token class-name">uint8_t</span> <span class="token operator">*</span>code<span class="token punctuation">)</span><span class="token punctuation">{</span>
+	<span class="token class-name">uint8_t</span> GBKH<span class="token punctuation">,</span>GBKL<span class="token punctuation">;</span>                 
+    <span class="token class-name">uint32_t</span> offset<span class="token punctuation">;</span>
+	<span class="token class-name">uint8_t</span>  character<span class="token punctuation">[</span><span class="token number">32</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+	<span class="token class-name">uint8_t</span><span class="token operator">*</span> characterPtr<span class="token punctuation">;</span>
+	
+    GBKH<span class="token operator">=</span><span class="token operator">*</span>code<span class="token punctuation">;</span>
+    GBKL<span class="token operator">=</span><span class="token operator">*</span><span class="token punctuation">(</span>code<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	
+    <span class="token keyword">if</span><span class="token punctuation">(</span>GBKH<span class="token operator">&gt;</span><span class="token number">0XFE</span><span class="token operator">||</span>GBKH<span class="token operator">&lt;</span><span class="token number">0X81</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+		<span class="token keyword">return</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+    GBKH<span class="token operator">-=</span><span class="token number">0x81</span><span class="token punctuation">;</span>
+    GBKL<span class="token operator">-=</span><span class="token number">0x40</span><span class="token punctuation">;</span>
+	
+	<span class="token comment">//获取字符在bin文件中的偏移量，一个字符占(16*16)/8=32字节。</span>
+    offset<span class="token operator">=</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token class-name">uint32_t</span><span class="token punctuation">)</span><span class="token number">192</span><span class="token operator">*</span>GBKH<span class="token operator">+</span>GBKL<span class="token punctuation">)</span><span class="token operator">*</span><span class="token number">32</span><span class="token punctuation">;</span>
+	
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span> <span class="token operator">==</span><span class="token function">fseek</span><span class="token punctuation">(</span>fd<span class="token punctuation">,</span>offset<span class="token punctuation">,</span><span class="token constant">SEEK_SET</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    	<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Fseek error\r\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+	<span class="token punctuation">}</span>
+	<span class="token comment">//得到字符指针</span>
+	<span class="token function">fread</span><span class="token punctuation">(</span>character<span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">32</span><span class="token punctuation">,</span>fd<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	characterPtr <span class="token operator">=</span> character<span class="token punctuation">;</span>
+	<span class="token comment">//显示字符，16*16，一个字符占(16*16)/8=32字节。</span>
+	<span class="token keyword">int</span> i<span class="token punctuation">,</span>j<span class="token punctuation">;</span>
+	<span class="token keyword">for</span><span class="token punctuation">(</span>j<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> j<span class="token operator">&lt;</span><span class="token number">16</span><span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+		<span class="token keyword">for</span><span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span><span class="token number">16</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+			<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">*</span>characterPtr <span class="token operator">&amp;</span><span class="token punctuation">(</span><span class="token number">0x80</span><span class="token operator">&gt;&gt;</span><span class="token punctuation">(</span>i <span class="token operator">%</span> <span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+				<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"*"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+				<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">" "</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token punctuation">}</span>
+			<span class="token keyword">if</span><span class="token punctuation">(</span>i<span class="token operator">%</span><span class="token number">8</span> <span class="token operator">==</span> <span class="token number">7</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+				characterPtr<span class="token operator">++</span><span class="token punctuation">;</span>
+			<span class="token punctuation">}</span>
+		<span class="token punctuation">}</span>
+		<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\r\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>将以上程序保存为:fontTest.c，gcc编译，执行，结果如下图所示：<br><img src="http://pic.huangruimin.tech/20190521002021.png"><br>由执行结果可见，程序能够从二进制bin文件中提取有用信息，并且，该bin文件保存了GBK编码的所有汉字，将“你好”替换成其他任意汉字也是可从bin文件中提取出子模的，生成的bin文件是有效的。<br>接下来讲解程序中的几个注意事项:</p>
+<ul>
+<li>该程序源文件必须以GBK编码或GB2312编码保存(GBK编码兼容GB2312编码)，在notepad++中，保存方式如下图所示：<br><img src="http://pic.huangruimin.tech/20190521002857.png"></li>
+<li>解释下如何获得内存中字符的偏移量：<blockquote>
+<p>GBK编码：每个GBK码由2个字节组成：</p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<blockquote>
+<p>第一个字节为0X81~0XF：<br>第二个字节分为两部分：</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>一是0X40-0X7E</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>二是0X80-0XFE</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>例如汉字“瑞”的GBK编码为C8 F0，第一字节C8，位于0X81-0XFE之间，第二字节F0，位于0X40-0XFE之间</p>
+<blockquote>
+<p>第一个字节代表的意义称为区，那么GBK里面总共有126个区（0XFE-0X81+1=126）<br>第二个字节代表的意义就是每个区内有多少个汉字，算了一下，一共有190个（0XFE-0X80+0X7E-0X40+2=190）。</p>
+</blockquote>
+<p>那么，GBK一共存储了126X190=23940个汉字。</p>
+<blockquote>
+<blockquote>
+<p>仔细看GBK编码第二个字节两部分中，0X40-0X7E和0X80-0XFE，也就是说它是从0X40~到0XFF，中间的0x7F和最后的0xFF没有用到。</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>但是为了能够线性查找，我们暂且认为这两个字节也存在，就是我们强制把每个区190个汉字当做每个区192个汉字，不过0X7F和0XFF上没有汉字。</p>
+</blockquote>
+</blockquote>
+<p>定义GBKH代表第一个字节，GBKL代表第二个字节，字库的偏移量offset，那么其计算方法如下：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">   GBKH<span class="token operator">=</span><span class="token operator">*</span>code<span class="token punctuation">;</span>
+   GBKL<span class="token operator">=</span><span class="token operator">*</span><span class="token punctuation">(</span>code<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token keyword">if</span><span class="token punctuation">(</span>GBKH<span class="token operator">&gt;</span><span class="token number">0XFE</span><span class="token operator">||</span>GBKH<span class="token operator">&lt;</span><span class="token number">0X81</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	<span class="token keyword">return</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+   GBKH<span class="token operator">-=</span><span class="token number">0x81</span><span class="token punctuation">;</span>
+   GBKL<span class="token operator">-=</span><span class="token number">0x40</span><span class="token punctuation">;</span>
+<span class="token comment">//字模大小为16*16/8=32，一个字模占32字节</span>
+   offset<span class="token operator">=</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token class-name">uint32_t</span><span class="token punctuation">)</span><span class="token number">192</span><span class="token operator">*</span>GBKH<span class="token operator">+</span>GBKL<span class="token punctuation">)</span><span class="token operator">*</span><span class="token number">32</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>实现了在控制台窗口打印汉字字模，那么在TFTLCD，OLED，墨水屏等屏幕上，只要先实现了画点功能，那么，显示任意汉字也可以实现的了。</p>
+<h2 id="5-任意汉字显示的实现-采用字库法"><a href="#5-任意汉字显示的实现-采用字库法" class="headerlink" title="5 任意汉字显示的实现(采用字库法)"></a>5 任意汉字显示的实现(采用字库法)</h2><p>最后再介绍一种显示汉字的方法，该方法采用Python实现，直接调用字体库，仅在Linux系统上可实现，下面将以树莓派为例，相关的操作如下：</p>
+<p>首先安装好Pillow库以及必要液晶屏显示必要的SPI库，GPIO库等：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> python3-pip
+<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> python-imaging
+<span class="token function">sudo</span> pip3 <span class="token function">install</span> spidev
+<span class="token function">sudo</span> pip3 <span class="token function">install</span> RPi.GPIO
+<span class="token function">sudo</span> pip3 <span class="token function">install</span> Pillow<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>安装 Pillow 如果报错: ImportError: libopenjp2.so.7: cannot open shared object file: No<br>such file or directory，则先执行如下指令：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> libopenjp2-7-dev<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>安装必要的字体:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> ttf-wqy-zenhei ttf-wqy-microhei<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>接下来是调用微软雅黑字体进行显示的部分示例(python3)，详情代码参考文章末尾留下的Github:</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">#!/usr/bin/python</span>
+<span class="token comment"># -*- coding:utf-8 -*-</span>
+
+<span class="token keyword">import</span> epd7in5b
+<span class="token keyword">import</span> time
+<span class="token keyword">from</span> PIL <span class="token keyword">import</span> Image<span class="token punctuation">,</span>ImageDraw<span class="token punctuation">,</span>ImageFont
+<span class="token keyword">import</span> traceback
+
+<span class="token keyword">try</span><span class="token punctuation">:</span>
+    epd <span class="token operator">=</span> epd7in5b<span class="token punctuation">.</span>EPD<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    epd<span class="token punctuation">.</span>init<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Clear..."</span><span class="token punctuation">)</span>
+    epd<span class="token punctuation">.</span>Clear<span class="token punctuation">(</span><span class="token number">0xFF</span><span class="token punctuation">)</span>
+    
+    <span class="token comment"># Drawing on the Horizontal image</span>
+    HBlackimage <span class="token operator">=</span> Image<span class="token punctuation">.</span>new<span class="token punctuation">(</span><span class="token string">'1'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>epd7in5b<span class="token punctuation">.</span>EPD_WIDTH<span class="token punctuation">,</span> epd7in5b<span class="token punctuation">.</span>EPD_HEIGHT<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">255</span><span class="token punctuation">)</span>
+    HRedimage <span class="token operator">=</span> Image<span class="token punctuation">.</span>new<span class="token punctuation">(</span><span class="token string">'1'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>epd7in5b<span class="token punctuation">.</span>EPD_WIDTH<span class="token punctuation">,</span> epd7in5b<span class="token punctuation">.</span>EPD_HEIGHT<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">255</span><span class="token punctuation">)</span>
+    
+    <span class="token comment"># Horizontal</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Drawing"</span><span class="token punctuation">)</span>
+    drawblack <span class="token operator">=</span> ImageDraw<span class="token punctuation">.</span>Draw<span class="token punctuation">(</span>HBlackimage<span class="token punctuation">)</span>
+    drawred <span class="token operator">=</span> ImageDraw<span class="token punctuation">.</span>Draw<span class="token punctuation">(</span>HRedimage<span class="token punctuation">)</span>
+    font24 <span class="token operator">=</span> ImageFont<span class="token punctuation">.</span>truetype<span class="token punctuation">(</span><span class="token string">'/usr/share/fonts/truetype/wqy/wqy-microhei.ttc'</span><span class="token punctuation">,</span> <span class="token number">24</span><span class="token punctuation">)</span>
+    drawblack<span class="token punctuation">.</span>text<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">'hello world'</span><span class="token punctuation">,</span> font <span class="token operator">=</span> font24<span class="token punctuation">,</span> fill <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    drawblack<span class="token punctuation">.</span>text<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">'7.5inch e-Paper B'</span><span class="token punctuation">,</span> font <span class="token operator">=</span> font24<span class="token punctuation">,</span> fill <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    drawblack<span class="token punctuation">.</span>text<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">150</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">u'微雪电子'</span><span class="token punctuation">,</span> font <span class="token operator">=</span> font24<span class="token punctuation">,</span> fill <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">)</span>    
+    drawblack<span class="token punctuation">.</span>line<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">,</span> <span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">70</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">,</span> fill <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    drawblack<span class="token punctuation">.</span>line<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">70</span><span class="token punctuation">,</span> <span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">,</span> fill <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    drawblack<span class="token punctuation">.</span>rectangle<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">,</span> <span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">70</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">,</span> outline <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">)</span>    
+    drawred<span class="token punctuation">.</span>line<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">165</span><span class="token punctuation">,</span> <span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">165</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">,</span> fill <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    drawred<span class="token punctuation">.</span>line<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">140</span><span class="token punctuation">,</span> <span class="token number">75</span><span class="token punctuation">,</span> <span class="token number">190</span><span class="token punctuation">,</span> <span class="token number">75</span><span class="token punctuation">)</span><span class="token punctuation">,</span> fill <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    drawred<span class="token punctuation">.</span>arc<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">140</span><span class="token punctuation">,</span> <span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">190</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">360</span><span class="token punctuation">,</span> fill <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    drawred<span class="token punctuation">.</span>rectangle<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">80</span><span class="token punctuation">,</span> <span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">130</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">,</span> fill <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    drawred<span class="token punctuation">.</span>chord<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">,</span> <span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">250</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">360</span><span class="token punctuation">,</span> fill <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    epd<span class="token punctuation">.</span>display<span class="token punctuation">(</span>epd<span class="token punctuation">.</span>getbuffer<span class="token punctuation">(</span>HBlackimage<span class="token punctuation">)</span><span class="token punctuation">,</span> epd<span class="token punctuation">.</span>getbuffer<span class="token punctuation">(</span>HRedimage<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    epd<span class="token punctuation">.</span>sleep<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">except</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'traceback.format_exc():\n%s'</span><span class="token punctuation">,</span>traceback<span class="token punctuation">.</span>format_exc<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    exit<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>该代码的精髓在于，先创建一段缓存，然后采用pillow库的相关方法通过字符串获取对应字库中字符的字模，将字模数据存入缓存中，然后将缓存数据显示到屏幕上，详情参考pillow库中的Image,ImageDraw,ImageFont方法对应的手册。</p>
+<blockquote>
+<p>注意，代码中的中文采用UTF-8编码，保存的时候，为防止乱码，必须以UTF-8编码保存(可采用notepad++工具保存为UTF-8编码)</p>
+</blockquote>
+<p>最后，放出相关代码的Github：<br><a target="_blank" rel="noopener" href="https://github.com/RuiminHuang/fontDisplay">软件工具,字模bin文件校验代码</a><br><a target="_blank" rel="noopener" href="https://github.com/RuiminHuang/e-Paper">刷屏代码示例</a></p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        Author:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Ruimin Huang</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        Link:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://www.huangruimin.tech/2017/08/09/qian-ru-shi-xi-tong-zhong-han-zi-zi-ku-bian-ma-ji-he/">http://www.huangruimin.tech/2017/08/09/qian-ru-shi-xi-tong-zhong-han-zi-zi-ku-bian-ma-ji-he/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        Reprint policy:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    All articles in this blog are used except for special statements
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    reprint polocy. If reproduced, please indicate source
+                    <a href="/about" target="_blank">Ruimin Huang</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/IC%E5%92%8C%E9%80%9A%E7%94%A8%E5%A4%96%E8%AE%BE%E5%BC%80%E5%8F%91/">
+                                    <span class="chip bg-color">IC和通用外设开发</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="qq,qzone,wechat,weibo,douban" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+            <div class="card">
+                <a href="/2018/02/01/rpi-opencv-kai-fa-huan-jing-da-jian/">
+                    <div class="card-image">
+                        
+                        <img src="http://pic.huangruimin.tech/banner_16.jpg" class="responsive-img" alt="RPi-OpenCV_开发环境搭建">
+                        
+                        <span class="card-title">RPi-OpenCV_开发环境搭建</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2018-02-01
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" class="post-category">
+                                    图像处理
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/">
+                        <span class="chip bg-color">树莓派</span>
+                    </a>
+                    
+                    <a href="/tags/OpenCV/">
+                        <span class="chip bg-color">OpenCV</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2017/01/01/diao-shi-zhuan-yong-ye-mian/">
+                    <div class="card-image">
+                        
+                        <img src="http://pic.huangruimin.tech/banner_10.jpg" class="responsive-img" alt="调试专用页面">
+                        
+                        <span class="card-title">调试专用页面</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2017-01-01
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E4%BF%A1%E6%81%AF%E6%8A%80%E6%9C%AF/" class="post-category">
+                                    信息技术
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E7%BD%91%E7%AB%99/">
+                        <span class="chip bg-color">网站</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="song"
+                   id="2015567290"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021-2023</span>
+            
+            <!-- <span id="year">2021</span> -->
+            <a href="/about" target="_blank">Ruimin Huang</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">169.9k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2021";
+                    var startMonth = "8";
+                    var startDate = "29";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+            <span id="icp"><img src="/medias/icp.png" style="vertical-align: text-bottom;" />
+                <a href="https://beian.miit.gov.cn/" target="_blank">湘ICP备2021000849号-1</a>
+            </span>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="mailto:huang_ruimin@163.com" class="tooltipped" target="_blank" data-tooltip="邮箱: huang_ruimin@163.com" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="http://pic.huangruimin.tech/WeChat_QR_Code.jpg" class="tooltipped" target="_blank" data-tooltip="微信: vivid-isotope" data-position="top" data-delay="50">
+        <i class="fab fa-weixin"></i>
+    </a>
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1447364060" class="tooltipped" target="_blank" data-tooltip="QQ: 1447364060" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+    <a href="https://github.com/RuiminHuang" class="tooltipped" target="_blank" data-tooltip="GitHub: https://github.com/RuiminHuang" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;Search</span>
+            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+	
+    
+    <script type="text/javascript" color="0,0,255"
+        pointColor="0,0,255" opacity='0.7'
+        zIndex="-1" count="99"
+        src="/libs/background/canvas-nest.js"></script>
+    
+
+    
+    
+    <script type="text/javascript" size="150" alpha='0.6'
+        zIndex="-1" src="/libs/background/ribbon.min.js" async="async"></script>
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
