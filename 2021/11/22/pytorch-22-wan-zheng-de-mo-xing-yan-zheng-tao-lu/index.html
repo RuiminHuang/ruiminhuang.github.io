@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="zh-HK">
+<html lang="default">
 
 
 <head>
@@ -142,7 +142,7 @@
   
   <li>
     <a href="#searchModal" class="modal-trigger waves-effect waves-light">
-      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+      <i id="searchIcon" class="fas fa-search" title="Search" style="zoom: 0.85;"></i>
     </a>
   </li>
 </ul>
@@ -408,35 +408,35 @@
             <div class="post-info">
                 
                 <div class="post-date info-break-policy">
-                    <i class="far fa-calendar-minus fa-fw"></i>發布日期:&nbsp;&nbsp;
+                    <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
                     2021-11-22
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
-                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
                     2023-09-13
                 </div>
                 
 
                 
                 <div class="info-break-policy">
-                    <i class="far fa-file-word fa-fw"></i>文章字數:&nbsp;&nbsp;
+                    <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
                     205
                 </div>
                 
 
                 
                 <div class="info-break-policy">
-                    <i class="far fa-clock fa-fw"></i>閱讀時長:&nbsp;&nbsp;
-                    1 分
+                    <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
+                    1 Min
                 </div>
                 
 
                 
                     <div id="busuanzi_container_page_pv" class="info-break-policy">
-                        <i class="far fa-eye fa-fw"></i>閱讀次數:&nbsp;&nbsp;
+                        <i class="far fa-eye fa-fw"></i>Read Count:&nbsp;&nbsp;
                         <span id="busuanzi_value_page_pv"></span>
                     </div>
 				
@@ -517,7 +517,7 @@ model<span class="token punctuation">.</span><span class="token builtin">eval</s
             <div class="reprint__author">
                 <span class="reprint-meta" style="font-weight: bold;">
                     <i class="fas fa-user">
-                        文章作者:
+                        Author:
                     </i>
                 </span>
                 <span class="reprint-info">
@@ -527,7 +527,7 @@ model<span class="token punctuation">.</span><span class="token builtin">eval</s
             <div class="reprint__type">
                 <span class="reprint-meta" style="font-weight: bold;">
                     <i class="fas fa-link">
-                        文章連結:
+                        Link:
                     </i>
                 </span>
                 <span class="reprint-info">
@@ -537,13 +537,13 @@ model<span class="token punctuation">.</span><span class="token builtin">eval</s
             <div class="reprint__notice">
                 <span class="reprint-meta" style="font-weight: bold;">
                     <i class="fas fa-copyright">
-                        版權聲明:
+                        Reprint policy:
                     </i>
                 </span>
                 <span class="reprint-info">
-                    本部落格所有文章除特別聲明外，均採用
+                    All articles in this blog are used except for special statements
                     <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
-                    許可協議。轉載請註明來源
+                    reprint polocy. If reproduced, please indicate source
                     <a href="/about" target="_blank">Ruimin Huang</a>
                     !
                 </span>
@@ -553,7 +553,7 @@ model<span class="token punctuation">.</span><span class="token builtin">eval</s
 
     <script async defer>
       document.addEventListener("copy", function (e) {
-        let toastHTML = '<span>複製成功，請遵循本文的轉載規則</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
         M.toast({html: toastHTML})
       });
 
@@ -746,7 +746,7 @@ model<span class="token punctuation">.</span><span class="token builtin">eval</s
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
                 <a href="/2022/09/15/rpi-opencv-opencv-zhong-highgui-ji-xiang-guan-shang-wei-ji-kai-fa/">
                     <div class="card-image">
@@ -797,7 +797,7 @@ model<span class="token punctuation">.</span><span class="token builtin">eval</s
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
                 <a href="/2021/11/21/pytorch-21-li-yong-gpu-xun-lian/">
@@ -875,7 +875,7 @@ model<span class="token punctuation">.</span><span class="token builtin">eval</s
     </div>
     <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
         <div class="toc-widget card" style="background-color: white;">
-            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目錄</div>
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
             <div id="toc-content"></div>
         </div>
     </div>
@@ -1157,8 +1157,8 @@ model<span class="token punctuation">.</span><span class="token builtin">eval</s
 <div id="searchModal" class="modal">
     <div class="modal-content">
         <div class="search-header">
-            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
-            <input type="search" id="searchInput" name="s" placeholder="請輸入搜索的關鍵字"
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;Search</span>
+            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
                    class="search-input">
         </div>
         <div id="searchResult"></div>
