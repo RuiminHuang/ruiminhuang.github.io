@@ -416,7 +416,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
-                    2023-09-13
+                    2024-08-27
                 </div>
                 
 
@@ -453,12 +453,12 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p><img src="https://pic.huangruimin.tech/20220812141627.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220812142248.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220812142403.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220812142459.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220812142649.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220812142841.png"></p>
+                <p><img src="http://pic.huangruimin.tech/20220812141627.png"></p>
+<p><img src="http://pic.huangruimin.tech/20220812142248.png"></p>
+<p><img src="http://pic.huangruimin.tech/20220812142403.png"></p>
+<p><img src="http://pic.huangruimin.tech/20220812142459.png"></p>
+<p><img src="http://pic.huangruimin.tech/20220812142649.png"></p>
+<p><img src="http://pic.huangruimin.tech/20220812142841.png"></p>
 <ul>
 <li>权重剪枝：结构化剪枝，整层整层地剪，整通道整通道地剪</li>
 <li>通道剪枝：非结构化剪枝，一根树杈子，一根树杈子剪</li>
@@ -468,26 +468,26 @@
 <li>比如说MnasNet和MobileNetV3就是把NAS和轻量化网络进行了结合，就是让人工智能自己去设计一个轻量化的网络，而不用人去设计了</li>
 <li>预训练大模型的知识蒸馏</li>
 </ul>
-<p><img src="https://pic.huangruimin.tech/20220812151750.png"></p>
+<p><img src="http://pic.huangruimin.tech/20220812151750.png"></p>
 <ul>
 <li>论文来自于NIPS会议，是计算机视觉领域的顶级论文</li>
 </ul>
-<p><img src="https://pic.huangruimin.tech/20220812161505.png"></p>
+<p><img src="http://pic.huangruimin.tech/20220812161505.png"></p>
 <ul>
 <li><p>所以在训练教师网络的时候，可以使用hard target去训练，但是，当训练出了教师网络后，教师网络对这张图片的预测结果，也就是这个soft targets能够传递更多的信息</p>
 </li>
 <li><p>那么也就可以使用这个soft target去训练学生网络</p>
 </li>
 </ul>
-<p><img src="https://pic.huangruimin.tech/20220812161731.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220812162236.png"></p>
+<p><img src="http://pic.huangruimin.tech/20220812161731.png"></p>
+<p><img src="http://pic.huangruimin.tech/20220812162236.png"></p>
 <ul>
 <li><p>那么现在目标就明确了，用包含了很多信息的标签去训练学生网络，这样效率就会更高</p>
 </li>
 <li><p>现在还要进行一个操作，这个softtarget，还是不够soft，需要让它更加soft，也就是要知道这些非正确类别的概率，并把它解耦出来，给他暴露出来，所以这个时候就需要引入一个蒸馏温度T，这个温度T越高，这个soft label就越soft</p>
 </li>
 </ul>
-<p><img src="https://pic.huangruimin.tech/20220812163103.png"></p>
+<p><img src="http://pic.huangruimin.tech/20220812163103.png"></p>
 <ul>
 <li><p>可以看出，当T越大，就越soft；当T=100的时候，这4类，就已经基本一样了，等于是基本没有贫富差距了</p>
 </li>
@@ -500,21 +500,21 @@
 <li><p>所以这里就可以举一个具体的例子：</p>
 </li>
 </ul>
-<p><img src="https://pic.huangruimin.tech/20220812164314.png"></p>
+<p><img src="http://pic.huangruimin.tech/20220812164314.png"></p>
 <ul>
 <li>那学生网络与教师网络之间，是如何通过蒸馏来进行学习的呢？</li>
 </ul>
-<p><img src="https://pic.huangruimin.tech/20220812182035.png"></p>
+<p><img src="http://pic.huangruimin.tech/20220812182035.png"></p>
 <ul>
 <li>知识蒸馏的图解如下图所示：</li>
 </ul>
-<p><img src="https://pic.huangruimin.tech/20220812183338.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220812183422.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220812183622.png"></p>
+<p><img src="http://pic.huangruimin.tech/20220812183338.png"></p>
+<p><img src="http://pic.huangruimin.tech/20220812183422.png"></p>
+<p><img src="http://pic.huangruimin.tech/20220812183622.png"></p>
 <ul>
 <li>distillation是有一个师傅在手把手教你，告诉你，这是一个马，更像驴，而不像车，驴和车有多像，有多不像；而下面的这个hardloss就是在告诉你，这个课本有一张马的插图，插图告诉你，这就是马，不是别的东西；所以，这两项，有一个师傅带，还有一个课本看；就是和我们普通人学习的过程是很像的。</li>
 </ul>
-<p><img src="https://pic.huangruimin.tech/20220812220225.png"></p>
+<p><img src="http://pic.huangruimin.tech/20220812220225.png"></p>
 <ul>
 <li><p>我们的目标就是，微调学生网络中的权重，使得最终的损失函数最小化；具体通过什么方法呢，就是通过梯度下降，反向传播的方法。</p>
 </li>
@@ -523,15 +523,15 @@
 <li><p>它里面的所有权重，最终就可以使得，最终的损失函数最小化，或者说收敛到一个低值。</p>
 </li>
 </ul>
-<p><img src="https://pic.huangruimin.tech/20220812221209.png"></p>
+<p><img src="http://pic.huangruimin.tech/20220812221209.png"></p>
 <ul>
 <li>前面这两个图是训练过程，后面这个图是预测过程，也叫做部署过程。</li>
 </ul>
-<p><img src="https://pic.huangruimin.tech/20220812221703.png"></p>
+<p><img src="http://pic.huangruimin.tech/20220812221703.png"></p>
 <ul>
 <li>少样本，甚至0样本，的学习，可以通过知识蒸馏来实现</li>
 </ul>
-<p><img src="https://pic.huangruimin.tech/20220812223901.png"></p>
+<p><img src="http://pic.huangruimin.tech/20220812223901.png"></p>
 <blockquote>
 <p>就好比，我们从来没有见过大熊猫，但是天天有一个人来给我们讲解大熊猫是什么样，给我们讲大熊猫跟老虎有什么区别；当我们再见到大熊猫的时候，其实也知道这是一只大熊猫了。</p>
 </blockquote>
@@ -550,7 +550,7 @@
 <li><p>但是使用soft target去训练就没有这个问题，准确率一直都是在增加的，直到收敛，不会出现先增后降的情况</p>
 </li>
 </ul>
-<p><img src="https://pic.huangruimin.tech/20220812230339.png"></p>
+<p><img src="http://pic.huangruimin.tech/20220812230339.png"></p>
 <ul>
 <li><p>迁移学习：把一个领域学习的东西，泛化到另一个领域，比如把猫狗域迁移到了医疗X光领域</p>
 </li>
@@ -568,68 +568,68 @@
 <p>这也是研究的热点，也是适合水论文的一个点</p>
 </blockquote>
 </blockquote>
-<p><img src="https://pic.huangruimin.tech/20220813201455.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220813201526.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220813201607.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220813201749.png"></p>
+<p><img src="http://pic.huangruimin.tech/20220813201455.png"></p>
+<p><img src="http://pic.huangruimin.tech/20220813201526.png"></p>
+<p><img src="http://pic.huangruimin.tech/20220813201607.png"></p>
+<p><img src="http://pic.huangruimin.tech/20220813201749.png"></p>
 <blockquote>
 <p>教师网络就会引导这个黄圈进行收敛，最终收敛到橙圈里面去</p>
 </blockquote>
 <blockquote>
 <p>越靠近教师网路就越好，因为教师网络的性能更好</p>
 </blockquote>
-<p><img src="https://pic.huangruimin.tech/20220813205659.png"></p>
+<p><img src="http://pic.huangruimin.tech/20220813205659.png"></p>
 <blockquote>
 <p>对bert进行知识蒸馏，也达到了很好的效果</p>
 </blockquote>
-<p><img src="https://pic.huangruimin.tech/20220813205746.png"></p>
+<p><img src="http://pic.huangruimin.tech/20220813205746.png"></p>
 <blockquote>
 <p>为什么知识蒸馏是有效的？</p>
 </blockquote>
 <blockquote>
 <p>知识蒸馏，就是学生网络在浩如烟海的书籍里面去翻书，但是教师网络指导一下，就不会漫无目的的翻书了</p>
 </blockquote>
-<p><img src="https://pic.huangruimin.tech/20220813210257.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220813210446.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220813210459.png"></p>
+<p><img src="http://pic.huangruimin.tech/20220813210257.png"></p>
+<p><img src="http://pic.huangruimin.tech/20220813210446.png"></p>
+<p><img src="http://pic.huangruimin.tech/20220813210459.png"></p>
 <blockquote>
 <p>Label Smooth是为了防止网络对某一个类别过度自信，也就是会导致网络对某一个类别的输出趋向于无穷大，为了防止这一现象的发生，通常就是给其它类别也赋予一个常数的概率</p>
 </blockquote>
-<h2 id="知识蒸馏现代的前沿研究方向"><a href="#知识蒸馏现代的前沿研究方向" class="headerlink" title="知识蒸馏现代的前沿研究方向"></a>知识蒸馏现代的前沿研究方向</h2><p><img src="https://pic.huangruimin.tech/20220813211030.png"></p>
+<h2 id="知识蒸馏现代的前沿研究方向"><a href="#知识蒸馏现代的前沿研究方向" class="headerlink" title="知识蒸馏现代的前沿研究方向"></a>知识蒸馏现代的前沿研究方向</h2><p><img src="http://pic.huangruimin.tech/20220813211030.png"></p>
 <blockquote>
 <p>每一个方向都是适合发很多论文的，适合自己来做毕业论文，或者适合自己做小论文的</p>
 </blockquote>
 <blockquote>
 <p>可以和人工智能的所有领域发生化学反应</p>
 </blockquote>
-<p><img src="https://pic.huangruimin.tech/20220813211238.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220813211943.png"></p>
+<p><img src="http://pic.huangruimin.tech/20220813211238.png"></p>
+<p><img src="http://pic.huangruimin.tech/20220813211943.png"></p>
 <blockquote>
 <p>这个图展示了有多个老师，也就是多模态的一种范式</p>
 </blockquote>
-<p><img src="https://pic.huangruimin.tech/20220813212403.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220813212420.png"></p>
+<p><img src="http://pic.huangruimin.tech/20220813212403.png"></p>
+<p><img src="http://pic.huangruimin.tech/20220813212420.png"></p>
 <blockquote>
 <p>上面是3种蒸馏方法</p>
 </blockquote>
-<p><img src="https://pic.huangruimin.tech/20220813212541.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220813212608.png"></p>
+<p><img src="http://pic.huangruimin.tech/20220813212541.png"></p>
+<p><img src="http://pic.huangruimin.tech/20220813212608.png"></p>
 <blockquote>
 <p>上面这个就是有一些中间层的蒸馏，也就是脑回路的传授</p>
 </blockquote>
-<p><img src="https://pic.huangruimin.tech/20220813212713.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220813212727.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220813212738.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220813212833.png"></p>
+<p><img src="http://pic.huangruimin.tech/20220813212713.png"></p>
+<p><img src="http://pic.huangruimin.tech/20220813212727.png"></p>
+<p><img src="http://pic.huangruimin.tech/20220813212738.png"></p>
+<p><img src="http://pic.huangruimin.tech/20220813212833.png"></p>
 <blockquote>
 <p>下面这个博客，描述的是知识蒸馏的综述和历史发展</p>
 </blockquote>
-<p><img src="https://pic.huangruimin.tech/20220813212853.png"></p>
-<h2 id="知识蒸馏的代码库"><a href="#知识蒸馏的代码库" class="headerlink" title="知识蒸馏的代码库"></a>知识蒸馏的代码库</h2><p><img src="https://pic.huangruimin.tech/20220813213120.png"><br><img src="https://pic.huangruimin.tech/20220813213108.png"><br><img src="https://pic.huangruimin.tech/20220813213519.png"><br><img src="https://pic.huangruimin.tech/20220813213554.png"><br><img src="https://pic.huangruimin.tech/20220813213608.png"></p>
-<h2 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h2><p><img src="https://pic.huangruimin.tech/20220813213622.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220813213648.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220813213707.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220813213732.png"></p>
+<p><img src="http://pic.huangruimin.tech/20220813212853.png"></p>
+<h2 id="知识蒸馏的代码库"><a href="#知识蒸馏的代码库" class="headerlink" title="知识蒸馏的代码库"></a>知识蒸馏的代码库</h2><p><img src="http://pic.huangruimin.tech/20220813213120.png"><br><img src="http://pic.huangruimin.tech/20220813213108.png"><br><img src="http://pic.huangruimin.tech/20220813213519.png"><br><img src="http://pic.huangruimin.tech/20220813213554.png"><br><img src="http://pic.huangruimin.tech/20220813213608.png"></p>
+<h2 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h2><p><img src="http://pic.huangruimin.tech/20220813213622.png"></p>
+<p><img src="http://pic.huangruimin.tech/20220813213648.png"></p>
+<p><img src="http://pic.huangruimin.tech/20220813213707.png"></p>
+<p><img src="http://pic.huangruimin.tech/20220813213732.png"></p>
 
                 
             </div>
