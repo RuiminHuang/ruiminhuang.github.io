@@ -406,14 +406,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
-                    811
+                    1.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
-                    3 Min
+                    5 Min
                 </div>
                 
 
@@ -582,7 +582,95 @@ target_information_entropy <span class="token operator">=</span> torch<span clas
 <blockquote>
 <p>对于非delta分布，即对于非onehot变量，信息熵是一个常数，常数对于卷积神经网络的参数更新时没有任何贡献的，此时，优化CE_loss与优化KLD_loss是没有任何区别，效果是一样的</p>
 </blockquote>
+<h2 id="5-Binary-Cross-Entropy-loss（BCE-loss）"><a href="#5-Binary-Cross-Entropy-loss（BCE-loss）" class="headerlink" title="5.Binary Cross Entropy loss（BCE loss）"></a>5.Binary Cross Entropy loss（BCE loss）</h2><blockquote>
+<p>对判别器输出是真还是假，就属于二分类问题了</p>
+</blockquote>
+<p><img src="http://pic.huangruimin.tech/20240918204028.png"></p>
+<blockquote>
+<p>代码示例</p>
+</blockquote>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> torch
+<span class="token keyword">import</span> torch<span class="token punctuation">.</span>nn <span class="token keyword">as</span> nn
+<span class="token keyword">import</span> torch<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>functional <span class="token keyword">as</span> F
 
+<span class="token comment"># logits shape: [BS, 1]</span>
+
+bce_loss_fn <span class="token operator">=</span> torch<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>BCELoss<span class="token punctuation">(</span><span class="token punctuation">)</span>
+nll_fn <span class="token operator">=</span> torch<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>NLLLoss<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+batchsize <span class="token operator">=</span> <span class="token number">2</span>
+logits <span class="token operator">=</span> torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span>batchsize<span class="token punctuation">)</span>
+prob_1 <span class="token operator">=</span> torch<span class="token punctuation">.</span>sigmoid<span class="token punctuation">(</span>logits<span class="token punctuation">)</span>
+target <span class="token operator">=</span> torch<span class="token punctuation">.</span>randint<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> size<span class="token operator">=</span><span class="token punctuation">(</span>batchsize<span class="token punctuation">,</span> <span class="token punctuation">)</span><span class="token punctuation">)</span>
+bce_loss <span class="token operator">=</span> bce_loss_fn<span class="token punctuation">(</span>prob_1<span class="token punctuation">,</span> target<span class="token punctuation">.</span><span class="token builtin">float</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"binart cross entropy loss: </span><span class="token interpolation"><span class="token punctuation">{</span>bce_loss<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+
+<span class="token comment">### 用NLL loss代替BCE loss做二分类</span>
+prob_0 <span class="token operator">=</span> <span class="token number">1</span><span class="token operator">-</span>prob_1<span class="token punctuation">.</span>unsqueeze<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+prob <span class="token operator">=</span> torch<span class="token punctuation">.</span>cat<span class="token punctuation">(</span><span class="token punctuation">[</span>prob_0<span class="token punctuation">,</span> prob_1<span class="token punctuation">.</span>unsqueeze<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span> dim<span class="token operator">=</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+nll_loss_binary <span class="token operator">=</span> nll_fn<span class="token punctuation">(</span>torch<span class="token punctuation">.</span>log<span class="token punctuation">(</span>prob<span class="token punctuation">)</span><span class="token punctuation">,</span> target<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"negative likelihood loss binary: </span><span class="token interpolation"><span class="token punctuation">{</span>nll_loss_binary<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>torch<span class="token punctuation">.</span>allclose<span class="token punctuation">(</span>bce_loss<span class="token punctuation">,</span> nll_loss_binary<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>本质上，都是2个概率分布的映射<br>sigmoid 的作用是将输出值转换为0-1之间的浮点型<br>如果不想添加sigmoid函数的话，那么就直接用BCEWithLogitsLoss函数，如下图</p>
+</blockquote>
+<p><img src="http://pic.huangruimin.tech/20240918222242.png"></p>
+<blockquote>
+<p>但是，sigmoid函数中，当输入数值变大的情况下，容易出现梯度消失的情况，如下代码及结果演示：</p>
+</blockquote>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> torch
+<span class="token keyword">import</span> torch<span class="token punctuation">.</span>nn <span class="token keyword">as</span> nn
+<span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot <span class="token keyword">as</span> plt
+logits <span class="token operator">=</span> torch<span class="token punctuation">.</span>linspace<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">2000</span><span class="token punctuation">)</span>
+loss <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+loss_fn <span class="token operator">=</span> nn<span class="token punctuation">.</span>BCELoss<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">for</span> lgs <span class="token keyword">in</span> logits<span class="token punctuation">:</span>
+    loss<span class="token punctuation">.</span>append<span class="token punctuation">(</span>loss_fn<span class="token punctuation">(</span>torch<span class="token punctuation">.</span>sigmoid<span class="token punctuation">(</span>lgs<span class="token punctuation">)</span><span class="token punctuation">,</span> torch<span class="token punctuation">.</span>ones_like<span class="token punctuation">(</span>lgs<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>logits<span class="token punctuation">,</span> loss<span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="http://pic.huangruimin.tech/20240918222813.png"></p>
+<h2 id="6-Cosine-Similarity-loss"><a href="#6-Cosine-Similarity-loss" class="headerlink" title="6.Cosine Similarity loss"></a>6.Cosine Similarity loss</h2><blockquote>
+<p>数学表达式</p>
+</blockquote>
+<p><img src="http://pic.huangruimin.tech/20240918222941.png"></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> torch
+<span class="token keyword">import</span> torch<span class="token punctuation">.</span>nn <span class="token keyword">as</span> nn
+<span class="token keyword">import</span> torch<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>functional <span class="token keyword">as</span> F
+
+batchsize <span class="token operator">=</span> <span class="token number">2</span>
+
+cosine_loss_fn <span class="token operator">=</span> torch<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>CosineEmbeddingLoss<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment">#生成具有正态分布（均值为0，标准差为1）的随机数的函数</span>
+v1 <span class="token operator">=</span> torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span>batchsize<span class="token punctuation">,</span> <span class="token number">512</span><span class="token punctuation">)</span>
+v2 <span class="token operator">=</span> torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span>batchsize<span class="token punctuation">,</span> <span class="token number">512</span><span class="token punctuation">)</span>
+<span class="token comment"># target只能是0或者1</span>
+<span class="token comment"># 因此：0~1 -&gt; 0~2 -&gt; -1~1</span>
+target <span class="token operator">=</span> torch<span class="token punctuation">.</span>randint<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> size<span class="token operator">=</span><span class="token punctuation">(</span>batchsize<span class="token punctuation">,</span> <span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">*</span><span class="token number">2</span><span class="token operator">-</span><span class="token number">1</span>
+cosine_loss <span class="token operator">=</span> cosine_loss_fn<span class="token punctuation">(</span>v1<span class="token punctuation">,</span> v2<span class="token punctuation">,</span> target<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"cosine similarity loss: </span><span class="token interpolation"><span class="token punctuation">{</span>cosine_loss<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>应用领域</p>
+<blockquote>
+<ul>
+<li>自监督学习</li>
+<li>对比学习</li>
+<li>相似度匹配</li>
+<li>文本检索</li>
+<li>图像检索</li>
+</ul>
+</blockquote>
+</blockquote>
+<h2 id="7-L1loss"><a href="#7-L1loss" class="headerlink" title="7.L1loss"></a>7.L1loss</h2><blockquote>
+<p>也被成为MAE<br>基本不用在分类中<br><img src="http://pic.huangruimin.tech/20240918224127.png"></p>
+</blockquote>
+<h2 id="8-MSEloss-不是用在分类中"><a href="#8-MSEloss-不是用在分类中" class="headerlink" title="8.MSEloss (不是用在分类中)"></a>8.MSEloss (不是用在分类中)</h2><blockquote>
+<p>即为MSE<br>基本不用在分类中<br><img src="http://pic.huangruimin.tech/20240918223949.png"></p>
+</blockquote>
+<h2 id="9-总结"><a href="#9-总结" class="headerlink" title="9.总结"></a>9.总结</h2>
                 
             </div>
             <hr/>
@@ -1098,7 +1186,7 @@ target_information_entropy <span class="token operator">=</span> torch<span clas
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">170.7k</span>&nbsp;字
+                class="white-color">171.1k</span>&nbsp;字
             
             
             
