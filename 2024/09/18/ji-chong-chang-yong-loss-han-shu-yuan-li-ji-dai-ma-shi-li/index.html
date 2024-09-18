@@ -406,7 +406,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
-                    292
+                    402
                 </div>
                 
 
@@ -495,7 +495,22 @@ nll_loss <span class="token operator">=</span> nll_fn<span class="token punctuat
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <blockquote>
-<p>也就是说，能用CE loss的地方，就能用NLL loss</p>
+<p>这里注意到：cross entropy value = NLL value<br>也就是说，能用CE loss的地方，就能用NLL loss<br>取决于输出的是什么，分两种情况：</p>
+<blockquote>
+<ul>
+<li>神经网络输出的是未归一化的分数的话：那么就用CE loss</li>
+<li>神经网络输出的是一个概率值，甚至是一个对数概率值的话：那么就用NLL loss</li>
+</ul>
+</blockquote>
+</blockquote>
+<blockquote>
+<p>总之他们俩是殊途同归的</p>
+<blockquote>
+<ul>
+<li>对数似然，就是负的交叉熵</li>
+<li>交叉熵，就是负对数似然</li>
+</ul>
+</blockquote>
 </blockquote>
 
                 
@@ -1013,7 +1028,7 @@ nll_loss <span class="token operator">=</span> nll_fn<span class="token punctuat
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">170.2k</span>&nbsp;字
+                class="white-color">170.3k</span>&nbsp;字
             
             
             
