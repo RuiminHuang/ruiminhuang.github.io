@@ -406,7 +406,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
-                    465
+                    532
                 </div>
                 
 
@@ -517,6 +517,27 @@ nll_loss <span class="token operator">=</span> nll_fn<span class="token punctuat
 <h2 id="3-Kullback-Leibler-divergence-loss（KL-loss）"><a href="#3-Kullback-Leibler-divergence-loss（KL-loss）" class="headerlink" title="3.Kullback-Leibler divergence loss（KL loss）"></a>3.Kullback-Leibler divergence loss（KL loss）</h2><blockquote>
 <p>反映的是：预测分布和目标分布之间的距离度量</p>
 </blockquote>
+<blockquote>
+<p>计算公式如下：</p>
+</blockquote>
+<p><img src="http://pic.huangruimin.tech/20240918192700.png"></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> torch
+<span class="token keyword">import</span> torch<span class="token punctuation">.</span>nn <span class="token keyword">as</span> nn
+<span class="token keyword">import</span> torch<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>functional <span class="token keyword">as</span> F
+
+<span class="token comment"># logits shape: [BS, NC]</span>
+batchsize <span class="token operator">=</span> <span class="token number">2</span>
+num_class <span class="token operator">=</span> <span class="token number">4</span>
+
+logits <span class="token operator">=</span> torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span>batchsize<span class="token punctuation">,</span> num_class<span class="token punctuation">)</span>
+soft_label <span class="token operator">=</span> torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span>batchsize<span class="token punctuation">,</span> num_class<span class="token punctuation">)</span>  <span class="token comment"># delta 目标分布</span>
+
+kld_loss_fn <span class="token operator">=</span> torch<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>KLDivLoss<span class="token punctuation">(</span><span class="token punctuation">)</span>
+kld_loss <span class="token operator">=</span> kld_loss_fn<span class="token punctuation">(</span>torch<span class="token punctuation">.</span>log<span class="token punctuation">(</span>torch<span class="token punctuation">.</span>softmax<span class="token punctuation">(</span>logits<span class="token punctuation">,</span> dim<span class="token operator">=</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> torch<span class="token punctuation">.</span>softmax<span class="token punctuation">(</span>soft_label <span class="token punctuation">,</span> dim<span class="token operator">=</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'Kullback-Leibler divergence loss:</span><span class="token interpolation"><span class="token punctuation">{</span>kld_loss<span class="token punctuation">}</span></span><span class="token string">'</span></span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
 <h2 id="4-验证-CE-IE-KLD"><a href="#4-验证-CE-IE-KLD" class="headerlink" title="4.验证 CE = IE + KLD"></a>4.验证 CE = IE + KLD</h2><blockquote>
 <p>即：交叉熵 = 信息熵 + KLD散度</p>
 </blockquote>
