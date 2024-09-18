@@ -406,14 +406,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
-                    532
+                    811
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
-                    2 Min
+                    3 Min
                 </div>
                 
 
@@ -462,7 +462,6 @@ hard_label <span class="token operator">=</span> torch<span class="token punctua
 <span class="token comment"># 非 delta 目标分布</span>
 soft_label <span class="token operator">=</span> torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span>batchsize<span class="token punctuation">,</span> num_class<span class="token punctuation">)</span>
 
-<span class="token comment">## 1. 调用 Cross Entropy loss</span>
 
 <span class="token comment">### method 1 for CE loss</span>
 <span class="token comment">### hard label，常用在分类之中</span>
@@ -473,7 +472,7 @@ ce_loss <span class="token operator">=</span> ce_loss_fun<span class="token punc
 <span class="token comment">### method 2 for CE loss</span>
 <span class="token comment">### soft label，常用在知识蒸馏中</span>
 ce_loss <span class="token operator">=</span> ce_loss_fun<span class="token punctuation">(</span>logits<span class="token punctuation">,</span> torch<span class="token punctuation">.</span>softmax<span class="token punctuation">(</span>soft_label<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"cross entropy loss2: </span><span class="token interpolation"><span class="token punctuation">{</span>ce_loss<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"cross entropy loss2: </span><span class="token interpolation"><span class="token punctuation">{</span>ce_loss<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="2-负对数似然损失-Negative-Log-Likelihood-Loss-NLL-loss"><a href="#2-负对数似然损失-Negative-Log-Likelihood-Loss-NLL-loss" class="headerlink" title="2.负对数似然损失 Negative Log Likelihood Loss (NLL loss)"></a>2.负对数似然损失 Negative Log Likelihood Loss (NLL loss)</h2><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> torch
 <span class="token keyword">import</span> torch<span class="token punctuation">.</span>nn <span class="token keyword">as</span> nn
@@ -544,6 +543,44 @@ kld_loss <span class="token operator">=</span> kld_loss_fn<span class="token pun
 <p><img src="http://pic.huangruimin.tech/20240918191929.png"></p>
 <blockquote>
 <p>其中p(x)代表了真实分布，q(x)代表了预测分布</p>
+</blockquote>
+<blockquote>
+<p>代码验证</p>
+</blockquote>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> torch
+<span class="token keyword">import</span> torch<span class="token punctuation">.</span>nn <span class="token keyword">as</span> nn
+<span class="token keyword">import</span> torch<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>functional <span class="token keyword">as</span> F
+
+<span class="token comment"># logits shape: [BS, NC]</span>
+batchsize <span class="token operator">=</span> <span class="token number">2</span>
+num_class <span class="token operator">=</span> <span class="token number">4</span>
+
+<span class="token comment"># 神经网络的输出值，没有经过softmax，未归一化</span>
+logits <span class="token operator">=</span> torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span>batchsize<span class="token punctuation">,</span> num_class<span class="token punctuation">)</span>
+<span class="token comment"># delta 目标分布</span>
+hard_label <span class="token operator">=</span> torch<span class="token punctuation">.</span>randint<span class="token punctuation">(</span>num_class<span class="token punctuation">,</span> size<span class="token operator">=</span><span class="token punctuation">(</span>batchsize<span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment"># 非 delta 目标分布</span>
+soft_label <span class="token operator">=</span> torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span>batchsize<span class="token punctuation">,</span> num_class<span class="token punctuation">)</span>
+
+
+ce_loss_fn_sample <span class="token operator">=</span> torch<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>CrossEntropyLoss<span class="token punctuation">(</span>reduction<span class="token operator">=</span><span class="token string">"none"</span><span class="token punctuation">)</span>
+ce_loss_sample <span class="token operator">=</span> ce_loss_fn_sample<span class="token punctuation">(</span>logits<span class="token punctuation">,</span> torch<span class="token punctuation">.</span>softmax<span class="token punctuation">(</span>soft_label<span class="token punctuation">,</span> dim<span class="token operator">=</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"cross entropy loss sample: </span><span class="token interpolation"><span class="token punctuation">{</span>ce_loss_sample<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+
+kld_loss_fn_sample <span class="token operator">=</span> torch<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>KLDivLoss<span class="token punctuation">(</span>reduction<span class="token operator">=</span><span class="token string">"none"</span><span class="token punctuation">)</span>
+kld_loss_sample <span class="token operator">=</span> kld_loss_fn_sample<span class="token punctuation">(</span>torch<span class="token punctuation">.</span>log<span class="token punctuation">(</span>torch<span class="token punctuation">.</span>softmax<span class="token punctuation">(</span>logits<span class="token punctuation">,</span> dim<span class="token operator">=</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> torch<span class="token punctuation">.</span>softmax<span class="token punctuation">(</span>soft_label<span class="token punctuation">,</span> dim<span class="token operator">=</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'Kullback-Leibler divergence loss sample:</span><span class="token interpolation"><span class="token punctuation">{</span>kld_loss_sample<span class="token punctuation">}</span></span><span class="token string">'</span></span><span class="token punctuation">)</span>
+
+target_information_entropy <span class="token operator">=</span> torch<span class="token punctuation">.</span>distributions<span class="token punctuation">.</span>Categorical<span class="token punctuation">(</span>probs<span class="token operator">=</span>torch<span class="token punctuation">.</span>softmax<span class="token punctuation">(</span>soft_label<span class="token punctuation">,</span> dim<span class="token operator">=</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>entropy<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f'information entropy sample:</span><span class="token interpolation"><span class="token punctuation">{</span>target_information_entropy<span class="token punctuation">}</span></span><span class="token string">'</span></span><span class="token punctuation">)</span>  <span class="token comment"># IE为常数，如果目标分布是delta分布，IE=0</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>torch<span class="token punctuation">.</span>allclose<span class="token punctuation">(</span>ce_loss_sample<span class="token punctuation">,</span> kld_loss_sample<span class="token operator">+</span>target_information_entropy<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>对于delta分布，即对于onehot变量，信息熵是一个0，0对于卷积神经网络的参数更新时没有任何贡献的，此时，优化CE_loss与优化KLD_loss是没有任何区别，效果是一样的</p>
+</blockquote>
+<blockquote>
+<p>对于非delta分布，即对于非onehot变量，信息熵是一个常数，常数对于卷积神经网络的参数更新时没有任何贡献的，此时，优化CE_loss与优化KLD_loss是没有任何区别，效果是一样的</p>
 </blockquote>
 
                 
@@ -1061,7 +1098,7 @@ kld_loss <span class="token operator">=</span> kld_loss_fn<span class="token pun
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">170.4k</span>&nbsp;字
+                class="white-color">170.7k</span>&nbsp;字
             
             
             
