@@ -406,7 +406,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
-                    132
+                    164
                 </div>
                 
 
@@ -455,20 +455,25 @@
 batchsize <span class="token operator">=</span> <span class="token number">2</span>
 num_class <span class="token operator">=</span> <span class="token number">4</span>
 
+<span class="token comment"># 神经网络的输出值，没有经过softmax</span>
 logits <span class="token operator">=</span> torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span>batchsize<span class="token punctuation">,</span> num_class<span class="token punctuation">)</span>
-target_indices <span class="token operator">=</span> torch<span class="token punctuation">.</span>randint<span class="token punctuation">(</span>num_class<span class="token punctuation">,</span> size<span class="token operator">=</span><span class="token punctuation">(</span>batchsize<span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token comment"># delta 目标分布</span>
-target_logits <span class="token operator">=</span> torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span>batchsize<span class="token punctuation">,</span> num_class<span class="token punctuation">)</span>  <span class="token comment"># 非 delta 目标分布</span>
+<span class="token comment"># delta 目标分布</span>
+hard_label <span class="token operator">=</span> torch<span class="token punctuation">.</span>randint<span class="token punctuation">(</span>num_class<span class="token punctuation">,</span> size<span class="token operator">=</span><span class="token punctuation">(</span>batchsize<span class="token punctuation">,</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment"># 非 delta 目标分布</span>
+soft_label <span class="token operator">=</span> torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span>batchsize<span class="token punctuation">,</span> num_class<span class="token punctuation">)</span>
 
 <span class="token comment">## 1. 调用 Cross Entropy loss</span>
 
 <span class="token comment">### method 1 for CE loss</span>
+<span class="token comment">### hard label，常用在分类之中</span>
 ce_loss_fun <span class="token operator">=</span> torch<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>CrossEntropyLoss<span class="token punctuation">(</span><span class="token punctuation">)</span>
-ce_loss <span class="token operator">=</span> ce_loss_fun<span class="token punctuation">(</span>logits<span class="token punctuation">,</span> target_indices<span class="token punctuation">)</span>
+ce_loss <span class="token operator">=</span> ce_loss_fun<span class="token punctuation">(</span>logits<span class="token punctuation">,</span> hard_label<span class="token punctuation">)</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"cross entropy loss1: </span><span class="token interpolation"><span class="token punctuation">{</span>ce_loss<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
 
 <span class="token comment">### method 2 for CE loss</span>
-ce_loss <span class="token operator">=</span> ce_loss_fun<span class="token punctuation">(</span>logits<span class="token punctuation">,</span> torch<span class="token punctuation">.</span>softmax<span class="token punctuation">(</span>target_logits<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"cross entropy loss2: </span><span class="token interpolation"><span class="token punctuation">{</span>ce_loss<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token comment">### soft label，常用在知识蒸馏中</span>
+ce_loss <span class="token operator">=</span> ce_loss_fun<span class="token punctuation">(</span>logits<span class="token punctuation">,</span> torch<span class="token punctuation">.</span>softmax<span class="token punctuation">(</span>soft_label<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"cross entropy loss2: </span><span class="token interpolation"><span class="token punctuation">{</span>ce_loss<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>
@@ -984,7 +989,7 @@ ce_loss <span class="token operator">=</span> ce_loss_fun<span class="token punc
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">170k</span>&nbsp;字
+                class="white-color">170.1k</span>&nbsp;字
             
             
             
