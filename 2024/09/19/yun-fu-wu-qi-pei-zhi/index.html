@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="PyTorch_19_网络模型的保存与读取, AI, TensorRT, Infrared">
+    <meta name="keywords" content="云服务器配置, AI, TensorRT, Infrared">
     <meta name="description" content="黄瑞敏的个人主页">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>PyTorch_19_网络模型的保存与读取 | Ruimin Huang&#39;s Space</title>
+    <title>云服务器配置 | Ruimin Huang&#39;s Space</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -259,12 +259,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('http://pic.huangruimin.tech/Transformers3_11.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('http://pic.huangruimin.tech/The_Wandering_Earth2_125.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">PyTorch_19_网络模型的保存与读取</h1>
+                    <h1 class="description center-align post-title">云服务器配置</h1>
                 </div>
             </div>
         </div>
@@ -378,29 +378,12 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                    <div class="article-tag">
-                        
-                            <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
-                                <span class="chip bg-color">深度学习</span>
-                            </a>
-                        
-                            <a href="/tags/PyTorch/">
-                                <span class="chip bg-color">PyTorch</span>
-                            </a>
-                        
-                    </div>
+                          <div class="article-tag">
+                            <span class="chip bg-color">No tag</span>
+                          </div>
                     
                 </div>
                 <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" class="post-category">
-                                人工智能
-                            </a>
-                        
-                    </div>
                     
                 </div>
             </div>
@@ -409,21 +392,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2021-11-19
+                    2024-09-19
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
-                    2024-08-27
+                    2024-09-19
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
-                    307
+                    305
                 </div>
                 
 
@@ -453,76 +436,86 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <ul>
-<li>model_save.py</li>
+                <h2 id="1-Ubuntu22-04及以后版本设置开机自动启动的方法"><a href="#1-Ubuntu22-04及以后版本设置开机自动启动的方法" class="headerlink" title="1.Ubuntu22.04及以后版本设置开机自动启动的方法"></a>1.Ubuntu22.04及以后版本设置开机自动启动的方法</h2><ul>
+<li>Step1 进入到以下路径：</li>
 </ul>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> torch
-<span class="token keyword">import</span> torchvision
+<blockquote>
+<p>/etc/systemd/system/</p>
+</blockquote>
+<ul>
+<li>Step2 新建开机自动启动服务文件：</li>
+</ul>
+<blockquote>
+<p>frpc.service</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">[</span>Unit<span class="token punctuation">]</span>
+<span class="token assign-left variable">Description</span><span class="token operator">=</span>frpc <span class="token function">service</span>
+<span class="token assign-left variable">After</span><span class="token operator">=</span>network.target syslog.target
+<span class="token assign-left variable">Wants</span><span class="token operator">=</span>network.target
 
-<span class="token comment"># 这个是没有经过训练的</span>
-<span class="token keyword">from</span> torch <span class="token keyword">import</span> nn
+<span class="token punctuation">[</span>Service<span class="token punctuation">]</span>
+<span class="token assign-left variable">Type</span><span class="token operator">=</span>simple
+<span class="token assign-left variable">Restart</span><span class="token operator">=</span>on-failure
+<span class="token assign-left variable">RestartSec</span><span class="token operator">=</span>5s
+<span class="token assign-left variable">StartLimitInterval</span><span class="token operator">=</span><span class="token number">0</span>
+<span class="token assign-left variable">ExecStart</span><span class="token operator">=</span>/data/HRM/frp_package/frp_0.58.1_linux_amd64/frpc <span class="token parameter variable">-c</span> /data/HRM/frp_package/frp_0.58.1_linux_amd64/frpc.toml
+<span class="token assign-left variable">WorkingDirectory</span><span class="token operator">=</span>/data/HRM/frp_package/frp_0.58.1_linux_amd64
 
-vgg16 <span class="token operator">=</span> torchvision<span class="token punctuation">.</span>models<span class="token punctuation">.</span>vgg16<span class="token punctuation">(</span>pretrained<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
-<span class="token comment"># 保存方式一：保存模型结构+模型参数</span>
-<span class="token comment"># 这里不仅保存了网络模型的一些结构，也保存了网络模型的一些参数</span>
-torch<span class="token punctuation">.</span>save<span class="token punctuation">(</span>vgg16<span class="token punctuation">,</span> <span class="token string">"vgg16_method1.pth"</span><span class="token punctuation">)</span>
-
-<span class="token comment"># 保存方式二：模型参数(官方推荐)</span>
-<span class="token comment"># 获取vgg16的状态，并把它保存为字典的形式</span>
-torch<span class="token punctuation">.</span>save<span class="token punctuation">(</span>vgg16<span class="token punctuation">.</span>state_dict<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"vgg16_method2.pth"</span><span class="token punctuation">)</span>
-
-
-<span class="token comment"># 陷阱</span>
-<span class="token keyword">class</span> <span class="token class-name">TuDui</span><span class="token punctuation">(</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token builtin">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>conv1 <span class="token operator">=</span> nn<span class="token punctuation">.</span>Conv2d<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">64</span><span class="token punctuation">,</span> kernel_size<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">)</span>
-
-    <span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        x <span class="token operator">=</span> self<span class="token punctuation">.</span>conv1<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
-        <span class="token keyword">return</span> x
-
-tudui <span class="token operator">=</span> TuDui<span class="token punctuation">(</span><span class="token punctuation">)</span>
-
-torch<span class="token punctuation">.</span>save<span class="token punctuation">(</span>tudui<span class="token punctuation">,</span> <span class="token string">"tudui_method1.pth"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">[</span>Install<span class="token punctuation">]</span>
+<span class="token assign-left variable">WantedBy</span><span class="token operator">=</span>multi-user.target<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <ul>
-<li>model_load.py</li>
+<li><p>Step3 重新加载systemd配置‌：执行命令sudo systemctl daemon-reload来重新加载配置。</p>
+</li>
+<li><p>Step4 设置开机自启‌：执行命令sudo systemctl enable frpc.service来设置开机自启。</p>
+</li>
+<li><p>Step5 执行命令sudo systemctl start frpc.service来启动服务。</p>
+</li>
+<li><p>Step6 执行命令systemctl status frpc.service来查看服务状态。</p>
+</li>
+<li><p>Step7 执行命令systemctl stop frpc.service来停止服务。</p>
+</li>
 </ul>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> torch
-<span class="token keyword">import</span> torchvision
+<blockquote>
+<p>旧版本为在/etc/rc.local里面添加新的指令<br>/home/frp/frp_package/frp_0.58.1_linux_amd64/frps -c /home/frp/frp_package/frp_0.58.1_linux_amd64/frps.toml &amp;</p>
+</blockquote>
+<h2 id="2-fpc在客户端及服务端配置说明"><a href="#2-fpc在客户端及服务端配置说明" class="headerlink" title="2.fpc在客户端及服务端配置说明"></a>2.fpc在客户端及服务端配置说明</h2><ul>
+<li><p>frp的版本为</p>
+<blockquote>
+<p>frp_0.58.1_linux_amd64.tar.gz</p>
+</blockquote>
+</li>
+<li><p>在客户端</p>
+</li>
+</ul>
+<blockquote>
+<p>frpc.toml</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">serverAddr <span class="token operator">=</span> <span class="token string">"114.132.200.6"</span>
+serverPort <span class="token operator">=</span> <span class="token number">7000</span>
 
-<span class="token comment">#方式一，对应保存方式一</span>
-<span class="token keyword">from</span> torch <span class="token keyword">import</span> nn
-<span class="token comment"># from model_save import TuDui</span>
+<span class="token punctuation">[</span><span class="token punctuation">[</span>proxies<span class="token punctuation">]</span><span class="token punctuation">]</span>
+name <span class="token operator">=</span> <span class="token string">"ssh"</span>
+<span class="token builtin class-name">type</span> <span class="token operator">=</span> <span class="token string">"tcp"</span>
+localIP <span class="token operator">=</span> <span class="token string">"127.0.0.1"</span>
+localPort <span class="token operator">=</span> <span class="token number">22</span>
+remotePort <span class="token operator">=</span> <span class="token number">6000</span>
+<span class="token punctuation">[</span><span class="token punctuation">[</span>proxies<span class="token punctuation">]</span><span class="token punctuation">]</span>
+name <span class="token operator">=</span> <span class="token string">"tensorboard"</span>
+<span class="token builtin class-name">type</span> <span class="token operator">=</span> <span class="token string">"tcp"</span>
+localIP <span class="token operator">=</span> <span class="token string">"127.0.0.1"</span>
+localPort <span class="token operator">=</span> <span class="token number">6006</span>
+remotePort <span class="token operator">=</span> <span class="token number">6006</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-model <span class="token operator">=</span> torch<span class="token punctuation">.</span>load<span class="token punctuation">(</span><span class="token string">"vgg16_method1.pth"</span><span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>model<span class="token punctuation">)</span>
+<ul>
+<li>在服务端</li>
+</ul>
+<blockquote>
+<p>frcs.toml</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">bindPort <span class="token operator">=</span> <span class="token number">7000</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<span class="token comment">#方式二，加载模型</span>
-vgg16 <span class="token operator">=</span> torchvision<span class="token punctuation">.</span>models<span class="token punctuation">.</span>vgg16<span class="token punctuation">(</span>pretrained<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
-<span class="token comment"># 这里面获取的就是字典</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>torch<span class="token punctuation">.</span>load<span class="token punctuation">(</span><span class="token string">"vgg16_method2.pth"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-vgg16<span class="token punctuation">.</span>load_state_dict<span class="token punctuation">(</span>torch<span class="token punctuation">.</span>load<span class="token punctuation">(</span><span class="token string">"vgg16_method2.pth"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>vgg16<span class="token punctuation">)</span>
-
-<span class="token comment"># 陷阱1</span>
-<span class="token comment"># 这会的时候，还需要把这个模型的类给搬过来</span>
-<span class="token comment"># 但是现在不用写这个了：tudui = TuDui()</span>
-<span class="token comment"># 就是为了确保加载的这个网络模型就是你想要的网络模型</span>
-<span class="token keyword">class</span> <span class="token class-name">TuDui</span><span class="token punctuation">(</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token builtin">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
-        self<span class="token punctuation">.</span>conv1 <span class="token operator">=</span> nn<span class="token punctuation">.</span>Conv2d<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">64</span><span class="token punctuation">,</span> kernel_size<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">)</span>
-
-    <span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        x <span class="token operator">=</span> self<span class="token punctuation">.</span>conv1<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
-        <span class="token keyword">return</span> x
-
-model <span class="token operator">=</span> torch<span class="token punctuation">.</span>load<span class="token punctuation">(</span><span class="token string">"tudui_method1.pth"</span><span class="token punctuation">)</span>
-
-<span class="token keyword">print</span><span class="token punctuation">(</span>model<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+<h2 id="3-hexo在服务端采用nginx配置说明"><a href="#3-hexo在服务端采用nginx配置说明" class="headerlink" title="3. hexo在服务端采用nginx配置说明"></a>3. hexo在服务端采用nginx配置说明</h2>
                 
             </div>
             <hr/>
@@ -548,7 +541,7 @@ model <span class="token operator">=</span> torch<span class="token punctuation"
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://www.huangruimin.tech/2021/11/19/pytorch-19-wang-luo-mo-xing-de-bao-cun-yu-du-qu/">http://www.huangruimin.tech/2021/11/19/pytorch-19-wang-luo-mo-xing-de-bao-cun-yu-du-qu/</a>
+                    <a href="http://www.huangruimin.tech/2024/09/19/yun-fu-wu-qi-pei-zhi/">http://www.huangruimin.tech/2024/09/19/yun-fu-wu-qi-pei-zhi/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -585,15 +578,7 @@ model <span class="token operator">=</span> torch<span class="token punctuation"
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            
-                                <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
-                                    <span class="chip bg-color">深度学习</span>
-                                </a>
-                            
-                                <a href="/tags/PyTorch/">
-                                    <span class="chip bg-color">PyTorch</span>
-                                </a>
-                            
+                            <span class="chip bg-color">No tag</span>
                         </div>
                     
                 </div>
@@ -761,70 +746,18 @@ model <span class="token operator">=</span> torch<span class="token punctuation"
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+                <i class="far fa-dot-circle"></i>&nbsp;Current
+            </div>
             <div class="card">
-                <a href="/2021/11/20/pytorch-20-wan-zheng-de-mo-xing-xun-lian-tao-lu/">
+                <a href="/2024/09/19/yun-fu-wu-qi-pei-zhi/">
                     <div class="card-image">
                         
                         
-                        <img src="http://pic.huangruimin.tech/The_Wandering_Earth2_66.jpg" class="responsive-img" alt="PyTorch_20_完整的模型训练套路">
+                        <img src="http://pic.huangruimin.tech/The_Wandering_Earth2_125.jpg" class="responsive-img" alt="云服务器配置">
                         
-                        <span class="card-title">PyTorch_20_完整的模型训练套路</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-11-20
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" class="post-category">
-                                    人工智能
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
-                        <span class="chip bg-color">深度学习</span>
-                    </a>
-                    
-                    <a href="/tags/PyTorch/">
-                        <span class="chip bg-color">PyTorch</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                Next&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2021/11/18/pytorch-18-xian-you-wang-luo-mo-xing-de-shi-yong-ji-xiu-gai/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="http://pic.huangruimin.tech/The_Wandering_Earth2_58.jpg" class="responsive-img" alt="PyTorch_18_现有模型的使用和修改">
-                        
-                        <span class="card-title">PyTorch_18_现有模型的使用和修改</span>
+                        <span class="card-title">云服务器配置</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -835,31 +768,53 @@ model <span class="token operator">=</span> torch<span class="token punctuation"
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-18
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-09-19
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" class="post-category">
-                                    人工智能
-                                </a>
-                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Ruimin Huang
                             
                         </span>
                     </div>
                 </div>
+
                 
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
-                        <span class="chip bg-color">深度学习</span>
-                    </a>
-                    
-                    <a href="/tags/PyTorch/">
-                        <span class="chip bg-color">PyTorch</span>
-                    </a>
-                    
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2024/09/19/focal-loss-de-li-jie/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="http://pic.huangruimin.tech/Transformers1_12.jpg" class="responsive-img" alt="Focal Loss的理解">
+                        
+                        <span class="card-title">Focal Loss的理解</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-09-19
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Ruimin Huang
+                            
+                        </span>
+                    </div>
                 </div>
                 
             </div>
