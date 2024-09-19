@@ -596,6 +596,45 @@ I2C接口，支持高达16路PWM输出，每路12位分辨率(4096级)
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
+                    <a href="/2024/09/19/focal-loss-de-li-jie/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="http://pic.huangruimin.tech/Transformers1_12.jpg" class="responsive-img" alt="Focal Loss的理解">
+                            
+                            <span class="card-title">Focal Loss的理解</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                0.介绍
+Focal Loss 是一种专门设计用于处理类别不平衡问题的损失函数，特别是在目标检测任务中表现出色。
+
+
+它最早由 Facebook AI Research (FAIR) 提出的，在物体检测中，如 RetinaNet，解决了正负
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-09-19
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-user fa-fw"></i>
+                                Ruimin Huang
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
                     <a href="/2024/09/18/ji-chong-chang-yong-loss-han-shu-yuan-li-ji-dai-ma-shi-li/">
                         <div class="card-image">
                             
@@ -609,19 +648,22 @@ I2C接口，支持高达16路PWM输出，每路12位分辨率(4096级)
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                1.交叉熵损失 Cross Entropy Loss (CE loss)
-计算公式：
+                                0.信息熵
+计算公式
 
-公式实际应用说明:
-
-其中p(x)代表了标签，q(x)代表了模型预测的概率
+说明
 
 
-代码示例
+
+Onehot向量的信息熵为0
 
 
-import torch
-import torch.nn 
+非Onehot向量的概率分布反而有一定的信息熵
+
+
+对于交叉熵而言，与Onehot向量相同的概率分布时，其交叉熵也为0
+
+1.交叉熵损失 Cross Entropy Lo
                             
                         </div>
                         <div class="publish-info">
@@ -3988,57 +4030,34 @@ I2C接口，支持高达16路PWM输出，每路12位分辨率(4096级)
                 </div>
             </div>
             
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2017/01/01/diao-shi-zhuan-yong-ye-mian/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="http://pic.huangruimin.tech/Transformers3_13.jpg" class="responsive-img" alt="调试专用页面">
-                            
-                            <span class="card-title">调试专用页面</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2017-01-01
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E4%BF%A1%E6%81%AF%E6%8A%80%E6%9C%AF/" class="post-category">
-                                    信息技术
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/%E7%BD%91%E7%AB%99/">
-                            <span class="chip bg-color">网站</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
         </div>
     </article>
 
 </main>
+
+
+<div class="container paging">
+    <div class="row">
+        <div class="col s6 m4 l4">
+            
+            <a class="left btn-floating btn-large disabled">
+                <i class="fas fa-angle-left"></i>
+            </a>
+            
+        </div>
+        <div class="page-info col m4 l4 hide-on-small-only">
+            <div class="center-align b-text-gray">1 / 2</div>
+        </div>
+        <div class="col s6 m4 l4">
+            
+            <a href="/page/2/"
+               class="right btn-floating btn-large waves-effect waves-light bg-color">
+                <i class="fas fa-angle-right"></i>
+            </a>
+            
+        </div>
+    </div>
+</div>
 
 
 
@@ -4112,7 +4131,7 @@ I2C接口，支持高达16路PWM输出，每路12位分辨率(4096级)
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">171.6k</span>&nbsp;字
+                class="white-color">171.8k</span>&nbsp;字
             
             
             

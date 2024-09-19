@@ -436,12 +436,27 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="1-交叉熵损失-Cross-Entropy-Loss-CE-loss"><a href="#1-交叉熵损失-Cross-Entropy-Loss-CE-loss" class="headerlink" title="1.交叉熵损失 Cross Entropy Loss (CE loss)"></a>1.交叉熵损失 Cross Entropy Loss (CE loss)</h2><ul>
+                <h2 id="0-信息熵"><a href="#0-信息熵" class="headerlink" title="0.信息熵"></a>0.信息熵</h2><ul>
+<li><p>计算公式<br><img src="http://pic.huangruimin.tech/20240919142939.png"></p>
+</li>
+<li><p>说明</p>
+</li>
+</ul>
+<blockquote>
+<p>Onehot向量的信息熵为0</p>
+</blockquote>
+<blockquote>
+<p>非Onehot向量的概率分布反而有一定的信息熵</p>
+</blockquote>
+<blockquote>
+<p>对于交叉熵而言，与Onehot向量相同的概率分布时，其交叉熵也为0</p>
+</blockquote>
+<h2 id="1-交叉熵损失-Cross-Entropy-Loss-CE-loss"><a href="#1-交叉熵损失-Cross-Entropy-Loss-CE-loss" class="headerlink" title="1.交叉熵损失 Cross Entropy Loss (CE loss)"></a>1.交叉熵损失 Cross Entropy Loss (CE loss)</h2><ul>
 <li><p>计算公式：<br><img src="http://pic.huangruimin.tech/20240918161853.png"></p>
 </li>
 <li><p>公式实际应用说明:</p>
 <blockquote>
-<p>其中p(x)代表了标签，q(x)代表了模型预测的概率</p>
+<p>其中p(x)代表了标签(或者每个标签的概率)，q(x)代表了模型预测的概率</p>
 </blockquote>
 </li>
 <li><p>代码示例</p>
@@ -617,7 +632,7 @@ nll_loss_binary <span class="token operator">=</span> nll_fn<span class="token p
 </blockquote>
 <p><img src="http://pic.huangruimin.tech/20240918222242.png"></p>
 <blockquote>
-<p>但是，sigmoid函数中，当输入数值变大的情况下，容易出现梯度消失的情况，如下代码及结果演示：</p>
+<p>但是，在BCE loss函数中，当输入数值变大的情况下，容易出现为0的情况，如下代码及结果所示：</p>
 </blockquote>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> torch
 <span class="token keyword">import</span> torch<span class="token punctuation">.</span>nn <span class="token keyword">as</span> nn
@@ -664,13 +679,7 @@ cosine_loss <span class="token operator">=</span> cosine_loss_fn<span class="tok
 </ul>
 </blockquote>
 </blockquote>
-<h2 id="7-L1loss"><a href="#7-L1loss" class="headerlink" title="7.L1loss"></a>7.L1loss</h2><blockquote>
-<p>也被成为MAE<br>基本不用在分类中<br><img src="http://pic.huangruimin.tech/20240918224127.png"></p>
-</blockquote>
-<h2 id="8-MSEloss-不是用在分类中"><a href="#8-MSEloss-不是用在分类中" class="headerlink" title="8.MSEloss (不是用在分类中)"></a>8.MSEloss (不是用在分类中)</h2><blockquote>
-<p>即为MSE<br>基本不用在分类中<br><img src="http://pic.huangruimin.tech/20240918223949.png"></p>
-</blockquote>
-<h2 id="9-总结"><a href="#9-总结" class="headerlink" title="9.总结"></a>9.总结</h2><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> torch
+<h2 id="7-前述分类损失函数测试代码汇总"><a href="#7-前述分类损失函数测试代码汇总" class="headerlink" title="7.前述分类损失函数测试代码汇总"></a>7.前述分类损失函数测试代码汇总</h2><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> torch
 <span class="token keyword">import</span> torch<span class="token punctuation">.</span>nn <span class="token keyword">as</span> nn
 <span class="token keyword">import</span> torch<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>functional <span class="token keyword">as</span> F
 
@@ -760,6 +769,16 @@ cosine_loss <span class="token operator">=</span> cosine_loss_fn<span class="tok
 <ul>
 <li>分类的损失函数，本质上是2个概率分布的比较</li>
 </ul>
+<h2 id="8-L1loss"><a href="#8-L1loss" class="headerlink" title="8.L1loss"></a>8.L1loss</h2><ul>
+<li>也被成为MAE</li>
+<li>基本不用在分类中</li>
+</ul>
+<p><img src="http://pic.huangruimin.tech/20240918224127.png"></p>
+<h2 id="9-MSEloss"><a href="#9-MSEloss" class="headerlink" title="9.MSEloss"></a>9.MSEloss</h2><ul>
+<li>即为MSE</li>
+<li>基本不用在分类中</li>
+</ul>
+<p><img src="http://pic.huangruimin.tech/20240918223949.png"></p>
 
                 
             </div>
@@ -991,18 +1010,17 @@ cosine_loss <span class="token operator">=</span> cosine_loss_fn<span class="tok
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;Current
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2024/09/18/ji-chong-chang-yong-loss-han-shu-yuan-li-ji-dai-ma-shi-li/">
+                <a href="/2024/09/19/focal-loss-de-li-jie/">
                     <div class="card-image">
                         
                         
-                        <img src="http://pic.huangruimin.tech/Transformers1_46.jpg" class="responsive-img" alt="几种常用loss函数原理及代码示例">
+                        <img src="http://pic.huangruimin.tech/Transformers1_12.jpg" class="responsive-img" alt="Focal Loss的理解">
                         
-                        <span class="card-title">几种常用loss函数原理及代码示例</span>
+                        <span class="card-title">Focal Loss的理解</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1012,9 +1030,9 @@ cosine_loss <span class="token operator">=</span> cosine_loss_fn<span class="tok
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-09-18
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2024-09-19
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -1023,7 +1041,6 @@ cosine_loss <span class="token operator">=</span> cosine_loss_fn<span class="tok
                         </span>
                     </div>
                 </div>
-
                 
             </div>
         </div>
@@ -1276,7 +1293,7 @@ cosine_loss <span class="token operator">=</span> cosine_loss_fn<span class="tok
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">171.6k</span>&nbsp;字
+                class="white-color">171.8k</span>&nbsp;字
             
             
             

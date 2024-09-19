@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="PyTorch_4_Transforms的使用, AI, TensorRT, Infrared">
+    <meta name="keywords" content="Focal Loss的理解, AI, TensorRT, Infrared">
     <meta name="description" content="黄瑞敏的个人主页">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>PyTorch_4_Transforms的使用 | Ruimin Huang&#39;s Space</title>
+    <title>Focal Loss的理解 | Ruimin Huang&#39;s Space</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -259,12 +259,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('http://pic.huangruimin.tech/The_Wandering_Earth2_80.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('http://pic.huangruimin.tech/Transformers1_12.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">PyTorch_4_Transforms的使用</h1>
+                    <h1 class="description center-align post-title">Focal Loss的理解</h1>
                 </div>
             </div>
         </div>
@@ -378,29 +378,12 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                    <div class="article-tag">
-                        
-                            <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
-                                <span class="chip bg-color">深度学习</span>
-                            </a>
-                        
-                            <a href="/tags/PyTorch/">
-                                <span class="chip bg-color">PyTorch</span>
-                            </a>
-                        
-                    </div>
+                          <div class="article-tag">
+                            <span class="chip bg-color">No tag</span>
+                          </div>
                     
                 </div>
                 <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" class="post-category">
-                                人工智能
-                            </a>
-                        
-                    </div>
                     
                 </div>
             </div>
@@ -409,21 +392,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2021-11-04
+                    2024-09-19
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
-                    2024-08-27
+                    2024-09-19
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
-                    145
+                    204
                 </div>
                 
 
@@ -453,34 +436,25 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> PIL <span class="token keyword">import</span> Image
-<span class="token keyword">from</span> torch<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>tensorboard <span class="token keyword">import</span> SummaryWriter
-<span class="token keyword">from</span> torchvision <span class="token keyword">import</span> transforms
-
-<span class="token comment"># python 的用法-&gt;Tensor数据类型</span>
-<span class="token comment"># 通过transforms.ToTensor去解决两个问题</span>
-
-<span class="token comment"># 2、为什么我们需要Tensor的数据类型</span>
-
-<span class="token comment"># 绝对路径“H:\Python_Project\Pycharm_Anaconda\LearnPytorch\practice\train\ants_image\0013035.jpg”</span>
-<span class="token comment"># 相对路径“practice/train/ants_image/0013035.jpg”</span>
-img_path <span class="token operator">=</span> <span class="token string">"practice/train/ants_image/0013035.jpg"</span>
-img_path_abs <span class="token operator">=</span> <span class="token string">r"H:\Python_Project\Pycharm_Anaconda\LearnPytorch\practice\train\ants_image\0013035.jpg"</span>
-img <span class="token operator">=</span> Image<span class="token punctuation">.</span><span class="token builtin">open</span><span class="token punctuation">(</span>img_path<span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token builtin">type</span><span class="token punctuation">(</span>img<span class="token punctuation">)</span><span class="token punctuation">)</span>
-
-writer <span class="token operator">=</span> SummaryWriter<span class="token punctuation">(</span><span class="token string">"logs"</span><span class="token punctuation">)</span>
-
-<span class="token comment"># 1、transforms该如何使用(python)</span>
-tensor_trains <span class="token operator">=</span> transforms<span class="token punctuation">.</span>ToTensor<span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token comment"># 要使用的时候，直接把这个对象这样就行了：def __call__(self, pic):</span>
-tensor_img <span class="token operator">=</span> tensor_trains<span class="token punctuation">(</span>img<span class="token punctuation">)</span>
-
-writer<span class="token punctuation">.</span>add_image<span class="token punctuation">(</span><span class="token string">"Tensor_img"</span><span class="token punctuation">,</span> tensor_img<span class="token punctuation">)</span>
-writer<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
-
-<span class="token comment"># print(type(tensor_img))</span>
-<span class="token comment"># print(tensor_img)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+                <h2 id="0-介绍"><a href="#0-介绍" class="headerlink" title="0.介绍"></a>0.介绍</h2><blockquote>
+<p>Focal Loss 是一种专门设计用于处理类别不平衡问题的损失函数，特别是在目标检测任务中表现出色。</p>
+</blockquote>
+<blockquote>
+<p>它最早由 Facebook AI Research (FAIR) 提出的，在物体检测中，如 RetinaNet，解决了正负样本严重不平衡的问题。</p>
+</blockquote>
+<blockquote>
+<p>在许多实际应用中，如目标检测，类别不平衡是一个常见问题。</p>
+</blockquote>
+<blockquote>
+<p>例如，在一个图像中，背景（负样本）通常占据大多数，而目标物体（正样本）很少。</p>
+</blockquote>
+<blockquote>
+<p>传统的交叉熵损失（Cross-Entropy Loss）可能会导致模型过度关注负样本，从而忽视正样本，特别是难以检测的正样本。</p>
+</blockquote>
+<blockquote>
+<p>Focal Loss 通过将注意力集中在难以分类的样本上，来解决这个问题。</p>
+</blockquote>
+<h2 id="1-定义"><a href="#1-定义" class="headerlink" title="1.定义"></a>1.定义</h2>
                 
             </div>
             <hr/>
@@ -506,7 +480,7 @@ writer<span class="token punctuation">.</span>close<span class="token punctuatio
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://www.huangruimin.tech/2021/11/04/pytorch-4-transforms-de-shi-yong/">http://www.huangruimin.tech/2021/11/04/pytorch-4-transforms-de-shi-yong/</a>
+                    <a href="http://www.huangruimin.tech/2024/09/19/focal-loss-de-li-jie/">http://www.huangruimin.tech/2024/09/19/focal-loss-de-li-jie/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -543,15 +517,7 @@ writer<span class="token punctuation">.</span>close<span class="token punctuatio
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            
-                                <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
-                                    <span class="chip bg-color">深度学习</span>
-                                </a>
-                            
-                                <a href="/tags/PyTorch/">
-                                    <span class="chip bg-color">PyTorch</span>
-                                </a>
-                            
+                            <span class="chip bg-color">No tag</span>
                         </div>
                     
                 </div>
@@ -719,70 +685,18 @@ writer<span class="token punctuation">.</span>close<span class="token punctuatio
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+                <i class="far fa-dot-circle"></i>&nbsp;Current
+            </div>
             <div class="card">
-                <a href="/2021/11/05/pytorch-5-chang-jian-transformers/">
+                <a href="/2024/09/19/focal-loss-de-li-jie/">
                     <div class="card-image">
                         
                         
-                        <img src="http://pic.huangruimin.tech/Transformers1_8.jpg" class="responsive-img" alt="PyTorch_5_常见Transformers">
+                        <img src="http://pic.huangruimin.tech/Transformers1_12.jpg" class="responsive-img" alt="Focal Loss的理解">
                         
-                        <span class="card-title">PyTorch_5_常见Transformers</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-11-05
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" class="post-category">
-                                    人工智能
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
-                        <span class="chip bg-color">深度学习</span>
-                    </a>
-                    
-                    <a href="/tags/PyTorch/">
-                        <span class="chip bg-color">PyTorch</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                Next&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2021/11/03/pytorch-3-tensorboard-de-shi-yong/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="http://pic.huangruimin.tech/The_Wandering_Earth2_73.jpg" class="responsive-img" alt="PyTorch_3_TensorBoard的使用">
-                        
-                        <span class="card-title">PyTorch_3_TensorBoard的使用</span>
+                        <span class="card-title">Focal Loss的理解</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -793,31 +707,53 @@ writer<span class="token punctuation">.</span>close<span class="token punctuatio
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-03
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-09-19
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" class="post-category">
-                                    人工智能
-                                </a>
-                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Ruimin Huang
                             
                         </span>
                     </div>
                 </div>
+
                 
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">
-                        <span class="chip bg-color">深度学习</span>
-                    </a>
-                    
-                    <a href="/tags/PyTorch/">
-                        <span class="chip bg-color">PyTorch</span>
-                    </a>
-                    
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2024/09/18/ji-chong-chang-yong-loss-han-shu-yuan-li-ji-dai-ma-shi-li/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="http://pic.huangruimin.tech/Transformers1_46.jpg" class="responsive-img" alt="几种常用loss函数原理及代码示例">
+                        
+                        <span class="card-title">几种常用loss函数原理及代码示例</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-09-18
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Ruimin Huang
+                            
+                        </span>
+                    </div>
                 </div>
                 
             </div>
