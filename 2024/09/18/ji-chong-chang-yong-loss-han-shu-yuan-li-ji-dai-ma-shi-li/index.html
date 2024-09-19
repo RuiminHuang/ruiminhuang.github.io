@@ -399,7 +399,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
-                    2024-09-18
+                    2024-09-19
                 </div>
                 
 
@@ -743,7 +743,7 @@ nll_loss_binary <span class="token operator">=</span> nll_fn<span class="token p
 <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f"negative likelihood loss binary: </span><span class="token interpolation"><span class="token punctuation">{</span>nll_loss_binary<span class="token punctuation">}</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span>torch<span class="token punctuation">.</span>allclose<span class="token punctuation">(</span>bce_loss<span class="token punctuation">,</span> nll_loss_binary<span class="token punctuation">)</span><span class="token punctuation">)</span>
 
-<span class="token comment"># 调用 Cosine Similarity loss</span>
+<span class="token comment"># 6.调用 Cosine Similarity loss</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"----------------------------------------------------------"</span><span class="token punctuation">)</span>
 
 cosine_loss_fn <span class="token operator">=</span> torch<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>CosineEmbeddingLoss<span class="token punctuation">(</span><span class="token punctuation">)</span>
