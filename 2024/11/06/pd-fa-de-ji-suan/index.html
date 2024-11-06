@@ -413,7 +413,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
-                    6 Min
+                    7 Min
                 </div>
                 
 
@@ -639,6 +639,7 @@
                 <span class="token comment"># 持续累加的变量3</span>
                 self<span class="token punctuation">.</span>PD<span class="token punctuation">[</span>iBin<span class="token punctuation">]</span> <span class="token operator">+=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>distance_match<span class="token punctuation">)</span>
 
+    <span class="token comment"># 所有图片都输入之后，才执行self.PD_FA.get，这个时候，才输入img_num</span>
     <span class="token keyword">def</span> <span class="token function">get</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> img_num<span class="token punctuation">)</span><span class="token punctuation">:</span>
 
         Final_FA <span class="token operator">=</span> self<span class="token punctuation">.</span>FA <span class="token operator">/</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>cfg<span class="token punctuation">.</span>data<span class="token punctuation">[</span><span class="token string">'crop_size'</span><span class="token punctuation">]</span> <span class="token operator">*</span> self<span class="token punctuation">.</span>cfg<span class="token punctuation">.</span>data<span class="token punctuation">[</span><span class="token string">'crop_size'</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">*</span> img_num<span class="token punctuation">)</span>
@@ -654,7 +655,7 @@
         <span class="token comment"># 持续累加变量3</span>
         <span class="token comment"># 后面自己添加的</span>
         self<span class="token punctuation">.</span>target <span class="token operator">=</span> np<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span>self<span class="token punctuation">.</span>bins <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>
