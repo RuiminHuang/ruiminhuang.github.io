@@ -406,7 +406,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
-                    1.3k
+                    1.4k
                 </div>
                 
 
@@ -591,9 +591,11 @@
 
     <span class="token keyword">def</span> <span class="token function">update</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> preds<span class="token punctuation">,</span> labels<span class="token punctuation">)</span><span class="token punctuation">:</span>
 
+        <span class="token comment"># 先进行外围的threshold</span>
         <span class="token keyword">for</span> iBin <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>bins <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
             score_thresh <span class="token operator">=</span> iBin <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token number">255</span> <span class="token operator">/</span> self<span class="token punctuation">.</span>bins<span class="token punctuation">)</span>
             batch <span class="token operator">=</span> preds<span class="token punctuation">.</span>size<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+            <span class="token comment"># 再进行内围的batch，也就是一张image和一张label进行比较</span>
             <span class="token keyword">for</span> b <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>batch<span class="token punctuation">)</span><span class="token punctuation">:</span>
                 predits <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">(</span>preds<span class="token punctuation">[</span>b<span class="token punctuation">,</span> <span class="token punctuation">:</span><span class="token punctuation">,</span> <span class="token punctuation">:</span><span class="token punctuation">,</span> <span class="token punctuation">:</span><span class="token punctuation">]</span> <span class="token operator">&gt;</span> score_thresh<span class="token punctuation">)</span><span class="token punctuation">.</span>cpu<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>astype<span class="token punctuation">(</span><span class="token string">'int64'</span><span class="token punctuation">)</span>
                 predits <span class="token operator">=</span> np<span class="token punctuation">.</span>reshape<span class="token punctuation">(</span>predits<span class="token punctuation">,</span> <span class="token punctuation">(</span>self<span class="token punctuation">.</span>cfg<span class="token punctuation">.</span>data<span class="token punctuation">[</span><span class="token string">'crop_size'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> self<span class="token punctuation">.</span>cfg<span class="token punctuation">.</span>data<span class="token punctuation">[</span><span class="token string">'crop_size'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
@@ -605,10 +607,13 @@
                 label <span class="token operator">=</span> measure<span class="token punctuation">.</span>label<span class="token punctuation">(</span>labelss<span class="token punctuation">,</span> connectivity<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span>
                 coord_label <span class="token operator">=</span> measure<span class="token punctuation">.</span>regionprops<span class="token punctuation">(</span>label<span class="token punctuation">)</span>
 
+                <span class="token comment"># 持续累加的变量1</span>
                 self<span class="token punctuation">.</span>target<span class="token punctuation">[</span>iBin<span class="token punctuation">]</span> <span class="token operator">+=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>coord_label<span class="token punctuation">)</span>
+                <span class="token comment"># 叠加的每一对图片内部的指标，到下一张图片之前，要清空。</span>
                 self<span class="token punctuation">.</span>image_area_total <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
                 self<span class="token punctuation">.</span>image_area_match <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
                 self<span class="token punctuation">.</span>distance_match <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+                <span class="token comment"># 后面直接赋值，所以其实不用进行清空</span>
                 self<span class="token punctuation">.</span>dismatch <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
 
                 <span class="token keyword">for</span> K <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>coord_image<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
@@ -629,7 +634,9 @@
                             <span class="token keyword">break</span>
 
                 self<span class="token punctuation">.</span>dismatch <span class="token operator">=</span> <span class="token punctuation">[</span>x <span class="token keyword">for</span> x <span class="token keyword">in</span> self<span class="token punctuation">.</span>image_area_total <span class="token keyword">if</span> x <span class="token keyword">not</span> <span class="token keyword">in</span> self<span class="token punctuation">.</span>image_area_match<span class="token punctuation">]</span>
+                <span class="token comment"># 持续累加的变量2</span>
                 self<span class="token punctuation">.</span>FA<span class="token punctuation">[</span>iBin<span class="token punctuation">]</span> <span class="token operator">+=</span> np<span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>dismatch<span class="token punctuation">)</span>
+                <span class="token comment"># 持续累加的变量3</span>
                 self<span class="token punctuation">.</span>PD<span class="token punctuation">[</span>iBin<span class="token punctuation">]</span> <span class="token operator">+=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>distance_match<span class="token punctuation">)</span>
 
     <span class="token keyword">def</span> <span class="token function">get</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> img_num<span class="token punctuation">)</span><span class="token punctuation">:</span>
@@ -640,9 +647,14 @@
         <span class="token keyword">return</span> Final_FA<span class="token punctuation">,</span> Final_PD
 
     <span class="token keyword">def</span> <span class="token function">reset</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token comment"># 持续累加变量1</span>
         self<span class="token punctuation">.</span>FA <span class="token operator">=</span> np<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span><span class="token punctuation">[</span>self<span class="token punctuation">.</span>bins <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+        <span class="token comment"># 持续累加变量2</span>
         self<span class="token punctuation">.</span>PD <span class="token operator">=</span> np<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span><span class="token punctuation">[</span>self<span class="token punctuation">.</span>bins <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token comment"># 持续累加变量3</span>
+        <span class="token comment"># 后面自己添加的</span>
+        self<span class="token punctuation">.</span>target <span class="token operator">=</span> np<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span>self<span class="token punctuation">.</span>bins <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>
@@ -1142,7 +1154,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">173.4k</span>&nbsp;字
+                class="white-color">173.6k</span>&nbsp;字
             
             
             
