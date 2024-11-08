@@ -406,14 +406,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
-                    1.8k
+                    2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
-                    6 Min
+                    7 Min
                 </div>
                 
 
@@ -508,8 +508,53 @@
 <p>那么Focal loss 怎么处理的呢，它相对交叉熵加上了一个乘性的因子(1 − pt)**γ，从而像我们上面所讲的，降低了易分类样本区间内产生的loss。</p>
 <p>再看下Focal loss的表达，是不是清晰了许多。</p>
 <p><img src="http://pic.huangruimin.tech/20241108222230.png"></p>
-<h2 id="5-交叉熵定义的回忆"><a href="#5-交叉熵定义的回忆" class="headerlink" title="5. 交叉熵定义的回忆"></a>5. 交叉熵定义的回忆</h2><p>对于给定的真实分布P和预测分布Q,交叉熵定义为<br><img src="http://pic.huangruimin.tech/20241108220628.png"><br>在分类问题中，P通常是实际的类别分布（也就是标签）， Q是模型预测的概率分布。</p>
-<h2 id="6-代码实现"><a href="#6-代码实现" class="headerlink" title="6. 代码实现"></a>6. 代码实现</h2>
+<h2 id="5-补充"><a href="#5-补充" class="headerlink" title="5. 补充"></a>5. 补充</h2><p><img src="http://pic.huangruimin.tech/20241108223953.png"></p>
+<h2 id="6-交叉熵定义的回忆"><a href="#6-交叉熵定义的回忆" class="headerlink" title="6. 交叉熵定义的回忆"></a>6. 交叉熵定义的回忆</h2><p>对于给定的真实分布P和预测分布Q,交叉熵定义为<br><img src="http://pic.huangruimin.tech/20241108220628.png"><br>在分类问题中，P通常是实际的类别分布（也就是标签）， Q是模型预测的概率分布。</p>
+<h2 id="7-代码实现"><a href="#7-代码实现" class="headerlink" title="7. 代码实现"></a>7. 代码实现</h2><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># -*- coding: utf-8 -*-</span>
+<span class="token comment"># @time: 2024/8/21 16:54</span>
+
+<span class="token keyword">import</span> torch
+<span class="token keyword">import</span> torch<span class="token punctuation">.</span>nn <span class="token keyword">as</span> nn
+
+<span class="token comment"># Focal Loss 的 PyTorch 示例实现</span>
+<span class="token keyword">class</span> <span class="token class-name">FocalLoss</span><span class="token punctuation">(</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> alpha<span class="token operator">=</span><span class="token number">0.25</span><span class="token punctuation">,</span> gamma<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> reduction<span class="token operator">=</span><span class="token string">'mean'</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token builtin">super</span><span class="token punctuation">(</span>FocalLoss<span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>alpha <span class="token operator">=</span> alpha
+        self<span class="token punctuation">.</span>gamma <span class="token operator">=</span> gamma
+        self<span class="token punctuation">.</span>reduction <span class="token operator">=</span> reduction
+
+    <span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> inputs<span class="token punctuation">,</span> targets<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        
+        <span class="token comment"># 计算 logits 的 sigmoid 概率</span>
+        p <span class="token operator">=</span> torch<span class="token punctuation">.</span>sigmoid<span class="token punctuation">(</span>inputs<span class="token punctuation">)</span>
+
+        <span class="token comment"># 计算交叉熵损失</span>
+        bce_loss <span class="token operator">=</span> nn<span class="token punctuation">.</span>functional<span class="token punctuation">.</span>binary_cross_entropy_with_logits<span class="token punctuation">(</span>inputs<span class="token punctuation">,</span> targets<span class="token punctuation">,</span> reduction<span class="token operator">=</span><span class="token string">'none'</span><span class="token punctuation">)</span>
+
+        <span class="token comment"># 计算 Focal Loss</span>
+        alpha <span class="token operator">=</span> self<span class="token punctuation">.</span>alpha <span class="token operator">*</span> targets <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">-</span> self<span class="token punctuation">.</span>alpha<span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">-</span> targets<span class="token punctuation">)</span>
+        focal_loss <span class="token operator">=</span> alpha <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">-</span> p<span class="token punctuation">)</span> <span class="token operator">**</span> self<span class="token punctuation">.</span>gamma<span class="token punctuation">)</span> <span class="token operator">*</span> bce_loss
+
+        <span class="token comment"># 根据 reduction 参数进行损失归约</span>
+        <span class="token keyword">if</span> self<span class="token punctuation">.</span>reduction <span class="token operator">==</span> <span class="token string">'mean'</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> focal_loss<span class="token punctuation">.</span>mean<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">elif</span> self<span class="token punctuation">.</span>reduction <span class="token operator">==</span> <span class="token string">'sum'</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> focal_loss<span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> focal_loss
+
+
+<span class="token comment"># 使用示例</span>
+criterion <span class="token operator">=</span> FocalLoss<span class="token punctuation">(</span>alpha<span class="token operator">=</span><span class="token number">0.25</span><span class="token punctuation">,</span> gamma<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span>
+inputs <span class="token operator">=</span> torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">,</span> requires_grad<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+targets <span class="token operator">=</span> torch<span class="token punctuation">.</span>empty<span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">.</span>random_<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
+loss <span class="token operator">=</span> criterion<span class="token punctuation">(</span>inputs<span class="token punctuation">,</span> targets<span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>inputs<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>targets<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>loss<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
                 
             </div>
             <hr/>
@@ -1007,7 +1052,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">175.2k</span>&nbsp;字
+                class="white-color">175.3k</span>&nbsp;字
             
             
             
