@@ -399,7 +399,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
-                    2024-11-08
+                    2024-11-09
                 </div>
                 
 
@@ -546,14 +546,15 @@
 
 
 <span class="token comment"># 使用示例</span>
-criterion <span class="token operator">=</span> FocalLoss<span class="token punctuation">(</span>alpha<span class="token operator">=</span><span class="token number">0.25</span><span class="token punctuation">,</span> gamma<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span>
-inputs <span class="token operator">=</span> torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">,</span> requires_grad<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
-targets <span class="token operator">=</span> torch<span class="token punctuation">.</span>empty<span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">.</span>random_<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
+criterion <span class="token operator">=</span> FocalLoss<span class="token punctuation">(</span>alpha<span class="token operator">=</span><span class="token number">0.25</span><span class="token punctuation">,</span> gamma<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> reduction<span class="token operator">=</span><span class="token string">'none'</span><span class="token punctuation">)</span>
+inputs <span class="token operator">=</span> torch<span class="token punctuation">.</span>rand<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">256</span><span class="token punctuation">,</span> <span class="token number">256</span><span class="token punctuation">,</span> requires_grad<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+targets <span class="token operator">=</span> torch<span class="token punctuation">.</span>ones<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">256</span><span class="token punctuation">,</span> <span class="token number">256</span><span class="token punctuation">,</span> dtype<span class="token operator">=</span>torch<span class="token punctuation">.</span>float32<span class="token punctuation">)</span>
 loss <span class="token operator">=</span> criterion<span class="token punctuation">(</span>inputs<span class="token punctuation">,</span> targets<span class="token punctuation">)</span>
 
 <span class="token keyword">print</span><span class="token punctuation">(</span>inputs<span class="token punctuation">)</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span>targets<span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>loss<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token keyword">print</span><span class="token punctuation">(</span>loss<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>loss<span class="token punctuation">.</span>shape<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
                 
             </div>
@@ -1052,7 +1053,7 @@ loss <span class="token operator">=</span> criterion<span class="token punctuati
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">175.3k</span>&nbsp;字
+                class="white-color">175.4k</span>&nbsp;字
             
             
             
