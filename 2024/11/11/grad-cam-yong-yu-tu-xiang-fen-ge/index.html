@@ -406,7 +406,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
-                    631
+                    623
                 </div>
                 
 
@@ -445,7 +445,7 @@
         
     <span class="token comment"># 这里被别的地方回调，并且这个地方不考虑batch_size维度</span>
     <span class="token keyword">def</span> <span class="token function">__call__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> model_output<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token comment"># model_output[self.category, :, : ]会直接降低为二维，然后相加</span>
+        <span class="token comment"># model_output[self.category, :, : ]会直接降低为二维</span>
         <span class="token keyword">return</span> <span class="token punctuation">(</span>model_output<span class="token punctuation">[</span>self<span class="token punctuation">.</span>category<span class="token punctuation">,</span> <span class="token punctuation">:</span><span class="token punctuation">,</span> <span class="token punctuation">:</span> <span class="token punctuation">]</span> <span class="token operator">*</span> self<span class="token punctuation">.</span>mask<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 
 targets <span class="token operator">=</span> <span class="token punctuation">[</span>SemanticSegmentationTarget<span class="token punctuation">(</span>car_category<span class="token punctuation">,</span> car_mask_float<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token comment"># 这里只考虑了1个batch_Size</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
@@ -537,7 +537,7 @@ cv2<span class="token punctuation">.</span>imwrite<span class="token punctuation
         
     <span class="token comment"># 这里被别的地方回调，并且这个地方不考虑batch_size维度</span>
     <span class="token keyword">def</span> <span class="token function">__call__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> model_output<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token comment"># model_output[self.category, :, : ]会直接降低为二维，然后相加</span>
+        <span class="token comment"># model_output[self.category, :, : ]会直接降低为二维</span>
         <span class="token keyword">return</span> <span class="token punctuation">(</span>model_output<span class="token punctuation">[</span>self<span class="token punctuation">.</span>category<span class="token punctuation">,</span> <span class="token punctuation">:</span><span class="token punctuation">,</span> <span class="token punctuation">:</span> <span class="token punctuation">]</span> <span class="token operator">*</span> self<span class="token punctuation">.</span>mask<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 
     
