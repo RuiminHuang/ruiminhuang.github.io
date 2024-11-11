@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>Grad-CAM的原理及实践</title>
+      <link href="/2024/11/11/grad-cam-de-yuan-li-ji-shi-jian/"/>
+      <url>/2024/11/11/grad-cam-de-yuan-li-ji-shi-jian/</url>
+      
+        <content type="html"><![CDATA[<h2 id="1-深层的特征图，具有更好的语义信息，其热力图效果也更好"><a href="#1-深层的特征图，具有更好的语义信息，其热力图效果也更好" class="headerlink" title="1. 深层的特征图，具有更好的语义信息，其热力图效果也更好"></a>1. 深层的特征图，具有更好的语义信息，其热力图效果也更好</h2><p><img src="http://pic.huangruimin.tech/20241111094517.png"></p><h2 id="2-基本示意图"><a href="#2-基本示意图" class="headerlink" title="2. 基本示意图"></a>2. 基本示意图</h2><p><img src="http://pic.huangruimin.tech/20241111094626.png"></p><ul><li><p>其中A是前向推理得到的</p></li><li><p>A’是反向传播得到的</p></li></ul><h2 id="3-计算细节"><a href="#3-计算细节" class="headerlink" title="3. 计算细节"></a>3. 计算细节</h2><p><img src="http://pic.huangruimin.tech/20241111094837.png"></p><h2 id="4-举例"><a href="#4-举例" class="headerlink" title="4. 举例"></a>4. 举例</h2><p><img src="http://pic.huangruimin.tech/20241111094942.png"><br><img src="http://pic.huangruimin.tech/20241111095004.png"><br><img src="http://pic.huangruimin.tech/20241111095038.png"></p><h2 id="5-后处理"><a href="#5-后处理" class="headerlink" title="5. 后处理"></a>5. 后处理</h2><p><img src="http://pic.huangruimin.tech/20241111095338.png"><br><img src="http://pic.huangruimin.tech/20241111095238.png"></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>PD_FA的计算</title>
       <link href="/2024/11/06/pd-fa-de-ji-suan/"/>
       <url>/2024/11/06/pd-fa-de-ji-suan/</url>
