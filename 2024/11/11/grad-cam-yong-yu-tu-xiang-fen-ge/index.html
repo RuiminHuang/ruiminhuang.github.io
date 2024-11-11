@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Hi3516DV300_6_官方SDK开发实战, AI, TensorRT, Infrared">
+    <meta name="keywords" content="Grad-CAM用于图像分割, AI, TensorRT, Infrared">
     <meta name="description" content="黄瑞敏的个人主页">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Hi3516DV300_6_官方SDK开发实战 | Ruimin Huang&#39;s Space</title>
+    <title>Grad-CAM用于图像分割 | Ruimin Huang&#39;s Space</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -259,12 +259,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('http://pic.huangruimin.tech/The_Wandering_Earth2_22.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('http://pic.huangruimin.tech/Transformers2_52.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hi3516DV300_6_官方SDK开发实战</h1>
+                    <h1 class="description center-align post-title">Grad-CAM用于图像分割</h1>
                 </div>
             </div>
         </div>
@@ -378,33 +378,12 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                    <div class="article-tag">
-                        
-                            <a href="/tags/ARM/">
-                                <span class="chip bg-color">ARM</span>
-                            </a>
-                        
-                            <a href="/tags/Linux/">
-                                <span class="chip bg-color">Linux</span>
-                            </a>
-                        
-                            <a href="/tags/Hi3516DV300/">
-                                <span class="chip bg-color">Hi3516DV300</span>
-                            </a>
-                        
-                    </div>
+                          <div class="article-tag">
+                            <span class="chip bg-color">No tag</span>
+                          </div>
                     
                 </div>
                 <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/" class="post-category">
-                                嵌入式
-                            </a>
-                        
-                    </div>
                     
                 </div>
             </div>
@@ -413,28 +392,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2021-10-12
+                    2024-11-11
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
-                    2023-09-13
+                    2024-11-11
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
-                    566
+                    631
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
-                    2 Min
+                    3 Min
                 </div>
                 
 
@@ -457,79 +436,126 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="1-SDK脚本管理解析"><a href="#1-SDK脚本管理解析" class="headerlink" title="1. SDK脚本管理解析"></a>1. SDK脚本管理解析</h2><h3 id="1-1-sdk-unpack脚本解析"><a href="#1-1-sdk-unpack脚本解析" class="headerlink" title="1.1 sdk.unpack脚本解析"></a>1.1 sdk.unpack脚本解析</h3><ul>
-<li>就是为了解压而已</li>
-</ul>
-<h3 id="1-2-scripts-common-sh脚本解析"><a href="#1-2-scripts-common-sh脚本解析" class="headerlink" title="1.2 scripts/common.sh脚本解析"></a>1.2 scripts/common.sh脚本解析</h3><ul>
-<li>定义了很多函数，整个SDK管理的所在</li>
-</ul>
-<h3 id="1-3-osdrv-readme-cn-txt"><a href="#1-3-osdrv-readme-cn-txt" class="headerlink" title="1.3 osdrv/readme_cn.txt"></a>1.3 osdrv/readme_cn.txt</h3><ul>
-<li>定义了怎么编译，包括一键编译，全部编译</li>
-</ul>
-<h2 id="2-如何安装交叉编译工具链"><a href="#2-如何安装交叉编译工具链" class="headerlink" title="2.如何安装交叉编译工具链"></a>2.如何安装交叉编译工具链</h2><p><img src="https://pic.huangruimin.tech/20211223141315.png"></p>
-<blockquote>
-<p>位于：/home/book/Hi3516DV300/arm-himix200-linux中</p>
-</blockquote>
-<ul>
-<li><p>正确的安装命令：</p>
-<blockquote>
-<p>sudo source ./arm-himix200-linux.install</p>
-</blockquote>
-</li>
-<li><p>如果遇到sudo: source: command not found，那么先执行：</p>
-<blockquote>
-<p>sudo su</p>
-</blockquote>
-</li>
-<li><p>如下图所示：<br><img src="https://pic.huangruimin.tech/20211223144953.png"><br><img src="https://pic.huangruimin.tech/20211223145209.png"></p>
-</li>
-<li><p>要明白x86-arm的含义：</p>
-<blockquote>
-<p>x86表示的是宿主运行环境，arm表示目标运行环境</p>
-</blockquote>
-</li>
-<li><p>最后安装的工具如下图所示：<br><img src="https://pic.huangruimin.tech/20211223150519.png"></p>
-</li>
-<li><p>/etc/profile：系统启动之初，就能启动它</p>
-</li>
-<li><p>.bach.src：其实是低一个等级的</p>
-</li>
-<li><p>最后检查下/etc/profile里面，其实是有export PATH=”/opt/hisi-linux/x86-arm/arm-himix200-linux/bin:$PATH”的，说明是添加到环境变量里面去了。</p>
-</li>
-<li><p>最后安装好后的情况如下输出所示：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">book@100ask:~$ <span class="token function">ls</span>
-Configuring_ubuntu.sh  Documents  examples.desktop  Music       Pictures  snap       tftpboot
-Desktop                Downloads  Hi3516DV300       nfs_rootfs  Public    Templates  Videos
-book@100ask:~$ arm-himix200-linux-gcc <span class="token parameter variable">-v</span>
-Using built-in specs.
-<span class="token assign-left variable">COLLECT_GCC</span><span class="token operator">=</span>arm-himix200-linux-gcc
-<span class="token assign-left variable">COLLECT_LTO_WRAPPER</span><span class="token operator">=</span>/opt/hisi-linux/x86-arm/arm-himix200-linux/host_bin/<span class="token punctuation">..</span>/libexec/gcc/arm-linux-gnueabi/6.3.0/lto-wrapper
-Target: arm-linux-gnueabi
-Configured with: /home/sying/SDK_CPU_UNIFIED/build/script/arm-himix200-linux/arm_himix200_build_dir/src/gcc-6.3.0/configure <span class="token parameter variable">--host</span><span class="token operator">=</span>i386-redhat-linux <span class="token parameter variable">--build</span><span class="token operator">=</span>i386-redhat-linux <span class="token parameter variable">--target</span><span class="token operator">=</span>arm-linux-gnueabi <span class="token parameter variable">--prefix</span><span class="token operator">=</span>/home/sying/SDK_CPU_UNIFIED/build/script/arm-himix200-linux/arm_himix200_build_dir/install --enable-threads --disable-libmudflap --disable-libssp --disable-libstdcxx-pch --with-gnu-as --with-gnu-ld --enable-languages<span class="token operator">=</span>c,c++ --enable-shared --enable-lto --enable-symvers<span class="token operator">=</span>gnu --enable-__cxa_atexit --disable-nls --enable-clocale<span class="token operator">=</span>gnu --enable-extra-hisi-multilibs --with-sysroot<span class="token operator">=</span>/home/sying/SDK_CPU_UNIFIED/build/script/arm-himix200-linux/arm_himix200_build_dir/install/target --with-build-sysroot<span class="token operator">=</span>/home/sying/SDK_CPU_UNIFIED/build/script/arm-himix200-linux/arm_himix200_build_dir/install/target --with-gmp<span class="token operator">=</span>/home/sying/SDK_CPU_UNIFIED/build/script/arm-himix200-linux/arm_himix200_build_dir/obj/host-libs/usr --with-mpfr<span class="token operator">=</span>/home/sying/SDK_CPU_UNIFIED/build/script/arm-himix200-linux/arm_himix200_build_dir/obj/host-libs/usr --with-mpc<span class="token operator">=</span>/home/sying/SDK_CPU_UNIFIED/build/script/arm-himix200-linux/arm_himix200_build_dir/obj/host-libs/usr --enable-libgomp --disable-libitm --enable-poison-system-directories --with-pkgversion<span class="token operator">=</span><span class="token string">'HC&amp;C V1R3C00SPC200B005_20190606'</span> --disable-bootstrap
-Thread model: posix
-gcc version <span class="token number">6.3</span>.0 <span class="token punctuation">(</span>HC<span class="token operator">&amp;</span>C V1R3C00SPC200B005_20190606<span class="token punctuation">)</span>
-book@100ask:~$<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
-<li><p>解压过程中会有这种报错，所以，要重新配置一下：</p>
-</li>
-</ul>
-<p><img src="https://pic.huangruimin.tech/20211223153942.png"></p>
-<p><img src="https://pic.huangruimin.tech/20211223154131.png"></p>
-<ul>
-<li>注意，在解压之前，需要把芯片的型号给确定好，就是要在</li>
-</ul>
-<p><img src="https://pic.huangruimin.tech/20211223165806.png"><br><img src="https://pic.huangruimin.tech/20211223165831.png"></p>
-<ul>
-<li>接下来就是进行解压</li>
-</ul>
-<p><img src="https://pic.huangruimin.tech/20211223170123.png"></p>
-<ul>
-<li><p>注意查阅OSDRV文件夹下的readme</p>
-</li>
-<li><p>荣品给的那一份，其实是编译好的，并没有重新压缩回去</p>
-</li>
-</ul>
+                <h2 id="一、target的设计"><a href="#一、target的设计" class="headerlink" title="一、target的设计"></a>一、target的设计</h2><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">SemanticSegmentationTarget</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> category<span class="token punctuation">,</span> mask<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>category <span class="token operator">=</span> category
+        self<span class="token punctuation">.</span>mask <span class="token operator">=</span> torch<span class="token punctuation">.</span>from_numpy<span class="token punctuation">(</span>mask<span class="token punctuation">)</span>
+        <span class="token keyword">if</span> torch<span class="token punctuation">.</span>cuda<span class="token punctuation">.</span>is_available<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>mask <span class="token operator">=</span> self<span class="token punctuation">.</span>mask<span class="token punctuation">.</span>cuda<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        
+    <span class="token comment"># 这里被别的地方回调，并且这个地方不考虑batch_size维度</span>
+    <span class="token keyword">def</span> <span class="token function">__call__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> model_output<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token comment"># model_output[self.category, :, : ]会直接降低为二维，然后相加</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span>model_output<span class="token punctuation">[</span>self<span class="token punctuation">.</span>category<span class="token punctuation">,</span> <span class="token punctuation">:</span><span class="token punctuation">,</span> <span class="token punctuation">:</span> <span class="token punctuation">]</span> <span class="token operator">*</span> self<span class="token punctuation">.</span>mask<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 
+targets <span class="token operator">=</span> <span class="token punctuation">[</span>SemanticSegmentationTarget<span class="token punctuation">(</span>car_category<span class="token punctuation">,</span> car_mask_float<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token comment"># 这里只考虑了1个batch_Size</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+<h2 id="二、代码示例"><a href="#二、代码示例" class="headerlink" title="二、代码示例"></a>二、代码示例</h2><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> warnings
+warnings<span class="token punctuation">.</span>filterwarnings<span class="token punctuation">(</span><span class="token string">'ignore'</span><span class="token punctuation">)</span>
+warnings<span class="token punctuation">.</span>simplefilter<span class="token punctuation">(</span><span class="token string">'ignore'</span><span class="token punctuation">)</span>
+<span class="token keyword">from</span> torchvision<span class="token punctuation">.</span>models<span class="token punctuation">.</span>segmentation <span class="token keyword">import</span> deeplabv3_resnet50
+<span class="token keyword">import</span> torch
+<span class="token keyword">import</span> torch<span class="token punctuation">.</span>functional <span class="token keyword">as</span> F
+<span class="token keyword">import</span> numpy <span class="token keyword">as</span> np
+<span class="token keyword">import</span> requests
+<span class="token keyword">import</span> torchvision
+<span class="token keyword">from</span> PIL <span class="token keyword">import</span> Image
+<span class="token keyword">from</span> pytorch_grad_cam<span class="token punctuation">.</span>utils<span class="token punctuation">.</span>image <span class="token keyword">import</span> show_cam_on_image<span class="token punctuation">,</span> preprocess_image
+<span class="token keyword">import</span> cv2
+
+
+image_url <span class="token operator">=</span> <span class="token string">"https://farm1.staticflickr.com/6/9606553_ccc7518589_z.jpg"</span>
+image <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>Image<span class="token punctuation">.</span><span class="token builtin">open</span><span class="token punctuation">(</span>requests<span class="token punctuation">.</span>get<span class="token punctuation">(</span>image_url<span class="token punctuation">,</span> stream<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span><span class="token punctuation">.</span>raw<span class="token punctuation">)</span><span class="token punctuation">)</span>
+rgb_img <span class="token operator">=</span> np<span class="token punctuation">.</span>float32<span class="token punctuation">(</span>image<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">255</span>
+input_tensor <span class="token operator">=</span> preprocess_image<span class="token punctuation">(</span>rgb_img<span class="token punctuation">,</span>
+                                mean<span class="token operator">=</span><span class="token punctuation">[</span><span class="token number">0.485</span><span class="token punctuation">,</span> <span class="token number">0.456</span><span class="token punctuation">,</span> <span class="token number">0.406</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                                std<span class="token operator">=</span><span class="token punctuation">[</span><span class="token number">0.229</span><span class="token punctuation">,</span> <span class="token number">0.224</span><span class="token punctuation">,</span> <span class="token number">0.225</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token comment"># Taken from the torchvision tutorial</span>
+<span class="token comment"># https://pytorch.org/vision/stable/auto_examples/plot_visualization_utils.html</span>
+model <span class="token operator">=</span> deeplabv3_resnet50<span class="token punctuation">(</span>pretrained<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> progress<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+model <span class="token operator">=</span> model<span class="token punctuation">.</span><span class="token builtin">eval</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">if</span> torch<span class="token punctuation">.</span>cuda<span class="token punctuation">.</span>is_available<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    model <span class="token operator">=</span> model<span class="token punctuation">.</span>cuda<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    input_tensor <span class="token operator">=</span> input_tensor<span class="token punctuation">.</span>cuda<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment"># 这是3个通道</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>input_tensor<span class="token punctuation">.</span>shape<span class="token punctuation">)</span>
+output <span class="token operator">=</span> model<span class="token punctuation">(</span>input_tensor<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token builtin">type</span><span class="token punctuation">(</span>output<span class="token punctuation">)</span><span class="token punctuation">,</span> output<span class="token punctuation">.</span>keys<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment"># 发现模型输出的是字典</span>
+<span class="token comment"># print("------------------------------------------------------------------")</span>
+
+<span class="token keyword">class</span> <span class="token class-name">SegmentationModelOutputWrapper</span><span class="token punctuation">(</span>torch<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> model<span class="token punctuation">)</span><span class="token punctuation">:</span> 
+        <span class="token builtin">super</span><span class="token punctuation">(</span>SegmentationModelOutputWrapper<span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>model <span class="token operator">=</span> model
+        
+    <span class="token keyword">def</span> <span class="token function">forward</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>model<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token string">"out"</span><span class="token punctuation">]</span>
+    
+model <span class="token operator">=</span> SegmentationModelOutputWrapper<span class="token punctuation">(</span>model<span class="token punctuation">)</span>
+output <span class="token operator">=</span> model<span class="token punctuation">(</span>input_tensor<span class="token punctuation">)</span>
+<span class="token comment"># 分成了7个类别</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>output<span class="token punctuation">.</span>shape<span class="token punctuation">)</span>
+<span class="token comment"># 封装一下，这样就只输出分割专用的矩阵了</span>
+<span class="token comment"># print("------------------------------------------------------------------")</span>
+<span class="token comment"># 这里在channel通道进行softmax</span>
+normalized_masks <span class="token operator">=</span> torch<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>functional<span class="token punctuation">.</span>softmax<span class="token punctuation">(</span>output<span class="token punctuation">,</span> dim<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">.</span>cpu<span class="token punctuation">(</span><span class="token punctuation">)</span>
+sem_classes <span class="token operator">=</span> <span class="token punctuation">[</span>
+    <span class="token string">'__background__'</span><span class="token punctuation">,</span> <span class="token string">'aeroplane'</span><span class="token punctuation">,</span> <span class="token string">'bicycle'</span><span class="token punctuation">,</span> <span class="token string">'bird'</span><span class="token punctuation">,</span> <span class="token string">'boat'</span><span class="token punctuation">,</span> <span class="token string">'bottle'</span><span class="token punctuation">,</span> <span class="token string">'bus'</span><span class="token punctuation">,</span>
+    <span class="token string">'car'</span><span class="token punctuation">,</span> <span class="token string">'cat'</span><span class="token punctuation">,</span> <span class="token string">'chair'</span><span class="token punctuation">,</span> <span class="token string">'cow'</span><span class="token punctuation">,</span> <span class="token string">'diningtable'</span><span class="token punctuation">,</span> <span class="token string">'dog'</span><span class="token punctuation">,</span> <span class="token string">'horse'</span><span class="token punctuation">,</span> <span class="token string">'motorbike'</span><span class="token punctuation">,</span>
+    <span class="token string">'person'</span><span class="token punctuation">,</span> <span class="token string">'pottedplant'</span><span class="token punctuation">,</span> <span class="token string">'sheep'</span><span class="token punctuation">,</span> <span class="token string">'sofa'</span><span class="token punctuation">,</span> <span class="token string">'train'</span><span class="token punctuation">,</span> <span class="token string">'tvmonitor'</span>
+<span class="token punctuation">]</span>
+<span class="token comment"># 组成dictionary</span>
+sem_class_to_idx <span class="token operator">=</span> <span class="token punctuation">{</span>cls<span class="token punctuation">:</span> idx <span class="token keyword">for</span> <span class="token punctuation">(</span>idx<span class="token punctuation">,</span> cls<span class="token punctuation">)</span> <span class="token keyword">in</span> <span class="token builtin">enumerate</span><span class="token punctuation">(</span>sem_classes<span class="token punctuation">)</span><span class="token punctuation">}</span>
+
+car_category <span class="token operator">=</span> sem_class_to_idx<span class="token punctuation">[</span><span class="token string">"car"</span><span class="token punctuation">]</span>
+<span class="token comment"># 之前搞得很复杂，然而这里一行代码就搞定了</span>
+car_mask <span class="token operator">=</span> normalized_masks<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token punctuation">:</span><span class="token punctuation">,</span> <span class="token punctuation">:</span><span class="token punctuation">,</span> <span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">.</span>argmax<span class="token punctuation">(</span>axis<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">.</span>detach<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>cpu<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>numpy<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment"># int8数据类型的mask</span>
+car_mask_uint8 <span class="token operator">=</span> <span class="token number">255</span> <span class="token operator">*</span> np<span class="token punctuation">.</span>uint8<span class="token punctuation">(</span>car_mask <span class="token operator">==</span> car_category<span class="token punctuation">)</span>
+<span class="token comment"># float数据类型的mask</span>
+car_mask_float <span class="token operator">=</span> np<span class="token punctuation">.</span>float32<span class="token punctuation">(</span>car_mask <span class="token operator">==</span> car_category<span class="token punctuation">)</span>
+
+<span class="token comment"># 在最后一个channel轴重复3次，然后在水平方向上和原始的image进行堆叠</span>
+both_images <span class="token operator">=</span> np<span class="token punctuation">.</span>hstack<span class="token punctuation">(</span><span class="token punctuation">(</span>image<span class="token punctuation">,</span> np<span class="token punctuation">.</span>repeat<span class="token punctuation">(</span>car_mask_uint8<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> <span class="token punctuation">:</span><span class="token punctuation">,</span> <span class="token boolean">None</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> axis<span class="token operator">=</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+Image<span class="token punctuation">.</span>fromarray<span class="token punctuation">(</span>both_images<span class="token punctuation">)</span>
+both_images <span class="token operator">=</span> cv2<span class="token punctuation">.</span>cvtColor<span class="token punctuation">(</span>both_images<span class="token punctuation">,</span> cv2<span class="token punctuation">.</span>COLOR_RGB2BGR<span class="token punctuation">)</span>
+cv2<span class="token punctuation">.</span>imwrite<span class="token punctuation">(</span><span class="token string">"both_images_seg.jpg"</span><span class="token punctuation">,</span> both_images<span class="token punctuation">)</span>
+
+<span class="token comment"># print("------------------------------------------------------------------")</span>
+
+<span class="token keyword">from</span> pytorch_grad_cam <span class="token keyword">import</span> GradCAM
+
+<span class="token keyword">class</span> <span class="token class-name">SemanticSegmentationTarget</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> category<span class="token punctuation">,</span> mask<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>category <span class="token operator">=</span> category
+        self<span class="token punctuation">.</span>mask <span class="token operator">=</span> torch<span class="token punctuation">.</span>from_numpy<span class="token punctuation">(</span>mask<span class="token punctuation">)</span>
+        <span class="token keyword">if</span> torch<span class="token punctuation">.</span>cuda<span class="token punctuation">.</span>is_available<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>mask <span class="token operator">=</span> self<span class="token punctuation">.</span>mask<span class="token punctuation">.</span>cuda<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        
+    <span class="token comment"># 这里被别的地方回调，并且这个地方不考虑batch_size维度</span>
+    <span class="token keyword">def</span> <span class="token function">__call__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> model_output<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token comment"># model_output[self.category, :, : ]会直接降低为二维，然后相加</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span>model_output<span class="token punctuation">[</span>self<span class="token punctuation">.</span>category<span class="token punctuation">,</span> <span class="token punctuation">:</span><span class="token punctuation">,</span> <span class="token punctuation">:</span> <span class="token punctuation">]</span> <span class="token operator">*</span> self<span class="token punctuation">.</span>mask<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token builtin">sum</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    
+target_layers <span class="token operator">=</span> <span class="token punctuation">[</span>model<span class="token punctuation">.</span>model<span class="token punctuation">.</span>backbone<span class="token punctuation">.</span>layer4<span class="token punctuation">]</span><span class="token comment"># 这里只考虑了1个layer</span>
+
+<span class="token comment"># 输入category(int)，float数据类型的mask，这里是输入回调函数以方便被调用的</span>
+targets <span class="token operator">=</span> <span class="token punctuation">[</span>SemanticSegmentationTarget<span class="token punctuation">(</span>car_category<span class="token punctuation">,</span> car_mask_float<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token comment"># 这里只考虑了1个batch_Size</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token builtin">type</span><span class="token punctuation">(</span>targets<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token builtin">type</span><span class="token punctuation">(</span>targets<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token keyword">with</span> GradCAM<span class="token punctuation">(</span>model<span class="token operator">=</span>model<span class="token punctuation">,</span> target_layers<span class="token operator">=</span>target_layers<span class="token punctuation">)</span> <span class="token keyword">as</span> cam<span class="token punctuation">:</span>
+    grayscale_cam <span class="token operator">=</span> cam<span class="token punctuation">(</span>input_tensor<span class="token operator">=</span>input_tensor<span class="token punctuation">,</span> targets<span class="token operator">=</span>targets<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token punctuation">:</span><span class="token punctuation">]</span> <span class="token comment"># 后面是从batch_Size中取出来</span>
+    cam_image <span class="token operator">=</span> show_cam_on_image<span class="token punctuation">(</span>rgb_img<span class="token punctuation">,</span> grayscale_cam<span class="token punctuation">,</span> use_rgb<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+
+Image<span class="token punctuation">.</span>fromarray<span class="token punctuation">(</span>cam_image<span class="token punctuation">)</span>
+cam_image <span class="token operator">=</span> cv2<span class="token punctuation">.</span>cvtColor<span class="token punctuation">(</span>cam_image<span class="token punctuation">,</span> cv2<span class="token punctuation">.</span>COLOR_RGB2BGR<span class="token punctuation">)</span>
+cv2<span class="token punctuation">.</span>imwrite<span class="token punctuation">(</span><span class="token string">"cam_image_seg.jpg"</span><span class="token punctuation">,</span> cam_image<span class="token punctuation">)</span>
+<span class="token comment"># print("------------------------------------------------------------------")</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>
@@ -555,7 +581,7 @@ book@100ask:~$<span aria-hidden="true" class="line-numbers-rows"><span></span><s
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://www.huangruimin.tech/2021/10/12/hi3516dv300-6-guan-fang-sdk-kai-fa-shi-zhan/">http://www.huangruimin.tech/2021/10/12/hi3516dv300-6-guan-fang-sdk-kai-fa-shi-zhan/</a>
+                    <a href="http://www.huangruimin.tech/2024/11/11/grad-cam-yong-yu-tu-xiang-fen-ge/">http://www.huangruimin.tech/2024/11/11/grad-cam-yong-yu-tu-xiang-fen-ge/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -592,19 +618,7 @@ book@100ask:~$<span aria-hidden="true" class="line-numbers-rows"><span></span><s
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            
-                                <a href="/tags/ARM/">
-                                    <span class="chip bg-color">ARM</span>
-                                </a>
-                            
-                                <a href="/tags/Linux/">
-                                    <span class="chip bg-color">Linux</span>
-                                </a>
-                            
-                                <a href="/tags/Hi3516DV300/">
-                                    <span class="chip bg-color">Hi3516DV300</span>
-                                </a>
-                            
+                            <span class="chip bg-color">No tag</span>
                         </div>
                     
                 </div>
@@ -772,74 +786,18 @@ book@100ask:~$<span aria-hidden="true" class="line-numbers-rows"><span></span><s
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+                <i class="far fa-dot-circle"></i>&nbsp;Current
+            </div>
             <div class="card">
-                <a href="/2021/10/13/hi3516dv300-7-kai-fa-ban-pei-tao-sdk-jie-du/">
+                <a href="/2024/11/11/grad-cam-yong-yu-tu-xiang-fen-ge/">
                     <div class="card-image">
                         
                         
-                        <img src="http://pic.huangruimin.tech/Transformers3_25.jpg" class="responsive-img" alt="Hi3516DV300_7_开发板配套SDK解读">
+                        <img src="http://pic.huangruimin.tech/Transformers2_52.jpg" class="responsive-img" alt="Grad-CAM用于图像分割">
                         
-                        <span class="card-title">Hi3516DV300_7_开发板配套SDK解读</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-10-13
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/" class="post-category">
-                                    嵌入式
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/ARM/">
-                        <span class="chip bg-color">ARM</span>
-                    </a>
-                    
-                    <a href="/tags/Linux/">
-                        <span class="chip bg-color">Linux</span>
-                    </a>
-                    
-                    <a href="/tags/Hi3516DV300/">
-                        <span class="chip bg-color">Hi3516DV300</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                Next&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2021/10/11/hi3516dv300-5-guan-fang-sdk-guan-li-jiao-ben-jie-xi/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="http://pic.huangruimin.tech/Transformers3_46.jpg" class="responsive-img" alt="Hi3516DV300_5_官方SDK管理脚本解析">
-                        
-                        <span class="card-title">Hi3516DV300_5_官方SDK管理脚本解析</span>
+                        <span class="card-title">Grad-CAM用于图像分割</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -850,35 +808,53 @@ book@100ask:~$<span aria-hidden="true" class="line-numbers-rows"><span></span><s
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-11
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-11-11
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/" class="post-category">
-                                    嵌入式
-                                </a>
-                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Ruimin Huang
                             
                         </span>
                     </div>
                 </div>
+
                 
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/ARM/">
-                        <span class="chip bg-color">ARM</span>
-                    </a>
-                    
-                    <a href="/tags/Linux/">
-                        <span class="chip bg-color">Linux</span>
-                    </a>
-                    
-                    <a href="/tags/Hi3516DV300/">
-                        <span class="chip bg-color">Hi3516DV300</span>
-                    </a>
-                    
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2024/11/11/grad-cam-de-yuan-li-ji-shi-jian/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="http://pic.huangruimin.tech/The_Wandering_Earth2_7.jpg" class="responsive-img" alt="Grad-CAM的原理及实践">
+                        
+                        <span class="card-title">Grad-CAM的原理及实践</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-11-11
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Ruimin Huang
+                            
+                        </span>
+                    </div>
                 </div>
                 
             </div>
