@@ -412,21 +412,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
-                    2024-11-21
+                    2024-11-25
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
-                    852
+                    1.9k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
-                    3 Min
+                    9 Min
                 </div>
                 
 
@@ -587,15 +587,89 @@ std: <span class="token punctuation">[</span><span class="token number">0.221579
 </li>
 <li><p>不同threshold下的F1参数，以及metric整体测试一下：已完成</p>
 </li>
-<li><p>设置随机数种子</p>
+<li><p>设置随机数种子：已完成</p>
 </li>
-<li><p>权重初始化</p>
+<li><p>权重初始化：已完成</p>
 </li>
-<li><p>学习率的变化</p>
+<li><p>学习率的变化: 已完成</p>
 </li>
-<li><p>添加模型</p>
+<li><p>优化器：已完成</p>
 </li>
-<li><p>编写训练和测试代码</p>
+<li><p>添加模型：已完成</p>
+</li>
+<li><p>编写训练和测试代码：已完成</p>
+</li>
+<li><p>三件套：build_scheduler, build_optimizer, weight_init：已完成</p>
+</li>
+</ul>
+<h2 id="五、实际训练的情况"><a href="#五、实际训练的情况" class="headerlink" title="五、实际训练的情况"></a>五、实际训练的情况</h2><ul>
+<li><p>固定随机数种子为3407时的情况</p>
+<blockquote>
+<p>best_mIoU: 0.5967，best_nIoU: 0.6467<br>此情况下性能下降太多</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token number">2024</span>-11-24 <span class="token number">23</span>:47:49,237 - INFO - Epoch: <span class="token number">290</span>, train_loss: <span class="token number">0.4583</span>, lr: <span class="token number">0.002336</span>
+<span class="token number">2024</span>-11-24 <span class="token number">23</span>:48:09,150 - INFO - Epoch: <span class="token number">290</span>, val_loss: <span class="token number">0.4062</span>, mIoU: <span class="token number">0.5864</span>, best_mIoU: <span class="token number">0.5967</span>, nIoU: <span class="token number">0.6358</span>, best_nIoU: <span class="token number">0.6467</span>
+<span class="token number">2024</span>-11-24 <span class="token number">23</span>:49:31,126 - INFO - Epoch: <span class="token number">291</span>, train_loss: <span class="token number">0.4480</span>, lr: <span class="token number">0.002125</span>
+<span class="token number">2024</span>-11-24 <span class="token number">23</span>:50:33,046 - INFO - Epoch: <span class="token number">291</span>, val_loss: <span class="token number">0.4058</span>, mIoU: <span class="token number">0.5823</span>, best_mIoU: <span class="token number">0.5967</span>, nIoU: <span class="token number">0.6324</span>, best_nIoU: <span class="token number">0.6467</span>
+<span class="token number">2024</span>-11-24 <span class="token number">23</span>:52:09,696 - INFO - Epoch: <span class="token number">292</span>, train_loss: <span class="token number">0.4473</span>, lr: <span class="token number">0.001911</span>
+<span class="token number">2024</span>-11-24 <span class="token number">23</span>:52:32,062 - INFO - Epoch: <span class="token number">292</span>, val_loss: <span class="token number">0.4072</span>, mIoU: <span class="token number">0.5853</span>, best_mIoU: <span class="token number">0.5967</span>, nIoU: <span class="token number">0.6339</span>, best_nIoU: <span class="token number">0.6467</span>
+<span class="token number">2024</span>-11-24 <span class="token number">23</span>:53:56,329 - INFO - Epoch: <span class="token number">293</span>, train_loss: <span class="token number">0.4406</span>, lr: <span class="token number">0.001695</span>
+<span class="token number">2024</span>-11-24 <span class="token number">23</span>:54:17,606 - INFO - Epoch: <span class="token number">293</span>, val_loss: <span class="token number">0.4028</span>, mIoU: <span class="token number">0.5876</span>, best_mIoU: <span class="token number">0.5967</span>, nIoU: <span class="token number">0.6354</span>, best_nIoU: <span class="token number">0.6467</span>
+<span class="token number">2024</span>-11-24 <span class="token number">23</span>:55:44,023 - INFO - Epoch: <span class="token number">294</span>, train_loss: <span class="token number">0.4490</span>, lr: <span class="token number">0.001475</span>
+<span class="token number">2024</span>-11-24 <span class="token number">23</span>:56:04,794 - INFO - Epoch: <span class="token number">294</span>, val_loss: <span class="token number">0.4025</span>, mIoU: <span class="token number">0.5863</span>, best_mIoU: <span class="token number">0.5967</span>, nIoU: <span class="token number">0.6363</span>, best_nIoU: <span class="token number">0.6467</span>
+<span class="token number">2024</span>-11-24 <span class="token number">23</span>:57:30,883 - INFO - Epoch: <span class="token number">295</span>, train_loss: <span class="token number">0.4435</span>, lr: <span class="token number">0.001252</span>
+<span class="token number">2024</span>-11-24 <span class="token number">23</span>:57:53,070 - INFO - Epoch: <span class="token number">295</span>, val_loss: <span class="token number">0.4052</span>, mIoU: <span class="token number">0.5884</span>, best_mIoU: <span class="token number">0.5967</span>, nIoU: <span class="token number">0.6352</span>, best_nIoU: <span class="token number">0.6467</span>
+<span class="token number">2024</span>-11-24 <span class="token number">23</span>:59:18,563 - INFO - Epoch: <span class="token number">296</span>, train_loss: <span class="token number">0.4526</span>, lr: <span class="token number">0.001025</span>
+<span class="token number">2024</span>-11-24 <span class="token number">23</span>:59:41,157 - INFO - Epoch: <span class="token number">296</span>, val_loss: <span class="token number">0.4040</span>, mIoU: <span class="token number">0.5872</span>, best_mIoU: <span class="token number">0.5967</span>, nIoU: <span class="token number">0.6366</span>, best_nIoU: <span class="token number">0.6467</span>
+<span class="token number">2024</span>-11-25 00:01:08,590 - INFO - Epoch: <span class="token number">297</span>, train_loss: <span class="token number">0.4492</span>, lr: <span class="token number">0.000791</span>
+<span class="token number">2024</span>-11-25 00:01:33,203 - INFO - Epoch: <span class="token number">297</span>, val_loss: <span class="token number">0.4019</span>, mIoU: <span class="token number">0.5894</span>, best_mIoU: <span class="token number">0.5967</span>, nIoU: <span class="token number">0.6373</span>, best_nIoU: <span class="token number">0.6467</span>
+<span class="token number">2024</span>-11-25 00:02:59,370 - INFO - Epoch: <span class="token number">298</span>, train_loss: <span class="token number">0.4502</span>, lr: <span class="token number">0.000550</span>
+<span class="token number">2024</span>-11-25 00:03:21,111 - INFO - Epoch: <span class="token number">298</span>, val_loss: <span class="token number">0.4036</span>, mIoU: <span class="token number">0.5884</span>, best_mIoU: <span class="token number">0.5967</span>, nIoU: <span class="token number">0.6352</span>, best_nIoU: <span class="token number">0.6467</span>
+<span class="token number">2024</span>-11-25 00:04:48,072 - INFO - Epoch: <span class="token number">299</span>, train_loss: <span class="token number">0.4612</span>, lr: <span class="token number">0.000295</span>
+<span class="token number">2024</span>-11-25 00:05:10,318 - INFO - Epoch: <span class="token number">299</span>, val_loss: <span class="token number">0.4034</span>, mIoU: <span class="token number">0.5874</span>, best_mIoU: <span class="token number">0.5967</span>, nIoU: <span class="token number">0.6359</span>, best_nIoU: <span class="token number">0.6467</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>不固定随机数种子时的情况</p>
+<blockquote>
+<p>best_mIoU: 0.7007，best_nIoU: 0.7110<br>此情况和ACM作者的情况基本接近:<br><img src="http://pic.huangruimin.tech/20241125090412.png"></p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token number">2024</span>-11-25 08:11:32,924 - INFO - Epoch: <span class="token number">290</span>, train_loss: <span class="token number">0.3187</span>, lr: <span class="token number">0.002336</span>
+<span class="token number">2024</span>-11-25 08:11:43,965 - INFO - Epoch: <span class="token number">290</span>, val_loss: <span class="token number">0.2922</span>, mIoU: <span class="token number">0.6824</span>, best_mIoU: <span class="token number">0.7007</span>, nIoU: <span class="token number">0.7041</span>, best_nIoU: <span class="token number">0.7110</span>
+<span class="token number">2024</span>-11-25 08:12:25,941 - INFO - Epoch: <span class="token number">291</span>, train_loss: <span class="token number">0.3242</span>, lr: <span class="token number">0.002125</span>
+<span class="token number">2024</span>-11-25 08:12:36,901 - INFO - Epoch: <span class="token number">291</span>, val_loss: <span class="token number">0.2871</span>, mIoU: <span class="token number">0.6933</span>, best_mIoU: <span class="token number">0.7007</span>, nIoU: <span class="token number">0.7090</span>, best_nIoU: <span class="token number">0.7110</span>
+<span class="token number">2024</span>-11-25 08:13:18,937 - INFO - Epoch: <span class="token number">292</span>, train_loss: <span class="token number">0.3153</span>, lr: <span class="token number">0.001911</span>
+<span class="token number">2024</span>-11-25 08:13:29,852 - INFO - Epoch: <span class="token number">292</span>, val_loss: <span class="token number">0.2908</span>, mIoU: <span class="token number">0.6865</span>, best_mIoU: <span class="token number">0.7007</span>, nIoU: <span class="token number">0.7067</span>, best_nIoU: <span class="token number">0.7110</span>
+<span class="token number">2024</span>-11-25 08:14:11,835 - INFO - Epoch: <span class="token number">293</span>, train_loss: <span class="token number">0.3192</span>, lr: <span class="token number">0.001695</span>
+<span class="token number">2024</span>-11-25 08:14:22,907 - INFO - Epoch: <span class="token number">293</span>, val_loss: <span class="token number">0.2920</span>, mIoU: <span class="token number">0.6812</span>, best_mIoU: <span class="token number">0.7007</span>, nIoU: <span class="token number">0.7069</span>, best_nIoU: <span class="token number">0.7110</span>
+<span class="token number">2024</span>-11-25 08:15:04,815 - INFO - Epoch: <span class="token number">294</span>, train_loss: <span class="token number">0.3246</span>, lr: <span class="token number">0.001475</span>
+<span class="token number">2024</span>-11-25 08:15:15,711 - INFO - Epoch: <span class="token number">294</span>, val_loss: <span class="token number">0.2890</span>, mIoU: <span class="token number">0.6888</span>, best_mIoU: <span class="token number">0.7007</span>, nIoU: <span class="token number">0.7074</span>, best_nIoU: <span class="token number">0.7110</span>
+<span class="token number">2024</span>-11-25 08:15:57,783 - INFO - Epoch: <span class="token number">295</span>, train_loss: <span class="token number">0.3087</span>, lr: <span class="token number">0.001252</span>
+<span class="token number">2024</span>-11-25 08:16:08,638 - INFO - Epoch: <span class="token number">295</span>, val_loss: <span class="token number">0.2882</span>, mIoU: <span class="token number">0.6868</span>, best_mIoU: <span class="token number">0.7007</span>, nIoU: <span class="token number">0.7080</span>, best_nIoU: <span class="token number">0.7110</span>
+<span class="token number">2024</span>-11-25 08:16:50,680 - INFO - Epoch: <span class="token number">296</span>, train_loss: <span class="token number">0.3164</span>, lr: <span class="token number">0.001025</span>
+<span class="token number">2024</span>-11-25 08:17:01,592 - INFO - Epoch: <span class="token number">296</span>, val_loss: <span class="token number">0.2903</span>, mIoU: <span class="token number">0.6879</span>, best_mIoU: <span class="token number">0.7007</span>, nIoU: <span class="token number">0.7072</span>, best_nIoU: <span class="token number">0.7110</span>
+<span class="token number">2024</span>-11-25 08:17:43,572 - INFO - Epoch: <span class="token number">297</span>, train_loss: <span class="token number">0.3228</span>, lr: <span class="token number">0.000791</span>
+<span class="token number">2024</span>-11-25 08:17:54,435 - INFO - Epoch: <span class="token number">297</span>, val_loss: <span class="token number">0.2872</span>, mIoU: <span class="token number">0.6928</span>, best_mIoU: <span class="token number">0.7007</span>, nIoU: <span class="token number">0.7099</span>, best_nIoU: <span class="token number">0.7110</span>
+<span class="token number">2024</span>-11-25 08:18:36,557 - INFO - Epoch: <span class="token number">298</span>, train_loss: <span class="token number">0.3073</span>, lr: <span class="token number">0.000550</span>
+<span class="token number">2024</span>-11-25 08:18:47,343 - INFO - Epoch: <span class="token number">298</span>, val_loss: <span class="token number">0.2879</span>, mIoU: <span class="token number">0.6958</span>, best_mIoU: <span class="token number">0.7007</span>, nIoU: <span class="token number">0.7096</span>, best_nIoU: <span class="token number">0.7110</span>
+<span class="token number">2024</span>-11-25 08:19:29,246 - INFO - Epoch: <span class="token number">299</span>, train_loss: <span class="token number">0.3104</span>, lr: <span class="token number">0.000295</span>
+<span class="token number">2024</span>-11-25 08:19:40,133 - INFO - Epoch: <span class="token number">299</span>, val_loss: <span class="token number">0.2927</span>, mIoU: <span class="token number">0.6850</span>, best_mIoU: <span class="token number">0.7007</span>, nIoU: <span class="token number">0.7058</span>, best_nIoU: <span class="token number">0.7110</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>官方原版+我们的数据集增强的情况</p>
+<blockquote>
+<p>best_mIoU: 0.6146，best_nIoU: 0.6676<br><img src="http://pic.huangruimin.tech/20241125092418.png"><br><img src="http://pic.huangruimin.tech/20241125092528.png"></p>
+</blockquote>
+</li>
+</ul>
+<h2 id="六、增加对照组"><a href="#六、增加对照组" class="headerlink" title="六、增加对照组"></a>六、增加对照组</h2><blockquote>
+<p>tensorboard数据可视化命令</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">tensorboard <span class="token parameter variable">--logdir</span><span class="token operator">=</span>/data1/hrm/Experiment/ACM_Practice/logs/dev/train/20241124234923 <span class="token parameter variable">--port</span><span class="token operator">=</span><span class="token number">8009</span> <span class="token parameter variable">--samples_per_plugin</span><span class="token operator">=</span>images<span class="token operator">=</span><span class="token number">100000</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ul>
+<li><p>1.我们的代码取消随机数种子：显卡0</p>
+</li>
+<li><p>2.官方代码用官方的数据增强：显卡1</p>
+</li>
+<li><p>3.官方的代码用我们的数据增强：显卡2</p>
 </li>
 </ul>
 
@@ -1098,7 +1172,7 @@ std: <span class="token punctuation">[</span><span class="token number">0.221579
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">177.5k</span>&nbsp;字
+                class="white-color">178.5k</span>&nbsp;字
             
             
             
