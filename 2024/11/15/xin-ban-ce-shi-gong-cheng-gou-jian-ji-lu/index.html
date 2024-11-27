@@ -412,21 +412,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
-                    2024-11-25
+                    2024-11-27
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
-                    1.9k
+                    2.6k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
-                    9 Min
+                    13 Min
                 </div>
                 
 
@@ -659,19 +659,69 @@ std: <span class="token punctuation">[</span><span class="token number">0.221579
 </blockquote>
 </li>
 </ul>
-<h2 id="六、增加对照组"><a href="#六、增加对照组" class="headerlink" title="六、增加对照组"></a>六、增加对照组</h2><blockquote>
-<p>tensorboard数据可视化命令</p>
-</blockquote>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">tensorboard <span class="token parameter variable">--logdir</span><span class="token operator">=</span>/data1/hrm/Experiment/ACM_Practice/logs/dev/train/20241124234923 <span class="token parameter variable">--port</span><span class="token operator">=</span><span class="token number">8009</span> <span class="token parameter variable">--samples_per_plugin</span><span class="token operator">=</span>images<span class="token operator">=</span><span class="token number">100000</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="六、增加对照组"><a href="#六、增加对照组" class="headerlink" title="六、增加对照组"></a>六、增加对照组</h2><h3 id="6-0-tensorboard数据可视化命令"><a href="#6-0-tensorboard数据可视化命令" class="headerlink" title="6.0 tensorboard数据可视化命令"></a>6.0 tensorboard数据可视化命令</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">tensorboard <span class="token parameter variable">--logdir</span><span class="token operator">=</span>/data1/hrm/Experiment/ACM_Practice/logs/dev/train/20241124234923 <span class="token parameter variable">--port</span><span class="token operator">=</span><span class="token number">8009</span> <span class="token parameter variable">--samples_per_plugin</span><span class="token operator">=</span>images<span class="token operator">=</span><span class="token number">100000</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="6-1-采用我们的代码的训练结果"><a href="#6-1-采用我们的代码的训练结果" class="headerlink" title="6.1 采用我们的代码的训练结果"></a>6.1 采用我们的代码的训练结果</h3><p><img src="http://pic.huangruimin.tech/20241126164731.png"><br><img src="http://pic.huangruimin.tech/20241126164742.png"><br><img src="http://pic.huangruimin.tech/20241126164756.png"><br><img src="http://pic.huangruimin.tech/20241126164811.png"></p>
+<ul>
+<li>1.我们的代码取消随机数种子：显卡0</li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token number">2024</span>-11-26 05:18:16,925 - INFO - Epoch: <span class="token number">286</span>, train_loss: <span class="token number">0.3092</span>, lr: <span class="token number">0.003162</span>
+<span class="token number">2024</span>-11-26 05:18:27,894 - INFO - Epoch: <span class="token number">286</span>, val_loss: <span class="token number">0.2809</span>, mIoU: <span class="token number">0.7000</span>, best_mIoU: <span class="token number">0.7120</span>, nIoU: <span class="token number">0.7164</span>, best_nIoU: <span class="token number">0.7214</span>
+<span class="token number">2024</span>-11-26 05:19:10,232 - INFO - Epoch: <span class="token number">287</span>, train_loss: <span class="token number">0.3002</span>, lr: <span class="token number">0.002958</span>
+<span class="token number">2024</span>-11-26 05:19:21,131 - INFO - Epoch: <span class="token number">287</span>, val_loss: <span class="token number">0.2820</span>, mIoU: <span class="token number">0.7025</span>, best_mIoU: <span class="token number">0.7120</span>, nIoU: <span class="token number">0.7176</span>, best_nIoU: <span class="token number">0.7214</span>
+<span class="token number">2024</span>-11-26 05:20:03,380 - INFO - Epoch: <span class="token number">288</span>, train_loss: <span class="token number">0.3070</span>, lr: <span class="token number">0.002752</span>
+<span class="token number">2024</span>-11-26 05:20:14,364 - INFO - Epoch: <span class="token number">288</span>, val_loss: <span class="token number">0.2824</span>, mIoU: <span class="token number">0.7020</span>, best_mIoU: <span class="token number">0.7120</span>, nIoU: <span class="token number">0.7165</span>, best_nIoU: <span class="token number">0.7214</span>
+<span class="token number">2024</span>-11-26 05:20:56,500 - INFO - Epoch: <span class="token number">289</span>, train_loss: <span class="token number">0.2986</span>, lr: <span class="token number">0.002545</span>
+<span class="token number">2024</span>-11-26 05:21:07,459 - INFO - Epoch: <span class="token number">289</span>, val_loss: <span class="token number">0.2805</span>, mIoU: <span class="token number">0.7042</span>, best_mIoU: <span class="token number">0.7120</span>, nIoU: <span class="token number">0.7177</span>, best_nIoU: <span class="token number">0.7214</span>
+<span class="token number">2024</span>-11-26 05:21:49,838 - INFO - Epoch: <span class="token number">290</span>, train_loss: <span class="token number">0.3029</span>, lr: <span class="token number">0.002336</span>
+<span class="token number">2024</span>-11-26 05:22:00,835 - INFO - Epoch: <span class="token number">290</span>, val_loss: <span class="token number">0.2800</span>, mIoU: <span class="token number">0.7076</span>, best_mIoU: <span class="token number">0.7120</span>, nIoU: <span class="token number">0.7164</span>, best_nIoU: <span class="token number">0.7214</span>
+<span class="token number">2024</span>-11-26 05:22:42,877 - INFO - Epoch: <span class="token number">291</span>, train_loss: <span class="token number">0.3085</span>, lr: <span class="token number">0.002125</span>
+<span class="token number">2024</span>-11-26 05:22:53,740 - INFO - Epoch: <span class="token number">291</span>, val_loss: <span class="token number">0.2805</span>, mIoU: <span class="token number">0.7097</span>, best_mIoU: <span class="token number">0.7120</span>, nIoU: <span class="token number">0.7178</span>, best_nIoU: <span class="token number">0.7214</span>
+<span class="token number">2024</span>-11-26 05:23:36,021 - INFO - Epoch: <span class="token number">292</span>, train_loss: <span class="token number">0.2979</span>, lr: <span class="token number">0.001911</span>
+<span class="token number">2024</span>-11-26 05:23:46,916 - INFO - Epoch: <span class="token number">292</span>, val_loss: <span class="token number">0.2802</span>, mIoU: <span class="token number">0.7062</span>, best_mIoU: <span class="token number">0.7120</span>, nIoU: <span class="token number">0.7177</span>, best_nIoU: <span class="token number">0.7214</span>
+<span class="token number">2024</span>-11-26 05:24:29,086 - INFO - Epoch: <span class="token number">293</span>, train_loss: <span class="token number">0.3088</span>, lr: <span class="token number">0.001695</span>
+<span class="token number">2024</span>-11-26 05:24:40,030 - INFO - Epoch: <span class="token number">293</span>, val_loss: <span class="token number">0.2810</span>, mIoU: <span class="token number">0.7010</span>, best_mIoU: <span class="token number">0.7120</span>, nIoU: <span class="token number">0.7153</span>, best_nIoU: <span class="token number">0.7214</span>
+<span class="token number">2024</span>-11-26 05:25:22,422 - INFO - Epoch: <span class="token number">294</span>, train_loss: <span class="token number">0.3092</span>, lr: <span class="token number">0.001475</span>
+<span class="token number">2024</span>-11-26 05:25:33,408 - INFO - Epoch: <span class="token number">294</span>, val_loss: <span class="token number">0.2803</span>, mIoU: <span class="token number">0.7049</span>, best_mIoU: <span class="token number">0.7120</span>, nIoU: <span class="token number">0.7168</span>, best_nIoU: <span class="token number">0.7214</span>
+<span class="token number">2024</span>-11-26 05:26:15,388 - INFO - Epoch: <span class="token number">295</span>, train_loss: <span class="token number">0.2911</span>, lr: <span class="token number">0.001252</span>
+<span class="token number">2024</span>-11-26 05:26:26,382 - INFO - Epoch: <span class="token number">295</span>, val_loss: <span class="token number">0.2809</span>, mIoU: <span class="token number">0.7065</span>, best_mIoU: <span class="token number">0.7120</span>, nIoU: <span class="token number">0.7170</span>, best_nIoU: <span class="token number">0.7214</span>
+<span class="token number">2024</span>-11-26 05:27:08,503 - INFO - Epoch: <span class="token number">296</span>, train_loss: <span class="token number">0.3127</span>, lr: <span class="token number">0.001025</span>
+<span class="token number">2024</span>-11-26 05:27:19,502 - INFO - Epoch: <span class="token number">296</span>, val_loss: <span class="token number">0.2811</span>, mIoU: <span class="token number">0.7054</span>, best_mIoU: <span class="token number">0.7120</span>, nIoU: <span class="token number">0.7165</span>, best_nIoU: <span class="token number">0.7214</span>
+<span class="token number">2024</span>-11-26 05:28:01,661 - INFO - Epoch: <span class="token number">297</span>, train_loss: <span class="token number">0.3100</span>, lr: <span class="token number">0.000791</span>
+<span class="token number">2024</span>-11-26 05:28:12,661 - INFO - Epoch: <span class="token number">297</span>, val_loss: <span class="token number">0.2785</span>, mIoU: <span class="token number">0.7079</span>, best_mIoU: <span class="token number">0.7120</span>, nIoU: <span class="token number">0.7174</span>, best_nIoU: <span class="token number">0.7214</span>
+<span class="token number">2024</span>-11-26 05:28:54,903 - INFO - Epoch: <span class="token number">298</span>, train_loss: <span class="token number">0.3006</span>, lr: <span class="token number">0.000550</span>
+<span class="token number">2024</span>-11-26 05:29:05,789 - INFO - Epoch: <span class="token number">298</span>, val_loss: <span class="token number">0.2819</span>, mIoU: <span class="token number">0.7044</span>, best_mIoU: <span class="token number">0.7120</span>, nIoU: <span class="token number">0.7168</span>, best_nIoU: <span class="token number">0.7214</span>
+<span class="token number">2024</span>-11-26 05:29:47,968 - INFO - Epoch: <span class="token number">299</span>, train_loss: <span class="token number">0.3035</span>, lr: <span class="token number">0.000295</span>
+<span class="token number">2024</span>-11-26 05:29:58,897 - INFO - Epoch: <span class="token number">299</span>, val_loss: <span class="token number">0.2805</span>, mIoU: <span class="token number">0.7058</span>, best_mIoU: <span class="token number">0.7120</span>, nIoU: <span class="token number">0.7167</span>, best_nIoU: <span class="token number">0.7214</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 
 <ul>
-<li><p>1.我们的代码取消随机数种子：显卡0</p>
-</li>
-<li><p>2.官方代码用官方的数据增强：显卡1</p>
-</li>
-<li><p>3.官方的代码用我们的数据增强：显卡2</p>
-</li>
+<li>2.官方代码用官方的数据增强：显卡1</li>
 </ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Best IoU: <span class="token number">0.65325</span>, best nIoU: <span class="token number">0.67298</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+<ul>
+<li>3.官方的代码用我们的数据增强：显卡2</li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Best IoU: <span class="token number">0.68095</span>, best nIoU: <span class="token number">0.71277</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<blockquote>
+<p>结论：我们自己的代码没问题，并且，用我们自己的数据增强，效果会更好 </p>
+</blockquote>
+<h3 id="6-2-验证固定随机数种子后，是否能够使得训练效果可复现"><a href="#6-2-验证固定随机数种子后，是否能够使得训练效果可复现" class="headerlink" title="6.2 验证固定随机数种子后，是否能够使得训练效果可复现"></a>6.2 验证固定随机数种子后，是否能够使得训练效果可复现</h3><p><img src="http://pic.huangruimin.tech/20241127201409.png"><br><img src="http://pic.huangruimin.tech/20241127201459.png"></p>
+<blockquote>
+<p>实际证明，这是不可复现的</p>
+</blockquote>
+<h3 id="6-3-查看GPU状态的命令"><a href="#6-3-查看GPU状态的命令" class="headerlink" title="6.3 查看GPU状态的命令"></a>6.3 查看GPU状态的命令</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">watch</span> <span class="token parameter variable">-n</span> <span class="token number">1</span> nvidia-smi<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="http://pic.huangruimin.tech/20241127202040.png"></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ps</span> <span class="token parameter variable">-f</span> <span class="token parameter variable">-p</span> <span class="token number">2570815</span> <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="http://pic.huangruimin.tech/20241127202213.png"></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gpustat <span class="token parameter variable">-i</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="http://pic.huangruimin.tech/20241127201953.png"></p>
 
                 
             </div>
@@ -1172,7 +1222,7 @@ std: <span class="token punctuation">[</span><span class="token number">0.221579
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">178.5k</span>&nbsp;字
+                class="white-color">179.2k</span>&nbsp;字
             
             
             
