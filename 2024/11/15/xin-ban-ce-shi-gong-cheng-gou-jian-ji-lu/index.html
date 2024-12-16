@@ -412,7 +412,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
-                    2024-12-15
+                    2024-12-16
                 </div>
                 
 
@@ -570,6 +570,12 @@ std: <span class="token punctuation">[</span><span class="token number">0.221579
 <li>tensorboard数据可视化命令，且确保能大量传输数据，即最多显示10w张图片</li>
 </ul>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">tensorboard <span class="token parameter variable">--logdir</span><span class="token operator">=</span>./logs/dev <span class="token parameter variable">--samples_per_plugin</span><span class="token operator">=</span>images<span class="token operator">=</span><span class="token number">100000</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ul>
+<li>后台运行</li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">nohup</span> python train_SC_TransNet.py <span class="token operator">&gt;</span> output0.log <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">&amp;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 
 <ul>
 <li>看准端口，然后采用MobaXterm内网穿透</li>
@@ -1223,7 +1229,7 @@ std: <span class="token punctuation">[</span><span class="token number">0.221579
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">179.2k</span>&nbsp;字
+                class="white-color">179.3k</span>&nbsp;字
             
             
             
