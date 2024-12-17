@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>测试记录</title>
+      <link href="/2024/12/17/ce-shi-ji-lu/"/>
+      <url>/2024/12/17/ce-shi-ji-lu/</url>
+      
+        <content type="html"><![CDATA[<h2 id="一、基本测试命令"><a href="#一、基本测试命令" class="headerlink" title="一、基本测试命令"></a>一、基本测试命令</h2><ul><li>tensorboard数据可视化命令，且确保能大量传输数据，即最多显示10w张图片</li></ul><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">tensorboard <span class="token parameter variable">--port</span><span class="token operator">=</span><span class="token number">8009</span> <span class="token parameter variable">--samples_per_plugin</span><span class="token operator">=</span>images<span class="token operator">=</span><span class="token number">100000</span> <span class="token parameter variable">--logdir</span><span class="token operator">=</span>./logs/dev<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><ul><li>后台运行</li></ul><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">nohup</span> python train_SC_TransNet.py <span class="token operator">&gt;</span> output0.log <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">&amp;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h2 id="二、基本测试记录"><a href="#二、基本测试记录" class="headerlink" title="二、基本测试记录"></a>二、基本测试记录</h2><h3 id="SwinUnet训练结果"><a href="#SwinUnet训练结果" class="headerlink" title="SwinUnet训练结果"></a>SwinUnet训练结果</h3><blockquote><p>/data1/hrm/Experiment/ACM_Practice/logs/Swin_UNet/train</p></blockquote><ul><li>NUAA数据集</li></ul><blockquote><p>20241217100528</p></blockquote><ul><li>NUDT数据集</li></ul><blockquote><p>20241217100649</p></blockquote><ul><li>IRSTD_1k数据集</li></ul><blockquote><p>20241217100718</p></blockquote><h3 id="SCTransNet预训练模型测试结果"><a href="#SCTransNet预训练模型测试结果" class="headerlink" title="SCTransNet预训练模型测试结果"></a>SCTransNet预训练模型测试结果</h3><blockquote><p>/data1/hrm/Experiment/ACM_Practice/logs/SC_TransNet/test</p></blockquote><ul><li>NUAA数据集</li></ul><blockquote><p>20241217104902</p></blockquote><ul><li>NUDT数据集</li></ul><blockquote><p>20241217110155</p></blockquote><ul><li>IRSTD_1k数据集</li></ul><blockquote><p>20241217110834</p></blockquote>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>新版测试工程构建记录</title>
       <link href="/2024/11/15/xin-ban-ce-shi-gong-cheng-gou-jian-ji-lu/"/>
       <url>/2024/11/15/xin-ban-ce-shi-gong-cheng-gou-jian-ji-lu/</url>
