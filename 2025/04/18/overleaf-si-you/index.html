@@ -412,14 +412,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
-                    2025-04-18
+                    2025-04-19
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
-                    36
+                    206
                 </div>
                 
 
@@ -449,10 +449,63 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">https://zhuanlan.zhihu.com/p/29053435112
+                <h2 id="一、操作参考链接"><a href="#一、操作参考链接" class="headerlink" title="一、操作参考链接"></a>一、操作参考链接</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">https://zhuanlan.zhihu.com/p/29053435112
 https://blog.csdn.net/weixin_54430466/article/details/145708733
 https://zhuanlan.zhihu.com/p/6093317488
 https://github.com/overleaf/toolkit/blob/master/doc/quick-start-guide.md<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="二、后期小版本更新维护链接"><a href="#二、后期小版本更新维护链接" class="headerlink" title="二、后期小版本更新维护链接"></a>二、后期小版本更新维护链接</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> bin/up <span class="token parameter variable">-d</span>
+
+<span class="token function">sudo</span> bin/shell
+
+tlmgr option repository http://mirrors.cloud.tencent.com/CTAN/systems/texlive/tlnet
+
+tlmgr option show repository
+
+tlmgr update <span class="token parameter variable">--self</span> <span class="token parameter variable">--all</span> 
+
+tlmgr <span class="token function">install</span> scheme-full
+tlmgr info scheme-full
+tlmgr path <span class="token function">add</span>
+
+tlmgr <span class="token function">install</span> ctex
+tlmgr info ctex
+tlmgr path <span class="token function">add</span>
+
+tlmgr <span class="token function">install</span> thmtools
+tlmgr info thmtools
+tlmgr path <span class="token function">add</span>
+
+<span class="token builtin class-name">exit</span>
+
+<span class="token function">cat</span> config/version
+
+<span class="token function">sudo</span> <span class="token function">docker</span> commit sharelatex sharelatex/sharelatex:5.4.0-with-texlive-full
+
+<span class="token builtin class-name">cd</span> config
+<span class="token function">sudo</span> <span class="token function">vim</span> version
+<span class="token number">5.4</span>.0-with-texlive-full
+
+<span class="token function">sudo</span> bin/stop
+
+<span class="token function">sudo</span> bin/up <span class="token parameter variable">-d</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="三、后期大版本更新维护链接"><a href="#三、后期大版本更新维护链接" class="headerlink" title="三、后期大版本更新维护链接"></a>三、后期大版本更新维护链接</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> bin/up <span class="token parameter variable">-d</span>
+
+<span class="token function">sudo</span> bin/shell
+
+tlmgr option repository http://mirrors.cloud.tencent.com/CTAN/systems/texlive/tlnet
+
+tlmgr option show repository
+
+tlmgr update <span class="token parameter variable">--self</span> <span class="token parameter variable">--all</span> 
+
+<span class="token builtin class-name">cd</span> ~
+
+<span class="token function">wget</span> http://mirrors.cloud.tencent.com/CTAN/systems/texlive/tlnet/update-tlmgr-latest.sh
+<span class="token function">chmod</span> +x update-tlmgr-latest.sh
+./update update-tlmgr-latest.sh
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>
@@ -952,7 +1005,7 @@ https://github.com/overleaf/toolkit/blob/master/doc/quick-start-guide.md<span ar
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">187.2k</span>&nbsp;字
+                class="white-color">187.4k</span>&nbsp;字
             
             
             
