@@ -412,14 +412,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
-                    2025-06-27
+                    2025-06-29
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
-                    490
+                    629
                 </div>
                 
 
@@ -501,26 +501,55 @@ output of dataloader <span class="token comment">#Tensor BCHW 0~1</span><span ar
 我的：直接ToTensor
 区别：我的维度为chw，别人的为hwc<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>已经解决</p>
+<li><p>已解决</p>
 </li>
 <li><p>确实默认是固定住，也已经固定住</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">按照目前这种形式，每次加载图片的顺序，都需要固定住<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
-<li><p>等待解决</p>
+<li><p>已解决</p>
+</li>
+<li><p>随机裁剪尺寸问题</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">IR_pos_h <span class="token operator">=</span> np.random.randint<span class="token punctuation">(</span><span class="token number">0</span>, <span class="token number">32</span><span class="token punctuation">)</span>
 IR_pos_w <span class="token operator">=</span> np.random.randint<span class="token punctuation">(</span><span class="token number">0</span>, <span class="token number">104</span><span class="token punctuation">)</span>
 当中的具体数值也需要注意
-注意：这是红外的训练过程，为什么这样裁剪，应当看训练过程<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+注意：这是红外的训练过程，为什么这样裁剪，应当看训练过程
+原来的图像，load和crop分别为： <span class="token number">288</span> <span class="token number">256</span>
+现在的图像，load和crop分别为: <span class="token number">300</span> <span class="token number">288</span>
+所以可以继续使用这个数<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p>已经解决</p>
 </li>
 <li><p>不需要固定住，原版也没有固定住</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">随机缩放裁剪的情况，可能需要固定住<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
+</li>
+<li><p>已解决</p>
 </li>
 <li><p>等待解决</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">是不是bhw影响了获取梯度的那个函数<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">是不是bhw影响了获取梯度的那个函数
+确实是这个地方影响的<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li><p>已解决<br>*等待解决 </p>
+<blockquote>
+<p>这部分代码<br>可能影响着语义分割网络的尺寸</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token keyword">if</span> self.netS_freezing_idx <span class="token operator">==</span> <span class="token number">0.0</span>:
+    rand_scale <span class="token operator">=</span> torch.randint<span class="token punctuation">(</span><span class="token number">32</span>, <span class="token number">80</span>, <span class="token punctuation">(</span><span class="token number">1</span>, <span class="token number">1</span><span class="token punctuation">))</span> <span class="token comment">#32, 80</span>
+    rand_size <span class="token operator">=</span> int<span class="token punctuation">(</span>rand_scale.item<span class="token punctuation">(</span><span class="token punctuation">)</span> * <span class="token number">4</span><span class="token punctuation">)</span>
+    rand_size_B <span class="token operator">=</span> int<span class="token punctuation">(</span>rand_scale.item<span class="token punctuation">(</span><span class="token punctuation">)</span> * <span class="token number">4</span><span class="token punctuation">)</span>
+else:
+    rand_size_B <span class="token operator">=</span> <span class="token number">256</span>
+    rand_size <span class="token operator">=</span> <span class="token number">256</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>已解决</p>
+</li>
+<li><p>等待解决</p>
+<blockquote>
+<h1 id="Optional-Scale-Robustness-Loss-on-generated-fake-images"><a href="#Optional-Scale-Robustness-Loss-on-generated-fake-images" class="headerlink" title="Optional Scale Robustness Loss on generated fake images"></a>Optional Scale Robustness Loss on generated fake images</h1></blockquote>
+</li>
 </ul>
+<blockquote>
+<p>这部分所缩放的尺寸可能存在问题</p>
+</blockquote>
 
                 
             </div>
@@ -1021,7 +1050,7 @@ IR_pos_w <span class="token operator">=</span> np.random.randint<span class="tok
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">188.8k</span>&nbsp;字
+                class="white-color">189k</span>&nbsp;字
             
             
             
