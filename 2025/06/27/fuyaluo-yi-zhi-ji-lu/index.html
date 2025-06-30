@@ -412,14 +412,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
-                    2025-06-29
+                    2025-06-30
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
-                    629
+                    667
                 </div>
                 
 
@@ -488,7 +488,11 @@ output of dataloader <span class="token comment">#Tensor BCHW 0~1</span><span ar
 <blockquote>
 <p>所以：之前就只有BCHW的区别和BHW的区别</p>
 </blockquote>
-<h2 id="二、可能存在的问题"><a href="#二、可能存在的问题" class="headerlink" title="二、可能存在的问题"></a>二、可能存在的问题</h2><ul>
+<h2 id="二、数据预处理总结"><a href="#二、数据预处理总结" class="headerlink" title="二、数据预处理总结"></a>二、数据预处理总结</h2><ul>
+<li>对于mask的缩放裁剪，一定要用最临近插值</li>
+<li>之前所有代码，都犯了这个错误</li>
+</ul>
+<h2 id="三、可能存在的问题"><a href="#三、可能存在的问题" class="headerlink" title="三、可能存在的问题"></a>三、可能存在的问题</h2><ul>
 <li><p>已经解决</p>
 </li>
 <li><p>更正：不存在了，因为是.convert(‘L’)操作，到numpy时只有单通道。</p>
