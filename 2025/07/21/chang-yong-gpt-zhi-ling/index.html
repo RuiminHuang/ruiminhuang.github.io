@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="HI3516DV300_17_Uboot第二阶段的启动, AI, TensorRT, Infrared">
+    <meta name="keywords" content="常用GPT指令, AI, TensorRT, Infrared">
     <meta name="description" content="黄瑞敏的个人主页">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>HI3516DV300_17_Uboot第二阶段的启动 | Ruimin Huang&#39;s Space</title>
+    <title>常用GPT指令 | Ruimin Huang&#39;s Space</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -272,12 +272,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('http://pic.huangruimin.tech/Transformers3_55.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('http://pic.huangruimin.tech/Transformers1_7.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">HI3516DV300_17_Uboot第二阶段的启动</h1>
+                    <h1 class="description center-align post-title">常用GPT指令</h1>
                 </div>
             </div>
         </div>
@@ -391,33 +391,12 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                    <div class="article-tag">
-                        
-                            <a href="/tags/ARM/">
-                                <span class="chip bg-color">ARM</span>
-                            </a>
-                        
-                            <a href="/tags/Linux/">
-                                <span class="chip bg-color">Linux</span>
-                            </a>
-                        
-                            <a href="/tags/Hi3516DV300/">
-                                <span class="chip bg-color">Hi3516DV300</span>
-                            </a>
-                        
-                    </div>
+                          <div class="article-tag">
+                            <span class="chip bg-color">No tag</span>
+                          </div>
                     
                 </div>
                 <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/" class="post-category">
-                                嵌入式
-                            </a>
-                        
-                    </div>
                     
                 </div>
             </div>
@@ -426,28 +405,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2021-10-23
+                    2025-07-21
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
-                    2023-09-13
+                    2025-07-30
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
-                    2.7k
+                    120
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
-                    9 Min
+                    1 Min
                 </div>
                 
 
@@ -470,464 +449,13 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="一、从这里开始"><a href="#一、从这里开始" class="headerlink" title="一、从这里开始"></a>一、从这里开始</h2><h3 id="1-1-分析内存空间"><a href="#1-1-分析内存空间" class="headerlink" title="1.1 分析内存空间"></a>1.1 分析内存空间</h3><p><img src="https://pic.huangruimin.tech/20220206214942.png"></p>
-<blockquote>
-<p>这里就主要集中力量，做了一件事情：去解压缩老版本的U-Boot</p>
-</blockquote>
-<blockquote>
-<p>观察这幅图</p>
-</blockquote>
-<p><img src="https://pic.huangruimin.tech/20220206215352.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220206215330.png"></p>
-<blockquote>
-<p>上面这张图的黑框部分，就是总共263 KB</p>
-</blockquote>
-<blockquote>
-<blockquote>
-<p>这263 KB由3部分组成：</p>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<p>A是第一部分：64字节，就是制作的压缩后的U-Boot的前64字节，就是一些当做头，校验使用的，具体内容取决于Hi_Gzip工具，所以我们无从得知，因为是人家从来做对接的。</p>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<p>B是第二部分：8KB，存放的是寄存器的配置值。</p>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<p>C+D是第三部分：<br>包含未压缩的部分C，也就是第一阶段运行的代码，这部分的代码小于24KB，所以，C是小于24KB的<br>包含被压缩的老版本的u-boot.bin，也就是D，也就是第一步编译出来的那个：</p>
-</blockquote>
-</blockquote>
-<p><img src="https://pic.huangruimin.tech/20220206220727.png"></p>
-<blockquote>
-<p>到目前为止，C那一部分，也就是未压缩的那一部分，已经从eMMC Load到sRAM中了。映射到DDR中的0x80700000地址中去，之前一直运行的都是C那一部分</p>
-</blockquote>
-<blockquote>
-<p>到目前为止，D那一部分，也就是被压缩的那一部分，已经从eMMC Load到DDR中了</p>
-</blockquote>
-<h3 id="1-2-start-armboot要解压到的目的地址"><a href="#1-2-start-armboot要解压到的目的地址" class="headerlink" title="1.2 start_armboot要解压到的目的地址"></a>1.2 start_armboot要解压到的目的地址</h3><ul>
-<li><p>首先把串口初始化一下，但是在前面，串口已经初始化过一次了</p>
-</li>
-<li><p>然后用串口打印了一个字符串，打印的字符串是：“\r\nUncompress”,但是OK还没有看到</p>
-</li>
-</ul>
-<p><img src="https://pic.huangruimin.tech/20220206223213.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220206223333.png"></p>
-<ul>
-<li><p>使用直接地址模式</p>
-</li>
-<li><p>初始化硬件解压模块</p>
-</li>
-</ul>
-<blockquote>
-<p>Hi3516DV300内部有一个硬件模块，专门用来进行压缩和解压缩使用的<br>硬件的模块，是一个有知识产权的解压模块</p>
-</blockquote>
-<p><img src="https://pic.huangruimin.tech/20220206223550.png"></p>
-<ul>
-<li>这里在准备要解压缩的目标地址</li>
-</ul>
-<blockquote>
-<p>pdst_l32：Pointer Destination of Low 32，这是在DDR中的目标地址。</p>
-<blockquote>
-<p>这个目标地址是：IMAGE_ENTRY</p>
-</blockquote>
-</blockquote>
-<p><img src="https://pic.huangruimin.tech/20220206224508.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220206224532.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220206224604.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220206224702.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220206224915.png"></p>
-<blockquote>
-<p>解压的目的地址，与之前之前存放的Uboot-z.bin的地址，有1MB的容量 (这也就是Hi-Tool下载的时候选用1MB的长度的原因之一)</p>
-</blockquote>
-<blockquote>
-<p>之前烧录的Uboot-z.bin也就在263KB，还不到1MB，因此不会发生踩踏事故</p>
-</blockquote>
-<blockquote>
-<p>因此，解压后的老版本U-Boot肯定就要从0x8080000开始运行，也就是老版本的U-Boot肯定运行到了0x8080000这个地址</p>
-</blockquote>
-<blockquote>
-<p>原来链接到0x80700000主要是为了执行C那部分的代码；因为从sRAM加载到DDR的时候，一定需要用到B这一部分，所以也可能那24KB是包含A，B，C的（A不一定包含，B一定包含，C一定包含，并且C一定小于24KB），所以现在修改为如下图所示：</p>
-</blockquote>
-<p><img src="https://pic.huangruimin.tech/20220206230355.png"></p>
-<h3 id="1-3-分析start-armboot源码-解压之前"><a href="#1-3-分析start-armboot源码-解压之前" class="headerlink" title="1.3 分析start_armboot源码(解压之前)"></a>1.3 分析start_armboot源码(解压之前)</h3><ul>
-<li>分析要解压的长度：</li>
-</ul>
-<p><img src="https://pic.huangruimin.tech/20220206230524.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220206230739.png"></p>
-<blockquote>
-<p>incbin：include bin</p>
-<blockquote>
-<p>这里要include的是一个二进制文件：image_data.lzma<br>其实也就是这个文件：</p>
-</blockquote>
-</blockquote>
-<p><img src="https://pic.huangruimin.tech/20220206231103.png"></p>
-<blockquote>
-<blockquote>
-<p>其实是把压缩后的老版本的U-Boot放在这里，因为压缩后就是二进制了，就没有格式了，把整个压缩文件include到这里，把起始地址作为input_data，把结束地址作为input_data_end</p>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<p>这样做的目的是：将来方便链接脚本进行重新排布文件</p>
-</blockquote>
-</blockquote>
-<ul>
-<li>分析Gzip要解析的一些头文件</li>
-</ul>
-<p><img src="https://pic.huangruimin.tech/20220206231809.png"></p>
-<blockquote>
-<p>这里是复制Gzip里面的一些头文件的长度，这里还没开始解压</p>
-</blockquote>
-<ul>
-<li>真正开始调用硬件解压</li>
-</ul>
-<blockquote>
-<p>本来是在DDR的0x80700000，现在解压后放到DDR的0x80800000，0x80800000里面放的就是我们解压缩过的U-Boot了</p>
-</blockquote>
-<p><img src="https://pic.huangruimin.tech/20220206231958.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220206232215.png"></p>
-<ul>
-<li>解压后</li>
-</ul>
-<blockquote>
-<p>U-boot中，A，C，D这一部分已经没用了；<br>B这一部分可能还有点用，因为后面可能涉及到硬件的操作，凡是涉及到硬件操作的，都会用到寄存器中的.reg文件<br>E这一部分就是完全有用的</p>
-</blockquote>
-<blockquote>
-<p>到了E这一部分，其实整个芯片，该初始化的，都已经初始化了</p>
-</blockquote>
-<h3 id="1-3-分析start-armboot源码-解压之后"><a href="#1-3-分析start-armboot源码-解压之后" class="headerlink" title="1.3 分析start_armboot源码(解压之后)"></a>1.3 分析start_armboot源码(解压之后)</h3><p><img src="https://pic.huangruimin.tech/20220206233316.png"></p>
-<blockquote>
-<p>首先把硬件解压缩模块给关掉</p>
-</blockquote>
-<blockquote>
-<p>直接定义了一个函数指针变量</p>
-<blockquote>
-<p>之前都是先定义类型，再用类型定义变量</p>
-</blockquote>
-</blockquote>
-<blockquote>
-<p>强制类型转换后的0x80800000赋值给uboot，其实就是把这个地址强制类型转换成一个函数指针，后面再去执行这个函数</p>
-</blockquote>
-<blockquote>
-<p>把原来的icache给清空，也就是把原来的上下文给清空，准备另一套东西的执行</p>
-</blockquote>
-<blockquote>
-<p>执行uboot这个函数，其实就是跳转到0x80800000这个地址，就差直接goto这个地址了</p>
-</blockquote>
-<p><img src="https://pic.huangruimin.tech/20220206233255.png"></p>
-<h3 id="1-4-解压之后，跳到u-boot，会首先执行哪行源码呢"><a href="#1-4-解压之后，跳到u-boot，会首先执行哪行源码呢" class="headerlink" title="1.4 解压之后，跳到u-boot，会首先执行哪行源码呢"></a>1.4 解压之后，跳到u-boot，会首先执行哪行源码呢</h3><h4 id="1-4-1-首先回忆制作时候的Makefile"><a href="#1-4-1-首先回忆制作时候的Makefile" class="headerlink" title="1.4.1 首先回忆制作时候的Makefile"></a>1.4.1 首先回忆制作时候的Makefile</h4><p><img src="https://pic.huangruimin.tech/20220207113632.png"></p>
-<h4 id="1-4-2-0x80800000地址对应的代码在哪里呢"><a href="#1-4-2-0x80800000地址对应的代码在哪里呢" class="headerlink" title="1.4.2 0x80800000地址对应的代码在哪里呢"></a>1.4.2 0x80800000地址对应的代码在哪里呢</h4><blockquote>
-<p>其实就是分析一下老版本的U-boot，看把谁链接到前面了</p>
-</blockquote>
-<blockquote>
-<blockquote>
-<p>所以就先分析一下链接脚本</p>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>第一个链接脚本就是这个，这个也是第二次制作的时候使用的链接脚本，也就是相当于A，B，C，D这个的链接脚本</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p><img src="https://pic.huangruimin.tech/20220208104828.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220208105111.png"></p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>那么E这个Uboot的链接脚本在哪里呢</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p><img src="https://pic.huangruimin.tech/20220208105111.png"></p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>从最顶层的Makefile来推</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p><img src="https://pic.huangruimin.tech/20220208111642.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220208112030.png"></p>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>最后翻阅文件夹得：只有下面这个文件夹中有u-boot.lds</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-<p><img src="https://pic.huangruimin.tech/20220208112445.png"></p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>因为是从顶层的Makefile编译得到U-boot的，所以查顶层的Makefile必然能得到链接脚本在什么地方</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p><img src="https://pic.huangruimin.tech/20220208111819.png"></p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>E这个Uboot的链接脚本在下面这个目录下</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p><img src="https://pic.huangruimin.tech/20220208111513.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220208112305.png"></p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>来开始分析链接脚本</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p><img src="https://pic.huangruimin.tech/20220208112701.png"></p>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>发现它的ENTRY还是_start，他在运行的时候，还是从_start开始的，那么到底是哪一个_start呢？肯定不是最早分析的那个_start了，所以这个体系里面有好几个_start.s，到底是哪个_start.s呢，这是一个需要确认的问题</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>从这个链接脚本往下翻阅，可以查看到</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-<p><img src="https://pic.huangruimin.tech/20220208113424.png"></p>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>CPUDIR到底是哪一个呢？肯定不是cpu，实际的CPU的话，那么就是armv7，也就是链接脚本目录下的armv7：</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-<p><img src="https://pic.huangruimin.tech/20220208113707.png"></p>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>所以就是下面这个目录的Start.s，也就是E那一部分的Start.s</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-<p><img src="https://pic.huangruimin.tech/20220208113744.png"></p>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>但是这个体系下面还有其他的start.s，其实这个就是，A，B，C，D这一部分的Start.s，也就是C那一部分的代码</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-<p><img src="https://pic.huangruimin.tech/20220208113906.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220208120533.png"></p>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>接下来就分析也就是E那一部分的Start.s</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-<p><img src="https://pic.huangruimin.tech/20220208113744.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220208121317.png"></p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>理清这个思路，这个Uboot其实是一个套一个，相当于虎头蛇尾；先执行一个解压，然后执行真正的U-Boot，一夜回到解放前</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>但是，这个时候的状态是不一样的，比如说：DDR，时钟，这些是好的了，下面跳转到来执行这个Start.s</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<h4 id="1-4-3-分析目前这个Start-s"><a href="#1-4-3-分析目前这个Start-s" class="headerlink" title="1.4.3 分析目前这个Start.s"></a>1.4.3 分析目前这个Start.s</h4><ul>
-<li>跳转过来立马执行第一行指令，第一行指令就是reset，这里的reset仅仅是一个符号，并不是真正地跳转到系统的0地址</li>
-</ul>
-<p><img src="https://pic.huangruimin.tech/20220208121912.png"></p>
-<ul>
-<li>save_boot_params</li>
-</ul>
-<blockquote>
-<p>就是一个空的函数，没有具体代码</p>
-</blockquote>
-<p><img src="https://pic.huangruimin.tech/20220208122630.png"></p>
-<ul>
-<li>和虚拟化有关的，啥都没干</li>
-</ul>
-<p><img src="https://pic.huangruimin.tech/20220208122728.png"></p>
-<ul>
-<li>关中断相关的</li>
-</ul>
-<p><img src="https://pic.huangruimin.tech/20220208122752.png"></p>
-<ul>
-<li>重新定位异常向量表相关的</li>
-</ul>
-<p><img src="https://pic.huangruimin.tech/20220208122856.png"></p>
-<ul>
-<li>跳过low_level_init相关的，这个是肯定要跳过的</li>
-</ul>
-<p><img src="https://pic.huangruimin.tech/20220208123008.png"></p>
-<ul>
-<li>bl _ main，很快就跳转到_main了，没事是什么事都没有做，就跳转到main了，所以不用跳转到Start.s，直接跳转到_ main也是可以的；所以上面这个Start.s其实就是空的，啥也没干。</li>
-</ul>
-<p><img src="https://pic.huangruimin.tech/20220208123031.png"></p>
-<ul>
-<li><p>那么_main是谁呀，其实就是main函数，链接的时候，就是以对等的当时链接了_main</p>
-</li>
-<li><p>main函数在什么地方呢？</p>
-</li>
-</ul>
-<blockquote>
-<p>main在arch/arm/lib/crt0.s中</p>
-<blockquote>
-<p>crt0.s可能没见过，但是crt0.o一定见过，程序如果在链接的时候，没有main函数，链接的时候，就会报错，说在crt0.o里面找不到main，我们平时写的代码呢，我们工具链的库里面，给我们提供了crt0.o，那是所有程序，所有进程，最开始的那一段。<br>因为这个属于工具链的一部分，所以就在lib目录下，其实main函数里面做的事情，就是做main之前的C语言运行环境的构建，最后跳转到main函数里面去运行，所以就跳到这里来了。</p>
-</blockquote>
-</blockquote>
-<blockquote>
-<p>通过搜索也知道在什么地方</p>
-</blockquote>
-<p><img src="https://pic.huangruimin.tech/20220208130049.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220208130250.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220208130336.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220208130354.png"></p>
-<blockquote>
-<p>所以这个crt0.s就是main函数</p>
-</blockquote>
-<ul>
-<li>来分析crt0.s</li>
-</ul>
-<blockquote>
-<p>设置C语言运行的初始环境</p>
-</blockquote>
-<blockquote>
-<p>有一个board)init_f(0)，也有一个board_init_r(0)</p>
-</blockquote>
-<p><img src="https://pic.huangruimin.tech/20220208130549.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220208130739.png"></p>
-<blockquote>
-<p>倒是在 board_init_f这个函数里面干了很多的事情</p>
-</blockquote>
-<p><img src="https://pic.huangruimin.tech/20220208130848.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220208130923.png"></p>
-<blockquote>
-<p>可以发现，跳转到crt0.s之后，一切的操作都很标准了，然后顺着这个往下走，就可以发现有global data</p>
-</blockquote>
-<p><img src="https://pic.huangruimin.tech/20220208131540.png"></p>
-<blockquote>
-<p>以及zero_global_data（)，类似于清零之类的</p>
-</blockquote>
-<p><img src="https://pic.huangruimin.tech/20220208131618.png"></p>
-<blockquote>
-<p>global_data 里面的一些初始化</p>
-</blockquote>
-<p><img src="https://pic.huangruimin.tech/20220208132016.png"></p>
-<blockquote>
-<p>initcall_run_list</p>
-</blockquote>
-<p><img src="https://pic.huangruimin.tech/20220208132110.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220208132541.png"></p>
-<blockquote>
-<blockquote>
-<p>这个函数传了个参数，叫：init_sequence_f，里面有一堆函数；这些初始化函数的返回值和接收参数类型都是一样的，所以就定义了一个函数指针数组。</p>
-</blockquote>
-</blockquote>
-<p><img src="https://pic.huangruimin.tech/20220208132642.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220208132803.png"></p>
-<blockquote>
-<blockquote>
-<p>然后就在这个函数里面，挨个去执行它，这里面有一个for循环，挨个进行调用，如果有一个出错了，那么就退出，如果没有一个出错，那么就挨个循环去执行。</p>
-</blockquote>
-</blockquote>
-<blockquote>
-<p>后面的流程，基本就和通用的U-boot很类似了，后面就是一边顺着这个流程走，一边顺着这个boot info去看</p>
-</blockquote>
-<ul>
-<li>到现在为止</li>
-</ul>
-<p><img src="https://pic.huangruimin.tech/20220208133241.png"></p>
-<blockquote>
-<p>上面这段U-boot，其实是分段式的U-boot带来的；后面的U-boot启动，其实和传统的U-boot启动就一样了</p>
-</blockquote>
-<blockquote>
-<p>所以下面来分析这句话的打印信息：</p>
-</blockquote>
-<p><img src="https://pic.huangruimin.tech/20220208133443.png"></p>
-<blockquote>
-<p>肯定是从这里开始的</p>
-</blockquote>
-<p><img src="https://pic.huangruimin.tech/20220208133519.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220208135617.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220208135739.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220208135942.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220208140108.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220208140141.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220208140223.png"></p>
-<p><img src="https://pic.huangruimin.tech/20220208140303.png"></p>
-<blockquote>
-<p>再往后</p>
-</blockquote>
-<blockquote>
-<blockquote>
-<p>往后有很多是没打印的，因为很多调用的是debug函数在输出，大部分是没有输出的</p>
-</blockquote>
-</blockquote>
-<p><img src="https://pic.huangruimin.tech/20220208153542.png"></p>
-<blockquote>
-<p>初始化完成之后，到这里，就进入一个hang了，就挂住了</p>
-</blockquote>
-<p><img src="https://pic.huangruimin.tech/20220208153740.png"></p>
-<blockquote>
-<p>最后init到这里了</p>
-</blockquote>
-<p><img src="https://pic.huangruimin.tech/20220208154106.png"></p>
-<blockquote>
-<p>一边分析，一边对着boot的log来看</p>
-</blockquote>
-<blockquote>
-<p>截止现在，U-boot就分析完了，后面的U-boot和传统的应该差不多，至少有90%是差不多的</p>
-</blockquote>
-<blockquote>
-<blockquote>
-<p>不同的是分段式设计，以及它压缩了，压缩了地话，就多了解压缩这样一个流程；但是这个解压呢，又和内核的自解压是比较相似的</p>
-</blockquote>
-</blockquote>
-<h4 id="1-4-3-未尽事宜"><a href="#1-4-3-未尽事宜" class="headerlink" title="1.4.3 未尽事宜"></a>1.4.3 未尽事宜</h4><ul>
-<li>Excel表格，里面怎么去设置，这样一些细节</li>
-</ul>
-<blockquote>
-<p>因为默认会给一些选型参考，并且可以直接使用海思他们已经调好的</p>
-</blockquote>
-<blockquote>
-<p>列表里面不支持的器件，大概率就不好采购；也可能不兼容，不兼容还是要用，那么就要找海思的支持人员了；调这个东西也是比较麻烦的。</p>
-</blockquote>
-<blockquote>
-<p>下节课讲内核，主要就是讲解驱动</p>
-</blockquote>
+                <h2 id="一、链接"><a href="#一、链接" class="headerlink" title="一、链接"></a>一、链接</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://aistudio.google.com/prompts/new_chat">https://aistudio.google.com/prompts/new_chat</a></p>
+</blockquote>
+<h2 id="二、常用提问指令"><a href="#二、常用提问指令" class="headerlink" title="二、常用提问指令"></a>二、常用提问指令</h2><h3 id="2-1"><a href="#2-1" class="headerlink" title="2.1"></a>2.1</h3><p>以下为审稿意见回复信中的内容，请将其翻译为英文：</p>
+<h3 id="2-2"><a href="#2-2" class="headerlink" title="2.2"></a>2.2</h3><p>以下是审稿人在SCI论文审稿过程中提出的问题，请帮我用英文进行回复：</p>
+<h3 id="2-3"><a href="#2-3" class="headerlink" title="2.3"></a>2.3</h3><p>以下是审稿人在SCI论文审稿过程中作出的总结性的评论，请帮我用英文进行回复：</p>
+<h3 id="2-4"><a href="#2-4" class="headerlink" title="2.4"></a>2.4</h3><p>润色以下句子，修改语法错误：</p>
 
                 
             </div>
@@ -954,7 +482,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://www.huangruimin.tech/2021/10/23/hi3516dv300-17-uboot-di-er-jie-duan-de-qi-dong/">http://www.huangruimin.tech/2021/10/23/hi3516dv300-17-uboot-di-er-jie-duan-de-qi-dong/</a>
+                    <a href="http://www.huangruimin.tech/2025/07/21/chang-yong-gpt-zhi-ling/">http://www.huangruimin.tech/2025/07/21/chang-yong-gpt-zhi-ling/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -991,19 +519,7 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            
-                                <a href="/tags/ARM/">
-                                    <span class="chip bg-color">ARM</span>
-                                </a>
-                            
-                                <a href="/tags/Linux/">
-                                    <span class="chip bg-color">Linux</span>
-                                </a>
-                            
-                                <a href="/tags/Hi3516DV300/">
-                                    <span class="chip bg-color">Hi3516DV300</span>
-                                </a>
-                            
+                            <span class="chip bg-color">No tag</span>
                         </div>
                     
                 </div>
@@ -1171,74 +687,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+                <i class="far fa-dot-circle"></i>&nbsp;Current
+            </div>
             <div class="card">
-                <a href="/2021/10/24/hi3516dv300-18-hong-mo-ping-ce-shi-ji-qu-dong-xiang-jie-1/">
+                <a href="/2025/07/21/chang-yong-gpt-zhi-ling/">
                     <div class="card-image">
                         
                         
-                        <img src="http://pic.huangruimin.tech/The_Wandering_Earth2_57.jpg" class="responsive-img" alt="HI3516DV300_18_触摸屏测试及驱动详解1">
+                        <img src="http://pic.huangruimin.tech/Transformers1_7.jpg" class="responsive-img" alt="常用GPT指令">
                         
-                        <span class="card-title">HI3516DV300_18_触摸屏测试及驱动详解1</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-10-24
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/" class="post-category">
-                                    嵌入式
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/ARM/">
-                        <span class="chip bg-color">ARM</span>
-                    </a>
-                    
-                    <a href="/tags/Linux/">
-                        <span class="chip bg-color">Linux</span>
-                    </a>
-                    
-                    <a href="/tags/Hi3516DV300/">
-                        <span class="chip bg-color">Hi3516DV300</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                Next&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2021/10/22/hi3516dv300-16-uboot-di-yi-jie-duan-de-qi-dong/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="http://pic.huangruimin.tech/The_Wandering_Earth2_120.jpg" class="responsive-img" alt="HI3516DV300_16_Uboot第一阶段的启动">
-                        
-                        <span class="card-title">HI3516DV300_16_Uboot第一阶段的启动</span>
+                        <span class="card-title">常用GPT指令</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1249,35 +709,53 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-22
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-07-21
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/" class="post-category">
-                                    嵌入式
-                                </a>
-                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Ruimin Huang
                             
                         </span>
                     </div>
                 </div>
+
                 
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/ARM/">
-                        <span class="chip bg-color">ARM</span>
-                    </a>
-                    
-                    <a href="/tags/Linux/">
-                        <span class="chip bg-color">Linux</span>
-                    </a>
-                    
-                    <a href="/tags/Hi3516DV300/">
-                        <span class="chip bg-color">Hi3516DV300</span>
-                    </a>
-                    
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2025/06/27/fuyaluo-yi-zhi-ji-lu/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="http://pic.huangruimin.tech/The_Wandering_Earth2_91.jpg" class="responsive-img" alt="FuyaLuo移植记录">
+                        
+                        <span class="card-title">FuyaLuo移植记录</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-06-27
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Ruimin Huang
+                            
+                        </span>
+                    </div>
                 </div>
                 
             </div>
